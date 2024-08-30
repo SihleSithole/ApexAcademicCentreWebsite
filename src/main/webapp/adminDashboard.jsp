@@ -17,7 +17,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!----css3---->
-	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/non.css">
 
 
 	<!--google fonts -->

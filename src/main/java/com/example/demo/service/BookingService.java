@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Booking;
+import com.example.demo.model.Tutor;
 import com.example.demo.repository.BookingRepository;
 
 
@@ -24,5 +26,32 @@ public class BookingService {
 		
 		  repo.save(msc);
 	}
+	
+	public Booking findOneBook(Long id) {
+		
+	 Optional<Booking> book = repo.findById(id);
+	 
+	    Booking oneBooking = book.get();
+	      
+	    return oneBooking;
+	
+	}
+	
+	public void update(Long id) {
+	       
+		 Optional<Booking> book = repo.findById(id);
+		 
+		 if (book.isPresent()){
+			 
+			 Booking existingBooking = book.get();
+
+			 existingBooking.setStatus("approved");
+			  
+	            // Save the updated student object
+	            repo.save(existingBooking);
+	            
+        }
+	        
+	 }
 
 }

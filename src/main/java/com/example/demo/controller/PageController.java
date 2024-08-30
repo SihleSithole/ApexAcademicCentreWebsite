@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,15 +19,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.Booking;
 import com.example.demo.model.Tutor;
 import com.example.demo.repository.TutorRepository;
 import com.example.demo.service.BookingService;
+import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.TutorService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class PageController {
+	
+	
+	@Autowired
+	private EmailSenderService senderService;
+	
+    @Autowired
+    private HttpServletRequest request;
 	
 	 @Autowired
     private TutorService tutorService;
@@ -180,14 +194,17 @@ public class PageController {
 		    String tutoring = booking.get("tutoring");
 		    /*if null - no Internet connection*/
 		    String internetCheck= booking.get("internet-check");
+		    if(internetCheck.equals(null)) {
+		    	
+		    	  internetCheck = "off";
+		    }
+		    
 		    /*if empty - no suburb selected*/
 		    String suburb = booking.get("suburb");
 		    String contactMethod = booking.get("contact-method");
 		    String province = booking.get("province");
 		    String tutorName = booking.get("hiddenTutorName");
 		    String tutorEmail = booking.get("hiddenTutorEmail");
-		    
-
 		    
 		    /*form 2 data*/
 		    
@@ -223,12 +240,73 @@ public class PageController {
 		    
 		    
 		    Booking book = new Booking(name,surname,email,phone,subject,tutoring,internetCheck,suburb,contactMethod,province,
-				   tutoringFor,helpWith,studName,studSurname,grade,syllabus,year,message,tutorName,tutorEmail);
-		        
+		    tutoringFor,helpWith,studName,studSurname,grade,syllabus,year,message,tutorName,tutorEmail);
+    
 		    bookingService.save(book);
+		    
+		    Long entryId = book.getEntry();
+		    String tutorEmaill = book.getTutorEmail();
+		    
+		    String serverName = request.getServerName();
+		    int serverPort = request.getServerPort();
+		    String protocol = request.getScheme();
+		    String host = protocol + "://" + serverName + ":" + serverPort;
+
+	        String bookingLink = host + "/booking-details?id=" + entryId;
+	        
+		    /*Send email to tutor*/
+			senderService.sendSimpleEmail(tutorEmaill, subject ,
+			"Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
 		    
 		 
 	 }
+	 
+	    @GetMapping("/booking-details")
+	    public ModelAndView getBookingDetails(@RequestParam("id") Long id) {
+	    	
+	        Booking booking = bookingService.findOneBook(id);  
+	        
+	        System.out.println(id);
+	        
+			ModelAndView data = new ModelAndView("confirm-booking.jsp");// load the admin dashboard
+			data.addObject("bookings", booking);
+			
+			return data;
+	
+	    }
+	    
+		 @PostMapping("/accept-booking")
+		 @ResponseBody
+		 public RedirectView acceptBooking(@RequestParam("accept-id") Long id, HttpServletRequest request) {
+			 
+			  bookingService.update(id);
+			  
+			    String serverName = request.getServerName();
+			    int serverPort = request.getServerPort();
+			    String protocol = request.getScheme();
+			    String host = protocol + "://" + serverName + ":" + serverPort;
+
+		        String bookingLink = host + "/booking-details?id=" + id;
+		        
+			    /*Send email to applicant*/
+		        Booking booking = bookingService.findOneBook(id); 
+		        
+		        String email = booking.getEmail();
+		        String subject = booking.getSubject();
+		        String tutorName = booking.getTutorName();
+		        String tutorSurname = booking.getTutorEmail();
+		        
+				senderService.sendSimpleEmail(email, "Booking for Tutor Approved : " + subject  ,
+				"Tutor Name : " + tutorName + "\nTutor Email : " + tutorSurname + "\n\nGood day,\n\nI hope this email finds you well. Looking forward to get in touch with you.\n\nRegards,\nApex Academic Centre");
+			  
+
+		        return new RedirectView(bookingLink);
+
+			 
+		 }
+	    
+
+	 
 	
 	
 }
