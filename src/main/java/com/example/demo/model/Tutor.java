@@ -3,6 +3,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
@@ -12,83 +14,92 @@ import jakarta.persistence.OneToOne;
 public class Tutor {
 	
 	@Id
-	@Column(name = "id")
-	private String idNumber;
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "entryId")
+	private int entryId;
 	
-	@Column(name = "Name")
-	private String name;
+	@Column(name = "fullNames")
+	private String fullNames;
 	
-	@Column(name = "Surname")
-	private String surname;
+	@Column(name = "background")
+	private String background;
 	
 	@Column(name = "PhoneNumber")
 	private String phoneNumber;
 	
-	@Column(name = "Email")
-	private String email;
+	@Column(name = "Subjects")
+	private String subjects;
 	
-	@Column(name = "location")
-	private String location;
+	@Column(name = "Grades")
+	private String grades;
+	
+	@Column(name = "address")
+	private String address;
 	
 	@Column(name = "trainOnline")
 	private boolean canTrainOnline;
+	
+	@Column(name = "availability")
+	private String availability;
+	
+	@Column(name = "syllabus")
+	private String syllabus;
+	
+	@Column(name = "Bio")
+	private String bio;
+	
+	@Column(name = "about")
+	private String about;
+	
+	@Column(name = "ratings")
+	private int ratings;
+	
+	@Column(name = "hoursTutored")
+	private int hoursTutored;
 	
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] image;
 	
-	@OneToOne
-	@JoinColumn(name = "tutor_id")
-	private Bio bio;
-
 	public Tutor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tutor(String idNumber, String name, String surname, String phoneNumber, String email, String location,
-		boolean canTrainOnline , byte[] image) {
+	public Tutor(String email, String fullNames, String background, String phoneNumber, String subjects, String grades,
+			String address, String availability, String bio, String about, int hoursTutored, byte[] image , String syllabus) {
 		super();
-		this.idNumber = idNumber;
-		this.name = name;
-		this.surname = surname;
-		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.location = location;
-		this.canTrainOnline = canTrainOnline;
-		this.image = image;
-	}
-
-	public String getIdNumber() {
-		return idNumber;
-	}
-
-	public void setIdNumber(String idNumber) {
-		this.idNumber = idNumber;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
+		this.fullNames = fullNames;
+		this.background = background;
 		this.phoneNumber = phoneNumber;
+		this.subjects = subjects;
+		this.grades = grades;
+		this.address = address;
+		this.availability = availability;
+		this.bio = bio;
+		this.about = about;
+		this.hoursTutored = hoursTutored;
+		this.image = image;
+		this.syllabus = syllabus;
+		
+		
+		String online = availability.substring(0, 6);
+		
+		
+		if(online.equals("Online")) {
+			
+			  this.canTrainOnline = true;
+		}
+		
+		else {
+			
+			this.canTrainOnline = false;
+		}
+		
+		
 	}
 
 	public String getEmail() {
@@ -99,12 +110,57 @@ public class Tutor {
 		this.email = email;
 	}
 
-	public String getLocation() {
-		return location;
+	public int getEntryId() {
+		return entryId;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+
+	public String getFullNames() {
+		return fullNames;
+	}
+
+	public void setFullNames(String fullNames) {
+		this.fullNames = fullNames;
+	}
+
+	public String getBackground() {
+		return background;
+	}
+
+	public void setBackground(String background) {
+		this.background = background;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(String subjects) {
+		this.subjects = subjects;
+	}
+
+	public String getGrades() {
+		return grades;
+	}
+
+	public void setGrades(String grades) {
+		this.grades = grades;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public boolean isCanTrainOnline() {
@@ -115,12 +171,44 @@ public class Tutor {
 		this.canTrainOnline = canTrainOnline;
 	}
 
-	public Bio getBio() {
+	public String getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(String availability) {
+		this.availability = availability;
+	}
+
+	public String getBio() {
 		return bio;
 	}
 
-	public void setBio(Bio bio) {
+	public void setBio(String bio) {
 		this.bio = bio;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public int getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(int ratings) {
+		this.ratings = ratings;
+	}
+
+	public int getHoursTutored() {
+		return hoursTutored;
+	}
+
+	public void setHoursTutored(int hoursTutored) {
+		this.hoursTutored = hoursTutored;
 	}
 
 	public byte[] getImage() {
@@ -130,6 +218,15 @@ public class Tutor {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	public String getSyllabus() {
+		return syllabus;
+	}
+
+	public void setSyllabus(String syllabus) {
+		this.syllabus = syllabus;
+	}
+	
 
 	
 }

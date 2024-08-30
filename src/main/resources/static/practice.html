@@ -1,0 +1,506 @@
+<%@ page import="java.sql.*, javax.sql.*, java.util.ArrayList, java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.demo.model.Tutor" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Base64" %>
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <style>
+
+            
+.section{
+	
+    background-color: #02A552;
+    color: white;
+    height: 55px;
+    border-radius: 5px;
+    
+    
+}
+
+.text-block{
+  
+    margin-left: 110px;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+
+/* Reset some default styles */
+body, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures logo and nav links are spaced apart */
+  background-color: white;
+  padding: 10px;
+}
+
+/* Logo image */
+.logo {
+ height: 55px;
+  margin-right: 20px;
+  margin-left: 95px;
+
+}
+
+/* Navbar links container */
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Pushes the nav links to the right */
+  margin-right: 175px;
+  font-size: 14px;
+}
+
+/* Navbar links */
+.nav-links li {
+  position: relative;
+  margin: 0 10px;
+}
+
+.nav-links a {
+  color:  #00154A ;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+/* Dropdown container */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.nav-links a:hover {
+ 
+  color: #02A552; /* Ensure text color remains white on hover */
+}
+
+.main-section {
+  background: white; /* Light grey background */
+  padding: 20px; /* Padding around content */
+/*  height: auto; /* Maximum height of the section */
+/*  overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
+  border: 1px solid #ddd; /* Optional border for visibility */
+  display: block ;
+
+  
+}
+
+.main-section .top {
+  background-color: ghostwhite;
+  height: 120px;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; /* Distribute space evenly between items */
+  border-radius: 50px 50px 0 0 ; /* top-left top-right bottom-right bottom-left */
+}
+
+/*TOP DIV START*/
+
+.main-section .top div {
+  background-color: ghostwhite;
+  height: 120px;
+  width: 100%; /* Ensure the divs take up available width */
+  flex: 1; /* Make sure divs grow equally */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+
+}
+
+.main-section .top .profile{
+  
+  background-color: ghostwhite;
+  height: 120px;
+  flex: 1; /* Ensure divs grow equally */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  display: block; /* Enable flexbox layout for the div */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  overflow: hidden; /* Ensure no overflow if image is larger */
+   border-radius: 50px 0 0 0px; /* top-left top-right bottom-right bottom-left */
+  
+  
+}
+
+.main-section .top .profile p{
+  
+ margin: 0; /* Remove default margins from the paragraph */
+ text-align: center; /* Center text within the paragraph */
+  
+  
+}
+
+.main-section .top .profile img {
+  
+  padding-left: 50px;
+  max-width: 100%; /* Ensure the image fits within the .profile div */
+  max-height: 100%; /* Ensure the image does not exceed the height of the .profile div */
+  object-fit: contain; /* Maintain the aspect ratio of the image */
+  border-radius: 5px;
+}
+
+
+.main-section .top .details{
+  
+  
+  background-color: ghostwhite;
+  height: auto;
+  flex: 1; /* Ensure divs grow equally */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  overflow: hidden; /* Ensure no overflow if image is larger */
+
+}
+
+.main-section .top .avaialability{
+  
+    background-color: ghostwhite;
+    height: auto;
+    flex: 1; /* Ensure divs grow equally */
+    margin: 0 10px; /* Adjust margin to control spacing between divs */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    overflow: hidden; /* Ensure no overflow if image is larger */
+    display: flex; /* Enable flexbox layout for the div */
+    color: blue; /* Set the text color to blue */
+
+}
+
+.main-section .top .availability p {
+  margin: 0; /* Remove default margins from the paragraph */
+  text-align: center; /* Center text within the paragraph */
+  color: blue;
+}
+
+.main-section .top .feedback {
+  background-color: ghostwhite;
+  height: auto;
+  flex: 1; /* Ensure divs grow equally */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  display: flex; /* Enable flexbox layout for the div */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  overflow: hidden; /* Ensure no overflow if content is larger */
+   border-radius: 0 50px 0 0 ; /* top-left top-right bottom-right bottom-left */
+}
+
+.main-section .top .feedback a {
+  text-align: center; /* Center text within the anchor element */
+  display: block; /* Ensure the anchor is a block-level element */
+  padding: 10px; /* Optional: Add padding for better click area and visual appeal */
+  margin: 5px 0; /* Optional: Add vertical margin between links */
+  text-decoration: none;
+  color: inherit; /* Use the color from the parent element, or set a specific color */
+  font: inherit; /* Use the font from the parent element, or set a specific font */
+}
+
+
+/*MIDDLE DIV START*/
+
+.main-section .middle {
+  background-color: ghostwhite;
+  height: auto;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; /* Distribute space evenly between items */
+  border-radius: 0 0 50px 50px; /* top-left top-right bottom-right bottom-left */
+}
+
+.main-section .middle div {
+  background-color: ghostwhite;
+  height: auto;
+  flex: 1; /* Allow divs to grow equally */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  /* Remove width: 100%; to allow Flexbox to handle widths */
+}
+
+/*Grades*/
+
+.main-section .middle .grades {
+  background-color: ghostwhite;
+  height: auto;
+  width: 284px; /* Set fixed width for the .grades div */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  flex: 0 0 284px; /* Prevent the .grades div from growing or shrinking */
+   border-radius: 0 0 0 50px; /* top-left top-right bottom-right bottom-left */
+}
+
+.main-section .middle .grades h4{
+  
+   margin: 0; /* Remove default margins from the paragraph */
+  text-align: center; /* Center text within the paragraph */
+}
+
+.main-section .middle .grades h4{
+  
+   margin: 0; /* Remove default margins from the paragraph */
+  text-align: center; /* Center text within the paragraph */
+}
+
+.main-section .middle .grades p{
+  
+   margin: 0; /* Remove default margins from the paragraph */
+  text-align: center; /* Center text within the paragraph */
+}
+
+
+/*SUBJECTS-ABOUT DIV STARTS*/
+
+.main-section .middle .subjects-about  {
+ 
+  background-color: ghostwhite;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: auto;
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+  gap: 10px;
+  justify-content: space-between; /* Distribute space evenly between items */
+
+
+}
+
+.main-section .middle .subjects-about .subjects {
+  background-color: ghostwhite;
+  height: auto;
+  width: auto; /* Set fixed width for the .grades div */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */
+
+}
+
+
+.main-section .middle .subjects-about .about {
+  background-color: ghostwhite;
+  height: auto;
+  width: auto; /* Set fixed width for the .grades div */
+  margin: 0 10px; /* Adjust margin to control spacing between divs */ flex: 0 0 450px; /* Prevent the .grades div from growing or shrinking */
+}
+
+
+.main-section .middle .subjects-about h4{
+  
+   margin: 0; /* Remove default margins from the paragraph */
+   text-align: center; /* Center text within the paragraph */
+   
+}
+
+.main-section .middle .subjects-about p{
+  
+   margin: 0; /* Remove default margins from the paragraph */
+  text-align: center; /* Center text within the paragraph */
+}
+
+
+/*Buttons*/
+
+.main-section .middle .book-view {
+  background-color: ghostwhite;
+  height: auto;
+  width: auto; /* You can set a specific width if needed */
+  margin: 0 5px; /* Adjust margin to control spacing between divs */
+  flex: 0 0 284px; /* Fixed width for the .book-view div */
+  display: flex; /* Enable flexbox layout for the container */
+  flex-direction: column; /* Align items in a column */
+  align-items: center; /* Center items horizontally within the container */
+  justify-content: center; /* Center items vertically within the container */
+   border-radius: 0 0 50px 0; /* top-left top-right bottom-right bottom-left */
+  
+}
+
+.main-section .middle .book-view button {
+    margin: 5px 0; /* Adjust margin to control spacing between buttons */
+    padding: 10px; /* Optional: Add padding for better visual appeal */
+    display: block; /* Ensure buttons are block-level elements */
+    width: 80%; /* Optional: Set width for buttons, or use auto */
+    text-align: center; /* Center text inside the button */
+    background-color: limegreen; /* Lime green background */
+    color: white; /* White text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    font-size: 16px; /* Optional: Adjust font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.feedback {
+    background-color: ghostwhite;
+    height: auto;
+    flex: 1;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    gap: 10px;
+}
+
+
+.feedback-item {
+    background-color: orange;
+    color: rgb(17, 17, 17); /* Use appropriate text color */
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+}
+
+.feedback-item i {
+    font-size: 20px; /* Size of the icon */
+}
+
+.feedback-item span {
+    font-size: 16px; /* Size of the text */
+}
+
+
+
+        </style>
+
+		<title>Book a Tutor</title>
+        
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+	</head>
+	<body class="body">
+
+		<section class="section">
+			<div class="text-block">011 354 0198 | info@apexacademiccentre.co.za</div>
+		</section>
+
+		<nav class="navbar">
+			<img src="apex.png" alt="Logo" class="logo">
+			<ul class="nav-links">
+				<li><a href="#">NAME</a></li>
+				<li><a href="#">ABOUT US</a></li>
+				<li class="dropdown">
+                    <a href="#" class="dropbtn">TUTORING <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Online Tutoring</a>
+                        <a href="#">In-person Tutoring</a>
+                    </div>
+                </li>
+				<li class="dropdown">
+                    <a href="#" class="dropbtn">CAMBRIDGE TUTORING <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Program 1</a>
+                        <a href="#">Program 2</a>
+                    </div>
+                </li>
+				<li><a href="#">RESOURCES</a></li>
+				<li><a href="#">CONTACT US</a></li>
+			</ul>
+		</nav>
+
+		<section class="main-section">
+
+			<div class="top">
+
+                <div class="profile">
+					<img src="imag.jfif" alt="profile picture">
+					<br>
+				    <p>icon : Ratings</p>
+					<p>numberOfRatings</p>
+				</div>
+				<div class="details">
+					<p><strong>TutorName</strong></p>
+					<p>Province <br>Area <br>Curriculum</p>
+				</div>
+				<div class="avaialability">
+					<p>Online/In-Person</p>
+				</div>
+
+				<div class="feedback">
+
+                    <div class="feedback-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Hours Tutored</span>
+                    </div>
+                    <div class="feedback-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Background Checked</span>
+                    </div>
+                </div>
+                
+                
+              
+			</div>
+
+			<div class="middle">
+
+				<div class="grades">
+					<br>
+					<h4>Grades</h4><br>
+					<p>Grade 1, Grade 2, Grade 3, Grade 4, Grade 5, Grade 6, Grade 7, Grade 8, Grade 9, Grade 10,Grade 10, Grade 12</p>
+				</div>
+				
+				<div class="subjects-about">
+                    <br>
+					<div class="subjects">
+					  <p>Mathematics, Physical Science, Business Studies, Geography, Statistics, Advanced Mathematics, GMAT, Fluid Mechanics, Civil Engineering Maths, Thermodynamics, Engineering Graphic Design, Mathematics IEB experience, Mathematics IGCSE Cambridge</p>
+					</div>
+                    <br>
+					<div class="about">
+					  
+					  <p>Maths is not a subject for everyone, but it is logical and practice-orientated. It was a subject I enjoyed in high school, and I would love to share it with others. I aim to help students break down the key concepts so that they are easily understood, and students can feel confident in their skills</p> 
+					</div>
+
+				</div>
+				<div class="book-view">
+					<button>View Profile</button>
+					<button>Book Tutor</button>
+				</div>
+              
+			</div>
+
+
+		</section>
+
+		<script src="js/jquery-3.3.1.slim.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.3.1.min.js"></script>
+
+	</body>
+</html>

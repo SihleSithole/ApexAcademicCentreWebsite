@@ -697,7 +697,7 @@ background-color:rgba(0,0,0,0.09);
 	   /*-------modal-style start------*/
 	   .modal .modal-dialog{
 		       max-width: 80%; 
-               width: 60%; 
+            width: 60%; 
 	   }
 	   .modal .modal-header, .modal .modal-body,.modal .modal-footer{
 		   padding:20px 30px;
