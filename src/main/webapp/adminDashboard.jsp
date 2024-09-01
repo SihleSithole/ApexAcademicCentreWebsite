@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.demo.model.Tutor" %>
 <%@ page import="com.example.demo.model.Booking" %>
+<%@ page import="com.example.demo.model.Review" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Base64" %>
 <!doctype html>
@@ -17,8 +18,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!----css3---->
-	<link rel="stylesheet" href="css/non.css">
-
+	<link rel="stylesheet" href="css/dashboard.css">
 
 	<!--google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,22 +82,26 @@
 				<h3><span>APEX ACADEMIC CENTRE</span></h3>
 			</div>
 			<ul class="list-unstyled component m-0">
-				<li class="active">
-					<a href="#" class="dashboard" onclick="showTutorPanel()"><i
-							class="material-icons">dashboard</i>Tutors </a>
 
-				</li>
+    <li class="active" id="tutors">
+        <a href="#" class="dashboard" onclick="showTutorPanel(); return false;"><i class="material-icons">dashboard</i>Tutors </a>
+    </li>
 
-				<li class="">
-					<a href="#" class="" onclick="showBookingsPanel()"><i
-							class="material-icons">library_books</i>Bookings </a>
-				</li>
+    <li id="bookings">
+        <a href="#" class="dashboard" onclick="showBookingsPanel(); return false;"><i class="material-icons">library_books</i>Pending Bookings </a>
+    </li>
 
-				<li class="">
-					<a href="#" class="" onclick="showBlogsPanel()"><i class="material-icons">aspect_ratio</i>Blogs </a>
-				</li>
+	<li id="blogs">
+		<a href="#" class="dashboard" onclick="showApprovedPanel(); return false;">
+			<i class="material-icons">check_circle</i>Approved Bookings 
+		</a>
+	</li>
 
-
+	<li id="reviews">
+		<a href="#" class="dashboard" onclick="showReviewsPanel(); return false;">
+			<i class="material-icons">rate_review</i>Reviews
+		</a>
+	</li>
 
 			</ul>
 		</div>
@@ -187,7 +191,7 @@
 							<div class="table-title">
 								<div class="row">
 									<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-										<h2 class="ml-lg-2">Manage Tutors</h2>
+										<h2 class="ml-lg-2">Tutors</h2>
 									</div>
 									<div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
 										<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
@@ -232,6 +236,7 @@
 											int hours = tutor.getHoursTutored();
                                             byte[] image = tutor.getImage();
                                             String syllabus = tutor.getSyllabus();
+                                            String area = tutor.getArea();
 
 											%>
 
@@ -255,7 +260,7 @@
 										
 											       <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-name="<%= name %>" data-email="<%= email %>" data-availability="<%= availability %>"
 														data-phone="<%= phone %>" data-subjects="<%= subjects %>" data-grades="<%= grades %>" data-address="<%= address %>" data-bio="<%= bio %>"
-														data-about="<%= about %>" data-hours="<%= hours %>" data-image="<%= image %>" data-syllabus="<%= syllabus %>">
+														data-about="<%= about %>" data-hours="<%= hours %>" data-image="<%= image %>" data-syllabus="<%= syllabus %>" data-area="<%= area %>"   >
 														<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
 														</a> 
 
@@ -327,9 +332,19 @@
 										</div>
 
 										<div class="mb-3">
-											<label for="address">Address</label>
-											<input type="text" id="address" name="address" class="form-control"
-												required>
+											<label for="address">Province</label>
+											<select id="address" name="address" class="form-control" required>
+														<option value="" disabled selected>Select your province</option>
+												<option value="Limpopo">Limpopo</option>
+												<option value="Gauteng">Gauteng</option>
+												<option value="Free State">Free State</option>
+												<option value="North West">North West</option>
+												<option value="Northern Cape">Northern Cape</option>
+												<option value="Eastern Cape">Eastern Cape</option>
+												<option value="KwaZulu Natal">KwaZulu Natal</option>
+												<option value="Mpumalanga">Mpumalanga</option>
+												<option value="Western Cape">Western Cape</option>
+											</select>
 											<div id="addressError" class="error-message"></div>
 										</div>
 
@@ -370,6 +385,13 @@
 											</select>
 										</div>
 
+										<div class="mb-3">
+											<label for="area">Area</label>
+											<input type="text" id="area" name="area" class="form-control"
+												required>
+											<div id="areaError" class="error-message"></div>
+										</div>
+
 										<input type="button" value="Previous" class="btn btn-secondary"
 											onclick="displayForm1()">
 										<button type="button" class="btn btn-secondary"
@@ -382,14 +404,13 @@
 										<h1 class="mb-4"></h1>
 										<div class="mb-3">
 											<label for="about">About Tutor</label>
-											<textarea id="about" name="about" rows="4" cols="30"
-												 maxlength="210"required>
-								             </textarea>
+											<input type="text" id="about" name="about" class="form-control" style="height: 150px;" required />
+								            
 										</div>
 										<div class="mb-3">
 											<label for="bio">Qualification(Separate in Comma)</label>
-											<textarea id="bio" name="bio" rows="4" cols="30"required>
-								</textarea>
+											<input type="text" id="bio" name="bio" class="form-control" style="height: 150px;" required>
+								
 										</div>
 
 										<div class="mb-3">
@@ -419,6 +440,8 @@
 											<input type="hidden" id="tutorOption" name="tutorOption"
 												class="form-control">
 											<input type="hidden" id="hiddenAddress" name="hiddenAddress"
+												class="form-control">
+												<input type="hidden" id="hiddenArea" name="hiddenArea"
 												class="form-control">
 										</div>
 
@@ -471,9 +494,19 @@
 										</div>
 
 										<div class="mb-3">
-											<label for="address">Address</label>
-											<input type="text" id="editaddress" name="editaddress" class="form-control"
-												required>
+											<label for="editaddress">Province</label>
+											<select id="editaddress" name="editaddress" class="form-control" required>
+												<option value="" disabled selected>Select your province</option>
+												<option value="Limpopo">Limpopo</option>
+												<option value="Gauteng">Gauteng</option>
+												<option value="Free State">Free State</option>
+												<option value="North West">North West</option>
+												<option value="Northern Cape">Northern Cape</option>
+												<option value="Eastern Cape">Eastern Cape</option>
+												<option value="KwaZulu Natal">KwaZulu Natal</option>
+												<option value="Mpumalanga">Mpumalanga</option>
+												<option value="Western Cape">Western Cape</option>
+											</select>
 											<div id="editaddressError" class="error-message"></div>
 										</div>
 
@@ -514,6 +547,13 @@
 											</select>
 										</div>
 
+										<div class="mb-3">
+											<label for="area">Area</label>
+											<input type="text" id="editarea" name="editarea" class="form-control"
+												required>
+											<div id="editAreaError" class="error-message"></div>
+										</div>
+
 										<input type="button" value="Previous" class="btn btn-secondary"
 											onclick="editdisplayForm1()">
 										<button type="button" class="btn btn-secondary"
@@ -525,15 +565,14 @@
 									<form id="editform3" class="p-4 border rounded" enctype="multipart/form-data">
 										<h1 class="mb-4"></h1>
 										<div class="mb-3">
-											<label for="about">About Tutor</label>
-											<textarea id="editabout" name="editabout" rows="4" cols="30"
-												placeholder="Brief description of the tutor." required>
-								</textarea>
+											<label for="editabout">About Tutor</label>
+											<input type="text" id="editabout" name="editabout" class="form-control" style="height: 150px;" required />
+								            
 										</div>
 										<div class="mb-3">
-											<label for="bio">Qualification(Separate in Comma)</label>
-											<textarea id="editbio" name="editbio" required>
-								</textarea>
+											<label for="editbio">Qualification(Separate in Comma)</label>
+											<input type="text" id="editbio" name="editbio" class="form-control" style="height: 150px;" required>
+								
 										</div>
 
 										<div class="mb-3">
@@ -563,6 +602,8 @@
 											<input type="hidden" id="edittutorOption" name="edittutorOption"
 												class="form-control">
 											<input type="hidden" id="edithiddenAddress" name="edithiddenAddress"
+												class="form-control">
+												<input type="hidden" id="edithiddenArea" name="edithiddenArea"
 												class="form-control">
 										</div>
 
@@ -622,7 +663,7 @@
 							<div class="table-title">
 								<div class="row">
 									<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-										<h2 class="ml-lg-2">View Bookings</h2>
+										<h2 class="ml-lg-2">Pending Bookings</h2>
 									</div>
 								</div>
 							</div>
@@ -698,8 +739,10 @@
 
 													String bMessage = book.getMessage();
 
+													if(bStatus.equalsIgnoreCase("pending..")){
 
-											%>
+										
+											        %>
 											<tr>
 											
 												<th>
@@ -752,9 +795,9 @@
 												</th>
 											</tr>
 
-											<% } } else { %>
+											<% } } } else { %>
 												<tr>
-													<th>No bookings yet..</th>
+													<th>No Tutor yet..</th>
 												</tr>
 												<% } %>
 
@@ -762,9 +805,254 @@
 							</table>
 						</div>
 					</div>
-				</div>
+										
+				</div>						    
 
-				    <!--Booking Panel-->
+					<!--Approved Booking Panel-->
+
+					<!--Reviews Panel-->
+
+					<div class="row" id="reviewsPanel">
+						<div class="col-md-12">
+							<div class="table-wrapper">
+	
+								<div class="table-title">
+									<div class="row">
+										<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+											<h2 class="ml-lg-2">Reviews</h2>
+										</div>
+									</div>
+								</div>
+	
+								<table class="table table-striped table-hover">
+	
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Rating</th>
+											<th>Message</th>
+										
+											<th>Tutor Email</th>
+											<th>View</th>
+										</tr>
+									</thead>
+	
+									<tbody>
+
+								     	<% List<Review> reviews = (List<Review>)
+											request.getAttribute("reviews");
+											if (reviews != null && !reviews.isEmpty()) {
+												
+											for (Review rv : reviews) {
+
+												String message = rv.getMessage();
+												String msg = message;
+												String useMessage = msg;
+
+												String rName = rv.getName();
+												String rTutorEmail = rv.getTutorEmail();
+												int rRating = rv.getRating();
+												Long rEntryId = rv.getEntryId();
+												String rStatus = rv.getStatus();
+
+												if(rStatus.equals("pending")){
+
+												%>
+
+												<tr>
+													<th>
+													    <%= rName %>
+													</th>
+													<th>
+													    <%= rRating %>
+													</th>
+													<th>
+														<%= useMessage %>
+													</th>
+													<th>
+														<%= rTutorEmail %>
+													</th>
+													<th>
+											
+														<a href="#" class="review" data-toggle="modal" data-target="#reviewModal" data-name="<%= rName %>" data-message="<%= message %>" data-rating="<%= rRating %>" data-message="<%= message %>" data-tutor="<%= rEntryId %>" data-email="rTutorEmail>
+														 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
+													    </a>
+	
+													</th>
+												</tr>
+												<% } } } else { %>
+													<tr>
+														<th>No Reviews yet..</th>
+													</tr>
+													<% } %>
+	
+											
+									</tbody>
+								</table>
+							</div>
+						</div>
+											
+					</div>
+					   
+
+					<!--Reviews Panel-->
+
+
+					<div class="row" id="approvedBookingPanel">
+						<div class="col-md-12">
+							<div class="table-wrapper">
+	
+								<div class="table-title">
+									<div class="row">
+										<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+											<h2 class="ml-lg-2">Approved Bookings</h2>
+										</div>
+									</div>
+								</div>
+	
+								<table class="table table-striped table-hover">
+	
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Online / In-person</th>
+											<th>Tutor Name</th>
+											<th>Tutor Email</th>
+											<th>Status</th>
+											<th>View</th>
+										</tr>
+									</thead>
+	
+									<tbody>
+	
+										<% List<Booking> bk = (List<Booking>)
+												request.getAttribute("bookings");
+												if (bk != null && !bk.isEmpty()) {
+													
+												for (Booking bks : bk) {
+	
+													String bkName = bks.getName();
+													String bkSurname = bks.getSurname();
+													String bkEmail = bks.getEmail();
+													String bkTutoring = bks.getTutoring();
+													String bkTutorName = bks.getTutorName();
+													String bkTutorEmail = bks.getTutorEmail();
+													String bkStatus = bks.getStatus();
+													String bkPhone = bks.getPhone();
+													String bkSubject = bks.getSubject();
+													String bkContactVia = bks.getContactMethod();
+													String bkProvince = bks.getProvince();
+													String bkSuburb = bks.getSuburb();
+													if(bkSuburb.equals("")){
+														bkSuburb = "n/a";
+													}
+													String bkgetInternetCheck = bks.getInternetCheck();
+													if(bkgetInternetCheck.equals("on")){
+														bkgetInternetCheck = "Yes";
+	
+													}
+													else{
+														bkgetInternetCheck = "No";
+													}
+	
+													String bkTutoringFor = bks.getTutoringFor();
+													String bkHelpWith = bks.getHelpWith();
+													String bkStudName = bks.getStudName();
+													if(bkStudName.equals("")){
+													bkStudName = "n/a";
+													}
+													String bkStudSurname = bks.getStudSurname();
+													if(bkStudSurname.equals("")){
+														bkStudSurname = "n/a";
+														}
+													String bkGrade = bks.getGrade();
+													if(bkGrade.equals("")){
+														bkGrade = "n/a";
+														}
+													String bkSyllabus = bks.getSyllabus();
+													if(bkSyllabus.equals("")){
+														bkSyllabus = "n/a";
+														}
+													String bkYear = bks.getYear();
+													if(bkYear.equals("")){
+														bkYear = "n/a";
+														}
+	
+														String bkMessage = bks.getMessage();
+	
+														if(bkStatus.equalsIgnoreCase("Approved")){
+	
+											
+														%>
+												<tr>
+												
+													<th>
+														<%= bkName %> <%= bkSurname %>
+													</th>
+													<th>
+														<%= bkEmail %>
+													</th>
+													<th>
+														<%= bkTutoring %>
+													</th>
+													<th>
+														<%= bkTutorName %>
+													</th>
+													<th>
+														<%= bkTutorEmail %>
+													</th>
+													<th>
+														<%= bkStatus %>
+													</th>
+													<th>
+											
+														<a href="#" class="view" 
+														data-toggle="modal" 
+														data-target="#bookingModal"
+														data-name="<%= bkName %> <%= bkSurname %>"
+														data-email="<%= bkEmail %>"
+														data-tutoring="<%= bkTutoring %>"
+														data-tutor-name="<%= bkTutorName %>"
+														data-tutor-email="<%= bkTutorEmail %>"
+														data-status="<%= bkStatus %>"
+														data-phone="<%= bkPhone %>"
+														data-subject="<%= bkSubject %>"
+														data-contactvia="<%= bkContactVia %>"
+														data-province="<%= bkProvince %>"
+														data-suburb="<%= bkSuburb %>"
+														data-internetcheck="<%= bkgetInternetCheck %>"
+														data-tutoringfor="<%= bkTutoringFor %>"
+														data-helpwith="<%= bkHelpWith %>"
+														data-studname="<%= bkStudName %>"
+														data-studsurname="<%= bkStudSurname %>"
+														data-gradee="<%= bkGrade %>"
+														data-syllabuss="<%= bkSyllabus %>"
+														data-year="<%= bkYear %>"
+														data-message="<%= bkMessage %>"
+														>
+														 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
+													 </a>
+	
+													</th>
+												</tr>
+	
+												<% } } } else { %>
+													<tr>
+														<th>No Tutor yet..</th>
+													</tr>
+													<% } %>
+	
+									</tbody>
+								</table>
+							</div>
+						</div>
+											
+					</div>	
+
+
+
+					<!--Approved Booking Panel-->
 
 					<!--View Booking modal-->
 
@@ -832,6 +1120,47 @@
 
 					<!--View Booking modal-->
 
+					<!--View Reviews Modal-->
+
+					<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title" id="bookingModalLabel">Review</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							
+						<form action="/approve-review" method="post">
+							<div class="modal-body">
+							<div class="row">
+								<!-- Applicant Section -->
+								<div class="col-md-6">
+							
+								<p><strong>Name:</strong> <span id="modalNameReview"></span></p>
+								<p><strong>Message:</strong> <span id="modalMessageReview"></span></p>
+								<p><strong>Rating:</strong> <span id="modalRatingReview"></span></p>
+								<input type="hidden" id="rEntryId" name="rEntryId"/>
+								<input type="hidden" id="rTutorEmail" name="rTutorEmail"/>
+
+							
+								</div>
+								
+							</div>
+						
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button class="btn btn-success" type="submit">Accept</button>
+							</div>
+					    </form>
+
+						</div>
+						</div>
+					</div>
+
+					<!--View Reviews Modal-->
 
 					<!--Search Panel-->
 
@@ -905,7 +1234,7 @@
 
 				<!------main-content-end----------->
 
-			</div>
+			
 
 		</div>
 
@@ -931,6 +1260,8 @@
 
 			document.getElementById('bookingPanel').style.display = 'none';
 			document.getElementById('searchPanel').style.display = 'none';
+			document.getElementById('approvedBookingPanel').style.display = 'none';
+			document.getElementById('reviewsPanel').style.display = 'none';
 			
 
 			$(document).ready(function () {
@@ -1001,22 +1332,70 @@
 					});
 				});
 
+		    function setActive(id) {
+				// Remove 'active' class from all list items
+				document.querySelectorAll('#sidebar ul li').forEach(function(item) {
+					item.classList.remove('active');
+				});
+
+				// Add 'active' class to the selected list item
+				document.getElementById(id).classList.add('active');
+			}
+
 
 
 			function showTutorPanel() {
 
+				setActive('tutors');
 				document.getElementById('bookingPanel').style.display = 'none';
+				document.getElementById('reviewsPanel').style.display = 'none';
 				document.getElementById('tutorPanel').style.display = 'block';
 				document.getElementById('searchPanel').style.display = 'none';
+				document.getElementById('searchEemail').style.display = 'block';
+				document.getElementById('button-addon2').style.display = 'block';
+				document.getElementById('approvedBookingPanel').style.display = 'none';
 
 			}
 
 
 			function showBookingsPanel() {
 
+				setActive('bookings');
+				document.getElementById('searchEemail').style.display = 'none';
+				document.getElementById('button-addon2').style.display = 'none';
 				document.getElementById('searchPanel').style.display = 'none';
 				document.getElementById('tutorPanel').style.display = 'none';
 				document.getElementById('bookingPanel').style.display = 'block';
+				document.getElementById('reviewsPanel').style.display = 'none';
+				document.getElementById('approvedBookingPanel').style.display = 'none';
+				
+				
+
+			}
+
+			function showApprovedPanel(){
+
+				setActive('blogs');
+				document.getElementById('searchEemail').style.display = 'none';
+				document.getElementById('button-addon2').style.display = 'none';
+				document.getElementById('searchPanel').style.display = 'none';
+				document.getElementById('tutorPanel').style.display = 'none';
+				document.getElementById('bookingPanel').style.display = 'none';
+				document.getElementById('reviewsPanel').style.display = 'none';
+				document.getElementById('approvedBookingPanel').style.display = 'block';
+
+			}
+
+			function showReviewsPanel(){
+
+				setActive('reviews');
+				document.getElementById('searchEemail').style.display = 'none';
+				document.getElementById('button-addon2').style.display = 'none';
+				document.getElementById('searchPanel').style.display = 'none';
+				document.getElementById('tutorPanel').style.display = 'none';
+				document.getElementById('bookingPanel').style.display = 'none';
+				document.getElementById('approvedBookingPanel').style.display = 'none';
+				document.getElementById('reviewsPanel').style.display = 'block';
 
 			}
 
@@ -1097,7 +1476,7 @@
 				}
 
 				if (address === "") {
-					addressError.innerText = "Address Required";
+					addressError.innerText = "Province Required";
 					addressError.style.color = "red"; // Set text color to red
 				}
 
@@ -1125,16 +1504,20 @@
 				var grades = document.getElementById("grades").value;
 				var syllabus = document.getElementById("syllabus").value;
 				var tutor = document.getElementById("tutorOptions").value;
+				var area = document.getElementById("area").value;
 
 
 				var subjectError = document.getElementById("subjectError");
 				var gradesError = document.getElementById("gradesError");
 				var syllabusError = document.getElementById("syllabusError");
+				var areaError = document.getElementById("areaError");
+				
 
 
 				subjectError.innerText = "";
 				gradesError.innerText = "";
 				syllabusError.innerText = "";
+				areaError.innerText = "";
 
 
 				if (subject === "") {
@@ -1152,13 +1535,19 @@
 					syllabusError.style.color = "red"; // Set text color to red
 				}
 
-				if (subject === "" || grades === "" || syllabus === "") {
+				if (area === "") {
+					areaError.innerText = "Area cannot be null";
+					areaError.style.color = "red"; // Set text color to red
+				}
+
+				if (subject === "" || grades === "" || syllabus === "" || area === "") {
 					return;
 				}
 
 				subjectError.innerText = "";
 				gradesError.innerText = "";
 				syllabusError.innerText = "";
+				areaError.innerText = "";
 
 				var hiddenName = document.getElementById('hiddenName');
 				hiddenName.value = name;
@@ -1187,6 +1576,9 @@
 
 				var addressTutor = document.getElementById('hiddenAddress');
 				addressTutor.value = address;
+
+				var areaTutor = document.getElementById('hiddenArea');
+				areaTutor.value = area;
 
 				displayForm3();
 
@@ -1270,7 +1662,7 @@
 					var phone = document.getElementById("editphone").value;
 					var email = document.getElementById("editemail").value;
 					var address = document.getElementById("editaddress").value;
-
+				
 					//Get error message divs
 					var nameError = document.getElementById("editnameError");
 					var phoneError = document.getElementById("editphoneError");
@@ -1325,6 +1717,7 @@
 					var email = document.getElementById("editemail").value;
 					
 					var address = document.getElementById("editaddress").value;
+					var area = document.getElementById("editarea").value;
 
 					var subject = document.getElementById("editsubjects").value;
 					var grades = document.getElementById("editgrades").value;
@@ -1390,6 +1783,9 @@
 					var addressTutor = document.getElementById('edithiddenAddress');
 					addressTutor.value = address;
 
+					var areaTutor = document.getElementById('edithiddenArea');
+					areaTutor.value = area;
+
 					editdisplayForm3();
 
 				}
@@ -1444,6 +1840,7 @@
 				var hours = $(this).data('hours');
 				var image = $(this).data('image');
 				var syllabus = $(this).data('syllabus');
+				var area = $(this).data('area');
 
 				var editEmail = document.getElementById('editemail');
 				editEmail.value = email;
@@ -1460,6 +1857,11 @@
 				var editAddress = document.getElementById('editaddress');
 				editAddress.value = address;
 				editAddress.placeholder = address; 
+
+				
+				var editArea = document.getElementById('editarea');
+				editArea.value = area;
+				editArea.placeholder = area; 
 
 				/*Next Button*/
 
@@ -1515,8 +1917,6 @@
 					body: JSON.stringify({ searchEmail: email }) // Include studentId in the request body
 				};
 
-				
-
 				// Send the fetch request
 				fetch('/searchTutor', requestOptions)
 					.then(response => response.json())
@@ -1547,6 +1947,30 @@
 											
 
 				}
+
+				$(document).ready(function() {
+					// Event listener for the "View" icon
+					$('.review').on('click', function() {
+						// Get data from attributes
+						var name = $(this).data('name');
+						var message = $(this).data('message');
+						var rating = $(this).data('rating');
+						var tutor = $(this).data('tutor');
+						var email = $(this).data('email');
+						
+		
+						// Populate modal with the data
+						$('#modalNameReview').text(name);
+						$('#modalMessageReview').text(message);
+						$('#modalRatingReview').text(rating);
+
+
+						document.getElementById("rEntryId").value = tutor;
+						document.getElementById("rTutorEmail").value = email;
+							
+					});
+				});
+
 
 </script>
 </body>

@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="style.css" rel="stylesheet">
+    <link href="tutor.css" rel="stylesheet">
 	<link href="sp.css" rel="stylesheet">
 	<link href="booking.css" rel="stylesheet">
 	</head>
@@ -74,6 +74,7 @@
         String syllabus = tutor.getSyllabus();
         String iSmage = java.util.Base64.getEncoder().encodeToString(image);
         int ratings = tutor.getRatings();
+		String area = tutor.getArea();
 
         %>
 
@@ -85,7 +86,7 @@
 
 				</div>
 				<div class="details">
-					<p><strong><%=name%></strong> <br><br>Province : <%=address%><br>Area : Soshanguve-L<br>Curriculum :  <%=syllabus%></p>
+					<p><strong><%=name%></strong> <br><br>Province : <%=address%><br>Area : <%= area %><br>Curriculum :  <%=syllabus%></p>
 				</div>
 				<div class="avaialability">
 					<p><%=availability%></p>
@@ -150,7 +151,7 @@
 				</div>
 				<div class="book-view">
 					<button onclick="openPopup('<%= name %>' , '<%= address %>' , '<%= iSmage %>', '<%= hours %>' , 
-					'<%= ratings %>' , '<%= availability %>' , '<%= about %>' , '<%= qualifications %>' , ' <%= subjects %> ' , ' <%= email %> ')">
+					'<%= ratings %>' , '<%= availability %>' , '<%= about %>' , '<%= qualifications %>' , ' <%= subjects %> ' , ' <%= email %> ' , ' <%= area %> ')">
 						View Profile</button>
 						<button onclick="openOpenopen('<%= name %>' , '<%= email %>')">Book Tutor</button>
 						
@@ -179,7 +180,7 @@
 								<div class="profile-info">
 									<h2 id="profile_name"></h2>
 									<p id="profile_province"></p>
-									<p>Area: Tutor Area</p>
+									<p id="profile_area"></p>
 									
 									<!-- Additional info row -->
 									<div class="additional-info-row">
@@ -567,7 +568,7 @@
 		 document.getElementById('popupContainer').style.display = 'none';
 		 document.getElementById('popupBackdrop').style.display = 'none';
 
-		 function openPopup(name,address,image,hours,ratings,availability,about,qualifications,subjects,email) {
+		 function openPopup(name,address,image,hours,ratings,availability,about,qualifications,subjects,email,area) {
 
            var profile_name = document.getElementById('profile_name');
 		   profile_name.innerText = name;
@@ -600,6 +601,11 @@
 
 			profile_subjects.innerHTML = subjects; 
 
+			
+			var profile_area= document.getElementById('profile_area');
+
+			profile_area.innerHTML = "Area : " + area; 
+
             document.getElementById('popupContainer').style.display = 'block';
             document.getElementById('popupBackdrop').style.display = 'block';
 
@@ -616,9 +622,6 @@
             document.getElementById('popupContainer').style.display = 'none';
             document.getElementById('popupBackdrop').style.display = 'none';
         }
-
-
-		
 
 /*###########################################################################BOOKINGS###############################################################*/
 

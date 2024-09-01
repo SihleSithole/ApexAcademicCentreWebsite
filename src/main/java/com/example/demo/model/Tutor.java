@@ -53,6 +53,9 @@ public class Tutor {
 	@Column(name = "about")
 	private String about;
 	
+	@Column(name = "area")
+	private String area;
+	
 	@Column(name = "ratings")
 	private int ratings;
 	
@@ -69,7 +72,7 @@ public class Tutor {
 	}
 
 	public Tutor(String email, String fullNames, String background, String phoneNumber, String subjects, String grades,
-			String address, String availability, String bio, String about, int hoursTutored, byte[] image , String syllabus) {
+			String address, String availability, String bio, String about, int hoursTutored, byte[] image , String syllabus , String area) {
 		super();
 		this.email = email;
 		this.fullNames = fullNames;
@@ -84,7 +87,7 @@ public class Tutor {
 		this.hoursTutored = hoursTutored;
 		this.image = image;
 		this.syllabus = syllabus;
-		
+		this.area = area;
 		
 		String online = availability.substring(0, 6);
 		
@@ -226,6 +229,15 @@ public class Tutor {
 	public void setSyllabus(String syllabus) {
 		this.syllabus = syllabus;
 	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+	
 	
 
 	

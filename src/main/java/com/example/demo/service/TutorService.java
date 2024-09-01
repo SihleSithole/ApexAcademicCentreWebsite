@@ -52,6 +52,7 @@ public class TutorService {
 			    existingTutor.setAbout(updatedTutor.getAbout());
 			    existingTutor.setHoursTutored(updatedTutor.getHoursTutored());
 			    existingTutor.setBackground("Yes");
+			    existingTutor.setArea(updatedTutor.getArea());
 
 	            // Save the updated student object
 	            repo.save(existingTutor);
@@ -59,5 +60,26 @@ public class TutorService {
          }
 	        
 	 }
+	
+	public void updateRatings(String email , int rate) {
+		
+		String noSpaces = email.replaceAll("\\s+", "");
+		
+		 Optional<Tutor> tutor = repo.findById(noSpaces);
+		 
+		 if (tutor.isPresent()){
+			 
+			 Tutor existingTutor = tutor.get();
+			 
+			 int ratings = existingTutor.getRatings();
+			   ratings += rate;
+			 
+			 existingTutor.setRatings(ratings);
+			 			 
+			 repo.save(existingTutor);
+			 
+		 }
+		
+	}
 	
 }

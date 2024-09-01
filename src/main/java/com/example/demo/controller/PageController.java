@@ -22,10 +22,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.Booking;
+import com.example.demo.model.Review;
 import com.example.demo.model.Tutor;
 import com.example.demo.repository.TutorRepository;
 import com.example.demo.service.BookingService;
 import com.example.demo.service.EmailSenderService;
+import com.example.demo.service.ReviewService;
 import com.example.demo.service.TutorService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,6 +47,9 @@ public class PageController {
 	 
 	 @Autowired
 	 private BookingService bookingService;
+	 
+	 @Autowired
+	 private ReviewService reviewService;
 	 
 	 @Autowired
 	 private TutorRepository tutorRepo;
@@ -75,10 +80,12 @@ public class PageController {
 		
 		List<Tutor> tutor = tutorService.listAll();
 		List<Booking> booking = bookingService.listAll();
+		List<Review> reviews = reviewService.listAll();
 		
 		ModelAndView data = new ModelAndView("adminDashboard.jsp");// load the admin dashboard
 		data.addObject("tutors" , tutor);
 		data.addObject("bookings", booking);
+		data.addObject("reviews", reviews);
 				
 		return data;
 		
@@ -92,15 +99,25 @@ public class PageController {
 				@RequestParam("hiddenGrades") String grades , @RequestParam("hiddenSyllabus") String syllabus ,
 				@RequestParam("tutorOption") String tutorOption , @RequestParam("hiddenAddress") String address,
 				@RequestParam("bio") String bio , @RequestParam("about") String about,
-				@RequestParam("hours") int hours) throws IOException 
+				@RequestParam("hours") int hours , @RequestParam("hiddenArea") String area) throws IOException 
 		{
 		 
            byte[] imageData = profile.getBytes();
-		    
-    
-		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,bio,about,hours,imageData,syllabus);
+           
+		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,bio,about,hours,imageData,syllabus,area);
 		      
 		    tutorService.save(tutor); 
+		    
+		    String serverName = request.getServerName();
+		    int serverPort = request.getServerPort();
+		    String protocol = request.getScheme();
+		    String host = protocol + "://" + serverName + ":" + serverPort;
+
+	        String reviewLink = host + "/review-ratings?email=" + email;
+	        
+		    /*Send email to tutor*/
+			senderService.sendSimpleEmail(email, "Tutor Registration Approval" ,
+			"Good day,\n\nKindly note that you successfully registered to Apex tutors.\n\nUse this link for Reviews and ratings : " + reviewLink + "\n\nRegards,\nApex Academic Centre : ");
 		   
 			return "redirect:/admin"; // Redirect to adminDashBoard
 		 
@@ -125,9 +142,10 @@ public class PageController {
 				@RequestParam("edithiddenGrades") String grades , @RequestParam("edithiddenSyllabus") String syllabus ,
 				@RequestParam("edittutorOption") String tutorOption , @RequestParam("edithiddenAddress") String address,
 				@RequestParam("editbio") String bio , @RequestParam("editabout") String about,
-				@RequestParam("edithours") int hours) throws IOException 
+				@RequestParam("edithours") int hours , @RequestParam("edithiddenArea") String area  ) throws IOException 
 		{
 		 
+		 		 
            byte[] imageData = profile.getBytes();
 		    
            Tutor tutor = new Tutor();
@@ -144,6 +162,7 @@ public class PageController {
 		    tutor.setAbout(about);
 		    tutor.setHoursTutored(hours);
 		    tutor.setAvailability(tutorOption);
+		    tutor.setArea(area);
            
     
 		    tutorService.update(email, tutor);
@@ -171,15 +190,12 @@ public class PageController {
 			 System.out.println("SIMTHOLILE");
 			 
 			 tutor = opT.get();
-			 
-			 
-		 
+
 		 }
 		
 		 return tutor;
 		 
 	 }
-	 
 	 
 	 @PostMapping("/booking")
 	 @ResponseBody
@@ -304,7 +320,41 @@ public class PageController {
 
 			 
 		 }
-	    
+		 
+		 @GetMapping("/review-ratings")
+		 public ModelAndView reviewRatings(@RequestParam("email") String tutorEmail) {
+			 
+				ModelAndView data = new ModelAndView("rate-tutor.jsp");// load the admin dashboard
+				data.addObject("tutorEmail", tutorEmail);
+				
+				return data;
+			 
+		 }
+		 
+		 @PostMapping("/add-review-ratings")
+		 public String addReviews(@RequestParam("tutorEmail") String tutorEmail ,  @RequestParam("name") String name , @RequestParam("message") String message , @RequestParam("ratings") int ratings) {
+			 
+			
+			 Review reviews = new Review(name,tutorEmail,message,ratings,"pending");
+			  
+			 reviewService.save(reviews);
+				
+				return "redirect:/";
+			 
+		 }
+		 
+		 @PostMapping("/approve-review")
+		 public String acceptReview(@RequestParam("rEntryId") Long entryId , @RequestParam("rTutorEmail") String email) {
+			 
+			 reviewService.updateReview(entryId);
+				
+				return "redirect:/admin";
+			 
+		 }
+		 
+		 
+		 
+		 
 
 	 
 	
