@@ -208,40 +208,50 @@
 								
 							</div>
 			
-							<!-- New row for "About Tutor" -->
-							<div class="about-tutor-row">
-								<div class="about-tutor-title">About Tutor</div>
-								<div class="about-tutor-info">
-									<p id="profile_about"></p>
-								</div>
+						<!-- New row for "About Tutor" -->
+						<div class="about-tutor-row">
+							<div class="about-tutor-title"><i class="fas fa-user"></i>About</div>
+							<div class="about-tutor-info">
+								<p id="profile_about"></p>
 							</div>
-			
-							<!-- New row for "Qualifications" -->
-							<div class="qualifications-row">
-								<div class="qualifications-title">Qualifications</div>
-								<div class="qualifications-info" >
-									<p id="profile_qualification"></p>
-									
-								</div>
-							</div>
-			
-							<!-- New row for "Subjects" -->
-							<div class="subjects-row">
-								<div class="subjects-title">Subjects</div>
-								<div class="subjects-info">
-									<p id="profile_subjects"></p>
-								</div>
-							</div>
-			
-							<!-- New row for "Reviews" -->
-							<div class="reviews-row">
-								<div class="reviews-title">Reviews</div>
-								<div class="reviews-info">
-									<p>"message"</p>
-									<p class="reviewer-name">- sender</p>
+						</div>
+		
+						<!-- New row for "Qualifications" -->
+						<div class="qualifications-row">
+							<div class="qualifications-title"><i class="fas fa-graduation-cap"></i>Qualifications</div>
+							<div class="qualifications-info" >
+								<p id="profile_qualification"></p>
+
 								
-								</div>
+								
 							</div>
+						</div>
+		
+						<!-- New row for "Subjects" -->
+						<div class="subjects-row">
+							<div class="subjects-title"><i class="fas fa-book"></i>Subjects</div>
+							<div class="subjects-info">
+
+
+
+								
+								<p id="profile_subjects"></p>
+							</div>
+						</div>
+		
+						<!-- New row for "Reviews" -->
+						<div class="reviews-row">
+							<div class="reviews-title"><i class="fas fa-user-circle"></i>Reviews</div>
+							<div class="reviews-info">
+								<p>"message"</p>
+								<p class="reviewer-name">- sender</p>
+							
+							</div>
+						</div>
+
+
+
+							
 						</div>
 					</div>
 				</div>
@@ -593,14 +603,17 @@
 		   var profile_about = document.getElementById('profile_about');
 		   profile_about.innerText = about ;
 
-			var profile_qualification = document.getElementById('profile_qualification');
+			//added for qualificaton
+			var profileQualificationElement = document.getElementById('profile_qualification');
+           var quali = qualifications.split(',');
+           var qualificationsString = quali.join(', ');
+           profileQualificationElement.innerHTML = '<ul><li>' + quali.join('</li><li>') + '</li></ul>';
 
-			profile_qualification.innerHTML = qualifications;
-
-			var profile_subjects= document.getElementById('profile_subjects');
-
-			profile_subjects.innerHTML = subjects; 
-
+           //added for subjects
+           var profileSubjectElement = document.getElementById('profile_subjects');
+            var mySub = subjects.split(',');
+            var subjectsString = mySub.join(', ');
+            profileSubjectElement.innerHTML = '<ul><li>' + mySub.join('</li><li>') + '</li></ul>';
 			
 			var profile_area= document.getElementById('profile_area');
 
