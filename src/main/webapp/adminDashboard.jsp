@@ -63,6 +63,17 @@
 		/*  input[type="button"]:hover {
             background-color: rgb(128, 255, 255); /* Darker blue on hover */
 		/* }*/
+
+		.grid-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+			gap: 1rem; /* Space between items */
+		}
+
+		.mb-3 {
+			margin-bottom: 1rem;
+		}
+
 	</style>
 
 </head>
@@ -233,10 +244,11 @@
 											String address = tutor.getAddress();
 											String bio = tutor.getBio();
 											String about = tutor.getAbout();
-											int hours = tutor.getHoursTutored();
+											String hours = tutor.getHoursTutored();
                                             byte[] image = tutor.getImage();
                                             String syllabus = tutor.getSyllabus();
                                             String area = tutor.getArea();
+											String country = tutor.getCountry();
 
 											%>
 
@@ -260,7 +272,7 @@
 										
 											       <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-name="<%= name %>" data-email="<%= email %>" data-availability="<%= availability %>"
 														data-phone="<%= phone %>" data-subjects="<%= subjects %>" data-grades="<%= grades %>" data-address="<%= address %>" data-bio="<%= bio %>"
-														data-about="<%= about %>" data-hours="<%= hours %>" data-image="<%= image %>" data-syllabus="<%= syllabus %>" data-area="<%= area %>"   >
+														data-about="<%= about %>" data-hours="<%= hours %>" data-country="<%= country %>" data-image="<%= image %>" data-syllabus="<%= syllabus %>" data-area="<%= area %>"   >
 														<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
 														</a> 
 
@@ -284,10 +296,7 @@
 						</div>
 					</div>
 
-
-
 					<!--END HERE-->
-
 
 					<!----add-modal start--------->
 					<div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
@@ -303,54 +312,87 @@
 									<!-- Form 1 -->
 									<form id="form1" class="p-4 border rounded">
 										<h1 class="mb-4"></h1>
-										<div class="mb-3">
-											<label for="name">Full Names</label>
-											<input type="text" id="name" name="name" class="form-control" required>
-											<div id="nameError" class="error-message"></div>
-										</div>
+										<div class="grid-container">
+											<div class="mb-3">
+												<label for="name">Full Names</label>
+												<input type="text" id="name" name="name" class="form-control" required>
+												<div id="nameError" class="error-message"></div>
+											</div>
+									
+											<div class="mb-3">
+												<label for="idnumber">Date of Birth</label>
+												<input type="date" id="idnumber" name="idnumber" class="form-control" required>
+												<div id="idError" class="error-message"></div>
+											</div>
+											
+											<div class="mb-3">
+												<label for="phone">Phone Number</label>
+												<input type="text" id="phone" name="phone" class="form-control" required>
+												<div id="phoneError" class="error-message"></div>
+											</div>
 
-										<div class="mb-3">
-											<label for="phone">Phone Number</label>
-											<input type="text" id="phone" name="phone" class="form-control" required>
-											<div id="phoneError" class="error-message"></div>
+											<div class="mb-3">
+												<label for="nationality">Nationality</label>
+												<select id="nationality" name="nationality" class="form-control" required>
+													<option value="" disabled selected>Select your nationality</option>
+													<option value="No">African</option>
+												</select>
+												
+											</div>
+									
+											<div class="mb-3">
+												<label for="email">Email Address</label>
+												<input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+												<div id="emailError" class="error-message"></div>
+											</div>
+									
+											<div class="mb-3">
+												<label for="background">Background check</label>
+												<select id="background" name="background" class="form-control" required>
+													<option value="No">No</option>
+													<option value="Yes">Yes</option>
+												</select>
+												<div id="backError" class="error-message"></div>
+											</div>
+									
+											<div class="mb-3">
+												<label for="country">Country</label>
+												<select id="country" name="country" class="form-control" required>
+													<option value="" disabled selected>Select your Country</option>
+													<option value="South Africa">South Africa</option>
+													<option value="Australia">Australia</option>
+													<option value="Japan">Japan</option>
+													<option value="Brazil">Brazil</option>
+													<option value="India">India</option>
+													<option value="Mexico">Mexico</option>
+													<option value="France">France</option>
+													<option value="Italy">Italy</option>
+													<option value="Germany">Germany</option>
+												</select>
+												<div id="countryError" class="error-message"></div>
+											</div>
+									
+											<div class="mb-3">
+												<label for="address">Province</label>
+												<select id="address" name="address" class="form-control" required>
+													<option value="" disabled selected>Select your province</option>
+													<option value="Limpopo">Limpopo</option>
+													<option value="Gauteng">Gauteng</option>
+													<option value="Free State">Free State</option>
+													<option value="North West">North West</option>
+													<option value="Northern Cape">Northern Cape</option>
+													<option value="Eastern Cape">Eastern Cape</option>
+													<option value="KwaZulu Natal">KwaZulu Natal</option>
+													<option value="Mpumalanga">Mpumalanga</option>
+													<option value="Western Cape">Western Cape</option>
+												</select>
+												<div id="addressError" class="error-message"></div>
+											</div>
 										</div>
-										<div class="mb-3">
-											<label for="email">Email Address</label>
-											<input type="email" id="email" name="email" class="form-control"
-												placeholder="Email" required>
-											<div id="emailError" class="error-message"></div>
-										</div>
-										<div class="mb-3">
-											<label for="background">Background check</label>
-											<select id="background" name="background" class="form-control" required>
-												<option value="No">No</option>
-												<option value="Yes">Yes</option>
-
-											</select>
-											<div id="backError" class="error-message"></div>
-
-										</div>
-
-										<div class="mb-3">
-											<label for="address">Province</label>
-											<select id="address" name="address" class="form-control" required>
-														<option value="" disabled selected>Select your province</option>
-												<option value="Limpopo">Limpopo</option>
-												<option value="Gauteng">Gauteng</option>
-												<option value="Free State">Free State</option>
-												<option value="North West">North West</option>
-												<option value="Northern Cape">Northern Cape</option>
-												<option value="Eastern Cape">Eastern Cape</option>
-												<option value="KwaZulu Natal">KwaZulu Natal</option>
-												<option value="Mpumalanga">Mpumalanga</option>
-												<option value="Western Cape">Western Cape</option>
-											</select>
-											<div id="addressError" class="error-message"></div>
-										</div>
-
-										<input type="button" value="Next" class="btn btn-primary"
-											onclick="validateForm1()">
+									
+										<input type="button" value="Next" class="btn btn-primary" onclick="validateForm1()">
 									</form>
+									
 
 									<!-- Form 2 -->
 									<form id="form2" class="p-4 border rounded">
@@ -407,16 +449,17 @@
 											<input type="text" id="about" name="about" class="form-control" style="height: 150px;" required />
 								            
 										</div>
+
+										<div class="mb-3">
+											<label for="hours">Bio</label>
+											<input type="text" id="hours" name="hours" class="form-control" style="height: 150px;" required />
+								            
+										</div>
+
 										<div class="mb-3">
 											<label for="bio">Qualification(Separate in Comma)</label>
 											<input type="text" id="bio" name="bio" class="form-control" style="height: 150px;" required>
 								
-										</div>
-
-										<div class="mb-3">
-											<label for="hours">Hours Tutored</label>
-											<input type="number" id="hours" name="hours" class="form-control" value="0"
-												required>
 										</div>
 
 										<div class="mb-3">
@@ -427,6 +470,7 @@
 										<div class="mb-3">
 											<input type="hidden" id="hiddenName" name="hiddenName" class="form-control">
 											<input type="hidden" id="hiddenID" name="hiddenID" class="form-control">
+											<input type="hidden" id="hiddenIdentity" name="hiddenIdentity" class="form-control">
 											<input type="hidden" id="hiddenEmail" name="hiddenEmail"
 												class="form-control">
 											<input type="hidden" id="hiddenPhone" name="hiddenPhone"
@@ -443,6 +487,7 @@
 												class="form-control">
 												<input type="hidden" id="hiddenArea" name="hiddenArea"
 												class="form-control">
+												<input type="hidden" id="hiddenCountry" name="hiddenCountry" class="form-control">
 										</div>
 
 										<input type="button" value="Previous" class="btn btn-secondary"
@@ -510,6 +555,23 @@
 											<div id="editaddressError" class="error-message"></div>
 										</div>
 
+										<div class="mb-3">
+											<label for="editcountry">Country</label>
+											<select id="editcountry" name="editcountry" class="form-control" required>
+												<option value="" disabled selected>Select your Country</option>
+												<option value="South Africa">South Africa</option>
+												<option value="Australia">Australia</option>
+												<option value="Japan">Japan</option>
+												<option value="Brazil">Brazil</option>
+												<option value="India">India</option>
+												<option value="Mexico">Mexico</option>
+												<option value="France">France</option>
+												<option value="Italy">Italy</option>
+												<option value="Germany">Germany</option>
+											</select>
+											<div id="editcountryError" class="error-message"></div>
+										</div>
+
 										<input type="button" value="Next" class="btn btn-primary"
 											onclick="editvalidateForm1()">
 									</form>
@@ -569,16 +631,17 @@
 											<input type="text" id="editabout" name="editabout" class="form-control" style="height: 150px;" required />
 								            
 										</div>
+
+										<div class="mb-3">
+											<label for="hours">Bio</label>
+											<input type="text" id="edithours" name="edithours" class="form-control" style="height: 150px;" required />
+								            
+										</div>
+
 										<div class="mb-3">
 											<label for="editbio">Qualification(Separate in Comma)</label>
 											<input type="text" id="editbio" name="editbio" class="form-control" style="height: 150px;" required>
 								
-										</div>
-
-										<div class="mb-3">
-											<label for="hours">Hours Tutored</label>
-											<input type="number" id="edithours" name="edithours" class="form-control" value="0"
-												required>
 										</div>
 
 										<div class="mb-3">
@@ -588,7 +651,7 @@
 
 										<div class="mb-3">
 											<input type="hidden" id="edithiddenName" name="edithiddenName" class="form-control">
-									
+									        <input type="hidden" id="edithiddenCountry" name="edithiddenCountry" class="form-control">
 											<input type="hidden" id="edithiddenEmail" name="edithiddenEmail"
 												class="form-control">
 											<input type="hidden" id="edithiddenPhone" name="edithiddenPhone"
@@ -693,55 +756,37 @@
 												String bName = book.getName();
 												String bSurname = book.getSurname();
 												String bEmail = book.getEmail();
-												String bTutoring = book.getTutoring();
+												String bTutoringOption = book.getTutorStyle();
 												String bTutorName = book.getTutorName();
 												String bTutorEmail = book.getTutorEmail();
 												String bStatus = book.getStatus();
-												String bPhone = book.getPhone();
+                                                String clientName = bName + " " + bSurname;
+												
+												String bPaid = book.getIsPaid();
+												String bPackageType = book.getPackageType();
+												String bTutorOption = book.getTutorOption();
+												String bMessage = book.getMessage();
+												String bSuburb = book.getSuburb();
+												String bAddress = book.getAddress();
 												String bSubject = book.getSubject();
-												String bContactVia = book.getContactMethod();
+												String bPhone = book.getPhone();
 												String bProvince = book.getProvince();
-                                                String bSuburb = book.getSuburb();
-												if(bSuburb.equals("")){
-													bSuburb = "n/a";
-												}
-												String bgetInternetCheck = book.getInternetCheck();
-												if(bgetInternetCheck.equals("on")){
-													bgetInternetCheck = "Yes";
-
-												}
-												else{
-													bgetInternetCheck = "No";
-												}
-
-												String bTutoringFor = book.getTutoringFor();
+												String bCountry = book.getCountry();
+												String bInstrLanguage = book.getInstrLanguage();
+												String bTutorFor = book.getTutorFor();
 												String bHelpWith = book.getHelpWith();
-												String bStudName = book.getStudName();
-												if(bStudName.equals("")){
-                                                bStudName = "n/a";
-												}
-                                                String bStudSurname = book.getStudSurname();
-												if(bStudSurname.equals("")){
-													bStudSurname = "n/a";
-													}
-												String bGrade = book.getGrade();
-												if(bGrade.equals("")){
-													bGrade = "n/a";
-													}
-												String bSyllabus = book.getSyllabus();
-												if(bSyllabus.equals("")){
-													bSyllabus = "n/a";
-													}
-												String bYear = book.getYear();
-												if(bYear.equals("")){
-													bYear = "n/a";
-													}
+												String bSchName = book.getSchName() ;
+												String bSchSurname = book.getSchSurname();
+												String bSchGrade = book.getSchGrade();
+												String bSchSyllabus = book.getSchSyllabus();
+												String bnName = book.getUnName();
+												String bnSurname = book.getUnSurname();
+												String bnYear = book.getUnYear();
+												
 
-													String bMessage = book.getMessage();
 
-													if(bStatus.equalsIgnoreCase("pending..")){
+												if(bStatus.equalsIgnoreCase("pending")){
 
-										
 											        %>
 											<tr>
 											
@@ -752,10 +797,10 @@
 													<%= bEmail %>
 												</th>
 												<th>
-													<%= bTutoring %>
+													<%= bTutoringOption %>
 												</th>
 												<th>
-													<%= bTutorName %>
+													<%= bTutorName%>
 												</th>
 												<th>
 													<%= bTutorEmail %>
@@ -765,29 +810,34 @@
 												</th>
 												<th>
 										
+										
 													<a href="#" class="view" 
-													data-toggle="modal" 
-													data-target="#bookingModal"
-													data-name="<%= bName %> <%= bSurname %>"
-													data-email="<%= bEmail %>"
-													data-tutoring="<%= bTutoring %>"
-													data-tutor-name="<%= bTutorName %>"
-													data-tutor-email="<%= bTutorEmail %>"
-													data-status="<%= bStatus %>"
-													data-phone="<%= bPhone %>"
-													data-subject="<%= bSubject %>"
-													data-contactvia="<%= bContactVia %>"
-													data-province="<%= bProvince %>"
+													data-toggle="modal" data-target="#bookingModal"
+													data-name="<%= clientName%>"
+													data-phone="<%= bPhone %> "
+													data-email="<%= bEmail %> "
+													data-country="<%= bCountry %> "
+													data-province="<%= bProvince %> "
+													data-language="<%= bInstrLanguage %> "
+													data-tutoringfor="<%= bTutorFor %> "
+													data-helpwith="<%= bHelpWith %> "
+													data-sname="<%= bSchName %> "
+													data-ssurname="<%= bSchSurname %> "
+													data-sgrade="<%= bSchGrade %> "
+													data-ssyllabus="<%= bSchSyllabus %> "
+													data-ssubject="<%= bSubject %> "
+													data-syear="<%= bnYear%> "
+													data-uname="<%= bnName %> "
+													data-usurname="<%= bnSurname %>"
+													data-address="<%= bAddress %>"
 													data-suburb="<%= bSuburb %>"
-													data-internetcheck="<%= bgetInternetCheck %>"
-													data-tutoringfor="<%= bTutoringFor %>"
-													data-helpwith="<%= bHelpWith %>"
-													data-studname="<%= bStudName %>"
-													data-studsurname="<%= bStudSurname %>"
-													data-gradee="<%= bGrade %>"
-													data-syllabuss="<%= bSyllabus %>"
-													data-year="<%= bYear %>"
 													data-message="<%= bMessage %>"
+													data-status="<%= bStatus %>"
+													data-tutorname="<%= bTutorName %>"
+													data-tutoremail="<%= bTutorEmail %>"
+													data-tutoropt="<%= bTutoringOption %>"
+													data-secondopt="<%= bTutorOption %>"
+													data-package="<%= bPackageType %>"
 													>
 													 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
 												 </a>
@@ -797,7 +847,7 @@
 
 											<% } } } else { %>
 												<tr>
-													<th>No Tutor yet..</th>
+													<th>No Bookings yet..</th>
 												</tr>
 												<% } %>
 
@@ -932,105 +982,90 @@
 													
 												for (Booking bks : bk) {
 	
-													String bkName = bks.getName();
-													String bkSurname = bks.getSurname();
-													String bkEmail = bks.getEmail();
-													String bkTutoring = bks.getTutoring();
-													String bkTutorName = bks.getTutorName();
-													String bkTutorEmail = bks.getTutorEmail();
-													String bkStatus = bks.getStatus();
-													String bkPhone = bks.getPhone();
-													String bkSubject = bks.getSubject();
-													String bkContactVia = bks.getContactMethod();
-													String bkProvince = bks.getProvince();
-													String bkSuburb = bks.getSuburb();
-													if(bkSuburb.equals("")){
-														bkSuburb = "n/a";
-													}
-													String bkgetInternetCheck = bks.getInternetCheck();
-													if(bkgetInternetCheck.equals("on")){
-														bkgetInternetCheck = "Yes";
+													String aName = bks.getName();
+													String aSurname = bks.getSurname();
+													String aEmail = bks.getEmail();
+													String aTutoringOption = bks.getTutorStyle();
+													String aTutorName = bks.getTutorName();
+													String aTutorEmail = bks.getTutorEmail();
+													String aStatus = bks.getStatus();
+
+													String aPaid = bks.getIsPaid();
+													String aPackageType = bks.getPackageType();
+													String aTutorOption = bks.getTutorOption();
+													String aMessage = bks.getMessage();
+													String aSuburb = bks.getSuburb();
+													String aAddress = bks.getAddress();
+													String aSubject = bks.getSubject();
+													String aPhone = bks.getPhone();
+												    String aProvince = bks.getProvince();
+													String aCountry = bks.getCountry();
+													String aInstrLanguage = bks.getInstrLanguage();
+													String aTutorFor = bks.getTutorFor();
+													String aHelpWith = bks.getHelpWith();
+													String aSchName = bks.getSchName() ;
+													String aSchSurname = bks.getSchSurname();
+													String aSchGrade = bks.getSchGrade();
+													String aSchSyllabus = bks.getSchSyllabus();
+													String anName = bks.getUnName();
+													String anSurname = bks.getUnSurname();
+													String anYear = bks.getUnYear();
+													String aPackage = bks.getPackageType();
 	
-													}
-													else{
-														bkgetInternetCheck = "No";
-													}
 	
-													String bkTutoringFor = bks.getTutoringFor();
-													String bkHelpWith = bks.getHelpWith();
-													String bkStudName = bks.getStudName();
-													if(bkStudName.equals("")){
-													bkStudName = "n/a";
-													}
-													String bkStudSurname = bks.getStudSurname();
-													if(bkStudSurname.equals("")){
-														bkStudSurname = "n/a";
-														}
-													String bkGrade = bks.getGrade();
-													if(bkGrade.equals("")){
-														bkGrade = "n/a";
-														}
-													String bkSyllabus = bks.getSyllabus();
-													if(bkSyllabus.equals("")){
-														bkSyllabus = "n/a";
-														}
-													String bkYear = bks.getYear();
-													if(bkYear.equals("")){
-														bkYear = "n/a";
-														}
+													if(aStatus.equalsIgnoreCase("approved")){
 	
-														String bkMessage = bks.getMessage();
-	
-														if(bkStatus.equalsIgnoreCase("Approved")){
-	
-											
+									
 														%>
 												<tr>
-												
 													<th>
-														<%= bkName %> <%= bkSurname %>
+														<%= aName %> <%= aSurname %>
 													</th>
 													<th>
-														<%= bkEmail %>
+														<%= aEmail %>
 													</th>
 													<th>
-														<%= bkTutoring %>
+														<%= aTutoringOption %>
 													</th>
 													<th>
-														<%= bkTutorName %>
+														<%= aTutorName%>
 													</th>
 													<th>
-														<%= bkTutorEmail %>
+														<%= aTutorEmail %>
 													</th>
 													<th>
-														<%= bkStatus %>
+														<%= aStatus %>
 													</th>
 													<th>
 											
-														<a href="#" class="view" 
-														data-toggle="modal" 
-														data-target="#bookingModal"
-														data-name="<%= bkName %> <%= bkSurname %>"
-														data-email="<%= bkEmail %>"
-														data-tutoring="<%= bkTutoring %>"
-														data-tutor-name="<%= bkTutorName %>"
-														data-tutor-email="<%= bkTutorEmail %>"
-														data-status="<%= bkStatus %>"
-														data-phone="<%= bkPhone %>"
-														data-subject="<%= bkSubject %>"
-														data-contactvia="<%= bkContactVia %>"
-														data-province="<%= bkProvince %>"
-														data-suburb="<%= bkSuburb %>"
-														data-internetcheck="<%= bkgetInternetCheck %>"
-														data-tutoringfor="<%= bkTutoringFor %>"
-														data-helpwith="<%= bkHelpWith %>"
-														data-studname="<%= bkStudName %>"
-														data-studsurname="<%= bkStudSurname %>"
-														data-gradee="<%= bkGrade %>"
-														data-syllabuss="<%= bkSyllabus %>"
-														data-year="<%= bkYear %>"
-														data-message="<%= bkMessage %>"
-														>
+													<a href="#" class="view" 
+													data-toggle="modal" data-target="#bookingModal"
+													data-name="<%= aName %> <%= aSurname %>"
+													data-phone="<%= aPhone %> "
+													data-email="<%= aEmail %> "
+													data-country="<%= aCountry %> "
+													data-province="<%= aProvince %> "
+													data-language="<%= aInstrLanguage %> "
+													data-tutoringfor="<%= aTutorFor %> "
+													data-helpwith="<%= aHelpWith %> "
+													data-sname="<%= aSchName %> "
+													data-ssurname="<%= aSchSurname %> "
+													data-sgrade="<%= aSchGrade %> "
+													data-ssyllabus="<%= aSchSyllabus %> "
+													data-ssubject="<%= aSubject %> "
+													data-syear="<%= anYear%> "
+													data-uname="<%= anName %> "
+													data-usurname="<%= anSurname %>"
+													data-address="<%= aAddress %>"
+													data-suburb="<%= aSuburb %>"
+													data-message="<%= aMessage %>"
+													data-status="<%= aStatus %>"
+													data-tutorname="<%= aTutorName %>"
+													data-tutoremail="<%= aTutorEmail %>"
+													data-tutoropt="<%= aTutoringOption %>"
+													data-secondopt="<%= aTutorOption %>"
+													data-package="<%= aPackage %>"
+													>
 														 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
 													 </a>
 	
@@ -1074,12 +1109,10 @@
 								<p><strong>Name:</strong> <span id="modalName"></span></p>
 								<p><strong>Email:</strong> <span id="modalEmail"></span></p>
 								<p><strong>Phone:</strong> <span id="modalPhone"></span></p>
-								<p><strong>Subject:</strong> <span id="modalSubject"></span></p>
-								<p><strong>Tutoring:</strong> <span id="modalTutoring"></span></p>
-								<p><strong>Contact Via:</strong> <span id="modalContactVia"></span></p>
+								<p><strong>Country:</strong> <span id="modalCountry"></span></p>
 								<p><strong>Province:</strong> <span id="modalProvince"></span></p>
-								<p><strong>Suburb:</strong> <span id="modalSuburb"></span></p>
-								<p><strong>Connection network:</strong> <span id="modalConnection"></span></p>
+								<p><strong>Language oF Instruction:</strong> <span id="modalLanguage"></span></p>
+								<p><strong>Package Type:</strong> <span id="modalPackage"></span></p>
 								</div>
 								<!-- Student Details Section -->
 								<div class="col-md-6">
@@ -1088,24 +1121,28 @@
 								<p><strong>Help with:</strong> <span id="modalHelpWith"></span></p>
 								<p><strong>Student Name:</strong> <span id="modalStudName"></span></p>
 								<p><strong>Student Surname:</strong> <span id="modalStudSurname"></span></p>
-								<p><strong>Grade:</strong> <span id="modalGrade"></span></p>
-								<p><strong>Syllabus:</strong> <span id="modalSyllabus"></span></p>
-								<p><strong>Year:</strong> <span id="modalYear"></span></p>
-								</div>
+								<p id="schGrade"><strong>Grade:</strong> <span id="modalGrade"></span></p>
+								<p id="schSyllabus"><strong>Syllabus:</strong> <span id="modalSyllabus"></span></p>
+								<p><strong>Subject:</strong> <span id="modalSubject"></span></p>
+								<p id="unvYear"><strong>Year:</strong> <span id="modalYear"></span></p>	
+							</div>
 							</div>
 							<!-- Message Section -->
 							<div class="row">
 							<div class="col-md-6">
-								<h5>Tutor</h5>
-								<p><strong>Tutor Name:</strong> <span id="modalTutorName"></span></p>
-								<p><strong>Tutor Email:</strong> <span id="modalTutorEmail"></span></p>
-							
+								<h5>Process</h5>
+							    <p><strong>Booking Message:</strong> <span id="modalMessage"></span></p>
+								<p><strong>Status:</strong><span id="modalStatus"></span></p>
+								<p><strong>Platform:</strong><span id="modalPlatform"></span></p>
+								<p id="fOne"><strong>Suburb:</strong><span id="modalSuburb"></span></p>
+								<p id="fSec"><strong>Address:</strong><span id="modalAddress"></span></p>
 							</div>
 
 							<div class="col-md-6">
-								<h5>Progress</h5>
-								<p><strong>Booking Message:</strong> <span id="modalMessage"></span></p>
-								<p><strong>Status:</strong> <span id="modalStatus"></span></p>
+								<h5>Tutor</h5>
+								<p><strong>Tutor Name:</strong> <span id="modalTutorName"></span></p>
+								<p><strong>Tutor Email:</strong> <span id="modalTutorEmail"></span></p>
+								<p><strong>Second Tutor Option?</strong> <span id="modalSecondOpt"></span></p>
 							</div>
 							</div>
 							</div>
@@ -1276,59 +1313,114 @@
 
 			});
 
+			var schGrade = document.getElementById('schGrade');
+			schGrade.style.display = 'none';
+            var schSyllabus = document.getElementById('schSyllabus');
+			schSyllabus.style.display = 'none';
+            var unvYear = document.getElementById('unvYear');
+			unvYear.style.display = 'none';
+
 				/*View Booking Details*/
 				$(document).ready(function() {
 					// Event listener for the "View" icon
 					$('.view').on('click', function() {
+
+						    $('#modalStudName').hide();
+							$('#modalStudSurname').hide();
+							$('#modalGrade').hide();
+							$('#modalSyllabus').hide();
+							$('#modalSubject').hide();
+							$('#modalYear').hide();
+
+
 						// Get data from attributes
 						var name = $(this).data('name');
 						var email = $(this).data('email');
-						var tutoring = $(this).data('tutoring');
-						var tutorName = $(this).data('tutorName');
-						var tutorEmail = $(this).data('tutorEmail');
+						var phone = $(this).data('phone');
+						var country = $(this).data('country');
+						var province = $(this).data('province');
+						var language = $(this).data('language');
+						var tutoringFor = $(this).data('tutoringfor');
+						var helpWith = $(this).data('helpwith');
+						var sName = $(this).data('sname');
+						var sSurname = $(this).data('ssurname');
+						var uName = $(this).data('uname');
+						var uSurname = $(this).data('usurname');
+						var sGrade = $(this).data('sgrade');
+						var sSyllabus = $(this).data('ssyllabus');
+						var sSubject = $(this).data('ssubject');
+						var sYear = $(this).data('syear');
+						var tutorOpt = $(this).data('tutoropt');
+						var address = $(this).data('address');
+						var suburb = $(this).data('suburb');
+						var message = $(this).data('message');
 						var status = $(this).data('status');
-                        var bPhone = $(this).data('phone');
-						var bSubject = $(this).data('subject');
-						var bContactVia = $(this).data('contactvia');
-						var bProvince = $(this).data('province');
-						var bSuburb = $(this).data('suburb');
-						var bgetInternetCheck = $(this).data('internetcheck');
+						var tutorName = $(this).data('tutorname');
+						var tutorEmail = $(this).data('tutoremail');
+						var secondOpt = $(this).data('secondopt');
+						var package = $(this).data('package');
+						
 
-						var bHelpWith = $(this).data('helpwith');
-						var bStudName = $(this).data('studname');
-						var bStudSurname = $(this).data('studsurname');
-						var bTutoringFor = $(this).data('tutoringfor');
-						var bGrade = $(this).data('gradee');
-						var bSyllabus = $(this).data('syllabuss');
-						var bYear = $(this).data('year');
-
-						var bMessage = $(this).data('message');
-
-						// Populate modal with the data
+		 				// Populate modal with the data
 						$('#modalName').text(name);
 						$('#modalEmail').text(email);
-						$('#modalTutoring').text(tutoring);
-						$('#modalTutorName').text(tutorName);
-						$('#modalTutorEmail').text(tutorEmail);
-						$('#modalStatus').text(status);
-						$('#modalSubject').text(bSubject);
-						$('#modalPhone').text(bPhone);
-						$('#modalContactVia').text(bContactVia);
-						$('#modalProvince').text(bProvince);
-						$('#modalSuburb').text(bSuburb);
-						$('#modalConnection').text(bgetInternetCheck);
+						$('#modalPhone').text(phone);
+						$('#modalCountry').text(country);
+						$('#modalProvince').text(province);
+						$('#modalLanguage').text(language);
+						$('#modalTutoringFor').text(tutoringFor);
+						$('#modalHelpWith').text(helpWith);
 
-						$('#modalHelpWith').text(bHelpWith);
-						$('#modalStudName').text(bStudName);
-						$('#modalStudSurname').text(bStudSurname);
-						$('#modalTutoringFor').text(bTutoringFor);
-						$('#modalGrade').text(bGrade);
-						$('#modalSyllabus').text(bSyllabus);
-						$('#modalYear').text(bYear);
+						helpWith = helpWith.replace(/\s+/g, '');
+						tutorOpt = tutorOpt.replace(/\s+/g, '');
 
-						$('#modalMessage').text(bMessage);
+						if (helpWith === "school") {
+								// Set values for the modal fields and show them
+								$('#modalStudName').text(sName).show();
+								$('#modalStudSurname').text(sSurname).show();
+								$('#modalGrade').text(sGrade).show();
+								$('#modalSyllabus').text(sSyllabus).show();
+								$('#modalSubject').text(sSubject).show();
+								schGrade.style.display = 'block';
+                                schSyllabus.style.display = 'block';
+								
+							} else {
+								// Set values for the modal fields and show them
+								
+								$('#modalStudName').text(uName).show();
+								$('#modalStudSurname').text(uSurname).show();
+								$('#modalYear').text(sYear).show();
+								$('#modalSubject').text(sSubject).show();
+								
+                            }
 
-							
+						$('#modalPlatform').text(tutorOpt);
+						$('#modalAddress').text(address);
+						$('#modalSuburb').text(suburb);
+
+						if(tutorOpt === "Online"){
+
+                             var addrSub = document.getElementById('fOne');
+		                       addrSub.style.display = 'none';
+							var subAdrr = document.getElementById('fSec');
+							  subAdrr.style.display = 'none';
+						}
+
+						else{
+
+							var addrSub = document.getElementById('fOne');
+		                       addrSub.style.display = 'block';
+							var subAdrr = document.getElementById('fSec');
+							  subAdrr.style.display = 'block';
+						}
+
+						$('#modalMessage').text(message);
+						$('#modalStatus').text(status );
+						$('#modalTutorName').text(tutorName );
+						$('#modalTutorEmail').text(tutorEmail );
+						$('#modalSecondOpt').text(secondOpt);
+						$('#modalPackage').text(package);
+								
 					});
 				});
 
@@ -1432,26 +1524,33 @@
 			}
 
 			function validateForm1() {
+
 				// Check if name, phone, and email are filled
 				var name = document.getElementById("name").value;
 				var phone = document.getElementById("phone").value;
 				var email = document.getElementById("email").value;
 				var background = document.getElementById("background").value;
 				var address = document.getElementById("address").value;
-
+				var country = document.getElementById("country").value;
+				var id = document.getElementById("idnumber").value;
+				
 				//Get error message divs
 				var nameError = document.getElementById("nameError");
 				var phoneError = document.getElementById("phoneError");
 				var emailError = document.getElementById("emailError");
 				var addressError = document.getElementById("addressError");
 				var backError = document.getElementById("backError");
-
+				var countryError = document.getElementById("countryError");
+				var idError = document.getElementById("idError");
+				
 				// Clear previous error messages
 				nameError.innerText = "";
 				phoneError.innerText = "";
 				emailError.innerText = "";
 				addressError.innerText = "";
 				backError.innerText = "";
+				countryError.innerText = "";
+				idError.innerText = "";
 
 
 				if (name === "") {
@@ -1480,10 +1579,20 @@
 					addressError.style.color = "red"; // Set text color to red
 				}
 
+				if (country === "") {
+					countryError.innerText = "Country is required.";
+					countryError.style.color = "red"; // Set text color to red
+				}
+
+				if (id === "") {
+					idError.innerText = "DOB number is required.";
+					idError.style.color = "red"; // Set text color to red
+				}
+
 
 
 				// If any field is empty, return without proceeding
-				if (name === "" || phone === "" || email === "" || background == "No" || address === "") {
+				if (name === "" || phone === "" || email === "" || background == "No" || address === ""  || country === "" || id === "") {
 					return;
 				}
 
@@ -1499,6 +1608,8 @@
 				var email = document.getElementById("email").value;
 				var background = document.getElementById("background").value;
 				var address = document.getElementById("address").value;
+				var country = document.getElementById("country").value;
+				var id = document.getElementById("idnumber").value;
 
 				var subject = document.getElementById("subjects").value;
 				var grades = document.getElementById("grades").value;
@@ -1555,8 +1666,14 @@
 				var hiddenEmail = document.getElementById('hiddenEmail');
 				hiddenEmail.value = email;
 
+				var hiddenID = document.getElementById('hiddenIdentity');
+				hiddenID.value = id;
+
 				var hiddenPhone = document.getElementById('hiddenPhone');
 				hiddenPhone.value = phone;
+
+				var hiddenCountry = document.getElementById('hiddenCountry');
+				hiddenCountry.value = country;
 
 				var hiddenBack = document.getElementById('hiddenID');
 				hiddenBack.value = background;
@@ -1662,22 +1779,23 @@
 					var phone = document.getElementById("editphone").value;
 					var email = document.getElementById("editemail").value;
 					var address = document.getElementById("editaddress").value;
+					var country = document.getElementById("editcountry").value;
+					
 				
 					//Get error message divs
 					var nameError = document.getElementById("editnameError");
 					var phoneError = document.getElementById("editphoneError");
 					var emailError = document.getElementById("editemailError");
 					var addressError = document.getElementById("editaddressError");
+					var editcountryError = document.getElementById("editcountryError");
 			
-
 					// Clear previous error messages
 					nameError.innerText = "";
 					phoneError.innerText = "";
 					emailError.innerText = "";
 					addressError.innerText = "";
+					editcountryError.innerText = "";
 				
-
-
 					if (name === "") {
 						editnameError.innerText = "Full Name is required.";
 						editnameError.style.color = "red"; // Set text color to red
@@ -1698,10 +1816,13 @@
 						editaddressError.style.color = "red"; // Set text color to red
 					}
 
-
+					if (country === "") {
+						editcountryError.innerText = "Country is Required";
+						editcountryError.style.color = "red"; // Set text color to red
+					}
 
 					// If any field is empty, return without proceeding
-					if (name === "" || phone === "" || email === "" || address === "") {
+					if (name === "" || phone === "" || email === "" || address === "" || country === "") {
 						return;
 					}
 
@@ -1715,6 +1836,7 @@
 					var name = document.getElementById("editname").value;
 					var phone = document.getElementById("editphone").value;
 					var email = document.getElementById("editemail").value;
+					var country = document.getElementById("editcountry").value;
 					
 					var address = document.getElementById("editaddress").value;
 					var area = document.getElementById("editarea").value;
@@ -1786,6 +1908,9 @@
 					var areaTutor = document.getElementById('edithiddenArea');
 					areaTutor.value = area;
 
+					var countryTutor = document.getElementById('edithiddenCountry');
+					countryTutor.value = country;
+
 					editdisplayForm3();
 
 				}
@@ -1841,10 +1966,15 @@
 				var image = $(this).data('image');
 				var syllabus = $(this).data('syllabus');
 				var area = $(this).data('area');
+				var country = $(this).data('country');
+
+				var editCountry = document.getElementById('editcountry');
+				editCountry.value = country;
+				editCountry.placeholder = email;
 
 				var editEmail = document.getElementById('editemail');
 				editEmail.value = email;
-				editEmail.placeholder = email;
+				editEmail.placeholder = country;
 
 				var editName = document.getElementById('editname');
 				editName.value = name;

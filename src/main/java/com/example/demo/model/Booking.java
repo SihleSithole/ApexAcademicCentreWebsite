@@ -25,94 +25,118 @@ public class Booking {
 	@Column(name = "phone")
 	private String phone;
 	
-	@Column(name = "subject")
-	private String subject;
-	
-	@Column(name = "tutoring")
-	private String tutoring;
-	
-	@Column(name = "internetCheck")
-	private String internetCheck;
-	
-	@Column(name = "suburb")
-	private String suburb;
-	
-	@Column(name = "contactMethod")
-	private String contactMethod;
-	
 	@Column(name = "province")
 	private String province;
 	
-	@Column(name = "tutoringFor")
-	private String tutoringFor;
+	@Column(name = "country")
+	private String country;
+	
+	@Column(name = "instrLanguage")
+	private String instrLanguage;
+	
+	@Column(name = "tutorFor")
+	private String tutorFor;
 	
 	@Column(name = "helpWith")
 	private String helpWith;
 	
-	@Column(name = "studName")
-	private String studName;
+	@Column(name = "schName")
+	private String schName;
 	
-	@Column(name = "studSurname")
-	private String studSurname;
+	@Column(name = "schSurname")
+	private String schSurname;
 	
-	@Column(name = "grade")
-	private String grade;
+	@Column(name = "schGrade")
+	private String schGrade;
 	
-	@Column(name = "syllabus")
-	private String syllabus;
+	@Column(name = "schSyllabus")
+	private String schSyllabus;
 	
-	@Column(name = "year")
-	private String year;
+	@Column(name = "unName")
+	private String unName;
+	
+	@Column(name = "unSurname")
+	private String unSurname;
+	
+	@Column(name = "unYear")
+	private String unYear;
+	
+	@Column(name = "subject")
+	private String subject;
+	
+	@Column(name = "tutorStyle")
+	private String tutorStyle;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "suburb")
+	private String suburb;
 	
 	@Column(name = "message")
 	private String message;
-
+	
+	@Column(name = "tutorOption")
+	private String tutorOption;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "packageType")
+	private String packageType;
+	
 	@Column(name = "tutorName")
 	private String tutorName;
 	
 	@Column(name = "tutorEmail")
 	private String tutorEmail;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(name = "isPaid")
+	private String isPaid;
 	
-
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public Booking(String name, String surname, String email, String phone, String subject, String tutoring,
-			String internetCheck, String suburb, String contactMethod, String province, String tutoringFor,
-			String helpWith, String studName, String studSurname, String grade, String syllabus, String year,
-			String message,String tutorName , String tutorEmail) {
+	public Booking(String name, String surname, String email, String phone, String province, String country,
+			String instrLanguage, String tutorFor, String helpWith, String schName, String schSurname, String schGrade,
+			String schSyllabus, String unName, String unSurname, String unYear, String subject, String tutorStyle,
+			String address, String suburb, String message, String tutorOption, String status, String packageType,
+			String tutorName, String tutorEmail, String isPaid) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
-		this.subject = subject;
-		this.tutoring = tutoring;
-		this.internetCheck = internetCheck;
-		this.suburb = suburb;
-		this.contactMethod = contactMethod;
 		this.province = province;
-		this.tutoringFor = tutoringFor;
+		this.country = country;
+		this.instrLanguage = instrLanguage;
+		this.tutorFor = tutorFor;
 		this.helpWith = helpWith;
-		this.studName = studName;
-		this.studSurname = studSurname;
-		this.grade = grade;
-		this.syllabus = syllabus;
-		this.year = year;
+		this.schName = schName;
+		this.schSurname = schSurname;
+		this.schGrade = schGrade;
+		this.schSyllabus = schSyllabus;
+		this.unName = unName;
+		this.unSurname = unSurname;
+		this.unYear = unYear;
+		this.subject = subject;
+		this.tutorStyle = tutorStyle;
+		this.address = address;
+		this.suburb = suburb;
 		this.message = message;
-		this.tutorEmail = tutorEmail;
+		this.tutorOption = tutorOption;
+		this.status = status;
+		this.packageType = packageType;
 		this.tutorName = tutorName;
-		this.status = "pending..";
+		this.tutorEmail = tutorEmail;
+		this.isPaid = isPaid;
 	}
 
-	public Long getEntry() {
-		return entry;
-	}
+
 
 	public String getName() {
 		return name;
@@ -146,46 +170,6 @@ public class Booking {
 		this.phone = phone;
 	}
 
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getTutoring() {
-		return tutoring;
-	}
-
-	public void setTutoring(String tutoring) {
-		this.tutoring = tutoring;
-	}
-
-	public String getInternetCheck() {
-		return internetCheck;
-	}
-
-	public void setInternetCheck(String internetCheck) {
-		this.internetCheck = internetCheck;
-	}
-
-	public String getSuburb() {
-		return suburb;
-	}
-
-	public void setSuburb(String suburb) {
-		this.suburb = suburb;
-	}
-
-	public String getContactMethod() {
-		return contactMethod;
-	}
-
-	public void setContactMethod(String contactMethod) {
-		this.contactMethod = contactMethod;
-	}
-
 	public String getProvince() {
 		return province;
 	}
@@ -194,12 +178,28 @@ public class Booking {
 		this.province = province;
 	}
 
-	public String getTutoringFor() {
-		return tutoringFor;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setTutoringFor(String tutoringFor) {
-		this.tutoringFor = tutoringFor;
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getInstrLanguage() {
+		return instrLanguage;
+	}
+
+	public void setInstrLanguage(String instrLanguage) {
+		this.instrLanguage = instrLanguage;
+	}
+
+	public String getTutorFor() {
+		return tutorFor;
+	}
+
+	public void setTutorFor(String tutorFor) {
+		this.tutorFor = tutorFor;
 	}
 
 	public String getHelpWith() {
@@ -210,44 +210,92 @@ public class Booking {
 		this.helpWith = helpWith;
 	}
 
-	public String getStudName() {
-		return studName;
+	public String getSchName() {
+		return schName;
 	}
 
-	public void setStudName(String studName) {
-		this.studName = studName;
+	public void setSchName(String schName) {
+		this.schName = schName;
 	}
 
-	public String getStudSurname() {
-		return studSurname;
+	public String getSchSurname() {
+		return schSurname;
 	}
 
-	public void setStudSurname(String studSurname) {
-		this.studSurname = studSurname;
+	public void setSchSurname(String schSurname) {
+		this.schSurname = schSurname;
 	}
 
-	public String getGrade() {
-		return grade;
+	public String getSchGrade() {
+		return schGrade;
 	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setSchGrade(String schGrade) {
+		this.schGrade = schGrade;
 	}
 
-	public String getSyllabus() {
-		return syllabus;
+	public String getSchSyllabus() {
+		return schSyllabus;
 	}
 
-	public void setSyllabus(String syllabus) {
-		this.syllabus = syllabus;
+	public void setSchSyllabus(String schSyllabus) {
+		this.schSyllabus = schSyllabus;
 	}
 
-	public String getYear() {
-		return year;
-	} 
+	public String getUnName() {
+		return unName;
+	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setUnName(String unName) {
+		this.unName = unName;
+	}
+
+	public String getUnSurname() {
+		return unSurname;
+	}
+
+	public void setUnSurname(String unSurname) {
+		this.unSurname = unSurname;
+	}
+
+	public String getUnYear() {
+		return unYear;
+	}
+
+	public void setUnYear(String unYear) {
+		this.unYear = unYear;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getTutorStyle() {
+		return tutorStyle;
+	}
+
+	public void setTutorStyle(String tutorStyle) {
+		this.tutorStyle = tutorStyle;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getSuburb() {
+		return suburb;
+	}
+
+	public void setSuburb(String suburb) {
+		this.suburb = suburb;
 	}
 
 	public String getMessage() {
@@ -258,9 +306,33 @@ public class Booking {
 		this.message = message;
 	}
 
+	public String getTutorOption() {
+		return tutorOption;
+	}
+
+	public void setTutorOption(String tutorOption) {
+		this.tutorOption = tutorOption;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getPackageType() {
+		return packageType;
+	}
+
+	public void setPackageType(String packageType) {
+		this.packageType = packageType;
+	}
+
 	public String getTutorName() {
 		return tutorName;
-	} 
+	}
 
 	public void setTutorName(String tutorName) {
 		this.tutorName = tutorName;
@@ -274,16 +346,18 @@ public class Booking {
 		this.tutorEmail = tutorEmail;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getIsPaid() {
+		return isPaid;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setIsPaid(String isPaid) {
+		this.isPaid = isPaid;
 	}
-	
-	
-	
+
+	public Long getEntry() {
+		return entry;
+	}
+
 	
 
 }

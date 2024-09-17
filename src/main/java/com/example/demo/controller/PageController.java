@@ -3,13 +3,19 @@ package com.example.demo.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +35,17 @@ import com.example.demo.service.BookingService;
 import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.ReviewService;
 import com.example.demo.service.TutorService;
+import com.example.demo.service.PayPalService.PayPalService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PageController {
 	
+	
+    @Autowired
+	private PayPalService payPalService;
 	
 	@Autowired
 	private EmailSenderService senderService;
@@ -63,12 +74,12 @@ public class PageController {
 	    Collections.sort(tutors, new Comparator<Tutor>() {
 	        @Override
 	        public int compare(Tutor t1, Tutor t2) {
-	            return Integer.compare(t2.getHoursTutored(), t1.getHoursTutored());
+	            return Integer.compare(t2.getRatings(), t1.getRatings());
 	        }
 	    });
 	    
 	    // Create and populate ModelAndView
-	    ModelAndView data = new ModelAndView("chooseTutor.jsp");
+	    ModelAndView data = new ModelAndView("newTutorPage.jsp");
 	    data.addObject("tutors", tutors);
 	    
 	    return data;
@@ -98,13 +109,16 @@ public class PageController {
 				@RequestParam("hiddenPhone") String phone , @RequestParam("hiddenSubjects") String subjects ,
 				@RequestParam("hiddenGrades") String grades , @RequestParam("hiddenSyllabus") String syllabus ,
 				@RequestParam("tutorOption") String tutorOption , @RequestParam("hiddenAddress") String address,
-				@RequestParam("bio") String bio , @RequestParam("about") String about,
-				@RequestParam("hours") int hours , @RequestParam("hiddenArea") String area) throws IOException 
+				@RequestParam("bio") String qualification , @RequestParam("about") String about,
+				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob) throws IOException, ParseException 
 		{
 		 
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		 Date date = dateFormat.parse(dob);
+		 
            byte[] imageData = profile.getBytes();
-           
-		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,bio,about,hours,imageData,syllabus,area);
+                
+		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date);
 		      
 		    tutorService.save(tutor); 
 		    
@@ -115,11 +129,15 @@ public class PageController {
 
 	        String reviewLink = host + "/review-ratings?email=" + email;
 	        
-		    /*Send email to tutor*/
-			senderService.sendSimpleEmail(email, "Tutor Registration Approval" ,
-			"Good day,\n\nKindly note that you successfully registered to Apex tutors.\n\nUse this link for Reviews and ratings : " + reviewLink + "\n\nRegards,\nApex Academic Centre : ");
+	        String sHeading = "Dear " + name;
+	        
 		   
-			return "redirect:/admin"; // Redirect to adminDashBoard
+			senderService.sendSimpleEmail(email, "Tutor Registration Approval" ,
+			sHeading+",\n\nCongratulations! You have been successfully added to the Apex Academic Centre website. We are confident that you will deliver exceptional service to our clients.\r\n"
+					+ "\r\n"
+					+ "Clients can book your services directly through our website, and we will also assign clients to you via email. To enhance your profile and increase visibility, please share the link below with your students, so they can leave reviews about your services on our website. These reviews will make your profile more attractive to potential clients and increase your chances of being recommended.\n\n Link: " + reviewLink + "\n\nThank you for joining our team, and we look forward to your success!");
+		   
+			 return "redirect:/admin"; // Redirect to adminDashBoard
 		 
  
 		}
@@ -142,7 +160,7 @@ public class PageController {
 				@RequestParam("edithiddenGrades") String grades , @RequestParam("edithiddenSyllabus") String syllabus ,
 				@RequestParam("edittutorOption") String tutorOption , @RequestParam("edithiddenAddress") String address,
 				@RequestParam("editbio") String bio , @RequestParam("editabout") String about,
-				@RequestParam("edithours") int hours , @RequestParam("edithiddenArea") String area  ) throws IOException 
+				@RequestParam("edithours") String hours , @RequestParam("edithiddenArea") String area  ) throws IOException 
 		{
 		 
 		 		 
@@ -177,8 +195,7 @@ public class PageController {
 	 @PostMapping("/searchTutor")
 	 @ResponseBody
 	 public Tutor searchTutor(@RequestBody Map<String, String> requestBody) {
-		 
-		 System.out.println("SILANE NJEH");
+	
 		 String email = requestBody.get("searchEmail");
 		 System.out.println(email);
 		 
@@ -198,85 +215,123 @@ public class PageController {
 	 }
 	 
 	 @PostMapping("/booking")
+	    public ModelAndView placeBooking(@RequestBody Map<String, String> booking, HttpSession session) {
+	        
+	        String amount = booking.get("amount");
+	        
+	        // Create or update session attributes
+	        session.setAttribute("bookings", booking);
+	        session.setAttribute("amount", amount);
+
+	        // Return the view name without the .jsp extension
+	        ModelAndView data = new ModelAndView("payment"); // View name without the .jsp extension
+	        data.addObject("bookings", booking);
+	        data.addObject("amount", amount);	        
+	        /* Send email to tutor (if needed)
+	        senderService.sendSimpleEmail(tutorEmaill, subject ,
+	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
+	        */
+	        
+	        return data;
+	    }
+	 
+	 
+	 @PostMapping("/pushBooking")
 	 @ResponseBody
 	 public void placeBooking(@RequestBody Map<String, String> booking) {
 		 
-		 /*form 1 data*/
-		    String name = booking.get("first-name");
-		    String surname = booking.get("last-name");
+		    String name = booking.get("name");
+		    String surname = booking.get("surname");
 		    String email = booking.get("email");
 		    String phone = booking.get("phone");
-		    String subject = booking.get("subject");
-		    String tutoring = booking.get("tutoring");
-		    /*if null - no Internet connection*/
-		    String internetCheck= booking.get("internet-check");
-		    if(internetCheck.equals(null)) {
-		    	
-		    	  internetCheck = "off";
-		    }
-		    
-		    /*if empty - no suburb selected*/
-		    String suburb = booking.get("suburb");
-		    String contactMethod = booking.get("contact-method");
 		    String province = booking.get("province");
-		    String tutorName = booking.get("hiddenTutorName");
-		    String tutorEmail = booking.get("hiddenTutorEmail");
-		    
-		    /*form 2 data*/
-		    
-		    String tutoringFor = booking.get("tutoring-for");
-		    String helpWith = booking.get("help-with");
-		    /*School*/
-		    String studName = "";
-		    String studSurname="";
-		    String grade = "";
-		    String syllabus = "";
+		    String country = booking.get("country");
+		    String instrLangauge = booking.get("instrLangauge");
+		    String tutorFor = booking.get("tutorFor");
+		    String helpWith = booking.get("helpWith");
+		    String schName = booking.get("schName");
+		    String schSurname = booking.get("schSurname");
+		    String schGrade = booking.get("schGrade");
+		    String schSyllabus = booking.get("schSyllabus");
+		    String unName = booking.get("unName");
+		    String unSurname = booking.get("unSurname");
+		    String unYear = booking.get("unYear");
+		    String status = "pending";
+		    String subject =  booking.get("subject");
+		    String tutorStyle =  booking.get("tutorStyle");
+		    String address =  booking.get("address");
+		    String suburb =  booking.get("suburb");
+		     String tutorOption =  booking.get("tutorOption");
+		     String message = booking.get("message");
+		     String userPackage = booking.get("userPackage");
+		     String tutorName = booking.get("tutorName");
+		     String tutorEmail = booking.get("tutorEmail");
+		     String isPaid = "Yes";
 		     
-		    /*University*/
-		    String year = "";
-		    
-		    if(helpWith.equals("school")) {
-		    	
-		    	studName = booking.get("student-name");
-		    	studSurname = booking.get("student-last-name");
-		    	grade = booking.get("grade");
-		    	syllabus = booking.get("syllabus");
-		    }
-		    
-		    else {
-		    	
-		    	year = booking.get("year");
-		    	
-		    }
-		    
+		     Booking bookings = new Booking( name,  surname,  email,  phone,  province,  country,
+		    		 instrLangauge,  tutorFor,  helpWith,  schName,  schSurname,  schGrade,
+					 schSyllabus,  unName,  unSurname,  unYear,  subject,  tutorStyle,
+					 address,  suburb,  message,  tutorOption,  status,  userPackage,
+					 tutorName,  tutorEmail,  isPaid);
+		     
+		     String sendName = "";
+		     String clientName = name + " " + surname;
+		     
+		     if(schName.equals("n/a")) {
+		    	 
+		    	 sendName = unName + " " + unSurname;
+		     }
+		     
+		     else {
+		    	 
+		    	 sendName = schName + " " + schSurname;
+		    	 
+		     }
+		     
+		     
+		     bookingService.save(bookings);
+			    
+			    Long entryId = bookings.getEntry();
+			    String tutorEmaill = bookings.getTutorEmail();
+			    
+			    String serverName = request.getServerName();
+			    int serverPort = request.getServerPort();
+			    String protocol = request.getScheme();
+			    String host = protocol + "://" + serverName + ":" + serverPort;
 
-		    /*form 3 data*/
-		    
-		    String message = booking.get("message");
-		    
-		    
-		    Booking book = new Booking(name,surname,email,phone,subject,tutoring,internetCheck,suburb,contactMethod,province,
-		    tutoringFor,helpWith,studName,studSurname,grade,syllabus,year,message,tutorName,tutorEmail);
-    
-		    bookingService.save(book);
-		    
-		    Long entryId = book.getEntry();
-		    String tutorEmaill = book.getTutorEmail();
-		    
-		    String serverName = request.getServerName();
-		    int serverPort = request.getServerPort();
-		    String protocol = request.getScheme();
-		    String host = protocol + "://" + serverName + ":" + serverPort;
-
-	        String bookingLink = host + "/booking-details?id=" + entryId;
-	        
-		    /*Send email to tutor*/
-			senderService.sendSimpleEmail(tutorEmaill, subject ,
-			"Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
-		    
-		 
+		        String bookingLink = host + "/booking-details?id=" + entryId;
+		        
+			    /*Send email to tutor*/
+				senderService.sendSimpleEmail(tutorEmaill, "Booking-info: " + subject ,
+				"Dear " + tutorName + "\n\nWe're pleased to inform you that [" +  name + " " + surname + "] has booked your services to support their child, [" + sendName + "]. We're thrilled to have you on board and are confident in your ability to provide exceptional guidance and support.\r\n"
+						+ "\r\n"
+						+ "To confirm your booking, please review the details at the link below and ACCEPT within 24 hours. If you're unavailable or need to reschedule, please notify us immediately so we can arrange a suitable replacement tutor.\r\n"
+						+ "\r\n"
+						+ "Link : " + bookingLink + "\r\n"
+						+ "\r\n"
+						+ "Thank you for your cooperation and expertise. We look forward to a successful collaboration!\r\n"
+						+ "\r\n"
+						+ "Best regards,\r\n"
+						+ "Apex Academic Centre");
+				
+				
+			    /*Send email to the student who book tutor*/
+				senderService.sendSimpleEmail(email, "Apex Tutor booking : no-reply" ,
+				"Dear " + clientName + "\n\nThank you for choosing " + tutorName + "! We're thrilled to have them work with " + sendName + " and are confident they will receive exceptional guidance and support in " + subject + ".\r\n"
+						+ "\r\n"
+						+ "Next Steps:\r\n"
+						+ "\r\n"
+						+ "- " + tutorName + " will contact you within the next 24 hours to introduce themselves and discuss a personalized lesson plan.\r\n"
+						+ "- Please note that if " + tutorName + " is unavailable for any reason or needs to reschedule, we have a secondary tutor available to ensure continuity.\r\n"
+						+ "\r\n"
+						+ "Thank you for entrusting us with your academic needs. We look forward to " + sendName + " success!\r\n"
+						+ "\r\n"
+						+ "Best regards,\r\n"
+						+ "Apex Academic Centre");
+				
 	 }
 	 
+
 	    @GetMapping("/booking-details")
 	    public ModelAndView getBookingDetails(@RequestParam("id") Long id) {
 	    	
@@ -310,12 +365,24 @@ public class PageController {
 		        String email = booking.getEmail();
 		        String subject = booking.getSubject();
 		        String tutorName = booking.getTutorName();
-		        String tutorSurname = booking.getTutorEmail();
+		        String name = booking.getName();
+		        String surname = booking.getSurname();
 		        
-				senderService.sendSimpleEmail(email, "Booking for Tutor Approved : " + subject  ,
-				"Tutor Name : " + tutorName + "\nTutor Email : " + tutorSurname + "\n\nGood day,\n\nI hope this email finds you well. Looking forward to get in touch with you.\n\nRegards,\nApex Academic Centre");
+		        String clientName = name + " " + surname;
+		        
+				senderService.sendSimpleEmail(email, "Booking Approval - " + subject  ,
+				"Dear " + clientName+",\n\nWe're delighted to inform you that " + tutorName + " has accepted your booking! They will be in touch with you shortly to arrange a suitable timetable and discuss any necessary details.\r\n"
+						+ "\r\n"
+						+ "Please note that if you have any questions, concerns, or misunderstandings, you can reach us directly via:\r\n"
+						+ "\r\n"
+						+ "Email: admin@apexacademiccentre.co.za\r\n"
+						+ "Phone/WhatsApp: 068 035 1845\r\n"
+						+ "\r\n"
+						+ "We're committed to ensuring a smooth and successful tutoring experience.\r\n"
+						+ "\r\n"
+						+ "Kind regards,\r\n"
+						+ "Apex Academic Centre");
 			  
-
 		        return new RedirectView(bookingLink);
 
 			 
@@ -353,7 +420,46 @@ public class PageController {
 		 }
 		 
 		 
+		 @GetMapping("/payment")
+		 public ModelAndView proess_paynment() {
+			 
+				ModelAndView data = new ModelAndView("payment.jsp");// load the admin dashboard
+				//data.addObject("tutorEmail", tutorEmail);
+				
+				return data;
+			 
+		 }
 		 
+		 
+		  @PostMapping("/create-payment")
+		    public ResponseEntity<Map<String, String>> createPayment(@RequestBody Map<String, String> requestBody) {
+			  
+			  String amount = requestBody.get("amount");
+			  
+			   System.out.println(amount);
+			  
+		        try {
+		            String approvalUrl = payPalService.createOrder(amount); // Method to create PayPal order
+		            Map<String, String> response = new HashMap<>();
+		            response.put("id", approvalUrl); // Pass the order ID or approval URL
+		            return ResponseEntity.ok(response);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Failed to create payment"));
+		        }
+		    }
+
+		    @PostMapping("/execute-payment")
+		    public ResponseEntity<Map<String, Object>> executePayment(@RequestBody Map<String, String> body) {
+		        try {
+		            String orderId = body.get("orderID");
+		            Map<String, Object> result = payPalService.executeOrder(orderId); // Method to execute PayPal payment
+		            return ResponseEntity.ok(result);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Failed to execute payment"));
+		        }
+		    }
 		 
 
 	 

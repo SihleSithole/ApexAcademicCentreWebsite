@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,7 +52,7 @@ public class Tutor {
 	@Column(name = "Bio")
 	private String bio;
 	
-	@Column(name = "about")
+	@Column(name = "about" ,length = 5000)
 	private String about;
 	
 	@Column(name = "area")
@@ -59,8 +61,14 @@ public class Tutor {
 	@Column(name = "ratings")
 	private int ratings;
 	
-	@Column(name = "hoursTutored")
-	private int hoursTutored;
+	@Column(name = "hoursTutored",length = 5000)
+	private String hoursTutored;
+	
+	@Column(name = "dob")
+	private Date dob;
+	
+	@Column(name = "country")
+	private String country;
 	
 	@Lob
 	@Column(columnDefinition = "longblob")
@@ -72,7 +80,7 @@ public class Tutor {
 	}
 
 	public Tutor(String email, String fullNames, String background, String phoneNumber, String subjects, String grades,
-			String address, String availability, String bio, String about, int hoursTutored, byte[] image , String syllabus , String area) {
+			String address, String availability, String bio, String about, String hoursTutored, byte[] image , String syllabus , String area, String country, Date dob) {
 		super();
 		this.email = email;
 		this.fullNames = fullNames;
@@ -88,6 +96,8 @@ public class Tutor {
 		this.image = image;
 		this.syllabus = syllabus;
 		this.area = area;
+		this.country = country;
+		this.dob = dob;
 		
 		String online = availability.substring(0, 6);
 		
@@ -206,11 +216,11 @@ public class Tutor {
 		this.ratings = ratings;
 	}
 
-	public int getHoursTutored() {
+	public String getHoursTutored() {
 		return hoursTutored;
 	}
 
-	public void setHoursTutored(int hoursTutored) {
+	public void setHoursTutored(String hoursTutored) {
 		this.hoursTutored = hoursTutored;
 	}
 
@@ -237,8 +247,21 @@ public class Tutor {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	
-	
 
-	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+		
 }

@@ -10,23 +10,21 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="tutor.css" rel="stylesheet">
+    <link href="fix.css" rel="stylesheet">
 	<link href="sp.css" rel="stylesheet">
 	<link href="booking.css" rel="stylesheet">
 	</head>
 	<body class="body">
 
-		<section class="section">
-			<div class="text-block">011 354 0198 | info@apexacademiccentre.co.za</div>
-		</section>
+		<section class="main-section">
 
 		<nav class="navbar">
-			<img src="apex.png" alt="Logo" class="logo">
+			<img src="apex.png" alt="Logo" class="logo" id="logo_image">
 			<ul class="nav-links">
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">ABOUT US</a></li>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
 				<li class="dropdown">
-                    <a href="#" class="dropbtn">TUTORING <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Online Tutoring</a>
                         <a href="#">In-person Tutor</a>
@@ -38,7 +36,7 @@
                     </div>
                 </li>
 				<li class="dropdown">
-                    <a href="#" class="dropbtn">CAMBRIDGE TUTORING <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cambridge</a>
                         <a href="#">A Level Tutoring</a>
@@ -47,126 +45,120 @@
 						<a href="#">Cambridge Exam Timetable</a>
                     </div>
                 </li>
-				<li><a href="#">RESOURCES</a></li>
-				<li><a href="#">CONTACT US</a></li>
+				<li><a href="#">Resources</a></li>
+				<li><a href="#">Contact Us</a></li>
 			</ul>
-		</nav>
+		</nav> 
 
-		<section class="main-section">
+		<section>
+			<img src="tutor.jpg" alt="tutorsImage" class="tutorImage"/>
+			<h2 id="tutorHead" align="center">Apex Academic Centre Tutors</h2>
+			<p id="tutorPar" align="center">These are the Highest Quality Online Tutors. Get Lessons Online with Apex - the Best in Tutoring</p>
+            <button id="tutorBtn">BOOK A TUTOR</button>
+			<br>
+			<br>
+		</section>
 
-
-      <% List<Tutor> tutors = (List<Tutor>)
-        request.getAttribute("tutors");
-        if (tutors != null && !tutors.isEmpty()) {
-        for (Tutor tutor : tutors) {
-
-        String email = tutor.getEmail();
-        String name = tutor.getFullNames();
-        String availability = tutor.getAvailability();
-        String phone = tutor.getPhoneNumber();
-        String subjects = tutor.getSubjects();
-        String grades = tutor.getGrades();
-        String address = tutor.getAddress();
-        String qualifications = tutor.getBio();
-        String about = tutor.getAbout();
-        int hours = tutor.getHoursTutored();
-        byte[] image = tutor.getImage();
-        String syllabus = tutor.getSyllabus();
-        String iSmage = java.util.Base64.getEncoder().encodeToString(image);
-        int ratings = tutor.getRatings();
-		String area = tutor.getArea();
-
-        %>
-
-			<div class="top">
-
-                <div class="profile">
-          <img src="data:image:png;base64, <%=iSmage%>"  alt="Member Image">
-					<br>
-
-				</div>
-				<div class="details">
-					<p><strong><%=name%></strong> <br><br>Province : <%=address%><br>Area : <%= area %><br>Curriculum :  <%=syllabus%></p>
-				</div>
-				<div class="avaialability">
-					<p><%=availability%></p>
-				</div>
-
-				<div class="feedback">
-
-                    <div class="feedback-item">
-                        <i class="fas fa-clock"></i>
-                        <span><%=hours%> Hours Tutored</span>
-                    </div>
-
-                    <div class="ratings">
-                      <i class="fas fa-star"  id="rate-icon"></i> <!-- Star icon -->
-                      <span id="rate"><%=ratings%> Ratings</span> <!-- Number of ratings -->
-                     </div>
-
-                    <div class="feedback-item">
-                        <i class="fas fa-check-circle" id="back-icon"></i>
-                        <span class="back">Background Checked</span>
-                    </div>
-          </div>
-                
-
-			</div>
-
-			<div class="middle">
-
-				<div class="grades">
-					<br>
-					<h4>Grades</h4><br>
-					<p><%=grades%></p>
-				</div>
-				
-				<div class="subjects-about">
-                    <br>
-					<div class="subjects">
-
-                         <%
-						    
-						    String[] sub = subjects.split(",");
-
-							for(int i = 0 ; i < sub.length ; i++){
-
-                                %>
-
-								<p><%=sub[i]%></p>
-
-								<%
-
-							}
-						 
-						 %>
-
+	
+		
+		<%
+			List<Tutor> tutors = (List<Tutor>) request.getAttribute("tutors");
+			if (tutors != null && !tutors.isEmpty()) {
+		%>
+		
+			<!-- Container for scrolling tutors -->
+			<div class="tutor-container">
+				<% 
+					for (Tutor tutor : tutors) {
+						String email = tutor.getEmail();
+						String name = tutor.getFullNames();
+						String availability = tutor.getAvailability();
+						String phone = tutor.getPhoneNumber();
+						String subjects = tutor.getSubjects();
+						String grades = tutor.getGrades();
+						String address = tutor.getAddress();
+						String qualifications = tutor.getBio();
+						String about = tutor.getAbout();
+						int hours = tutor.getHoursTutored();
+						byte[] image = tutor.getImage();
+						String syllabus = tutor.getSyllabus();
+						String iSmage = java.util.Base64.getEncoder().encodeToString(image);
+						int ratings = tutor.getRatings();
+						String area = tutor.getArea();
+				%>
+					<div class="tutor">
+						<div class="top">
+							<div class="profile">
+								<img src="data:image/png;base64,<%= iSmage %>" alt="Member Image">
+								<br>
+							</div>
+							<div class="details">
+								<p><strong><%= name %></strong> <br><br>Province : <%= address %><br>Area : <%= area %><br>Curriculum : <%= syllabus %><br>Tutoring Option : <%= availability %></p>
+								<br>
+							</div>
+							<div class="avaialability">
+								<!--	<p><%=availability%></p>  -->
+								</div>
+							<div class="feedback">
+								<div class="feedback-item">
+									<i class="fas fa-clock"></i>
+									<span><%= hours %> Hours Tutored</span>
+								</div>
+								<div class="ratings">
+									<i class="fas fa-star" id="rate-icon"></i>
+									<span id="rate"><%= ratings %> Ratings</span>
+								</div>
+								<div class="feedback-item">
+									<i class="fas fa-check-circle" id="back-icon"></i>
+									<span class="back">Background Checked</span>
+								</div>
+							</div>
+						</div>
+						<div class="middle">
+							<div class="grades">
+								<br>
+								<h4>Grades</h4><br>
+								<p><%= grades %></p>
+							</div>
+							<div class="subjects-about">
+								<div class="about">
+									<br>
+									<p><%= about %></p>
+									<br>
+								</div>
+								<br>
+								<div class="subjects">
+									<%
+										String[] sub = subjects.split(",");
+										for (String subject : sub) {
+									%>
+										<p><%= subject %></p>
+									<% } %>
+								</div>
+							</div>
+							<div class="book-view">
+								<button onclick="openPopup('<%= name %>' , '<%= address %>' , '<%= iSmage %>', '<%= hours %>' , '<%= ratings %>' , '<%= availability %>' , '<%= about %>' , '<%= qualifications %>' , '<%= subjects %>' , '<%= email %>' , '<%= area %>')" class="view_pp">
+									VIEW PROFILE
+								</button>
+								<button onclick="openOpenopen('<%= name %>' , '<%= email %>')">BOOK TUTOR</button>
+								<br>
+							</div>
+						</div>
+						<br>
 					</div>
-                    <br>
-					<div class="about">
-            <p><%=about%></p> 
-					    <br>
-          </div>
-
-				</div>
-				<div class="book-view">
-					<button onclick="openPopup('<%= name %>' , '<%= address %>' , '<%= iSmage %>', '<%= hours %>' , 
-					'<%= ratings %>' , '<%= availability %>' , '<%= about %>' , '<%= qualifications %>' , ' <%= subjects %> ' , ' <%= email %> ' , ' <%= area %> ')">
-						View Profile</button>
-						<button onclick="openOpenopen('<%= name %>' , '<%= email %>')">Book Tutor</button>
-						
-					<br>
-				</div>
-              
+				<% 
+					} 
+				%>
 			</div>
-            <br>
-
-
-			<% } } else { %>
-				<div>
-					<p>Nothing Yet</p>
-				</div>
-				<% } %>
+		
+		<% 
+			} else { 
+		%>
+			<div>
+				<p>Nothing Yet</p>
+			</div>
+		<% } %>
+		
 
 				<div class="backdrop" id="popupBackdrop"></div>
 				<div class="popup" id="popupContainer">
@@ -819,18 +811,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function validateForm3() {
-                // Implement validation for review and submit here
-                // For demonstration, assume the form is valid
-
-
 
                  var isValid = true;
 
 				var yourMessage = document.getElementById('message').value.trim();
 
-				
-
-				
 				if (!yourMessage) {
                     document.getElementById('message-error').textContent = "Student message is required.";
                     isValid = false;

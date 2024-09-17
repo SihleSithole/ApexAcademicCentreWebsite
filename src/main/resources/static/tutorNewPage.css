@@ -1,0 +1,552 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6fffa;
+}
+
+/* Reset some default styles */
+body, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    background-color: white;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    position: fixed; /* Fixes the navbar to the top of the viewport */
+    top: 0; /* Positions it at the top */
+    left: 0; /* Ensures it stretches from the left edge */
+    right: 0; /* Ensures it stretches to the right edge */
+    z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+/* Logo image */
+.logo {
+    height: 60px;
+    margin-right: 20px;
+    margin-left: 95px;
+    width: 220px;
+}
+
+/* Navbar links container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Pushes the nav links to the left */
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Navbar links */
+.nav-links li {
+    position: relative;
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: #00154A;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+/* Dropdown container */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-links a:hover {
+    color: #02A552; /* Ensure text color remains white on hover */
+}
+
+/* Nav-right styling */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds spacing between items */
+}
+
+/* Search container */
+.search-container {
+    position: relative;
+    margin-right: 20px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
+    z-index: 10; /* Ensures it's on top of other content */
+    height: 40px;
+}
+
+#search-input {
+    padding: 5px 30px 5px 30px;
+    border: 1px solid transparent; /* Hide the border */
+    border-radius: 4px;
+    font-size: 14px;
+    width: 0;
+    padding-left: 35px; /* Space for icon */
+    background: white;
+    outline: none;
+    transition: width 0.3s, padding 0.3s;
+}
+
+#search-input:focus {
+    width: 200px;
+    padding-left: 35px; /* Adjust for icon */
+}
+
+#search-button {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#search-button .search-icon {
+    font-size: 18px;
+    color: #00a550; /* Set the icon color */
+}
+
+.login-register {
+    background-color: #00a550;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-register .login-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+
+.main-section {
+  padding-top: 80px; /* Adjust this value based on the height of your navbar */
+}
+
+.main-class .tutorImage{
+	
+	  width: 100%;
+	  align-items: center;
+	  height: 235px;
+	
+}
+
+#tutorHead{
+	
+	color: #001549;
+	font-size: 35px;
+}
+
+#tutorPar{
+	
+	color: #00a550;
+	font-weight: bold;
+	
+}
+
+#tutorBtn {
+    background-color: #00a550;
+    height: 35px;
+    color: white;
+    width: 190px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-size: 20px;
+    display: block; /* Make sure the button is a block element */
+    margin: 0 auto; /* Center the button */
+}
+
+
+/*TUTOR DESIGN*/
+
+.main-section {
+	
+ 	background-color: #f6fffa;
+    display: block ;
+  	font-family: 'Montserrat', sans-serif;
+
+  
+}
+
+/*TOP DIV START*/
+
+.main-section .top {
+
+  background-color: white;
+  display: flex; 
+  width: 65%;
+  margin-left: 110px;
+  border-radius: 10px 10px 0 0 ; /* top-left top-right bottom-right bottom-left */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
+  position: relative; /* Or 'absolute' if needed */
+  z-index: 10; /* Ensures it's on top of other content */
+  
+}
+
+.main-section .last {
+
+  background-color: white;
+  display: flex; 
+  width: 65%;
+  margin-left: 110px;
+  border-radius:0 0  10px 10px  ; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  position: relative;
+  z-index: 10;
+  
+}
+
+/* Profile Section */
+.main-section .top .profile {
+  background-color: white;
+  height: 120px; /* Ensure consistent height */
+  width: 200px; /* Fixed width for the .profile div */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px 0 0 0;
+  margin-top: 20px;
+  padding-bottom: 13px;
+}
+
+/* Profile Image */
+.main-section .top .profile img {
+	
+  padding-top: 8px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
+ /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  position: relative;
+  z-index: 10; */
+  
+}
+
+/* Details Section */
+.main-section .top .details {
+  background-color: white;
+  height: fit-content;
+  flex: 3; /* Adjust this value to control the relative width */
+}
+
+/* Feedback Section */
+.main-section .top .feedback {
+  background-color: white;
+  height: auto;
+  flex: 1; /* Adjust this value to control the relative width */
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0 10px 0 0;
+  padding-top: 25px;
+  gap: 10px;
+}
+
+
+.main-section .top .feedback a {
+  text-align: center; /* Center text within the anchor element */
+  display: block; /* Ensure the anchor is a block-level element */
+  padding: 10px; /* Optional: Add padding for better click area and visual appeal */
+  margin: 5px 0; /* Optional: Add vertical margin between links */
+  text-decoration: none;
+  color: inherit; /* Use the color from the parent element, or set a specific color */
+  font: inherit; /* Use the font from the parent element, or set a specific font */
+}
+
+/*LAST DESIGN*/
+
+.main-section .last .grades {
+  background-color: white;
+  height: 100%; /* Ensure consistent height */
+  width: 200px; /* Fixed width for the .profile div */
+  display: block;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px 0 0 0;
+  box-sizing: border-box; /* Ensure padding is included in the width and height */
+  
+}
+
+.inside{
+	display: flex;
+	gap: 5px;
+	align-items: center;
+    justify-content: center;
+}
+
+.main-section .last .grades h4{
+  
+   margin: 0; 
+   text-align: center; /* Center text within the paragraph */
+   color: #001549;
+  
+   
+}
+
+.grades .inside{
+  display: grid; /* Use CSS Grid layout */
+  grid-template-columns: repeat(3, minmax(0, 52px)); /* Set a maximum width for each column */
+  gap: 5px; /* Minimal spacing between paragraphs */
+  
+}
+
+.grades p {
+  margin: 0; /* Remove default margin */
+  background-color: #e7eeff; /* Set the background color */
+  border-radius: 2px; /* Apply border radius for rounded corners */
+  text-align: center;
+  color: #00a550;
+  font-size: 13.5px;
+}
+
+
+.main-section .last .user-details {
+  background-color: white;
+  height: fit-content;
+  flex: 3; /* Adjust this value to control the relative width */
+ 
+}
+
+.main-section .last .user-details .about {
+  background-color: white;
+  height: fit-content;
+  flex: 2; /* Adjust this value to control the relative width */
+  align-content: start;
+  
+}
+
+.main-section .last .user-details .subjects {
+  background-color: white;
+  height: fit-content;
+  flex: 2; /* Adjust this value to control the relative width */
+  align-content: start;
+
+}
+
+.subjects {
+  display: grid; /* Use CSS Grid layout */
+  grid-template-columns: repeat(4, minmax(0, 150px)); /* Set a maximum width for each column */
+  gap: 5px; /* Minimal spacing between paragraphs */
+}
+
+.subjects p {
+  margin: 0; /* Remove default margin */
+  background-color: #e7eeff;
+  border-radius: 3px; /* Apply border radius for rounded corners */
+  text-align: center;
+  color: #00a550;
+  height : fit-content;
+ 
+}
+
+
+.main-section .last .book-view {
+  background-color: white;
+  height: auto;
+  flex: 1; /* Adjust this value to control the relative width */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+   border-radius:0 0 10px 10px; 
+
+}
+
+.main-section .last .book-view button {
+    margin: 5px 0; /* Adjust margin to control spacing between buttons */
+    padding: 10px; /* Optional: Add padding for better visual appeal */
+    display: block; /* Ensure buttons are block-level elements */
+    width: 80%; /* Optional: Set width for buttons, or use auto */
+    text-align: center; /* Center text inside the button */
+    background-color: #02A552; /* Lime green background */
+    color: white; /* White text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 2px; /* Optional: Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-left: 10px; 
+    font-size: 13px;
+    
+}
+
+.main-section .last .book-view .view_pp {
+    margin: 5px 0; /* Adjust margin to control spacing between buttons */
+    padding: 10px; /* Optional: Add padding for better visual appeal */
+    display: block; /* Ensure buttons are block-level elements */
+    width: 80%; /* Optional: Set width for buttons, or use auto */
+    text-align: center; /* Center text inside the button */
+    background-color: #001549; /* Lime green background */
+    color: white; /* White text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 2px; /* Optional: Rounded corners */
+    font-size: 13px; /* Optional: Adjust font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-left: 10px;
+    
+}
+
+.main-section .last .book-view button:hover {
+    background-color: white; /* Change background to white on hover */
+    color: #02A552; /* Change text color to lime green on hover */
+}
+
+.feedback-item i {
+    font-size: 18px; /* Size of the icon */
+  
+}
+
+.feedback-item .back{
+	
+	color: #02A552;
+}
+
+.feedback-item #back-icon{
+	
+	color: #02A552;
+	
+}
+
+
+.ratings #rate-icon{
+	
+	color:#FFDB58;
+	
+}
+
+
+.feedback-item span {
+    font-size: 14px; /* Size of the text */
+}
+
+
+
+.detail-info {
+    color: #00a550;
+    font-size: 14px;
+    font-weight: bold;
+    
+}
+
+.static-text {
+    color: #001549;
+    font-style: italic;
+    font-weight: bold;
+    
+}
+
+#h{
+	display: none;
+}
+
+/*SCROLLING ON TUTOR*/
+
+.tutor-container {
+    max-height: 600px; /* Adjust height as needed */
+    overflow: auto; /* Allows scrolling */
+    padding: 10px;
+    scrollbar-width: thin; /* Thin scrollbar for Firefox */
+    scrollbar-color: transparent transparent; /* Transparent scrollbars for Firefox */
+}
+
+/* WebKit browsers (Chrome, Safari) */
+.tutor-container::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+.tutor-container::-webkit-scrollbar-track {
+    background: transparent; /* Background of the track */
+}
+
+.tutor-container::-webkit-scrollbar-thumb {
+    background: transparent; /* Transparent scrollbar thumb */
+}
+
+
+/*FIXED IMAGES FOR THE TUTOR*/
+
+.tutor-wrapper {
+  position: relative;
+}
+
+.image-wrapper {
+  position: absolute; /* Initially positioned within the page flow */
+  right: 80px;
+  display: block;
+}
+
+.image {
+  width: 250px; /* Adjust size as needed */
+  height: 300px;
+  margin-bottom: 20px; /* Adjust spacing between images */
+  display: block;
+  
+}
+
+/* For fixed positioning after scrolling */
+.fixed-image {
+  position: fixed;
+  right: 80px;
+  z-index: 1000; /* Ensure images are above other content */
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

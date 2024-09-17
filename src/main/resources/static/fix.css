@@ -3,15 +3,45 @@
 	
     background-color: #02A552;
     color: white;
-    height: 55px;
-    border-radius: 5px;
-    
-    
+   
+      
 }
 
 body{
 	
-	Font-family:Arial,sans-serif;
+	/*Font-family:Arial,sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
+	background-color: #f6fffa;
+	
+}
+
+.tutor-container {
+    max-height: 600px; /* Adjust height as needed */
+    overflow: auto; /* Allows scrolling */
+    padding: 10px;
+    scrollbar-width: thin; /* Thin scrollbar for Firefox */
+    scrollbar-color: transparent transparent; /* Transparent scrollbars for Firefox */
+}
+
+/* WebKit browsers (Chrome, Safari) */
+.tutor-container::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+.tutor-container::-webkit-scrollbar-track {
+    background: transparent; /* Background of the track */
+}
+
+.tutor-container::-webkit-scrollbar-thumb {
+    background: transparent; /* Transparent scrollbar thumb */
+}
+
+.tutorImage{
+	
+	  width: fit-content;
+	  align-items: center;
+	  height: 235px;
+	
 }
 
 .text-block{
@@ -31,18 +61,24 @@ body, ul, li {
 
 /* Navbar container */
 .navbar {
+
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures logo and nav links are spaced apart */
+  justify-content: space-between; 
   background-color: white;
   padding: 10px;
+  margin-left: 5px;
+  margin-left: 10px;
+  font-family: 'Montserrat', sans-serif;
+ 
 }
 
 /* Logo image */
 .logo {
- height: 55px;
+  height: 50px;
   margin-right: 20px;
   margin-left: 95px;
+  width: 220px;
 
 }
 
@@ -51,9 +87,11 @@ body, ul, li {
   display: flex;
   align-items: center;
   margin-left: auto; /* Pushes the nav links to the right */
-  margin-right: 175px;
+  margin-right: 325px;
   font-size: 14px;
+  	font-family: 'Montserrat', sans-serif;
 }
+
 
 /* Navbar links */
 .nav-links li {
@@ -99,53 +137,51 @@ body, ul, li {
 }
 
 .main-section {
-  background: white; /* Light grey background */
-  padding: 20px; /* Padding around content */
-/*  height: auto; /* Maximum height of the section */
-/*  overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
- /* border: 1px solid #ddd; /* Optional border for visibility */
-  display: block ;
+ 	background-color: #f6fffa;
+    display: block ;
+  	font-family: 'Montserrat', sans-serif;
 
   
 }
 
 .main-section .top {
-  background-color: ghostwhite;
+  background-color: white;
   height: 120px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 150px;
+  margin-right: 450px;
   display: flex; /* Enable flexbox layout */
   justify-content: space-between; /* Distribute space evenly between items */
-  border-radius: 50px 50px 0 0 ; /* top-left top-right bottom-right bottom-left */
+  border-radius: 10px 10px 0 0 ; /* top-left top-right bottom-right bottom-left */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
+  position: relative; /* Or 'absolute' if needed */
+  z-index: 10; /* Ensures it's on top of other content */
 }
 
 /*TOP DIV START*/
 
 .main-section .top div {
-  background-color: ghostwhite;
+  background-color: white;
   height: 120px;
   width: 100%; /* Ensure the divs take up available width */
-  flex: 1; /* Make sure divs grow equally */
-  margin: 0 10px; /* Adjust margin to control spacing between divs */
-
+  flex: 1; 
 }
 
 .main-section .top .profile {
-  background-color: ghostwhite;
+  background-color: white;
   height: 120px;
   flex: 1; /* Ensure divs grow equally */
- /* margin: 0 10px; /* Adjust margin to control spacing between divs */
   display: flex; /* Enable Flexbox layout for the .profile div */
   align-items: center; /* Center items vertically */
   justify-content: center; /* Center items horizontally */
   overflow: hidden; /* Ensure no overflow if image is larger */
-  border-radius: 50px 0 0 0; /* Apply border-radius */
+  border-radius: 10px 0 0 0; /* Apply border-radius */
+ 
 }
 
 .main-section .top .profile img {
 
   padding-top: 20px;
-  max-width: 100%; /* Ensure the image fits within the .profile div */
+   max-width: 100%; /* Ensure the image fits within the .profile div */
   max-height: 100%; /* Ensure the image does not exceed the height of the .profile div */
   object-fit: contain; /* Ensure the image is fully visible within the .profile div */
  
@@ -155,28 +191,20 @@ body, ul, li {
 .main-section .top .details{
   
   
-  background-color: ghostwhite;
-  height: auto;
-  flex: 1; /* Ensure divs grow equally */
-  margin: 0 10px; /* Adjust margin to control spacing between divs */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  overflow: hidden; /* Ensure no overflow if image is larger */
+  background-color: white;
+  height: fit-content;
+  /*flex: 1; */
 
 }
 
 .main-section .top .avaialability{
 
-    background-color: ghostwhite;
+    background-color: white;
     height: auto;
-    flex: 1; /* Ensure divs grow equally */
-    margin: 0 10px; /* Adjust margin to control spacing between divs */
-    display: flex; /* Enable flexbox layout for the div */
-    align-items: center; /* Center items vertically */
-    padding-left: 80px;
-    overflow: hidden; /* Ensure no overflow if content is larger */
-    color: blue; /* Set the text color to blue */
-
+  /*  flex: 1; */
+    color: blue;
+  
+    
 }
 
 .main-section .top .availability p {
@@ -187,7 +215,7 @@ body, ul, li {
 }
 
 .main-section .top .feedback {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
   flex: 1; /* Ensure divs grow equally */
   margin: 0 10px; /* Adjust margin to control spacing between divs */
@@ -196,8 +224,9 @@ body, ul, li {
  /* align-items: center; /* Center items horizontally */
  /* justify-content: center; /* Center items vertically */
   overflow: hidden; /* Ensure no overflow if content is larger */
-  border-radius: 0 50px 0 0 ; /* top-left top-right bottom-right bottom-left */
+  border-radius: 0 10px 0 0 ; /* top-left top-right bottom-right bottom-left */
   padding-top: 25px;
+  background-color: white;
 }
 
 .main-section .top .feedback a {
@@ -214,39 +243,42 @@ body, ul, li {
 /*MIDDLE DIV START*/
 
 .main-section .middle {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 150px;
+  margin-right: 450px;
   display: flex; /* Enable flexbox layout */
   justify-content: space-between; /* Distribute space evenly between items */
-  border-radius: 0 0 50px 50px; /* top-left top-right bottom-right bottom-left */
+  border-radius: 0 0 10px 10px; /* top-left top-right bottom-right bottom-left */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
+  position: relative; /* Or 'absolute' if needed */
+  z-index: 10; /* Ensures it's on top of other content */
 }
 
 .main-section .middle div {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
-  flex: 1; /* Allow divs to grow equally */
-  margin: 0 10px; /* Adjust margin to control spacing between divs */
-  /* Remove width: 100%; to allow Flexbox to handle widths */
+
+ 
 }
 
 /*Grades*/
 
 .main-section .middle .grades {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
-  width: 284px; /* Set fixed width for the .grades div */
-  margin: 0 10px; /* Adjust margin to control spacing between divs */
-  flex: 0 0 284px; /* Prevent the .grades div from growing or shrinking */
-   border-radius: 0 0 0 50px; /* top-left top-right bottom-right bottom-left */
+  width: 284px; 
+ /* flex: 0 0 284px; */
+  border-radius: 0 0 0 10px; 
+  margin-left: 35px;
 }
 
 .main-section .middle .grades h4{
   
-   margin: 0; /* Remove default margins from the paragraph */
+   margin: 0; 
    text-align: center; /* Center text within the paragraph */
-   color: blue;
+   color: #001549;
+   
 }
 
 
@@ -261,19 +293,19 @@ body, ul, li {
 
 .main-section .middle .subjects-about  {
  
-  background-color: ghostwhite;
+  background-color: white;
   margin-left: 50px;
   margin-right: 50px;
   height: auto;
   margin: 0 10px; /* Adjust margin to control spacing between divs */
   gap: 10px;
   justify-content: space-between; /* Distribute space evenly between items */
-
+  margin-left: 35px;
 
 }
 
 .main-section .middle .subjects-about .subjects {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
   width: auto; /* Set fixed width for the .grades div */
   margin: 0 10px; /* Adjust margin to control spacing between divs */
@@ -282,7 +314,7 @@ body, ul, li {
 
 
 .main-section .middle .subjects-about .about {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
   width: auto; /* Set fixed width for the .grades div */
   margin: 0 10px; /* Adjust margin to control spacing between divs */ flex: 0 0 450px; /* Prevent the .grades div from growing or shrinking */
@@ -313,7 +345,7 @@ body, ul, li {
 /*Buttons*/
 
 .main-section .middle .book-view {
-  background-color: ghostwhite;
+  background-color: white;
   height: auto;
   width: auto; /* You can set a specific width if needed */
   margin: 0 5px; /* Adjust margin to control spacing between divs */
@@ -322,7 +354,7 @@ body, ul, li {
   flex-direction: column; /* Align items in a column */
   align-items: center; /* Center items horizontally within the container */
   justify-content: center; /* Center items vertically within the container */
-   border-radius: 0 0 50px 0; /* top-left top-right bottom-right bottom-left */
+   border-radius: 0 0 10px 0; /* top-left top-right bottom-right bottom-left */
   
 }
 
@@ -330,15 +362,34 @@ body, ul, li {
     margin: 5px 0; /* Adjust margin to control spacing between buttons */
     padding: 10px; /* Optional: Add padding for better visual appeal */
     display: block; /* Ensure buttons are block-level elements */
-    width: 80%; /* Optional: Set width for buttons, or use auto */
+    width: 50%; /* Optional: Set width for buttons, or use auto */
     text-align: center; /* Center text inside the button */
     background-color: #02A552; /* Lime green background */
     color: white; /* White text color for contrast */
     border: none; /* Remove default border */
-    border-radius: 5px; /* Optional: Rounded corners */
+    border-radius: 2px; /* Optional: Rounded corners */
     font-size: 16px; /* Optional: Adjust font size */
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-left: 40px;
+    
+}
+
+.main-section .middle .book-view .view_pp {
+    margin: 5px 0; /* Adjust margin to control spacing between buttons */
+    padding: 10px; /* Optional: Add padding for better visual appeal */
+    display: block; /* Ensure buttons are block-level elements */
+    width: 50%; /* Optional: Set width for buttons, or use auto */
+    text-align: center; /* Center text inside the button */
+    background-color: #001549; /* Lime green background */
+    color: white; /* White text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 2px; /* Optional: Rounded corners */
+    font-size: 16px; /* Optional: Adjust font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-left: 40px;
+    
 }
 
 .main-section .middle .book-view button:hover {
@@ -376,7 +427,7 @@ body, ul, li {
 
 .subjects {
   display: grid; /* Use CSS Grid layout */
-  grid-template-columns: repeat(5, minmax(0, 150px)); /* Set a maximum width for each column */
+  grid-template-columns: repeat(4, minmax(0, 150px)); /* Set a maximum width for each column */
   gap: 5px; /* Minimal spacing between paragraphs */
 }
 
@@ -384,6 +435,30 @@ body, ul, li {
   margin: 0; /* Remove default margin */
   background-color: gainsboro; /* Set the background color */
   border-radius: 4px; /* Apply border radius for rounded corners */
-   /* Add padding inside paragraphs */
   text-align: center;
+}
+
+#tutorHead{
+	
+	color: #001549;
+	font-size: 35px;
+}
+
+#tutorPar{
+	
+	color: #00a550;
+	font-weight: bold;
+	
+}
+
+#tutorBtn {
+    background-color: #00a550;
+    height: 35px;
+    color: white;
+    width: 190px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-size: 20px;
+    display: block; /* Make sure the button is a block element */
+    margin: 0 auto; /* Center the button */
 }
