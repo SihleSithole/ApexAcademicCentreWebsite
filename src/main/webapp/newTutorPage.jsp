@@ -111,6 +111,9 @@
     opacity: 0.5;
 }
 
+.book-view form{
+   padding-top: 20px;
+}
 
     </style>
  </head>
@@ -267,10 +270,14 @@
                             </div>
                         </div>
                         <div class="book-view">
-                            <button onclick="openPopup('<%= name %>' , '<%= address %>' , '<%= iSmage %>', '<%= descTutor %>' , '<%= ratings %>' , '<%= availability %>' , '<%= about %>' , '<%= qualifications %>' , '<%= subjects %>' , '<%= email %>' , '<%= area %>')" class="view_pp">
+                            <form action="/view-profile" method="post">
+                                <input type="hidden" name="email" value="<%= email %>"/>
+                            <button type="submit" class="view_pp">
                                 VIEW PROFILE
                             </button>
-                            <button onclick="openOpenopen('<%= name %>' , '<%= email %>')">BOOK TUTOR</button>
+                            <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>')">BOOK TUTOR</button>
+                            </form>
+                           
                             <br>
                         </div>
                     </div>
@@ -1427,6 +1434,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
     eliteButton.addEventListener('click', handleButtonClick);
 
 });
+
+
+function openPopup(email) {
+    fetch('/view-profile', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Redirect to profile page after successful response
+            window.location.href = '/profile'; // Adjust the path as needed
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+}
+
 
 
 </script>

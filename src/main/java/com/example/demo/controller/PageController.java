@@ -460,6 +460,32 @@ public class PageController {
 		            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Failed to execute payment"));
 		        }
 		    }
+		    
+		    
+		    @PostMapping("view-profile")
+		    public ModelAndView getTry(@RequestParam("email") String email) {
+		    	
+		    	List<Tutor> tutors = tutorService.listAll();
+				 Optional<Tutor> opT = tutorRepo.findById(email);
+				 Tutor tutor = new Tutor();
+				     
+				 if (opT.isPresent()){
+					 
+					 tutor = opT.get();
+
+				 }
+				 
+				 String name = tutor.getFullNames();
+				 
+		    	
+				ModelAndView data = new ModelAndView("profile.jsp");// load the admin dashboard
+				data.addObject("tutor", tutor);
+				data.addObject("tutors", tutors);
+				data.addObject("name", name);
+				
+				return data;
+				
+		    }
 		 
 
 	 
