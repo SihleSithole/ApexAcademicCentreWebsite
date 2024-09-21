@@ -25,6 +25,9 @@ public class Tutor {
 	@Column(name = "fullNames")
 	private String fullNames;
 	
+	@Column(name = "surname")
+	private String surname;
+	
 	@Column(name = "background")
 	private String background;
 	
@@ -80,7 +83,7 @@ public class Tutor {
 	}
 
 	public Tutor(String email, String fullNames, String background, String phoneNumber, String subjects, String grades,
-			String address, String availability, String bio, String about, String hoursTutored, byte[] image , String syllabus , String area, String country, Date dob) {
+			String address, String availability, String bio, String about, String hoursTutored, byte[] image , String syllabus , String area, String country, Date dob , String surname) {
 		super();
 		this.email = email;
 		this.fullNames = fullNames;
@@ -98,6 +101,7 @@ public class Tutor {
 		this.area = area;
 		this.country = country;
 		this.dob = dob;
+		this.surname = surname;
 		
 		String online = availability.substring(0, 6);
 		
@@ -262,6 +266,14 @@ public class Tutor {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+	
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 		
 }

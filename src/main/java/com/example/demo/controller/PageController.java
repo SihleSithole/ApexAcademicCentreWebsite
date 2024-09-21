@@ -110,15 +110,17 @@ public class PageController {
 				@RequestParam("hiddenGrades") String grades , @RequestParam("hiddenSyllabus") String syllabus ,
 				@RequestParam("tutorOption") String tutorOption , @RequestParam("hiddenAddress") String address,
 				@RequestParam("bio") String qualification , @RequestParam("about") String about,
-				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob) throws IOException, ParseException 
+				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob , @RequestParam("hiddenSurname") String surname) throws IOException, ParseException 
 		{
+		 
+		 System.out.println(surname);
 		 
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		 Date date = dateFormat.parse(dob);
 		 
            byte[] imageData = profile.getBytes();
                 
-		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date);
+		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date,surname);
 		      
 		    tutorService.save(tutor); 
 		    

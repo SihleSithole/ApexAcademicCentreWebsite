@@ -786,6 +786,7 @@ body, ul, li {
             String qualifications = tutor.getBio();
             int ratings = tutor.getRatings();
             String descTutor = tutor.getHoursTutored();
+            String surname = tutor.getSurname();
 
             
   %>
@@ -798,7 +799,7 @@ body, ul, li {
                 <!-- Tutor's Picture and Info Div -->
                 <div class="profile-picture-container">
                     <img src="data:image/png;base64,<%= tutorImage %>" alt="Tutor's Picture">
-                    <div class="name"><%= name %></div>
+                    <div class="name"><%= name %> <%= surname %></div>
                     <div class="age"><%= age %> years old</div>
                 </div>
                 <!-- Tutor's information div -->
@@ -823,7 +824,7 @@ body, ul, li {
 
                 <!--Book Tutor Button-->
                 <div class="profile-action">
-                    <button id="book-tutor-button" class="book-tutor-button">Book tutorName</button>
+                    <button id="book-tutor-button" class="book-tutor-button">Book <%= name %></button>
                 </div>
 
 
@@ -994,7 +995,7 @@ body, ul, li {
                     Your Personal Tutor in the Comfort of Your Own Home
                     <!--Book Tutor Button and find tutor-->
                     <div class="button-action">
-                        <button id="book-tutor-button" class="book-tutor-button">Book tutorName</button>
+                        <button id="book-tutor-button" class="book-tutor-button">Book <%= name %></button>
                         <button id="find-tutor-button" class="find-tutor-button">Find Me A Tutor</button>
                     </div>
                 </div>

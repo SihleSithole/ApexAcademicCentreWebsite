@@ -559,21 +559,21 @@
                             <form id="submit-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="subject">Subject <span class="required">*</span></label><br>
-                                        <select id="subject" name="subject" class="input" required>
-                                            <option value="" disabled selected>Select your Subject</option>
-                                            <option value="English">English</option>
-                                            <option value="isiZulu">isiZulu</option>
-                                            <option value="Mathematics">Mathematics</option>
-                                            <option value="Science">Science</option>
-                                            <option value="History">History</option>
-                                            <option value="Geography">Geography</option>
-                                            <option value="Other">Other</option>
-                                          
-                                        </select>
+                                        <label for="subject">Select Subject <span class="required">*</span></label><br>
+                                        <input type="text" id="subject" name="subject" class="input" required readonly onclick="toggleSubjectOptions()">
+                                        <div id="subjectContainer" style="display: none;">
+                                            <label><input type="checkbox" value="English" onchange="updateSubjects()"> English</label>
+                                            <label><input type="checkbox" value="isiZulu" onchange="updateSubjects()"> isiZulu</label>
+                                            <label><input type="checkbox" value="Mathematics" onchange="updateSubjects()"> Mathematics</label>
+                                            <label><input type="checkbox" value="Science" onchange="updateSubjects()"> Science</label>
+                                            <label><input type="checkbox" value="History" onchange="updateSubjects()"> History</label>
+                                            <label><input type="checkbox" value="Geography" onchange="updateSubjects()"> Geography</label>
+                                            
+                                        </div>
                                         <div id="subject-error" class="error"></div>
                                     </div>
                                 </div>
+                                
 
                                 <div class="form-group">
                                     <label>Tutoring Option<span class="required">*</span></label>
@@ -1457,6 +1457,25 @@ function openPopup(email) {
     });
 
 }
+
+function toggleSubjectOptions() {
+    const container = document.getElementById('subjectContainer');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+}
+
+function updateSubjects() {
+    const checkboxes = document.querySelectorAll('#subjectContainer input[type="checkbox"]');
+    const selectedSubjects = [];
+    
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            selectedSubjects.push(checkbox.value);
+        }
+    });
+    
+    document.getElementById('subject').value = selectedSubjects.join(', ');
+}
+
 
 
 

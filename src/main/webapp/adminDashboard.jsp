@@ -74,6 +74,8 @@
 			margin-bottom: 1rem;
 		}
 
+
+
 	</style>
 
 </head>
@@ -314,11 +316,17 @@
 										<h1 class="mb-4"></h1>
 										<div class="grid-container">
 											<div class="mb-3">
-												<label for="name">Full Names</label>
-												<input type="text" id="name" name="name" class="form-control" required>
+												<label for="name">Name</label>
+												<input type="text" id="name" name="name" class="form-control" placeholder="Sihle">
 												<div id="nameError" class="error-message"></div>
 											</div>
 									
+											<div class="mb-3">
+												<label for="name">Surname</label>
+												<input type="text" id="lsurname" name="lsurname" class="form-control" placeholder="Sithole" required>
+												<div id="lSurnameError" class="error-message"></div>
+											</div>
+
 											<div class="mb-3">
 												<label for="idnumber">Date of Birth</label>
 												<input type="date" id="idnumber" name="idnumber" class="form-control" required>
@@ -327,7 +335,7 @@
 											
 											<div class="mb-3">
 												<label for="phone">Phone Number</label>
-												<input type="text" id="phone" name="phone" class="form-control" required>
+												<input type="text" id="phone" name="phone" class="form-control" placeholder="0712345678"required>
 												<div id="phoneError" class="error-message"></div>
 											</div>
 
@@ -398,23 +406,61 @@
 									<form id="form2" class="p-4 border rounded">
 										<h1 class="mb-4"></h1>
 										<div class="mb-3">
-											<label for="subject">Subjects(Separate in Comma)</label>
-											<input type="text" id="subjects" name="subjects" class="form-control"
-												required>
+										<label>
+											<input type="checkbox" name="university" value="yes">
+											Do you tutor University Students?
+										  </label>
+										</div>
+										<div class="mb-3">
+											<label for="subject">Select Subjects</label>
+											<input type="text" id="subjects" name="subjects" class="form-control" required readonly onclick="toggleSubjectOptions()">
+											<div id="subjectContainer" style="display: none;">
+												<label><input type="checkbox" value="Mathematics" onchange="updateSubjects()"> Mathematics</label>
+												<label><input type="checkbox" value="isiZulu" onchange="updateSubjects()"> isiZulu</label>
+												<label><input type="checkbox" value="History" onchange="updateSubjects()"> History</label>
+												<label><input type="checkbox" value="Geography" onchange="updateSubjects()"> Geography</label>
+												<label><input type="checkbox" value="English" onchange="updateSubjects()"> English</label>
+												<label><input type="checkbox" value="Afrikaans" onchange="updateSubjects()"> Afrikaans</label>
+												<label><input type="checkbox" value="Physics" onchange="updateSubjects()"> Physics</label>
+											</div>
 											<div id="subjectError" class="error-message"></div>
 										</div>
+										
 										<div class="mb-3">
-											<label for="grades">Grades(Separate in Comma)</label>
-											<input type="text" id="grades" name="grades" class="form-control" required>
+											<label for="grades">Select Grades</label>
+											<input type="text" id="grades" name="grades" class="form-control" required readonly onclick="toggleCheckboxes()">
+											<div id="gradesContainer" style="display: none;">
+												<label><input type="checkbox" value="GRD:R" onchange="updateGrades()"> R</label>
+												<label><input type="checkbox" value="GRD:1" onchange="updateGrades()"> 1</label>
+												<label><input type="checkbox" value="GRD:2" onchange="updateGrades()"> 2</label>
+												<label><input type="checkbox" value="GRD:3" onchange="updateGrades()"> 3</label>
+												<label><input type="checkbox" value="GRD:4" onchange="updateGrades()"> 4</label>
+												<label><input type="checkbox" value="GRD:5" onchange="updateGrades()"> 5</label>
+												<label><input type="checkbox" value="GRD:6" onchange="updateGrades()"> 6</label>
+												<label><input type="checkbox" value="GRD:7" onchange="updateGrades()"> 7</label>
+												<label><input type="checkbox" value="GRD:8" onchange="updateGrades()"> 8</label>
+												<label><input type="checkbox" value="GRD:9" onchange="updateGrades()"> 9</label>
+												<label><input type="checkbox" value="GRD:10" onchange="updateGrades()"> 10</label>
+												<label><input type="checkbox" value="GRD:11" onchange="updateGrades()"> 11</label>
+												<label><input type="checkbox" value="GRD:12" onchange="updateGrades()"> 12</label>
+											</div>
 											<div id="gradesError" class="error-message"></div>
 										</div>
+
 										<div class="mb-3">
-											<label for="syllabus">Syllabus(Separate in
-												Comma)</label>
-											<input type="text" id="syllabus" name="syllabus" class="form-control"
-												required>
+											<label for="syllabus">Select Syllabus</label>
+											<input type="text" id="syllabus" name="syllabus" class="form-control" required readonly onclick="toggleSyllabusOptions()">
+											<div id="syllabusContainer" style="display: none;">
+												<label><input type="checkbox" value="CAPs" onchange="updateSyllabus()"> CAPs</label>
+												<label><input type="checkbox" value="IEB" onchange="updateSyllabus()"> IEB</label>
+												<label><input type="checkbox" value="IB" onchange="updateSyllabus()"> IB</label>
+												<label><input type="checkbox" value="Person" onchange="updateSyllabus()"> Person</label>
+												<label><input type="checkbox" value="Cambridge" onchange="updateSyllabus()"> Cambridge</label>
+												<label><input type="checkbox" value="Pearson Edexel" onchange="updateSyllabus()"> Pearson Edexel</label>
+											</div>
 											<div id="syllabusError" class="error-message"></div>
 										</div>
+										
 
 										<div class="mb-3">
 											<label for="tutorOptions">Tutoring Options</label>
@@ -469,6 +515,7 @@
 
 										<div class="mb-3">
 											<input type="hidden" id="hiddenName" name="hiddenName" class="form-control">
+											<input type="hidden" id="hiddenSurname" name="hiddenSurname" class="form-control">
 											<input type="hidden" id="hiddenID" name="hiddenID" class="form-control">
 											<input type="hidden" id="hiddenIdentity" name="hiddenIdentity" class="form-control">
 											<input type="hidden" id="hiddenEmail" name="hiddenEmail"
@@ -1533,6 +1580,7 @@
 				var address = document.getElementById("address").value;
 				var country = document.getElementById("country").value;
 				var id = document.getElementById("idnumber").value;
+				var lsurname = document.getElementById("lsurname").value;
 				
 				//Get error message divs
 				var nameError = document.getElementById("nameError");
@@ -1589,10 +1637,13 @@
 					idError.style.color = "red"; // Set text color to red
 				}
 
-
+				if (lsurname === "") {
+					lSurnameError.innerText = "Surname is required.";
+					lSurnameError.style.color = "red"; // Set text color to red
+				}
 
 				// If any field is empty, return without proceeding
-				if (name === "" || phone === "" || email === "" || background == "No" || address === ""  || country === "" || id === "") {
+				if (name === "" || phone === "" || email === "" || background == "No" || address === ""  || country === "" || id === "" || lsurname === "") {
 					return;
 				}
 
@@ -1610,6 +1661,7 @@
 				var address = document.getElementById("address").value;
 				var country = document.getElementById("country").value;
 				var id = document.getElementById("idnumber").value;
+				var lsurname = document.getElementById("lsurname").value;
 
 				var subject = document.getElementById("subjects").value;
 				var grades = document.getElementById("grades").value;
@@ -1680,6 +1732,10 @@
 
 				var hiddenSubjects = document.getElementById('hiddenSubjects');
 				hiddenSubjects.value = subject;
+
+				var hiddenSurname = document.getElementById('hiddenSurname');
+				hiddenSurname.value = lsurname;
+				
 
 				var hiddenGrades = document.getElementById('hiddenGrades');
 				hiddenGrades.value = grades;
@@ -2100,6 +2156,60 @@
 							
 					});
 				});
+
+				function toggleCheckboxes() {
+						const container = document.getElementById('gradesContainer');
+						container.style.display = container.style.display === 'none' ? 'block' : 'none';
+					}
+
+					function updateGrades() {
+						const checkboxes = document.querySelectorAll('#gradesContainer input[type="checkbox"]');
+						const selectedGrades = [];
+						
+						checkboxes.forEach((checkbox) => {
+							if (checkbox.checked) {
+								selectedGrades.push(checkbox.value);
+							}
+						});
+						
+						document.getElementById('grades').value = selectedGrades.join(', ');
+					}
+
+					function toggleSyllabusOptions() {
+						const container = document.getElementById('syllabusContainer');
+						container.style.display = container.style.display === 'none' ? 'block' : 'none';
+					}
+
+					function updateSyllabus() {
+						const checkboxes = document.querySelectorAll('#syllabusContainer input[type="checkbox"]');
+						const selectedSyllabi = [];
+						
+						checkboxes.forEach((checkbox) => {
+							if (checkbox.checked) {
+								selectedSyllabi.push(checkbox.value);
+							}
+						});
+						
+						document.getElementById('syllabus').value = selectedSyllabi.join(', ');
+					}
+
+		function toggleSubjectOptions() {
+				const container = document.getElementById('subjectContainer');
+				container.style.display = container.style.display === 'none' ? 'block' : 'none';
+			}
+
+			function updateSubjects() {
+				const checkboxes = document.querySelectorAll('#subjectContainer input[type="checkbox"]');
+				const selectedSubjects = [];
+				
+				checkboxes.forEach((checkbox) => {
+					if (checkbox.checked) {
+						selectedSubjects.push(checkbox.value);
+					}
+				});
+				
+				document.getElementById('subjects').value = selectedSubjects.join(', ');
+			}
 
 
 </script>
