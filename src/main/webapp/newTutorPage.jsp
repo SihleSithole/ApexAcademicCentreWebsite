@@ -7,7 +7,7 @@
  <head>
     <title>ApexAcademicCentre</title> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="tutorNewPage.css" rel="stylesheet">
+    <link href="updatedTutor.css" rel="stylesheet">
     <link href="book.css" rel="stylesheet">
     <style>
 /* General Styling for the form */
@@ -169,7 +169,7 @@
 			<img src="tutor.jpg" alt="tutorsImage" class="tutorImage"/>
 			<h2 id="tutorHead" align="center">Apex Academic Centre Tutors</h2>
 			<p id="tutorPar" align="center">These are the Highest Quality Online Tutors. Get Lessons Online with Apex - the Best in Tutoring</p>
-            <button id="tutorBtn">BOOK A TUTOR</button>
+            <button id="tutorBtn" onclick="openOpenopen()">BOOK A TUTOR</button>
 			<br>
 			<br>
 		</section>
@@ -488,7 +488,7 @@
                                                     <option value="PEX">Pearson Edexcel</option>
                                                     <option value="CAMBRIDGE">Cambridge</option>
                                                     <option value="IB">IB</option>
-                                                    
+                                                    <option value="Other" id="other-option">Other</option>
                                                 </select>
                                                 <div id="syllabus-error" class="error"></div>
                                             </div>
@@ -810,6 +810,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                                        /*#########################BOOKINGS#######################*/
 
+ document.addEventListener('DOMContentLoaded', function() {
+  const otherOption = document.getElementById('other-option');
+  otherOption.style.display = 'none'; // Hide the "Other" option
+});
+
 document.addEventListener('DOMContentLoaded', function() {
             var form_1 = document.querySelector(".form_1");
             var form_2 = document.querySelector(".form_2");
@@ -1040,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				return isValid;
 
             }
-//In Person
+
             function validateForm4() {
 
                 var tutoring = document.querySelector('input[name="tutor-style"]:checked');
@@ -1173,10 +1178,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 }
 
-
-
-                //onceOffPackage
-
                     var isValid = true;
 
                     var message = document.getElementById('message').value.trim();
@@ -1199,7 +1200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
 
 
-                    return isValid;
+                         return isValid;
 
                     }
 
@@ -1275,12 +1276,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
             form_4_next_btn.addEventListener("click", function() {
                 if(validateForm4()) {
+
+                    var syllabus = document.getElementById("syllabus").value;
+
+                    if(syllabus === "Other"){
+
+                    modal_wrapper.classList.add("active");
+                    shadow.addEventListener("click", function() {
+                        modal_wrapper.classList.remove("active");
+                    });
+
+                    const allData = combineFormData();
+
+                    const dataToSend = {
+                        ...allData
+                    };
+
+                            fetch('/other-booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(dataToSend)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                
+                                    setTimeout(function(){
+                                            window.location.href = '/';
+                                        } , 2000);
+
+                                        
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                    setTimeout(function(){
+                        window.location.href = '/';
+                    } , 2000);
+
+                    }
+
+                  else{
+
+
                     form_3.style.display = "none";
                     form_4.style.display = "none";
                     form_5.style.display = "block";
 
                     form_4_btns.style.display = "none";
                     form_5_btns.style.display = "block";
+
+                  }
 
                 }
             });
@@ -1331,6 +1380,22 @@ document.addEventListener('DOMContentLoaded', function() {
         var btn = document.getElementById("open-popup");*/
 
 		function openOpenopen(name,email){
+
+            const button = document.getElementById('tutorBtn');
+            if (event.target === button) {
+                // The button was clicked
+                const otherOption = document.getElementById('other-option');
+                otherOption.style.display = 'block'; // Hide the "Other" option
+            
+            }
+
+            else{
+
+                const otherOption = document.getElementById('other-option');
+                otherOption.style.display = 'none'; // Hide the "Other" option
+                document.querySelector("#syllabus option:first-child").textContent = "";
+
+            }
 
 			document.getElementById("modal").style.display = 'block';
 			var span = document.getElementById("close-popup");

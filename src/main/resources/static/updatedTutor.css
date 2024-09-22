@@ -189,6 +189,11 @@ body, ul, li {
     margin: 0 auto; /* Center the button */
 }
 
+#tutorBtn:hover {
+    background-color: white;
+    color: #02A552; /* Change text color on hover */
+}
+
 
 /*TUTOR DESIGN*/
 
@@ -377,8 +382,9 @@ body, ul, li {
 
 .subjects p {
     display: inline-block; /* Allows width to be determined by content */
-    padding: 5px; /* Set padding to 3px */
-    margin: 5px; /* Margin for spacing between paragraphs */
+    padding-left: 5px; /* Set padding to 3px */
+    padding-right: 5px; /* Set padding to 3px */
+    margin: 3px; /* Margin for spacing between paragraphs */
     background-color: #e7eeff; /* Light background for visibility */
     text-align: center;
     border-radius: 3px;

@@ -699,7 +699,7 @@ body, ul, li {
         .tutoring-container {
             color: #00a550; /* Color for the tutoring title */
             font-size: 14px; /* Adjust font size as needed */
-            margin-top: 8px; /* Space between title and grades */
+
             margin-left: 10px;
         }
         .tutoring-container1 {
@@ -712,7 +712,7 @@ body, ul, li {
 
         .grades, .modules {
             color: #001549; /* Color for grades */
-            font-size: 12px; /* Adjust font size as needed */
+            font-size: 10px; /* Adjust font size as needed */
             margin-left: 20px;
             background-color: #e7eeff; /* Light background color */
             /*border-radius: 8px; /* Rounded corners */
@@ -1030,7 +1030,7 @@ body, ul, li {
                     Your Personal Tutor in the Comfort of Your Own Home
                     <!--Book Tutor Button and find tutor-->
                     <div class="button-action">
-                        <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullNames %>' , '<%= email %>')">Book <%= name %></button>
+                        <button id="book-tutor-button" class="book-tutor-button">Book <%= name %></button>
                         <button id="find-tutor-button" class="find-tutor-button">Find Me A Tutor</button>
                     </div>
                 </div>

@@ -237,6 +237,19 @@ public class PageController {
 	        return data;
 	    }
 	 
+	 @PostMapping("/other-booking")
+	 @ResponseBody
+	    public void otherBooking(@RequestBody Map<String, String> booking) {
+	        
+
+		 System.out.println("We here - Send the email");
+		 
+	        /*senderService.sendSimpleEmail(tutorEmaill, subject ,
+	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
+	        */
+	        
+	    }
+	 
 	 
 	 @PostMapping("/pushBooking")
 	 @ResponseBody
