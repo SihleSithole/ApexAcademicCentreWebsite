@@ -7,6 +7,8 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +22,7 @@
     
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/css/styles.css">
+          <link href="book.css" rel="stylesheet">
 
 
     <title>View profile</title>
@@ -124,17 +127,28 @@ body{
 
 }
 
-.subjects-info p {
-    flex: 0 0 calc(16.66% - 10px); /* Each paragraph takes up about 16.66% of the container width minus gap */
-    margin: 5px; /* Margin for spacing between paragraphs */
-    background-color: #e7eeff; /* Light background for visibility */
-    display: inline; /* Make paragraphs fit tightly around their content */
-    padding: 0; /* Optional: small padding for better aesthetics */
+/*.subjects-info p {
+    flex: 0 0 calc(16.66% - 10px); 
+    margin: 5px;
+    background-color: #e7eeff;
+    display: inline;
+    padding: 0; 
     text-align: center;
     height : fit-content;
     border-radius: 3px;
     color: #00a550;
+}*/
+
+.subjects-info p {
+    display: inline-block; /* Allows width to be determined by content */
+    padding: 5px; /* Set padding to 3px */
+    margin: 5px; /* Margin for spacing between paragraphs */
+    background-color: #e7eeff; /* Light background for visibility */
+    text-align: center;
+    border-radius: 3px;
+    color: #00a550;
 }
+
 
 /*Start here */
 
@@ -144,7 +158,7 @@ body{
         }
 
         .profile-picture-container, .matric {
-            width: 250px; /* Adjust as needed */
+            width: 290px; /* Adjust as needed */
             /*background-color: #f6fffa; */
             padding: 20px;
             border-radius: 8px;
@@ -215,12 +229,12 @@ body{
 /*The added */
 
 
-.subjects-row,  .qualifications-row {
+.subjects-row,  .qualifications-row, .University-row {
   display: flex;
   align-items: center; /* Align items to the top */
 }
 
-.subjects-row{
+.subjects-row, .University-row{
     margin-top: 10px;
     margin-left: 15px;
     margin-right: 15px;
@@ -675,7 +689,7 @@ body, ul, li {
             display: flex; /* Use flexbox */
             flex-direction: column; /* Stack items vertically */
         }
-        .header {
+        .header, .header1 {
             display: flex; /* Use flexbox for icon and title */
             align-items: center; /* Center items vertically */
             font-size: 14px;
@@ -688,14 +702,23 @@ body, ul, li {
             margin-top: 8px; /* Space between title and grades */
             margin-left: 10px;
         }
-        .grades {
+        .tutoring-container1 {
+            color: #00a550; /* Color for the tutoring title */
+            font-size: 13px; /* Adjust font size as needed */
+            margin-top: 8px; /* Space between title and grades */
+            margin-left: 10px;
+        }
+
+
+        .grades, .modules {
             color: #001549; /* Color for grades */
-            font-size: 10px; /* Adjust font size as needed */
+            font-size: 12px; /* Adjust font size as needed */
             margin-left: 20px;
             background-color: #e7eeff; /* Light background color */
             /*border-radius: 8px; /* Rounded corners */
             /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
+
 
 
     </style>
@@ -787,7 +810,9 @@ body, ul, li {
             int ratings = tutor.getRatings();
             String descTutor = tutor.getHoursTutored();
             String surname = tutor.getSurname();
-
+            String email = tutor.getEmail().trim().replaceAll("\\s+", "");
+            String modules = tutor.getModule();
+            String fullNames = name + "" + surname;
             
   %>
 
@@ -884,8 +909,40 @@ body, ul, li {
                                 <% } %>
                                 <br><br>
                             </div>
-                        
+ 
                     </div>
+
+                    <%
+                    if (modules != null && !modules.isEmpty()) { // Check for null and empty
+                    %>
+                        <div class="University-row">
+                            <div class="subjects-title">
+                                <div class="header1">
+                                    <i class="fa fa-book"></i>&nbsp;&nbsp;Subjects
+                                </div>
+                                <div class="tutoring-container1">
+                                    University tutoring<br>
+                                    <span class="modules">1st yr - 4th yr</span>
+                                </div>
+                            </div>
+                            <div class="subjects-info">
+                                <%
+                                String[] mod = modules.split(",");
+                                for (String modu : mod) {
+                                %>
+                                    <p><%= modu.trim() %></p> <!-- Trim to remove any leading/trailing whitespace -->
+                                <% } %>
+                                <br><br>
+                            </div>
+                        </div>
+                    <%
+                    } else {
+                    %>
+                       
+                    <%
+                    }
+                    %>
+                    
 
                 </div>
 
@@ -902,100 +959,78 @@ body, ul, li {
                                 <span id="rev">Reviews</span>
                             </div>
                             <div class="swiper-wrapper">
-
-                                <article class="card__article swiper-slide">
-
-
-                                    <div class="card__data">
-                                        <h3 class="card__name">Vuyiswa</h3>
-                                        <p class="card__description">
-                                            I am extremely certified and content with Apex arcademic,my son always looks forward
-                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
-                                            a marvelous work.
-                                        </p>
-
-                                    </div>
-                                </article>
-
-                                <article class="card__article swiper-slide">
-
-
-                                    <div class="card__data">
-                                        <h3 class="card__name">Bongisani</h3>
-                                        <p class="card__description">
-                                            I am extremely certified and content with Apex arcademic,my son always looks forward
-                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
-                                            a marvelous work.
-                                        </p>
-
-
-                                    </div>
-                                </article>
-
-                                <article class="card__article swiper-slide">
-
-
-                                    <div class="card__data">
-                                        <h3 class="card__name">Mdu</h3>
-                                        <p class="card__description">
-                                            I am extremely certified and content with Apex arcademic,my son always looks forward
-                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
-                                            a marvelous work.
-                                        </p>
-
-
-                                    </div>
-                                </article>
-
-                                <article class="card__article swiper-slide">
-
-
-                                    <div class="card__data">
-                                        <h3 class="card__name">Mabhena</h3>
-                                        <p class="card__description">
-                                            I am extremely certified and content with Apex arcademic,my son always looks forward
-
-                                        </p>
-
-
-                                    </div>
-                                </article>
-
-                                <article class="card__article swiper-slide">
-
-                                    <div class="card__data">
-                                        <h3 class="card__name">Shobane</h3>
-                                        <p class="card__description">
-                                            I am extremely certified and content with Apex arcademic,my son always looks forward
-                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
-                                            a marvelous work.
-                                        </p>
-
-
-                                    </div>
-                                </article>
+                                <%
+                                    List<Review> reviews = (List<Review>) request.getAttribute("reviews");
+                                    Set<String> displayedTutors = new HashSet<>();
+                                    boolean hasReviews = false; // Flag to check if there are any approved reviews
+                                    int reviewCount = 0; // Counter to limit displayed reviews
+                                    final int maxReviewsToShow = 3; // Maximum reviews to show
+                    
+                                    if (reviews != null) {
+                                        for (Review r : reviews) {
+                                            String emailTutor = r.getTutorEmail().trim().replaceAll("\\s+", "");
+                                            if (emailTutor.equals(email) && r.getStatus().equals("approved")) {
+                                                hasReviews = true; // Set flag if there's at least one approved review
+                                                String tutName = r.getName();
+                                                String reviewDescription = r.getMessage();
+                                                
+                                                // Create a unique key for each tutor's review
+                                                String uniqueKey = emailTutor + "_" + tutName;
+                    
+                                                // Only display if this unique key hasn't been displayed yet
+                                                if (!displayedTutors.contains(uniqueKey)) {
+                                                    displayedTutors.add(uniqueKey);
+                                                    reviewCount++; // Increment the review counter
+                    
+                                                    // Limit the number of displayed reviews
+                                                    if (reviewCount > maxReviewsToShow) {
+                                                        break; // Exit the loop if the limit is reached
+                                                    }
+                                %>
+                                                    <article class="card__article swiper-slide">
+                                                        <div class="card__data">
+                                                            <h3 class="card__name"><%= tutName %></h3>
+                                                            <p class="card__description">
+                                                                <%= reviewDescription != null ? reviewDescription : "No description available." %>
+                                                            </p>
+                                                        </div>
+                                                    </article>
+                                <%
+                                                }
+                                            }
+                                        }
+                                    }
+                    
+                                    // Display a message if no approved reviews were found
+                                    if (!hasReviews) {
+                                %>
+                                        <p>No reviews available.</p>
+                                <%
+                                    }
+                                %>
                             </div>
+                    
+                            <!-- Navigation buttons -->
+                            <div class="swiper-button-next">
+                                <i class="ri-arrow-right-s-line"></i>
+                            </div>
+                    
+                            <div class="swiper-button-prev">
+                                <i class="ri-arrow-left-s-line"></i>
+                            </div>
+                    
+                            <!-- Pagination -->
+                            <div class="swiper-pagination"></div>
                         </div>
-
-                        <!-- Navigation buttons -->
-                        <div class="swiper-button-next">
-                            <i class="ri-arrow-right-s-line"></i>
-                        </div>
-
-                        <div class="swiper-button-prev">
-                            <i class="ri-arrow-left-s-line"></i>
-                        </div>
-
-                        <!-- Pagination -->
-                        <div class="swiper-pagination"></div>
                     </div>
+                    
                 </section>
 
                 <div class="short-paragraph">
                     Your Personal Tutor in the Comfort of Your Own Home
                     <!--Book Tutor Button and find tutor-->
                     <div class="button-action">
-                        <button id="book-tutor-button" class="book-tutor-button">Book <%= name %></button>
+                        <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullNames %>' , '<%= email %>')">Book <%= name %></button>
                         <button id="find-tutor-button" class="find-tutor-button">Find Me A Tutor</button>
                     </div>
                 </div>

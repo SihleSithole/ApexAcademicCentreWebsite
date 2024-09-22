@@ -110,17 +110,17 @@ public class PageController {
 				@RequestParam("hiddenGrades") String grades , @RequestParam("hiddenSyllabus") String syllabus ,
 				@RequestParam("tutorOption") String tutorOption , @RequestParam("hiddenAddress") String address,
 				@RequestParam("bio") String qualification , @RequestParam("about") String about,
-				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob , @RequestParam("hiddenSurname") String surname) throws IOException, ParseException 
+				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob , @RequestParam("hiddenSurname") String surname ,@RequestParam("hiddenModules") String hiddenModules) throws IOException, ParseException 
 		{
 		 
-		 System.out.println(surname);
+		 System.out.println(hiddenModules);
 		 
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		 Date date = dateFormat.parse(dob);
 		 
            byte[] imageData = profile.getBytes();
                 
-		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date,surname);
+		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date,surname,hiddenModules);
 		      
 		    tutorService.save(tutor); 
 		    
@@ -470,6 +470,7 @@ public class PageController {
 		    	List<Tutor> tutors = tutorService.listAll();
 				 Optional<Tutor> opT = tutorRepo.findById(email);
 				 Tutor tutor = new Tutor();
+				 List<Review> reviews = reviewService.listAll();
 				     
 				 if (opT.isPresent()){
 					 
@@ -484,7 +485,9 @@ public class PageController {
 				data.addObject("tutor", tutor);
 				data.addObject("tutors", tutors);
 				data.addObject("name", name);
-				
+				data.addObject("reviews",reviews);
+		       
+
 				return data;
 				
 		    }

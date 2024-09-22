@@ -483,12 +483,12 @@
                                                 <label for="syllabus">Syllabus <span class="required">*</span></label>
                                                 <select id="syllabus" name="syllabus" required>
                                                     <option value="" disabled selected>Select syllabus</option>
-                                                    <option value="ieb">IEB</option>
-                                                    <option value="caps">CAPS</option>
-                                                    <option value="pearson-edexel">Pearson Edexel</option>
-                                                    <option value="cambridge">Cambridge</option>
-                                                    <option value="ged">GED</option>
-                                                    <option value="other">Other</option>
+                                                    <option value="IEB">IEB</option>
+                                                    <option value="CAPs">CAPS</option>
+                                                    <option value="PEX">Pearson Edexcel</option>
+                                                    <option value="CAMBRIDGE">Cambridge</option>
+                                                    <option value="IB">IB</option>
+                                                    
                                                 </select>
                                                 <div id="syllabus-error" class="error"></div>
                                             </div>
@@ -573,7 +573,6 @@
                                         <div id="subject-error" class="error"></div>
                                     </div>
                                 </div>
-                                
 
                                 <div class="form-group">
                                     <label>Tutoring Option<span class="required">*</span></label>
@@ -666,14 +665,14 @@
                         <div class="form_5" style="display: none;" id="formFive">
                             <h2>Payment Packages</h2>
                         
-                            <div class="div-container">
+                            <div class="div-container" id="schoolPackages">
                                 <div class="custom-div">
                                     <h3>Once Off Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">1 Session per month<br>(once off)</div>
                                         <div class="package-details">Package Details</div>
                                  
-                                        <button type="submit" class="package-btn" id="onceOffPackage">R250</button>
+                                        <button type="submit" class="package-btn" id="onceOffPackage"></button>
                                       
                                     </div>
                                 </div>
@@ -683,7 +682,7 @@
                                         <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
                                         <div class="package-details">Package Details</div>
                                 
-                                        <button type="submit" class="package-btn" id="basicPackage">R950 p/m</button>
+                                        <button type="submit" class="package-btn" id="basicPackage"></button>
                                      
                                     </div>
                                 </div>
@@ -693,7 +692,7 @@
                                         <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
                                         <div class="package-details">Package Details</div>
                                  
-                                        <button type="submit" class="package-btn" id="premiumPackage">R1850 p/m</button>
+                                        <button type="submit" class="package-btn" id="premiumPackage"></button>
                                     
                                     </div>
                                 </div>
@@ -703,7 +702,7 @@
                                         <div class="session-per-month">12 Sessions per month<br>(once a week)</div>
                                         <div class="package-details">Package Details</div>
                                     
-                                        <button type="submit" class="package-btn" id="advancedPackage">R2650 p/m</button>
+                                        <button type="submit" class="package-btn" id="advancedPackage"></button>
                                       
                                     </div>
                                 </div>
@@ -713,10 +712,44 @@
                                         <div class="session-per-month">16 Sessions per month<br>(once a week)</div>
                                         <div class="package-details">Package Details</div>
                                         
-                                        <button type="submit" class="package-btn" id="elitePackage">R3350 p/m</button>
+                                        <button type="submit" class="package-btn" id="elitePackage"></button>
                                     
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="div-container" id="universityPackages">
+                                <div class="custom-div">
+                                    <h3>One on One</h3>
+                                    <div class="content">
+                                        <div class="session-per-month">1 Session per month<br>(once off)</div>
+                                        <div class="package-details">Package Details</div>
+                                 
+                                        <button type="submit" class="package-btn" id="oneOnone"></button>
+                                      
+                                    </div>
+                                </div>
+                                <div class="custom-div">
+                                    <h3>2 to 5 students</h3>
+                                    <div class="content">
+                                        <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
+                                        <div class="package-details">Package Details</div>
+                                
+                                        <button type="submit" class="package-btn" id="twoTofivePackage"></button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="custom-div">
+                                    <h3>6 to 10 students</h3>
+                                    <div class="content">
+                                        <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
+                                        <div class="package-details">Package Details</div>
+                                 
+                                        <button type="submit" class="package-btn" id="sixTo10Package"></button>
+                                    
+                                    </div>
+                                </div>
+                        
                             </div>
                             
                             <div class="btns_wrap">
@@ -974,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var suburbTeaching = document.getElementById('suburb-inperson').value.trim(); 
 
             if (!subject) {
-                    document.getElementById('subject-error').textContent = "Please select a tutoring type.";
+                    document.getElementById('subject-error').textContent = "Please select subject(s) type.";
                     isValid = false;
                 } else {
                     document.getElementById('subject-error').textContent = "";
@@ -1007,21 +1040,148 @@ document.addEventListener('DOMContentLoaded', function() {
 				return isValid;
 
             }
-
+//In Person
             function validateForm4() {
+
+                var tutoring = document.querySelector('input[name="tutor-style"]:checked');
+                var ghg = tutoring ? tutoring.value : 'None';
+                var helpingFor = document.querySelector('input[name="help-with"]:checked');
+				var forWho = helpingFor ? helpingFor.value : 'None';
+                var syllabusId = document.getElementById('syllabus').value;
+
+                if(forWho === "school"){
+
+                    var universityPackages = document.getElementById("universityPackages");
+                    universityPackages.style.display = 'none';
+                    var schoolPackages = document.getElementById("schoolPackages");
+                    schoolPackages.style.display = 'flex';
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                    const onceOffPackage = document.getElementById('onceOffPackage');
+                    onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+
+                    const basicPackage= document.getElementById('basicPackage');
+                    basicPackage.textContent = 'R1100 p/m'; // or button.innerHTML = 'Submit';
+
+                    const premiumPackage = document.getElementById('premiumPackage');
+                    premiumPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+
+                    const advancedPackage = document.getElementById('advancedPackage');
+                    advancedPackage.textContent = 'R3250 p/m'; // or button.innerHTML = 'Submit';
+
+                    const elitePackage =  document.getElementById('elitePackage');
+                    elitePackage.textContent = 'R4350 p/m'; // or button.innerHTML = 'Submit';
+
+                }
+                else{
+                    if(ghg === "Online" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                       
+                        const onceOffPackage = document.getElementById('onceOffPackage');
+                        onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+
+                        const basicPackage= document.getElementById('basicPackage');
+                        basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+
+                        const premiumPackage = document.getElementById('premiumPackage');
+                        premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+
+                        const advancedPackage = document.getElementById('advancedPackage');
+                        advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+
+                        const elitePackage =  document.getElementById('elitePackage');
+                        elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+
+                    }
+                    else{
+                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                            const onceOffPackage = document.getElementById('onceOffPackage');
+                            onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+
+                            const basicPackage= document.getElementById('basicPackage');
+                            basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+
+                            const premiumPackage = document.getElementById('premiumPackage');
+                            premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+
+                            const advancedPackage = document.getElementById('advancedPackage');
+                            advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+
+                            const elitePackage =  document.getElementById('elitePackage');
+                            elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+
+                                }
+
+                            else{
+                                if(ghg === "In Person" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                       
+                                        const onceOffPackage = document.getElementById('onceOffPackage');
+                                        onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                                        const basicPackage= document.getElementById('basicPackage');
+                                        basicPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+
+                                        const premiumPackage = document.getElementById('premiumPackage');
+                                        premiumPackage.textContent = 'R4300 p/m'; // or button.innerHTML = 'Submit';
+
+                                        const advancedPackage = document.getElementById('advancedPackage');
+                                        advancedPackage.textContent = 'R6350 p/m'; // or button.innerHTML = 'Submit';
+
+                                        const elitePackage =  document.getElementById('elitePackage');
+                                        elitePackage.textContent = 'R8500 p/m'; // or button.innerHTML = 'Submit';
+
+                                    }
+
+                            }
+                    }
+                }
+            }
+
+                else{
+
+                     var schoolPackages = document.getElementById("schoolPackages");
+                     schoolPackages.style.display = 'none';
+                     var universityPackages = document.getElementById("universityPackages");
+                     universityPackages.style.display = 'flex';
+
+                     if(ghg === "In Person"){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R450 pp'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R350 pp'; // or button.innerHTML = 'Submit';
+
+                        }
+                        else{
+
+                            const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R300 pp'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R200 pp'; // or button.innerHTML = 'Submit';
+
+                        }
+                  
+
+                }
+
+
+
+                //onceOffPackage
 
                     var isValid = true;
 
                     var message = document.getElementById('message').value.trim();
                     var secondTutor = document.querySelector('input[name="tutor-option"]:checked');
                     var ghg = secondTutor ? secondTutor.value : 'None';
-
-                  /*  if (!message) {
-                    document.getElementById('message-error').textContent = "Please select a tutoring type.";
-                    isValid = false;
-                    } else {
-                    document.getElementById('message-error').textContent = "";
-                    } */
 
                     if (!secondTutor) {
                     document.getElementById('tutor-option-error').textContent = "Please specify.";

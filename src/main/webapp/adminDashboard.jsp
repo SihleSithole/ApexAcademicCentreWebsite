@@ -406,13 +406,18 @@
 									<form id="form2" class="p-4 border rounded">
 										<h1 class="mb-4"></h1>
 										<div class="mb-3">
-										<label>
-											<input type="checkbox" name="university" value="yes">
-											Do you tutor University Students?
-										  </label>
+											<label>
+												<input type="checkbox" name="university" value="yes" id="universityCheckbox">
+												Do you tutor University Students?
+											</label>
+											<div class="modules" id="modulesDiv" style="display: none;"> 
+												<label for="unsubjects">Modules (Separate in Comma)</label>
+												<input type="text" id="unSubjects" name="unSubjects" class="form-control"  required>
+												<div id="unError" class="error-message"></div>
+											</div>
 										</div>
 										<div class="mb-3">
-											<label for="subject">Select Subjects</label>
+											<label for="subject">School Subjects</label>
 											<input type="text" id="subjects" name="subjects" class="form-control" required readonly onclick="toggleSubjectOptions()">
 											<div id="subjectContainer" style="display: none;">
 												<label><input type="checkbox" value="Mathematics" onchange="updateSubjects()"> Mathematics</label>
@@ -454,7 +459,6 @@
 												<label><input type="checkbox" value="CAPs" onchange="updateSyllabus()"> CAPs</label>
 												<label><input type="checkbox" value="IEB" onchange="updateSyllabus()"> IEB</label>
 												<label><input type="checkbox" value="IB" onchange="updateSyllabus()"> IB</label>
-												<label><input type="checkbox" value="Person" onchange="updateSyllabus()"> Person</label>
 												<label><input type="checkbox" value="Cambridge" onchange="updateSyllabus()"> Cambridge</label>
 												<label><input type="checkbox" value="Pearson Edexel" onchange="updateSyllabus()"> Pearson Edexel</label>
 											</div>
@@ -516,6 +520,7 @@
 										<div class="mb-3">
 											<input type="hidden" id="hiddenName" name="hiddenName" class="form-control">
 											<input type="hidden" id="hiddenSurname" name="hiddenSurname" class="form-control">
+											<input type="hidden" id="hiddenModules" name="hiddenModules" class="form-control">
 											<input type="hidden" id="hiddenID" name="hiddenID" class="form-control">
 											<input type="hidden" id="hiddenIdentity" name="hiddenIdentity" class="form-control">
 											<input type="hidden" id="hiddenEmail" name="hiddenEmail"
@@ -1662,6 +1667,7 @@
 				var country = document.getElementById("country").value;
 				var id = document.getElementById("idnumber").value;
 				var lsurname = document.getElementById("lsurname").value;
+				var modules = document.getElementById("unSubjects").value;
 
 				var subject = document.getElementById("subjects").value;
 				var grades = document.getElementById("grades").value;
@@ -1723,6 +1729,9 @@
 
 				var hiddenPhone = document.getElementById('hiddenPhone');
 				hiddenPhone.value = phone;
+
+				var hiddenModules = document.getElementById('hiddenModules');
+				hiddenModules.value = modules;
 
 				var hiddenCountry = document.getElementById('hiddenCountry');
 				hiddenCountry.value = country;
@@ -2211,6 +2220,16 @@
 				document.getElementById('subjects').value = selectedSubjects.join(', ');
 			}
 
+			const checkbox = document.getElementById('universityCheckbox');
+				const modulesDiv = document.getElementById('modulesDiv');
+
+				checkbox.addEventListener('change', function() {
+					if (this.checked) {
+						modulesDiv.style.display = 'block';
+					} else {
+						modulesDiv.style.display = 'none';
+					}
+				});
 
 </script>
 </body>
