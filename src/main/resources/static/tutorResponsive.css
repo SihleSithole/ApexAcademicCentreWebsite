@@ -247,7 +247,7 @@ body, ul, li {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     #tutorHead {
         font-size: 1.8rem; /* Smaller header size */
     }

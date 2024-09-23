@@ -151,34 +151,6 @@ body, ul, li {
     font-size: 18px;
 }
 
-.navbar-toggle {
-    display: none; /* Hide by default */
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px; /* Adjust icon size */
-    margin-left: auto; /* Push it to the right */
-}
-
-/* Show the toggle button on smaller screens */
-@media (max-width: 768px) {
-    .navbar-toggle {
-        display: block;
-    }
-    .nav-links {
-        display: none; /* Hide nav links by default */
-        flex-direction: column; /* Stack links vertically */
-        width: 100%; /* Full width */
-        background-color: white; /* Background for dropdown */
-        position: absolute; /* Position it below the navbar */
-        top: 60px; /* Adjust according to your navbar height */
-        left: 0; /* Align to left */
-        z-index: 999; /* Ensure it is above other content */
-    }
-    .nav-links.show {
-        display: flex; /* Show links when toggled */
-    }
-}
 
 
 .main-section {
