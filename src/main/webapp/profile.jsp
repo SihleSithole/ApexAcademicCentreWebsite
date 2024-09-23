@@ -7,8 +7,6 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Set" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +16,10 @@
           <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">-->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
           <!--=============== SWIPER CSS ===============-->
-         <link rel="stylesheet" href="assets/css/swiper-bundle.min.css"> 
+         <link rel="stylesheet" href="swiper-bundle.min.css"> 
     
           <!--=============== CSS ===============-->
-          <link rel="stylesheet" href="assets/css/styles.css">
-          <link href="book.css" rel="stylesheet">
+          <link rel="stylesheet" href="styles.css">
 
 
     <title>View profile</title>
@@ -127,28 +124,16 @@ body{
 
 }
 
-/*.subjects-info p {
-    flex: 0 0 calc(16.66% - 10px); 
-    margin: 5px;
-    background-color: #e7eeff;
-    display: inline;
-    padding: 0; 
-    text-align: center;
-    height : fit-content;
-    border-radius: 3px;
-    color: #00a550;
-}*/
-
 .subjects-info p {
     display: inline-block; /* Allows width to be determined by content */
-    padding: 5px; /* Set padding to 3px */
+    padding-left: 5px; /* Set padding to 3px */
+    padding-right: 5px; /* Set padding to 3px */
     margin: 5px; /* Margin for spacing between paragraphs */
     background-color: #e7eeff; /* Light background for visibility */
     text-align: center;
     border-radius: 3px;
     color: #00a550;
 }
-
 
 /*Start here */
 
@@ -699,7 +684,7 @@ body, ul, li {
         .tutoring-container {
             color: #00a550; /* Color for the tutoring title */
             font-size: 14px; /* Adjust font size as needed */
-
+            margin-top: 8px; /* Space between title and grades */
             margin-left: 10px;
         }
         .tutoring-container1 {
@@ -718,7 +703,6 @@ body, ul, li {
             /*border-radius: 8px; /* Rounded corners */
             /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
-
 
 
     </style>
@@ -810,9 +794,8 @@ body, ul, li {
             int ratings = tutor.getRatings();
             String descTutor = tutor.getHoursTutored();
             String surname = tutor.getSurname();
-            String email = tutor.getEmail().trim().replaceAll("\\s+", "");
             String modules = tutor.getModule();
-            String fullNames = name + "" + surname;
+
             
   %>
 
@@ -911,7 +894,7 @@ body, ul, li {
                             </div>
  
                     </div>
-
+                   
                     <%
                     if (modules != null && !modules.isEmpty()) { // Check for null and empty
                     %>
@@ -942,7 +925,6 @@ body, ul, li {
                     <%
                     }
                     %>
-                    
 
                 </div>
 
@@ -959,71 +941,93 @@ body, ul, li {
                                 <span id="rev">Reviews</span>
                             </div>
                             <div class="swiper-wrapper">
-                                <%
-                                    List<Review> reviews = (List<Review>) request.getAttribute("reviews");
-                                    Set<String> displayedTutors = new HashSet<>();
-                                    boolean hasReviews = false; // Flag to check if there are any approved reviews
-                                    int reviewCount = 0; // Counter to limit displayed reviews
-                                    final int maxReviewsToShow = 3; // Maximum reviews to show
-                    
-                                    if (reviews != null) {
-                                        for (Review r : reviews) {
-                                            String emailTutor = r.getTutorEmail().trim().replaceAll("\\s+", "");
-                                            if (emailTutor.equals(email) && r.getStatus().equals("approved")) {
-                                                hasReviews = true; // Set flag if there's at least one approved review
-                                                String tutName = r.getName();
-                                                String reviewDescription = r.getMessage();
-                                                
-                                                // Create a unique key for each tutor's review
-                                                String uniqueKey = emailTutor + "_" + tutName;
-                    
-                                                // Only display if this unique key hasn't been displayed yet
-                                                if (!displayedTutors.contains(uniqueKey)) {
-                                                    displayedTutors.add(uniqueKey);
-                                                    reviewCount++; // Increment the review counter
-                    
-                                                    // Limit the number of displayed reviews
-                                                    if (reviewCount > maxReviewsToShow) {
-                                                        break; // Exit the loop if the limit is reached
-                                                    }
-                                %>
-                                                    <article class="card__article swiper-slide">
-                                                        <div class="card__data">
-                                                            <h3 class="card__name"><%= tutName %></h3>
-                                                            <p class="card__description">
-                                                                <%= reviewDescription != null ? reviewDescription : "No description available." %>
-                                                            </p>
-                                                        </div>
-                                                    </article>
-                                <%
-                                                }
-                                            }
-                                        }
-                                    }
-                    
-                                    // Display a message if no approved reviews were found
-                                    if (!hasReviews) {
-                                %>
-                                        <p>No reviews available.</p>
-                                <%
-                                    }
-                                %>
+
+                                <article class="card__article swiper-slide">
+
+
+                                    <div class="card__data">
+                                        <h3 class="card__name">Vuyiswa</h3>
+                                        <p class="card__description">
+                                            I am extremely certified and content with Apex arcademic,my son always looks forward
+                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
+                                            a marvelous work.
+                                        </p>
+
+                                    </div>
+                                </article>
+
+                                <article class="card__article swiper-slide">
+
+
+                                    <div class="card__data">
+                                        <h3 class="card__name">Bongisani</h3>
+                                        <p class="card__description">
+                                            I am extremely certified and content with Apex arcademic,my son always looks forward
+                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
+                                            a marvelous work.
+                                        </p>
+
+
+                                    </div>
+                                </article>
+
+                                <article class="card__article swiper-slide">
+
+
+                                    <div class="card__data">
+                                        <h3 class="card__name">Mdu</h3>
+                                        <p class="card__description">
+                                            I am extremely certified and content with Apex arcademic,my son always looks forward
+                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
+                                            a marvelous work.
+                                        </p>
+
+
+                                    </div>
+                                </article>
+
+                                <article class="card__article swiper-slide">
+
+
+                                    <div class="card__data">
+                                        <h3 class="card__name">Mabhena</h3>
+                                        <p class="card__description">
+                                            I am extremely certified and content with Apex arcademic,my son always looks forward
+
+                                        </p>
+
+
+                                    </div>
+                                </article>
+
+                                <article class="card__article swiper-slide">
+
+                                    <div class="card__data">
+                                        <h3 class="card__name">Shobane</h3>
+                                        <p class="card__description">
+                                            I am extremely certified and content with Apex arcademic,my son always looks forward
+                                            to meet with his tutor Mr Prince,his confidence with Math has improved.Prince is doing
+                                            a marvelous work.
+                                        </p>
+
+
+                                    </div>
+                                </article>
                             </div>
-                    
-                            <!-- Navigation buttons -->
-                            <div class="swiper-button-next">
-                                <i class="ri-arrow-right-s-line"></i>
-                            </div>
-                    
-                            <div class="swiper-button-prev">
-                                <i class="ri-arrow-left-s-line"></i>
-                            </div>
-                    
-                            <!-- Pagination -->
-                            <div class="swiper-pagination"></div>
                         </div>
+
+                        <!-- Navigation buttons -->
+                        <div class="swiper-button-next">
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+
+                        <div class="swiper-button-prev">
+                            <i class="ri-arrow-left-s-line"></i>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
                     </div>
-                    
                 </section>
 
                 <div class="short-paragraph">

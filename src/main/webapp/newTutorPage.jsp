@@ -10,7 +10,7 @@
     <link href="updatedTutor.css" rel="stylesheet">
     <link href="book.css" rel="stylesheet">
     <style>
-/* General Styling for the form */
+
 .form_5 {
     position: relative;
     padding: 20px;
@@ -20,18 +20,16 @@
     margin-top: 20px;
 }
 
-/* Styling for the divs container */
 .div-container {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping if necessary */
-    justify-content: space-between; /* Distributes space between items */
+    flex-wrap: wrap; 
+    justify-content: space-between; 
     margin-top: 20px;
 }
 
-/* Styling for each div */
 .custom-div {
     width: 100%;
-    max-width: 200px; /* Adjust width as necessary */
+    max-width: 200px; 
     background: white;
     border: 1px solid white;
     display: flex;
@@ -113,6 +111,11 @@
 
 .book-view form{
    padding-top: 20px;
+}
+
+#consult_btn{
+
+      width: 150px;
 }
 
     </style>
@@ -755,7 +758,7 @@
                             <div class="btns_wrap">
                                 <div class="common_btns form_5_btns">
                                     <button type="button" class="btn_back">Back <span class="icon">←</span></button>
-                                    <button type="button" class="btn_next">I Want to speak to a sales consultant first</button>
+                                    <button type="button" class="btn_next" id="consult_btn">Speak to consultant</button>
                                 </div>
                             </div>
                         </div>
@@ -1137,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         elitePackage.textContent = 'R8500 p/m'; // or button.innerHTML = 'Submit';
 
                                     }
-
+                                   
                             }
                     }
                 }
@@ -1164,14 +1167,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         else{
 
-                            const onceOffPackage = document.getElementById('oneOnone');
-                       onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+                           document.getElementById('universityPackages').style.width = '500px';
+                       
+                        const onceOffPackage = document.getElementById('oneOnone');
+                        onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
-                       const basicPackage= document.getElementById('twoTofivePackage');
-                       basicPackage.textContent = 'R300 pp'; // or button.innerHTML = 'Submit';
+                        const basicPackage= document.getElementById('twoTofivePackage');
+                        basicPackage.textContent = 'R300 pp'; // or button.innerHTML = 'Submit';
 
-                       const premiumPackage = document.getElementById('sixTo10Package');
-                       premiumPackage.textContent = 'R200 pp'; // or button.innerHTML = 'Submit';
+                        const premiumPackage = document.getElementById('sixTo10Package');
+                        premiumPackage.textContent = 'R200 pp'; // or button.innerHTML = 'Submit';
 
                         }
                   
@@ -1235,7 +1240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     form_3.style.display = "block";
 
                     form_2_btns.style.display = "none";
-                    form_3_btns.style.display = "block";
+                    form_3_btns.style.display = "flex";
 
                     form_3_progessbar.classList.add("active");
                     form_2.classList.remove("active");
@@ -1260,7 +1265,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     form_4.style.display = "block";
 
                     form_2_btns.style.display = "none";
-                    form_4_btns.style.display = "block";
+                    form_4_btns.style.display = "flex";
 
                 }
             });
@@ -1327,7 +1332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     form_5.style.display = "block";
 
                     form_4_btns.style.display = "none";
-                    form_5_btns.style.display = "block";
+                    form_5_btns.style.display = "flex";
 
                   }
 
@@ -1339,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 form_5.style.display = "none";
 
                 form_4_btns.style.display = "flex";
-                form_4_btns.style.display = "block";
+                form_4_btns.style.display = "flex";
 
             });
 
