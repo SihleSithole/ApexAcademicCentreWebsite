@@ -159,68 +159,107 @@ body, ul, li {
     font-size: 24px; /* Adjust icon size */
     margin-left: auto; /* Push it to the right */
 }
+/* Toggle button */
+/* Initial styles for nav links */
+.nav-links {
+    display: flex; /* Default for larger screens */
+    align-items: center;
+}
 
-/* Show the toggle button on smaller screens */
+/* Styles for the mobile view */
 @media (max-width: 768px) {
     .navbar-toggle {
-        display: block;
+        display: block; /* Show toggle button */
     }
+    
     .nav-links {
-        display: none; /* Hide nav links by default */
-        flex-direction: column; /* Stack links vertically */
-        width: 100%; /* Full width */
-        background-color: white; /* Background for dropdown */
-        position: absolute; /* Position it below the navbar */
-        top: 60px; /* Adjust according to your navbar height */
-        left: 0; /* Align to left */
+        position: fixed; /* Fix position */
+        top: 0; /* Align to top */
+        right: -300px; /* Start off-screen */
+        height: 100%; /* Full height */
+        width: 250px; /* Width of the nav */
+        background-color: white; /* Background color */
+        flex-direction: column; /* Stack vertically */
+        transition: right 0.3s ease; /* Sliding effect */
         z-index: 999; /* Ensure it is above other content */
     }
+    
     .nav-links.show {
-        display: flex; /* Show links when toggled */
+        right: 0; /* Slide in */
+    }
+    
+    /* Hide the search container in responsive view */
+    .search-container {
+        display: none; /* Hide search on small screens */
+    }
+    
+    .login-register {
+        width: 100%; /* Full width */
+        margin: 10px 0; /* Add spacing */
     }
 }
 
+
+/* Existing styles remain unchanged */
 
 .main-section {
   padding-top: 80px; /* Adjust this value based on the height of your navbar */
 }
 
-.main-class .tutorImage{
-	
-	  width: 100%;
-	  align-items: center;
-	  height: 235px;
-	
+.main-class {
+    padding: 20px; /* Add padding for spacing */
+    text-align: center; /* Center-align text */
 }
 
-#tutorHead{
-	
-	color: #001549;
-	font-size: 35px;
+.tutorImage {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 235px; /* Keep the max height */
 }
 
-#tutorPar{
-	
-	color: #00a550;
-	font-weight: bold;
-	
+#tutorHead {
+    color: #001549;
+    font-size: 2.5rem; /* Use relative units for better scaling */
+}
+
+#tutorPar {
+    color: #00a550;
+    font-weight: bold;
+    font-size: 1.2rem; /* Adjust font size for readability */
 }
 
 #tutorBtn {
     background-color: #00a550;
-    height: 35px;
+    height: 45px; /* Increase button height for better touch targets */
     color: white;
-    width: 190px;
+    width: 100%; /* Make button full width on smaller screens */
+    max-width: 190px; /* Limit button width on larger screens */
     border-radius: 10px;
-    border-color: transparent;
-    font-size: 20px;
-    display: block; /* Make sure the button is a block element */
-    margin: 0 auto; /* Center the button */
+    border: none; /* Remove border */
+    font-size: 1.2rem; /* Use relative units */
+    display: block;
+    margin: 20px auto; /* Center the button with margin */
 }
 
 #tutorBtn:hover {
     background-color: white;
-    color: #02A552; /* Change text color on hover */
+    color: #02A552;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #tutorHead {
+        font-size: 1.8rem; /* Smaller header size */
+    }
+
+    #tutorPar {
+        font-size: 1rem; /* Smaller paragraph size */
+    }
+
+    #tutorBtn {
+        height: 40px; /* Adjust button height */
+        font-size: 1rem; /* Smaller font size */
+    }
 }
 
 

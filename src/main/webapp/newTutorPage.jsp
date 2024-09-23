@@ -7,7 +7,7 @@
  <head>
     <title>ApexAcademicCentre</title> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="updatedTutor.css" rel="stylesheet">
+    <link href="tutorResponsive.css" rel="stylesheet">
     <link href="book.css" rel="stylesheet">
     <style>
 
@@ -123,48 +123,45 @@
     <body>
 
         <nav class="navbar">
-			<img src="apex.png" alt="Logo" class="logo" id="logo_image">
-			<ul class="nav-links">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About Us</a></li>
-				<li class="dropdown">
+            <img src="apex.png" alt="Logo" class="logo" id="logo_image">
+            <button class="navbar-toggle" id="navbar-toggle">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </button>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li class="dropdown">
                     <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Online Tutoring</a>
                         <a href="#">In-person Tutor</a>
-						<a href="#">Matric Re-Write</a>
-						<a href="#">Special Need Tutoring</a>
-						<a href="#">University/ College Tutors</a>
-						<a href="#">Homeschooling Support</a>
-						<a href="#">Person Edexcel Tutoring</a>
+                        <a href="#">Matric Re-Write</a>
+                        <a href="#">Special Need Tutoring</a>
+                        <a href="#">University/ College Tutors</a>
+                        <a href="#">Homeschooling Support</a>
+                        <a href="#">Person Edexcel Tutoring</a>
                     </div>
                 </li>
-				<li class="dropdown">
+                <li class="dropdown">
                     <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cambridge</a>
                         <a href="#">A Level Tutoring</a>
-						<a href="#">Expert Cambridge Tutors</a>
-						<a href="#">IGCSE Level Tutoring</a>
-						<a href="#">Cambridge Exam Timetable</a>
+                        <a href="#">Expert Cambridge Tutors</a>
+                        <a href="#">IGCSE Level Tutoring</a>
+                        <a href="#">Cambridge Exam Timetable</a>
                     </div>
                 </li>
-				<li><a href="#">Resources</a></li>
-				<li><a href="#">Contact Us</a></li>
-			</ul>
-
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search...">
-                <button id="search-button">
-                    <i class="fas fa-search search-icon"></i>
-                </button>
-            </div>
-            <button class="login-register">
-                
-                <i class="fas fa-user login-icon"></i> Login / Register
-            </button>
-        </div>
-		</nav> 
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li>
+                    <button class="login-register">
+                        <i class="fas fa-user login-icon"></i> Login / Register
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        
 
         <section class="main-section">
 
@@ -788,6 +785,29 @@
 
 <script>
 
+const navbarToggle = document.getElementById('navbar-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+// Toggle menu on button click
+navbarToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('show');
+});
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('li a').forEach(link => {
+    link.addEventListener('click', function() {
+        navLinks.classList.remove('show'); // Close the menu
+    });
+});
+
+// Optional: Close menu when clicking outside of it
+window.addEventListener('click', function(event) {
+    if (!navbarToggle.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('show'); // Close the menu
+    }
+});
+
+
 document.addEventListener("DOMContentLoaded", function() {
   var imageWrapper = document.querySelector('.image-wrapper');
   var tutorContainer = document.querySelector('.tutor-container');
@@ -1385,7 +1405,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var btn = document.getElementById("open-popup");*/
 
 		function openOpenopen(name, email) {
-            
+
             const button = document.getElementById('tutorBtn');
             const directTutors = document.querySelectorAll('.directTutor');
             const otherOption = document.getElementById('other-option');
