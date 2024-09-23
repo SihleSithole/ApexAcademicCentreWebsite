@@ -1167,8 +1167,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         else{
 
-                           document.getElementById('universityPackages').style.width = '500px';
-                       
                         const onceOffPackage = document.getElementById('oneOnone');
                         onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
