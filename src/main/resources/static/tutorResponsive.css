@@ -151,6 +151,12 @@ body, ul, li {
     font-size: 18px;
 }
 
+
+.nav-links {
+    display: flex; /* Default for larger screens */
+    align-items: center;
+}
+
 .navbar-toggle {
     display: none; /* Hide by default */
     background: transparent;
@@ -161,13 +167,10 @@ body, ul, li {
 }
 /* Toggle button */
 /* Initial styles for nav links */
-.nav-links {
-    display: flex; /* Default for larger screens */
-    align-items: center;
-}
+
 
 /* Styles for the mobile view */
-@media (max-width: 768px) {
+@media (max-width: 834px) {
     .navbar-toggle {
         display: block; /* Show toggle button */
     }
@@ -247,7 +250,7 @@ body, ul, li {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 834px) {
     #tutorHead {
         font-size: 1.8rem; /* Smaller header size */
     }

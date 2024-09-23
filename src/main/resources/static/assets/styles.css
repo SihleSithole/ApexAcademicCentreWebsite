@@ -52,13 +52,13 @@
 
 .card__container {
   padding-block: 1rem;
-  background-color: #f6fffa;
+  background-color: #fff;
   border-radius: 8px;
 }
 
 .card__content {
   
-  background-color: #f6fffa;
+  background-color: #fff;
   overflow: hidden;
 
 }
@@ -82,10 +82,11 @@
   max-width: fit-content;
 }
 
-.reviews{
+.reviews1{
 margin-bottom: 15px;
 color: #001549;
 font-weight: bold;
+background-color: #fff;
 }
 
 .card__name {

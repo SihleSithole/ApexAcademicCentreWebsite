@@ -649,7 +649,7 @@ body, ul, li {
     display: flex; /* Use flexbox for centering */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    height: 350px; /* Set height */
+    height: 300px; /* Set height */
     border: none; /* No border */
     background-color: #e7eeff; /* Light background color */
     
@@ -658,6 +658,7 @@ body, ul, li {
 .reviews {
     display: inline-flex; /* Ensures icons are inline */
     margin-top: 10px; /* Margin for reviews */
+    background-color: #fff;
 }
 
 .review-icon {
@@ -677,14 +678,14 @@ body, ul, li {
             display: flex; /* Use flexbox */
             flex-direction: column; /* Stack items vertically */
         }
-        .header, .header1 {
+        .school_head, .header1 {
             display: flex; /* Use flexbox for icon and title */
             align-items: center; /* Center items vertically */
             font-size: 14px;
             margin-right: 18px;
            
         }
-        .tutoring-container {
+        .bongi {
             color: #00a550; /* Color for the tutoring title */
             font-size: 14px; /* Adjust font size as needed */
             margin-top: 8px; /* Space between title and grades */
@@ -878,10 +879,10 @@ body, ul, li {
                     </div>
                     <div class="subjects-row">
                         <div class="subjects-title">
-                            <div class="header">
+                            <div class="school_head">
                                 <i class="fa fa-book"></i>&nbsp;&nbsp;Subjects
                             </div>
-                            <div class="tutoring-container">
+                            <div class="bongi">
                                 School tutoring<br>
                                 <span class="grades">GRD:1 - GRD:12</span>
                             </div>
@@ -941,7 +942,7 @@ body, ul, li {
 
                     <div class="card__container swiper">
                         <div class="card__content">
-                            <div class="reviews">
+                            <div class="reviews1">
                                 <i class="fas fa-star" id="rate-icon"></i>
                                 <span id="rev">Reviews</span>
                             </div>
