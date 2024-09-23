@@ -799,7 +799,7 @@ body, ul, li {
             String descTutor = tutor.getHoursTutored();
             String surname = tutor.getSurname();
             String modules = tutor.getModule();
-            String fullName = name + "" + surname;
+            String fullName = name + " " + surname;
 
             
   %>
@@ -1084,7 +1084,7 @@ body, ul, li {
         <!--START OF FORMS-->
         <div class="form_wrap">
             <div class="form_1 data_info">
-                <h2>Book a Personalized Tutor Across South Africa!</h2>
+                <h2><span class="directTutor"></span></h2>
                 <br>
                 <form id="contact-form">
                     <div class="form_container">
@@ -1185,7 +1185,7 @@ body, ul, li {
                 </form>
             </div>
             <div class="form_2" style="display: none;">
-                <h2>Book a Personalized Tutor Across South Africa!</h2>
+                <h2><span class="directTutor"></span></h2>
                 <br>
                 <div id="form-container-2" class="form-container hidden">
                     <form id="additional-form">
@@ -1327,7 +1327,7 @@ body, ul, li {
             </div>
 
             <div class="form_3" style="display: none;" id="formThree">
-                <h2>Book a Personalized Tutor Across South Africa!</h2>
+                <h2><span class="directTutor"></span></h2>
                 <br>
             
                 <form id="submit-form">
@@ -1389,7 +1389,7 @@ body, ul, li {
      
 
             <div class="form_4" style="display: none;" >
-                <h2>Book a Personalized Tutor Across South Africa!</h2>
+                <h2><span class="directTutor"></span></h2>
                 <div id="Message" class="hidden">
                     <form id="formFour">
                     <div class="form-row">
@@ -2139,19 +2139,21 @@ document.addEventListener('DOMContentLoaded', function() {
 		function openOpenopen(name,email){
 
             const button = document.getElementById('tutorBtn');
+            const directTutors = document.querySelectorAll('.directTutor');
+            const otherOption = document.getElementById('other-option');
+
             if (event.target === button) {
                 // The button was clicked
-                const otherOption = document.getElementById('other-option');
-                otherOption.style.display = 'block'; // Hide the "Other" option
-            
-            }
-
-            else{
-
-                const otherOption = document.getElementById('other-option');
+                directTutors.forEach(tutor => {
+                    tutor.textContent = 'Book a Personalized Tutor Across South Africa!';
+                });
+                otherOption.style.display = 'block'; // Show the "Other" option
+            } else {
+                directTutors.forEach(tutor => {
+                    tutor.textContent = 'Book ' + name + ' for Tutoring!';
+                });
                 otherOption.style.display = 'none'; // Hide the "Other" option
                 document.querySelector("#syllabus option:first-child").textContent = "";
-
             }
 
 			document.getElementById("modal").style.display = 'block';

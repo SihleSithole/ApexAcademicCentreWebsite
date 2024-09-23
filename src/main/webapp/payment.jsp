@@ -49,12 +49,13 @@
     String instrLangauge = bookings.get("language");
     String tutorFor = bookings.get("tutoring-for");
     String helpWith = bookings.get("help-with");
+    
     String schName = "n/a";
     String schSurname = "n/a";
     String schGrade = "n/a";
     String schSyllabus = "n/a";
     String unName = "n/a";
-    String unSurname = "n/1";
+    String unSurname = "n/a";
     String unYear = "n/a";
 
     if(helpWith.equals("school")){

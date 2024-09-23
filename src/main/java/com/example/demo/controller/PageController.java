@@ -244,8 +244,111 @@ public class PageController {
 
 		 System.out.println("We here - Send the email");
 		 
-	        /*senderService.sendSimpleEmail(tutorEmaill, subject ,
+		    String name = booking.get("first-name");
+		    String surname = booking.get("last-name");
+		    String email = booking.get("email");
+		    String phone = booking.get("phone");
+		    String province = booking.get("province");
+		    String country = booking.get("country");
+		    String instrLangauge = booking.get("language");
+		    String tutorFor = booking.get("tutoring-for");
+		    String helpWith = booking.get("help-with");
+
+		    
+		    String schName = "n/a";
+		    String schSurname = "n/a";
+		    String schGrade = "n/a";
+		    String schSyllabus = "n/a";
+		    String unName = "n/a";
+		    String unSurname = "n/a";
+		    String unYear = "n/a";
+		    
+		    if(helpWith.equals("school")){
+
+		        schName = booking.get("student-name");
+		        schSurname = booking.get("student-last-name");
+		        schGrade = booking.get("grade");
+		        schSyllabus = booking.get("syllabus");
+
+		    }
+
+		    else{
+
+		         unName = booking.get("stud-name");
+		         unSurname = booking.get("stud-last");
+		         unYear = booking.get("year");
+
+		    }
+		    
+		    String subject = booking.get("subject");
+		    String tutorStyle = booking.get("tutor-style");
+
+		    String address = "n/a";
+		    String suburb = "n/a";
+
+		    if(tutorStyle.equals("In Person")){
+
+		         address = booking.get("address-inperson");
+		         suburb = booking.get("suburb-inperson");
+		    }
+
+		    String message = booking.get("message");
+		    if(message.equals("")){
+		        message = "n/a";
+		    }
+		    
+		     String tutorOption = booking.get("tutor-option");
+		     String status = "other";
+		     String userPackage = "Not Selected";
+		     String tutorName = "not applicable";
+		     String tutorEmail = "not applicable";
+		     String isPaid = "No";
+		     
+		     Booking bookings = new Booking( name,  surname,  email,  phone,  province,  country,
+		    		 instrLangauge,  tutorFor,  helpWith,  schName,  schSurname,  schGrade,
+					 schSyllabus,  unName,  unSurname,  unYear,  subject,  tutorStyle,
+					 address,  suburb,  message,  tutorOption,  status,  userPackage,
+					 tutorName,  tutorEmail,  isPaid);
+		     
+		     String sendName = "";
+		     String clientName = name + " " + surname;
+		     
+		     if(schName.equals("n/a")) {
+		    	 
+		    	 sendName = unName + " " + unSurname;
+		     }
+		     
+		     else {
+		    	 
+		    	 sendName = schName + " " + schSurname;
+		    	 
+		     }
+		     
+		     
+		     bookingService.save(bookings);
+		     
+		 
+	        // SEND EMAIL TO CLIENT
+	         
+	            senderService.sendSimpleEmail(email, "Apex Academic Centre - Tutor Booking" ,
+	            "Dear " + clientName + ",\r\n"
+	            + "\r\n"
+	            + "\r\n"
+	            + "Thank you for considering Apex Academic Centre for " + sendName  +"'s educational needs. We appreciate your inquiry about our one-on-one [in-person/online] tutoring services for " + subject + ".\r\n"
+	            + "\r\n"
+	            + "\r\n"
+	            + "Our consultants will promptly contact you to discuss " + sendName  +"'s requirements and match them with a suitable tutor.\r\n"
+	            + "\r\n"
+	            + "\r\n"
+	            + "Best regards,\r\n"
+	            + "Apex Academic Centre");
+	        
+		     
+		    /*   SEND EMAIL TO APEX
+
+                 sendSimpleEmail(tutorEmaill, subject ,
 	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
+	            
 	        */
 	        
 	    }
