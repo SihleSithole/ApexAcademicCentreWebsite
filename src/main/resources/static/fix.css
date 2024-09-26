@@ -161,7 +161,7 @@ body, ul, li {
 }
 
 /* Styles for the mobile view */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .navbar {
         height: 50px; /* Adjust the height as needed */
     }
@@ -250,7 +250,7 @@ body, ul, li {
     color: #02A552; /* Change text color on hover */
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 	
 	.tutorImage {
     width: 100%; /* Make the image fill the container */
@@ -336,7 +336,7 @@ body, ul, li {
 }
 
 
-@media (max-width: 768px) {
+@media screen and  (max-width: 768px) {
     .main-section .top,
     .main-section .last {
         width: 90%; /* Increase width on smaller screens */
@@ -349,7 +349,7 @@ body, ul, li {
     }
 }
 
-@media (max-width: 480px) {
+@media screen and  (max-width: 480px) {
     .main-section .top {
         width: 100%; /* Full width on very small screens */
         margin-left: 0; /* Remove left margin */
@@ -431,7 +431,7 @@ body, ul, li {
 
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 	
 	.main-section .top {
        flex-direction: column; /* Stack elements vertically */
@@ -645,7 +645,7 @@ body, ul, li {
   }
 
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .main-section .last {
         display: flex;
         flex-direction: column; /* Stack items vertically */
