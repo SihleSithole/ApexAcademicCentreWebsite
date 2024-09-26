@@ -79,7 +79,7 @@ public class PageController {
 	    });
 	    
 	    // Create and populate ModelAndView
-	    ModelAndView data = new ModelAndView("newTutorPage.jsp");
+	    ModelAndView data = new ModelAndView("tutorsLandingPage.jsp");
 	    data.addObject("tutors", tutors);
 	    
 	    return data;
