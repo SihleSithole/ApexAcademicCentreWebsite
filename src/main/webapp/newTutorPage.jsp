@@ -7,11 +7,10 @@
  <head>
     <title>ApexAcademicCentre</title> 
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <link href="fix.css" rel="stylesheet">
+    <link href="pavillion.css" rel="stylesheet">
     <link href="bookBook.css" rel="stylesheet">
 
  </head>
@@ -178,7 +177,7 @@
                             <form action="/view-profile" method="post">
                                 <input type="hidden" name="email" value="<%= email %>"/>
                            <div class="repoStyle">
-                            <button type="button">
+                            <button type="submit" class="view_pp">
                                 VIEW PROFILE
                             </button>
                             <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>', '<%= syllabus %>', '<%= grades %> ', '<%= subjects %> ')"  class="bk_tutor">BOOK TUTOR</button>
