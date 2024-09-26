@@ -607,6 +607,13 @@ public class PageController {
 				return data;
 				
 		    }
+		    
+		    
+		    @GetMapping("/adminpanel")
+		    public String adminLogin() {
+		    	
+		    	  return "loginAdmin.html";
+		    }
 		 
 
 	 

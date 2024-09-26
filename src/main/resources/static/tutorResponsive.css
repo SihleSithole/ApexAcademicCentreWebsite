@@ -151,12 +151,6 @@ body, ul, li {
     font-size: 18px;
 }
 
-
-.nav-links {
-    display: flex; /* Default for larger screens */
-    align-items: center;
-}
-
 .navbar-toggle {
     display: none; /* Hide by default */
     background: transparent;
@@ -165,17 +159,19 @@ body, ul, li {
     font-size: 24px; /* Adjust icon size */
     margin-left: auto; /* Push it to the right */
 }
-/* Toggle button */
-/* Initial styles for nav links */
-
 
 /* Styles for the mobile view */
-@media (max-width: 834px) {
+@media (max-width: 768px) {
+    .navbar {
+        height: 50px; /* Adjust the height as needed */
+    }
+
     .navbar-toggle {
         display: block; /* Show toggle button */
     }
-    
+
     .nav-links {
+        margin-top: 5%;
         position: fixed; /* Fix position */
         top: 0; /* Align to top */
         right: -300px; /* Start off-screen */
@@ -186,20 +182,28 @@ body, ul, li {
         transition: right 0.3s ease; /* Sliding effect */
         z-index: 999; /* Ensure it is above other content */
     }
-    
+
     .nav-links.show {
         right: 0; /* Slide in */
     }
-    
-    /* Hide the search container in responsive view */
+
     .search-container {
         display: none; /* Hide search on small screens */
     }
-    
+
     .login-register {
         width: 100%; /* Full width */
         margin: 10px 0; /* Add spacing */
     }
+
+    .logo {
+        margin: 0; /* Remove margins */
+        position: absolute; /* Position it absolutely */
+        top: 10px; /* Adjust as needed */
+        left: 0; /* Align to the left */
+    }
+
+	
 }
 
 
@@ -250,19 +254,40 @@ body, ul, li {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 834px) {
-    #tutorHead {
-        font-size: 1.8rem; /* Smaller header size */
+
+@media (max-width: 768px) {
+	
+	   .tutorImage {
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Set a max height */
+    transform: scale(1.1); /* Zoom in */
+    transition: transform 0.3s ease; /* Smooth transition */
+    object-fit: cover; /* Prevent stretching */
+    position: relative; /* Allow positioning adjustments */
+   }
+   
+	.image-wrapper .image1,
+	.image-wrapper .image2 {
+	    display: none; /* Hide both images */
+	}
+	
+	#tutorHead {
+        font-size: 2rem; /* Smaller font size for mobile */
     }
 
     #tutorPar {
-        font-size: 1rem; /* Smaller paragraph size */
+        font-size: 1rem; /* Smaller font size for mobile */
     }
 
     #tutorBtn {
-        height: 40px; /* Adjust button height */
-        font-size: 1rem; /* Smaller font size */
+        height: 40px; /* Slightly reduce height */
+        font-size: 1rem; /* Smaller font size for mobile */
     }
+    
+    
+	
+	
 }
 
 

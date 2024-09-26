@@ -22,7 +22,7 @@
     
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
-          <link href="book.css" rel="stylesheet">
+          <link href="bookBook.css" rel="stylesheet">
 
 
     <title>View profile</title>
@@ -1594,6 +1594,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
             var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
             var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
+            var consult = document.querySelector(".form_5_btns .btn_next");
 
 
             var form_2_progessbar = document.querySelector(".form_2_progessbar");
@@ -1803,6 +1804,44 @@ document.addEventListener('DOMContentLoaded', function() {
 				return isValid;
 
             }
+
+            consult.addEventListener("click", function() {
+
+                    alert("Consultant will get in touch  with you shortly. Thank you.");
+
+                    const allData = combineFormData();
+
+                    const dataToSend = {
+                        ...allData
+                    };
+
+                            fetch('/other-booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(dataToSend)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                
+                                    setTimeout(function(){
+                                            window.location.href = '/';
+                                        } , 2000);
+
+                                        
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                    setTimeout(function(){
+                        window.location.href = '/';
+                    } , 2000);
+
+
+                    });
 
             function validateForm4() {
 

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link href="fix.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<style>
+		body {
+		    font-family: 'Arial', sans-serif;
+		    background-color: #f0f2f5;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    height: 100vh;
+		    margin: 0;
+		}
+		
+		.login-container {
+		    background: white;
+		    padding: 40px;
+		    border-radius: 8px;
+		    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		    width: 500px;
+		}
+		
+		h2 {
+		    text-align: center;
+		    color: #007bff;
+		    margin-bottom: 20px;
+		}
+		
+		.form-group {
+		    margin-bottom: 20px;
+		}
+		
+		label {
+		    display: block;
+		    margin-bottom: 5px;
+		}
+		
+		.input-icon {
+		    position: relative;
+		}
+		
+		.input-icon i {
+		    position: absolute;
+		    left: 10px;
+		    top: 12px;
+		    color: #007bff;
+		}
+		
+		input {
+		    width: 90%;
+		    padding: 10px 10px 10px 40px; /* Add padding for icon */
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    transition: border-color 0.3s;
+		}
+		
+		input:focus {
+		    border-color: #007bff;
+		    outline: none;
+		}
+		
+		button {
+		    width: 100%;
+		    padding: 10px;
+		    background: #007bff;
+		    color: white;
+		    border: none;
+		    border-radius: 4px;
+		    cursor: pointer;
+		    font-size: 16px;
+		    transition: background 0.3s;
+		}
+		
+		button:hover {
+		    background: #0056b3;
+		}
+		
+		.popup {
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    background: white;
+		    padding: 20px;
+		    border: 1px solid #ccc;
+		    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+		    z-index: 1000;
+		    border-radius: 8px;
+		}
+		
+		.close-btn {
+		    cursor: pointer;
+		    font-size: 20px;
+		    position: absolute;
+		    top: 10px;
+		    right: 10px;
+		    color: #007bff;
+		}
+		
+		#fg{
+			
+			text-decoration: none;
+			align-items: center;
+			text-align: center;
+			margin-left: 190px;
+			
+		}
+
+	</style>
+</head>
+<body>
+	
+	<nav class="navbar">
+	    <img src="apex.png" alt="Logo" class="logo" id="logo_image">
+	    <button class="navbar-toggle" id="navbar-toggle">
+	        <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+	    </button>
+	    <ul class="nav-links">
+	        <li><a href="#">Home</a></li>
+	        <li><a href="#">About Us</a></li>
+	        <li class="dropdown">
+	            <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
+	            <div class="dropdown-content">
+	                <a href="#">Online Tutoring</a>
+	                <a href="#">In-person Tutor</a>
+	                <a href="#">Matric Re-Write</a>
+	                <a href="#">Special Need Tutoring</a>
+	                <a href="#">University/ College Tutors</a>
+	                <a href="#">Homeschooling Support</a>
+	                <a href="#">Person Edexcel Tutoring</a>
+	            </div>
+	        </li>
+	        <li class="dropdown">
+	            <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
+	            <div class="dropdown-content">
+	                <a href="#">Cambridge</a>
+	                <a href="#">A Level Tutoring</a>
+	                <a href="#">Expert Cambridge Tutors</a>
+	                <a href="#">IGCSE Level Tutoring</a>
+	                <a href="#">Cambridge Exam Timetable</a>
+	            </div>
+	        </li>
+	        <li><a href="#">Resources</a></li>
+	        <li><a href="#">Contact Us</a></li>
+	
+	        <li>
+	            <button class="login-register">
+	                <i class="fas fa-user login-icon"></i> Login / Register
+	            </button>
+	        </li>
+	    </ul>
+	</nav>
+
+<div class="login-container" id="loginContainer">
+    <h2>Apex Academic Centre <i class="fas fa-user-lock"></i></h2>
+    <form id="loginForm" action="" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <div class="input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="input-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" required>
+            </div>
+        </div>
+		<button type="submit">Login</button>
+		<p></p>
+		<a href="#" id="fg" >forget password?</a>
+		
+       
+    </form>
+</div>
+
+<div class="popup" id="popup" style="display: none;">
+    <span class="close-btn" id="close-popup">&times;</span>
+    <p>Admin can't be managed on a small screen.</p>
+</div>
+
+<script>
+	document.getElementById('loginForm').addEventListener('submit', function(event) {
+	    event.preventDefault(); // Prevent default form submission
+	
+	    // Check screen size
+	    if (window.innerWidth < 600) {
+	        showPopup(); // Show popup if the screen is small
+	    } else {
+	        // Handle normal login logic here (e.g., authentication)
+	        alert('Logging in...');
+	    }
+	});
+	
+	// Function to show the popup
+	function showPopup() {
+	    document.getElementById('popup').style.display = 'block';
+	}
+	
+	// Function to close the popup
+	document.getElementById('close-popup').addEventListener('click', function() {
+	    document.getElementById('popup').style.display = 'none';
+	});
+
+</script>
+</body>
+</html>

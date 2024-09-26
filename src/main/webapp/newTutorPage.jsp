@@ -6,119 +6,12 @@
 <html>
  <head>
     <title>ApexAcademicCentre</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="tutorResponsive.css" rel="stylesheet">
-    <link href="book.css" rel="stylesheet">
-    <style>
+    
+    <link href="fix.css" rel="stylesheet">
+    <link href="bookBook.css" rel="stylesheet">
 
-.form_5 {
-    position: relative;
-    padding: 20px;
-}
-
-.btns_wrap {
-    margin-top: 20px;
-}
-
-.div-container {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-    margin-top: 20px;
-}
-
-.custom-div {
-    width: 100%;
-    max-width: 200px; 
-    background: white;
-    border: 1px solid white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 16px;
-    color: gray;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px; /* Space below each div */
-    padding: 15px;
-    box-sizing: border-box;
-    height: 350px;
-}
-
-/* Heading inside each div */
-.custom-div h3 {
-    margin: 0;
-    font-size: 18px;
-    text-align: center;
-    color: #02A552;
-}
-
-/* Content inside each div */
-.content {
-   /* display: flex;*/
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%; /* Ensure div takes up full height */
-}
-
-/* Styling for session per month and package details */
-.session-per-month,
-.package-details {
-    margin: 10px 0;
-    text-align: center;
-    padding: 5px;
-    width: 100%; /* Ensures full width within the parent div */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
-    background: white; /* Background color for better visibility of shadow */
-    border-radius: 4px; /* Rounded corners for the box shadow */
-}
-
-/* Button styling */
-.package-btn {
-    background: #001549;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    align-items: center;
-    margin-top: 80%;
-    margin-left: 30px;
-
-}
-
-.package-btn:hover {
-    background: #02A552;
-}
-
-/* Reflection effect */
-.custom-div::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    transform: scaleY(-1);
-    z-index: -1;
-    opacity: 0.5;
-}
-
-.book-view form{
-   padding-top: 20px;
-}
-
-#consult_btn{
-
-      width: 150px;
-}
-
-    </style>
  </head>
     <body>
 
@@ -154,6 +47,15 @@
                 </li>
                 <li><a href="#">Resources</a></li>
                 <li><a href="#">Contact Us</a></li>
+                <li>            
+                    <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search...">
+                    <button id="search-button">
+                        <i class="fas fa-search search-icon"></i>
+                    </button>
+                    </div>
+                </li>
+
                 <li>
                     <button class="login-register">
                         <i class="fas fa-user login-icon"></i> Login / Register
@@ -166,15 +68,13 @@
         <section class="main-section">
 
         <section class="main-class">
-			<img src="tutor.jpg" alt="tutorsImage" class="tutorImage"/>
+            <img src="tutor.jpg" alt="Tutors Image" class="tutorImage"/>
 			<h2 id="tutorHead" align="center">Apex Academic Centre Tutors</h2>
 			<p id="tutorPar" align="center">These are the Highest Quality Online Tutors. Get Lessons Online with Apex - the Best in Tutoring</p>
             <button id="tutorBtn" onclick="openOpenopen()">BOOK A TUTOR</button>
 			<br>
-			<br>
+            <br>			
 		</section>
-
- 
 
         <%
         List<Tutor> tutors = (List<Tutor>) request.getAttribute("tutors");
@@ -212,12 +112,13 @@
                 %>
                 <div class="tutor">
                     <div class="top">
+                        <div class="row">
                         <div class="profile">
                             <img src="data:image/png;base64,<%= iSmage %>" alt="Member Image">
                         </div>
                         <div class="details">
                             <p>
-                                <span class="static-text"><strong><%= name %></strong></span><br><br>
+                                <span class="static-text" id="tutorNameDisplay"><strong><%= name %></strong></span><br><br>
                                 <span class="static-text">Country :</span> <span class="detail-info"><%= country %></span><br>
                                 <span class="static-text">Province :</span> <span class="detail-info"><%= address %></span><br>
                                 <span class="static-text">Area :</span> <span class="detail-info"><%= area %></span><br>
@@ -225,8 +126,9 @@
                                 <span class="static-text">Tutoring Option :</span> <span class="detail-info"><%= availability %></span>
                             </p>
                         </div>
+                    </div>
                         <div class="feedback">
-                            <div class="feedback-item">
+                           <div class="feedback-item">
                                <br>
                             </div>
                             <div class="ratings">
@@ -260,6 +162,7 @@
                             </div>
                             <br>
                             <div class="subjects">
+                                <span class="hidSubjects">Subjects</span>
                                 <%
                                     String[] sub = subjects.split(",");
                                     for (String subject : sub) {
@@ -272,15 +175,17 @@
                         <div class="book-view">
                             <form action="/view-profile" method="post">
                                 <input type="hidden" name="email" value="<%= email %>"/>
-                            <button type="submit" class="view_pp">
+                           <div class="repoStyle">
+                            <button type="button">
                                 VIEW PROFILE
                             </button>
-                            <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>')">BOOK TUTOR</button>
+                            <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>', '<%= syllabus %>', '<%= grades %> ', '<%= subjects %> ')"  class="bk_tutor">BOOK TUTOR</button>
+                            </div>
                             </form>
                            
                             <br>
                         </div>
-                    </div>
+                       </div>
                     <br>
                     <br>
                 </div>
@@ -399,7 +304,7 @@
                                 </div>
                                 <div class="btns_wrap">
                                     <div class="common_btns form_1_btns">
-                                        <button type="button" class="btn_next">Next <span class="icon">→</span></button>
+                                        <button type="button" class="btn_next">Next</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -464,30 +369,13 @@
                                                 <label for="grade">Grade <span class="required">*</span></label><br>
                                                 <select id="grade" name="grade" required>
                                                     <option value="" disabled selected>Select grade</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
+
                                                 </select>
                                                 <div id="grade-error" class="error"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="syllabus">Syllabus <span class="required">*</span></label>
                                                 <select id="syllabus" name="syllabus" required>
-                                                    <option value="" disabled selected>Select syllabus</option>
-                                                    <option value="IEB">IEB</option>
-                                                    <option value="CAPs">CAPS</option>
-                                                    <option value="PEX">Pearson Edexcel</option>
-                                                    <option value="CAMBRIDGE">Cambridge</option>
-                                                    <option value="IB">IB</option>
                                                     <option value="Other" id="other-option">Other</option>
                                                 </select>
                                                 <div id="syllabus-error" class="error"></div>
@@ -544,8 +432,8 @@
     
                                     <div class="btns_wrap">
                                         <div class="common_btns form_2_btns">
-                                            <button type="button" class="btn_back">Back <span class="icon">←</span></button>
-                                            <button type="button" class="btn_next">Next <span class="icon">→</span></button>
+                                            <button type="button" class="btn_back">Back</button>
+                                            <button type="button" class="btn_next">Next</button>
                                         </div>
                                     </div>
                                 </form>
@@ -561,15 +449,7 @@
                                     <div class="form-group">
                                         <label for="subject">Select Subject <span class="required">*</span></label><br>
                                         <input type="text" id="subject" name="subject" class="input" required readonly onclick="toggleSubjectOptions()">
-                                        <div id="subjectContainer" style="display: none;">
-                                            <label><input type="checkbox" value="English" onchange="updateSubjects()"> English</label>
-                                            <label><input type="checkbox" value="isiZulu" onchange="updateSubjects()"> isiZulu</label>
-                                            <label><input type="checkbox" value="Mathematics" onchange="updateSubjects()"> Mathematics</label>
-                                            <label><input type="checkbox" value="Science" onchange="updateSubjects()"> Science</label>
-                                            <label><input type="checkbox" value="History" onchange="updateSubjects()"> History</label>
-                                            <label><input type="checkbox" value="Geography" onchange="updateSubjects()"> Geography</label>
-                                            
-                                        </div>
+                                        <div id="subjectContainer" style="display: none;"></div>
                                         <div id="subject-error" class="error"></div>
                                     </div>
                                 </div>
@@ -606,7 +486,7 @@
 
                             <div class="btns_wrap">
                                 <div class="common_btns form_3_btns">
-                                    <button type="button" class="btn_back">Back <span class="icon">←</span></button>
+                                    <button type="button" class="btn_back">Back</button>
                                     <button type="button" class="btn_next">Next</button>
                                 </div>
                             </div>
@@ -620,7 +500,7 @@
                                 <form id="formFour">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="message">Message <span class="required">*</span></label><br><br>
+                                        <label for="message">Message <span class="required"></span></label><br><br>
                                         <textarea id="message" name="message" placeholder="Is there anything else you would like to add?...." class="textarea" required></textarea>
                                         <div id="message-error" class="error"></div>
                                     </div>
@@ -652,7 +532,7 @@
 
                             <div class="btns_wrap">
                                 <div class="common_btns form_4_btns">
-                                    <button type="button" class="btn_back">Back <span class="icon">←</span></button>
+                                    <button type="button" class="btn_back">Back</button>
                                     <button type="button" class="btn_next">Next</button>
                                 </div>
                             </div>
@@ -754,8 +634,8 @@
                             
                             <div class="btns_wrap">
                                 <div class="common_btns form_5_btns">
-                                    <button type="button" class="btn_back">Back <span class="icon">←</span></button>
-                                    <button type="button" class="btn_next" id="consult_btn">Speak to consultant</button>
+                                    <button type="button" class="btn_back">Back</button>
+                                    <button type="button" class="btn_next" id="consult_btn" ">Speak to consultant</button>
                                 </div>
                             </div>
                         </div>
@@ -859,6 +739,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
             var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
             var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
+            var consult = document.querySelector(".form_5_btns .btn_next");
 
 
             var form_2_progessbar = document.querySelector(".form_2_progessbar");
@@ -1069,6 +950,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
             }
 
+            consult.addEventListener("click", function() {
+
+                alert("Consultant will get in touch  with you shortly. Thank you.");
+
+                const allData = combineFormData();
+
+                const dataToSend = {
+                    ...allData
+                };
+
+                        fetch('/other-booking', { // Replace with your actual endpoint URL
+                                method: 'POST',
+                                headers: { 
+                                    'Content-Type': 'application/json' 
+                                },
+                                body: JSON.stringify(dataToSend)
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                            
+                                setTimeout(function(){
+                                        window.location.href = '/';
+                                    } , 2000);
+
+                                    
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Optionally handle error response
+                            });
+
+                setTimeout(function(){
+                    window.location.href = '/';
+                } , 2000);
+
+            
+});
+
+
             function validateForm4() {
 
                 var tutoring = document.querySelector('input[name="tutor-style"]:checked');
@@ -1090,35 +1010,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
                     const basicPackage= document.getElementById('basicPackage');
-                    basicPackage.textContent = 'R1100 p/m'; // or button.innerHTML = 'Submit';
+                    basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
 
                     const premiumPackage = document.getElementById('premiumPackage');
-                    premiumPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+                    premiumPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
 
                     const advancedPackage = document.getElementById('advancedPackage');
-                    advancedPackage.textContent = 'R3250 p/m'; // or button.innerHTML = 'Submit';
+                    advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
 
                     const elitePackage =  document.getElementById('elitePackage');
-                    elitePackage.textContent = 'R4350 p/m'; // or button.innerHTML = 'Submit';
+                    elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
 
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
                         const basicPackage= document.getElementById('basicPackage');
-                        basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+                        basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
 
                         const premiumPackage = document.getElementById('premiumPackage');
-                        premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+                        premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
 
                         const advancedPackage = document.getElementById('advancedPackage');
-                        advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+                        advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
 
                         const elitePackage =  document.getElementById('elitePackage');
-                        elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+                        elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
 
                     }
                     else{
@@ -1128,36 +1048,36 @@ document.addEventListener('DOMContentLoaded', function() {
                             onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
                             const basicPackage= document.getElementById('basicPackage');
-                            basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+                            basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
 
                             const premiumPackage = document.getElementById('premiumPackage');
-                            premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+                            premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
 
                             const advancedPackage = document.getElementById('advancedPackage');
-                            advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+                            advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
 
                             const elitePackage =  document.getElementById('elitePackage');
-                            elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+                            elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
 
                                 }
 
                             else{
-                                if(ghg === "In Person" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        
                                         const onceOffPackage = document.getElementById('onceOffPackage');
                                         onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
 
                                         const basicPackage= document.getElementById('basicPackage');
-                                        basicPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+                                        basicPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
 
                                         const premiumPackage = document.getElementById('premiumPackage');
-                                        premiumPackage.textContent = 'R4300 p/m'; // or button.innerHTML = 'Submit';
+                                        premiumPackage.textContent = 'R4300'; // or button.innerHTML = 'Submit';
 
                                         const advancedPackage = document.getElementById('advancedPackage');
-                                        advancedPackage.textContent = 'R6350 p/m'; // or button.innerHTML = 'Submit';
+                                        advancedPackage.textContent = 'R6350'; // or button.innerHTML = 'Submit';
 
                                         const elitePackage =  document.getElementById('elitePackage');
-                                        elitePackage.textContent = 'R8500 p/m'; // or button.innerHTML = 'Submit';
+                                        elitePackage.textContent = 'R8500'; // or button.innerHTML = 'Submit';
 
                                     }
                                    
@@ -1179,10 +1099,10 @@ document.addEventListener('DOMContentLoaded', function() {
                        onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
 
                        const basicPackage= document.getElementById('twoTofivePackage');
-                       basicPackage.textContent = 'R450 pp'; // or button.innerHTML = 'Submit';
+                       basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
                        const premiumPackage = document.getElementById('sixTo10Package');
-                       premiumPackage.textContent = 'R350 pp'; // or button.innerHTML = 'Submit';
+                       premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
 
                         }
                         else{
@@ -1193,10 +1113,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
                         const basicPackage= document.getElementById('twoTofivePackage');
-                        basicPackage.textContent = 'R300 pp'; // or button.innerHTML = 'Submit';
+                        basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
                         const premiumPackage = document.getElementById('sixTo10Package');
-                        premiumPackage.textContent = 'R200 pp'; // or button.innerHTML = 'Submit';
+                        premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
 
                         }
                   
@@ -1404,7 +1324,174 @@ document.addEventListener('DOMContentLoaded', function() {
 		/*var modal = document.getElementById("modal");
         var btn = document.getElementById("open-popup");*/
 
-		function openOpenopen(name, email) {
+		function openOpenopen(name, email, subjects, grades , subsub) {
+
+            if(subjects === undefined){
+
+                const syll = "CAP,IEB,Cambridge,IB,Pearson Edexel";
+                const syllabusArray = syll.split(',').map(item => item.trim());
+
+                const syllabi = syllabusArray.map(item => {
+                        return { value: item, text: item };
+                    });
+
+                const syllabusSelect = document.getElementById('syllabus');
+
+                while (syllabusSelect.options.length > 1) {
+
+                    const secondOption = syllabusSelect.options[1];
+
+                    // Check if the second option exists and remove it
+                    if (secondOption) {
+                        syllabusSelect.remove(1); // Remove the second option
+                    } else {
+                        break; // Exit the loop if no second option exists
+                    }
+                }
+
+
+                syllabi.forEach(syllabus => {
+                    const option = document.createElement('option');
+                    option.value = syllabus.value;
+                    option.textContent = syllabus.text;
+
+                    syllabusSelect.appendChild(option);
+
+                });
+                            
+            }
+           else{
+            const syllabusArray = subjects.split(',').map(item => item.trim());
+
+            const syllabi = syllabusArray.map(item => {
+                    return { value: item, text: item };
+                });
+
+                const syllabusSelect = document.getElementById('syllabus');
+
+                while (syllabusSelect.options.length > 1) {
+
+                    const secondOption = syllabusSelect.options[1];
+
+                    // Check if the second option exists and remove it
+                    if (secondOption) {
+                        syllabusSelect.remove(1); // Remove the second option
+                    } else {
+                        break; // Exit the loop if no second option exists
+                    }
+                }
+
+
+                syllabi.forEach(syllabus => {
+                    const option = document.createElement('option');
+                    option.value = syllabus.value;
+                    option.textContent = syllabus.text;
+
+                    syllabusSelect.appendChild(option);
+
+                });
+
+           }
+
+           /*Grades Start Here*/
+
+           if(grades === undefined){
+
+                    const grd = "GRD:1,GRD:2,GRD:3,GRD:4,GRD:5,GRD:6,GRD:7,GRD:8,GRD:9,GRD:10,GRD:11,GRD:12";
+                    const gradesArray = grd.split(',').map(item => item.trim());
+
+                    const gr = gradesArray.map(item => {
+                            return { value: item, text: item };
+                        });
+
+                    const gradesSelect = document.getElementById('grade');
+
+                    while (gradesSelect.options.length > 0) {
+
+                        const secondOption = gradesSelect.options[0];
+
+                        // Check if the second option exists and remove it
+                        if (secondOption) {
+                            gradesSelect.remove(0); // Remove the second option
+                        } else {
+                            break; // Exit the loop if no second option exists
+                        }
+                    }
+
+
+                    gr.forEach(gradee => {
+                        const option = document.createElement('option');
+                        option.value = gradee.value;
+                        option.textContent = gradee.text;
+
+                        gradesSelect.appendChild(option);
+
+                    });
+                                
+                    }
+                        else{
+                            const gradesArray = grades.split(',').map(item => item.trim());
+
+                            const gr = gradesArray.map(item => {
+                                                    return { value: item, text: item };
+                                                });
+
+                                                const gradesSelect = document.getElementById('grade');
+
+                        while (gradesSelect.options.length > 0) {
+
+                            const secondOption = gradesSelect.options[0];
+
+                            // Check if the second option exists and remove it
+                            if (secondOption) {
+                                gradesSelect.remove(0); // Remove the second option
+                            } else {
+                                break; // Exit the loop if no second option exists
+                            }
+                        }
+
+
+                            gr.forEach(gradee => {
+                                const option = document.createElement('option');
+                                option.value = gradee.value;
+                                option.textContent = gradee.text;
+
+                                gradesSelect.appendChild(option);
+
+                            });
+
+                            }
+
+           /*Grades End Here*/
+
+           /*Subects Start Here*/
+
+           const defaultSubjects = "Mathematics, Mathematics Literacy, Biology, Chemistry,Physics,Life Sciences,Physical Sciences,Combined Science,Natural Science,Social Sciences,Technonology";
+    const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
+    
+    const subjectContainer = document.getElementById('subjectContainer');
+    
+    // Clear existing checkboxes
+    subjectContainer.innerHTML = '';
+
+    subjectsArray.forEach(subject => {
+        const label = document.createElement('label');
+        label.style.display = 'inline'; // Make each label take up a new line
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = subject;
+        checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+
+        // Set the label text
+        label.textContent = subject; // Set the text for the label
+
+        // Append checkbox to label and label to container
+        label.prepend(checkbox); // Add checkbox before the label text
+        subjectContainer.appendChild(label);
+    });
+
+           /*Subects End Here*/
 
             const button = document.getElementById('tutorBtn');
             const directTutors = document.querySelectorAll('.directTutor');
@@ -1416,6 +1503,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     tutor.textContent = 'Book a Personalized Tutor Across South Africa!';
                 });
                 otherOption.style.display = 'block'; // Show the "Other" option
+
+                
+
             } else {
                 directTutors.forEach(tutor => {
                     tutor.textContent = 'Book ' + name + ' for Tutoring!';
@@ -1500,12 +1590,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Get the ID of the button that was clicked
         const buttonId = event.target.id;
 
+        var tutoring = document.querySelector('input[name="tutor-style"]:checked');
+        var ghg = tutoring ? tutoring.value : 'None';
+        var syllabusId = document.getElementById('syllabus').value;
+  
         // You can use a switch statement or if-else logic to handle specific buttons
         switch (buttonId) {
             case 'onceOffPackage':
-                alert('Once Off Package selected');
+            alert('Once Off Package selected');
+            var amountTopay;
 
-                var amountTopay = '14.15';
+            if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '300'; // amount to pay;
+               }
+               else{
+
+               if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       
+                       amountTopay = '400'; // amount to pay;
+
+               }
+
+               else{
+
+                if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                        amountTopay = '400'; // amount to pay;
+
+                        }
+
+                        else{
+
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       
+                                    amountTopay = '550'; // amount to pay;
+                
+                                }
+
+                        }
+
+               }
+
+            }
 
                 const allData = combineFormData();
 
@@ -1539,7 +1665,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'basicPackage':
                 alert('Basic Package selected');
 
-                var amountTopay = '53.79';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '1100'; // amount to pay;
+                  }
+                  else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                      amountTopay = '1550'; // amount to pay;
+
+                  }
+
+                  else{
+
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                        amountTopay = '1550'; // or button.innerHTML = 'Submit';
+
+                        }
+                        else{
+
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                     amountTopay = '2150'; // amount to pay;
+                  }
+
+                            
+                        }
+                  }
+
+                }
+
+
+
+                    const advancedPackage = document.getElementById('advancedPackage');
+                    advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
+
+                    const elitePackage =  document.getElementById('elitePackage');
+                    elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
 
                 const all = combineFormData();
 
@@ -1573,7 +1735,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'premiumPackage':
                 alert('Premium Package selected');
 
-                var amountTopay = '104.75';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                amountTopay = '2150'; // amount to pay;
+                }
+                else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '3100'; // amount to pay;
+                }
+
+                else{
+
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                            amountTopay = '3100'; // amount to pay;
+
+                            }
+                            else{
+
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '4300'; // amount to pay;
+                }
+
+
+                            }
+
+                }
+
+                }
+
+
+
 
                 const dataall = combineFormData();
 
@@ -1607,7 +1800,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'advancedPackage':
                 alert('Advanced Package selected');
 
-                var amountTopay = '150.04';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '3250'; // amount to pay;
+                  }
+                  else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                     amountTopay = '4650'; // amount to pay;
+                  }
+
+                  else{
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                   amountTopay = '4650'; // amount to pay;
+                  }
+                  else{
+
+                    if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '6350'; // amount to pay;
+                  }
+
+                  }
+
+                  }
+
+                  }
 
                 const data = combineFormData();
 
@@ -1642,7 +1859,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'elitePackage':
                alert('Elite Package selected');
 
-               var amountTopay = '189.68';
+               var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                amountTopay = '4350'; // amount to pay;
+                }
+                else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                    }
+                    else{
+
+                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                        amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                            }
+                            else{
+
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                      amountTopay = '8500'; // or button.innerHTML = 'Submit';
+
+                   }
+
+                            }
+                    }
+
+                }
 
                 const gatherData = combineFormData();
 
@@ -1728,7 +1971,49 @@ function updateSubjects() {
     document.getElementById('subject').value = selectedSubjects.join(', ');
 }
 
+function speakConsult(){
 
+    alert("WE ARE HERE");
+
+
+    modal_wrapper.classList.add("active");
+    shadow.addEventListener("click", function() {
+    modal_wrapper.classList.remove("active");
+     });
+
+                    const allData = combineFormData();
+
+                    const dataToSend = {
+                        ...allData
+                    };
+
+                            fetch('/other-booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(dataToSend)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                
+                                    setTimeout(function(){
+                                            window.location.href = '/';
+                                        } , 2000);
+
+                                        
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                    setTimeout(function(){
+                        window.location.href = '/';
+                    } , 2000);
+
+
+}
 
 
 </script>

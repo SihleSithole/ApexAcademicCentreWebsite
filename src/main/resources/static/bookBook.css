@@ -315,8 +315,210 @@
             margin-top: 20px;
         }
         
+        
+        @media (max-width: 768px) {
+			
+        .form-row {
+			
+			    display: flex;
+			    flex-direction: column; /* Stack inputs vertically */
+			    margin-bottom: 20px;
+			}
+			
+		.form-group {
+			    margin-right: 0; /* Remove right margin for single column */
+			    width: 100%; /* Full width for each input */
+			}
 
-/**/
+}
+        
+
+/* form 5*/
+
+.form_5 {
+    position: relative;
+    padding: 20px;
+}
+
+.btns_wrap {
+    margin-top: 20px;
+}
+
+.div-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    margin-top: 20px;
+}
+
+.custom-div {
+    width: 100%;
+    max-width: 200px; 
+    background: white;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    color: gray;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Space below each div */
+    padding: 15px;
+    box-sizing: border-box;
+    height: 350px;
+}
+
+/* Heading inside each div */
+.custom-div h3 {
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+    color: #02A552;
+}
+
+/* Content inside each div */
+.content {
+   /* display: flex;*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%; /* Ensure div takes up full height */
+}
+
+/* Styling for session per month and package details */
+.session-per-month,
+.package-details {
+    margin: 10px 0;
+    text-align: center;
+    padding: 5px;
+    width: 100%; /* Ensures full width within the parent div */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background: white; /* Background color for better visibility of shadow */
+    border-radius: 4px; /* Rounded corners for the box shadow */
+}
+
+/* Button styling */
+.package-btn {
+    background: #001549;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    align-items: center;
+    margin-top: 80%;
+    margin-left: 30px;
+
+}
+
+.package-btn:hover {
+    background: #02A552;
+}
+
+/* Reflection effect */
+.custom-div::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transform: scaleY(-1);
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.book-view form{
+   padding-top: 20px;
+}
+
+#consult_btn{
+
+      width: 150px;
+}
+
+  @media (max-width: 768px) {
+	
+	.form_5 {
+    position: relative;
+    padding: 20px;
+			}
+			
+			.btns_wrap {
+			    margin-top: 20px;
+			}
+			
+		.div-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    margin-top: 20px;
+}
+
+.custom-div {
+    width: 100%;
+    max-width: 48%; /* Adjust width to allow two per line */
+    background: white;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px; /* Reduce font size */
+    color: gray;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Space below each div */
+    padding: 10px; /* Reduce padding */
+    box-sizing: border-box;
+    height: 200px; /* Reduce height */
+}
+
+.content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%; /* Ensure div takes up full height */
+}
+
+.session-per-month{
+	font-size: 10px;
+}
+
+.session-per-month,
+.package-details {
+    margin: 10px 0;
+    text-align: center;
+    width: 90%; /* Ensures full width within the parent div */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background: white; /* Background color for better visibility of shadow */
+    border-radius: 4px; /* Rounded corners for the box shadow */
+}
+
+/* Button styling */
+.package-btn {
+    background: #001549;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;  
+    margin-top: 0%;
+    width: fit-content; 
+
+}
+
+
+
+
+}
+
 
 
  

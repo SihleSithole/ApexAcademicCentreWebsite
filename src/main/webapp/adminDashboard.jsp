@@ -464,7 +464,6 @@
 											</div>
 											<div id="syllabusError" class="error-message"></div>
 										</div>
-										
 
 										<div class="mb-3">
 											<label for="tutorOptions">Tutoring Options</label>

@@ -151,6 +151,15 @@ body, ul, li {
     font-size: 18px;
 }
 
+.navbar-toggle {
+    display: none; /* Hide by default */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* Adjust icon size */
+    margin-left: auto; /* Push it to the right */
+}
+
 
 
 .main-section {
