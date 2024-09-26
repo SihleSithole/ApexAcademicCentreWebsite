@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Booking;
-import com.example.demo.model.Tutor;
+
 import com.example.demo.repository.BookingRepository;
 
 
