@@ -23,7 +23,7 @@
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
           <link href="bookBook.css" rel="stylesheet">
-          <link href="profile.css" rel="stylesheet"> 
+          <link href="pp.css" rel="stylesheet"> 
     <title>ApexAcademicCentre</title>
 </head>
 <body>
@@ -180,7 +180,7 @@
                     <div class="qualifications-row">
                         <div class="qualifications-title"><i class="fas fa-university"></i>&nbsp;&nbsp;Education</div>
 
-                        <div class="subjects-info">
+                        <div class="subjects-info" >
                             <ul>
                                 <%
                                     String[] c = qualifications.split(",");
