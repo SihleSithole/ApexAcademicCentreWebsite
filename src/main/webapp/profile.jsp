@@ -752,7 +752,7 @@
                         <h3>Premium Package</h3>
                         <div class="content">
                             <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                            <div class="package-details">Popular</div>
                      
                             <button type="submit" class="package-btn" id="premiumPackage"></button>
                         

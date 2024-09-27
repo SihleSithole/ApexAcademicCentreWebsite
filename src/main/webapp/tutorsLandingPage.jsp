@@ -565,7 +565,7 @@
                                     <h3>Premium Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                        <div class="package-details">Popular</div>
                                  
                                         <button type="submit" class="package-btn" id="premiumPackage"></button>
                                     
@@ -1498,8 +1498,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     tutor.textContent = 'BOOK A PERSONALIZED TUTOR';
                 });
                 otherOption.style.display = 'block'; // Show the "Other" option
-
-                
 
             } else {
                 directTutors.forEach(tutor => {
