@@ -460,7 +460,7 @@
 												<label><input type="checkbox" value="IEB" onchange="updateSyllabus()"> IEB</label>
 												<label><input type="checkbox" value="IB" onchange="updateSyllabus()"> IB</label>
 												<label><input type="checkbox" value="Cambridge" onchange="updateSyllabus()"> Cambridge</label>
-												<label><input type="checkbox" value="Pearson Edexel" onchange="updateSyllabus()"> Pearson Edexel</label>
+												<label><input type="checkbox" value="Pearson Edexel" onchange="updateSyllabus()"> Pearson Edexcel</label>
 											</div>
 											<div id="syllabusError" class="error-message"></div>
 										</div>

@@ -445,6 +445,7 @@
                                     <option value="kwa-zulu-natal">Kwa Zulu Natal</option>
                                     <option value="mpumalanga">Mpumalanga</option>
                                     <option value="western-cape">Western Cape</option>
+                                    <option value="Internationally">Internationally</option>
                                 </select>
                                 <div id="province-error" class="error"></div>
                             </div>
@@ -475,12 +476,6 @@
                                 <select id="language" name="language" class="input" required>
                                     <option value="" disabled selected>Select Language of Instruction</option>
                                     <option value="English">English</option>
-                                    <option value="isiZulu">isiZulu</option>
-                                    <option value="Afrikaans">Afrikaans</option>
-                                    <option value="isiXhosa">Xhosa</option>
-                                    <option value="isiNdebele">isiNdebele</option>
-                                    <option value="Sepedi">Sepedi</option>
-                                    <option value="Other">Other</option>
                                 </select>
                                 <div id="language-error" class="error"></div>
                             </div>
@@ -1504,7 +1499,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if(subjects === undefined){
 
-                const syll = "CAP,IEB,Cambridge,IB,Pearson Edexel";
+                const syll = "CAPs,IEB,Cambridge,IB,Pearson Edexcel";
                 const syllabusArray = syll.split(',').map(item => item.trim());
 
                 const syllabi = syllabusArray.map(item => {
@@ -1676,7 +1671,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (event.target === button) {
                 // The button was clicked
                 directTutors.forEach(tutor => {
-                    tutor.textContent = 'Book a Personalized Tutor Across South Africa!';
+                    tutor.textContent = 'BOOK A PERSONALIZED TUTOR';
                 });
                 otherOption.style.display = 'block'; // Show the "Other" option
 
@@ -1781,7 +1776,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                }
                else{
 
-               if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+               if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                        
                        amountTopay = '400'; // amount to pay;
 
@@ -1797,7 +1792,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                         else{
 
-                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                        
                                     amountTopay = '550'; // amount to pay;
                 
@@ -1847,7 +1842,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                  amountTopay = '1100'; // amount to pay;
                   }
                   else{
-                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                       amountTopay = '1550'; // amount to pay;
 
                   }
@@ -1861,7 +1856,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         }
                         else{
 
-                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                             amountTopay = '2150'; // amount to pay;
                   }
 
@@ -1909,7 +1904,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 amountTopay = '2150'; // amount to pay;
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                        amountTopay = '3100'; // amount to pay;
                 }
 
@@ -1922,7 +1917,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             }
                             else{
 
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                        amountTopay = '4300'; // amount to pay;
                 }
 
@@ -1970,7 +1965,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                  amountTopay = '3250'; // amount to pay;
                   }
                   else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                      amountTopay = '4650'; // amount to pay;
                   }
 
@@ -1980,7 +1975,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   }
                   else{
 
-                    if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                        amountTopay = '6350'; // amount to pay;
                       }
 
@@ -2029,7 +2024,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 amountTopay = '4350'; // amount to pay;
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                     amountTopay = '6200'; // or button.innerHTML = 'Submit';
 
                     }
@@ -2041,7 +2036,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             }
                             else{
 
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
                       amountTopay = '8500'; // or button.innerHTML = 'Submit';
 
                    }
