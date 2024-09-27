@@ -694,7 +694,7 @@ body, ul, li {
     width: 100%;/* Allow this section to take the remaining space */
     color: #001549;
     margin-left: 15px; /* Space to the left of the text */
-    font-size: 14px;
+    font-size: 35px;
 }
 
 .subjects-info {
@@ -714,6 +714,11 @@ body, ul, li {
     text-align: center;
     border-radius: 3px;
     color: #00a550;
+}
+
+.subjects-info li{
+
+    color: red;
 }
 
 .tutoring-container1 {

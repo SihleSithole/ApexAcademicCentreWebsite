@@ -23,7 +23,7 @@
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
           <link href="bookBook.css" rel="stylesheet">
-          <link href="pp.css" rel="stylesheet"> 
+          <link href="prop.css" rel="stylesheet"> 
     <title>ApexAcademicCentre</title>
 </head>
 <body>
