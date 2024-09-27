@@ -5,7 +5,7 @@
 <%@ page import="java.util.Base64" %>
 <html>
  <head>
-    <title>Apex</title> 
+    <title>ApexAcademicCentre</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -1686,7 +1686,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         else{
 
                             if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
-                     amountTopay = '2150'; // amount to pay;
+                            amountTopay = '2150'; // amount to pay;
                   }
 
                             
@@ -1694,14 +1694,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   }
 
                 }
-
-
-
-                    const advancedPackage = document.getElementById('advancedPackage');
-                    advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
-
-                    const elitePackage =  document.getElementById('elitePackage');
-                    elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
 
                 const all = combineFormData();
 
@@ -1758,15 +1750,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                        amountTopay = '4300'; // amount to pay;
                 }
 
-
-                            }
-
-                }
+             }
 
                 }
 
-
-
+                }
 
                 const dataall = combineFormData();
 
@@ -1818,7 +1806,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                     if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        amountTopay = '6350'; // amount to pay;
-                  }
+                      }
 
                   }
 
@@ -1970,6 +1958,12 @@ function updateSubjects() {
     
     document.getElementById('subject').value = selectedSubjects.join(', ');
 }
+
+
+
+
+
+
 
 function speakConsult(){
 

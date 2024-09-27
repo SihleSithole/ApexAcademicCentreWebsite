@@ -23,739 +23,54 @@
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
           <link href="bookBook.css" rel="stylesheet">
-
-
-    <title>View profile</title>
-    <style>
-
-body{
-	
-	font-family: 'Montserrat', sans-serif;
-	background-color: #f6fffa;
-  
-	
-}
-  .profile-container{
-        background-color: #f6fffa;
-        border-radius: 8px;
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
-        
-    }
-
-    .long-paragraph{
-        margin-top: 40px;
-        text-align: center;
-        font-weight: bold;
-        color: #001549;
-        font-size: 30px;
-        height: 12vh;
-    }
-
-    .short-paragraph{
-        margin-top: 20px;
-        text-align: center;
-        font-size: 35px;
-        font-weight: bold;
-        color: #00a550;
-    }
-
-        .main-section {
-            display: flex; /* Use flexbox to align child elements horizontally */
-            align-items: flex-start; /* Align items to the top of the container */
-            padding: 20px;
-            width: 100%;
-            background-color: #e7eeff; /* Optional: for better visibility */
-            border: none;
-        }
-
-        .whole-wrapper {
-            display: flex; /* Use flexbox to align child elements horizontally */
-            align-items: flex-start; /* Align items to the top of the container */
-            padding: 20px;
-            border: 1px solid #ccc; /* Optional: for better visibility */
-            background-color: #e7eeff; /* Optional: for better visibility */
-            margin-top: 75px;
-            width: 100%;
-            border: none;
-        }
-
-
-.about-tutor-row, .qualifications-row {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #1cee50;
-    padding-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.about-tutor-title, .qualifications-title {
-    width: 150px;
-    height: 100px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #021631;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: left;
-    justify-content: left;
-    text-align: left;
-}
-
-
-.about-tutor-info {
-    flex: 1 1 auto;
-    color: #001549;
-    margin-right: 20px;
-    font-size: 14px;
-    width:50%;
-}
-
-.qualifications-info, .subjects-info {
-    flex: 1 1 auto;
-    color: #001549;
-    overflow: auto;
-    margin-right: 20px;
-    font-size: 14px;
-}
-
-.subjects-info {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto the next line */
-   
-
-}
-
-.subjects-info p {
-    display: inline-block; /* Allows width to be determined by content */
-    padding-left: 5px; /* Set padding to 3px */
-    padding-right: 5px; /* Set padding to 3px */
-    margin: 5px; /* Margin for spacing between paragraphs */
-    background-color: #e7eeff; /* Light background for visibility */
-    text-align: center;
-    border-radius: 3px;
-    color: #00a550;
-}
-
-/*Start here */
-
-.profile-row {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .profile-picture-container, .matric {
-            width: 290px; /* Adjust as needed */
-            /*background-color: #f6fffa; */
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-           
-            justify-content: flex-start;
-        }
-        
-        .matric img{
-            width: 100%;
-            height: 345px;
-            border-radius: 8px;
-        }
-
-        .profile-picture-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .profile-picture-container .name,
-        .profile-picture-container .age {
-            margin-top: 10px;
-            color: #001549;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .profile-picture-container .name{
-            font-size: larger;
-        }
-        .profile-picture-container .age {
-            font-style: italic;
-        }
-
-        .content-wrapper {
-            flex: 1;
-            margin-left: 20px;
-        }
-
-        /* Adjusting the profile-container */
-        .profile-container {
-            flex: 1;
-        }
-
-/*end here*/
-
-
-.qualification {
-    display: inline-block;
-    padding: 5px;
-    background-color: gainsboro;
-    border-radius: 4px;
-    color: blue;
-    text-align: center;
-}
-
-.subjectt {
-    display: inline-block;
-    padding: 5px;
-    background-color: gainsboro;
-    border-radius: 4px;
-    color: blue;
-    text-align: center;
-}
-
-/*The added */
-
-
-.subjects-row,  .qualifications-row, .University-row {
-  display: flex;
-  align-items: center; /* Align items to the top */
-}
-
-.subjects-row, .University-row{
-    margin-top: 10px;
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-/*.about-tutor-row{
- gap: 10px;
-}*/
-.subjects-title ,.about-tutor-title ,.qualifications-title{
-  /*display: flex;*/
-  align-items: center; /* Center the icon above the text */
-  text-align: left; /* Center the text within the title */
-  font-size: 14px; /* Adjust text size if needed */
-}
-
-.qualifications-title{
-    align-items: center; /* Center the icon above the text */
-  text-align: center;
-}
-
-
-        .subjects-title i,
-        .about-tutor-title i,
-        .qualifications-title i {
-            font-size: 24px; /* Adjust icon size if needed */
-            margin-bottom: 7px;
-            color: #00a550;
-            display: inline-block; /* Ensure the icon can have a shadow */
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Add shadow */
-            background-color: #e7eeff;
-            width: 35px; /* Fixed width */
-            height: 35px; /* Fixed height */
-            line-height: 35px; /* Center vertically */
-            text-align: center; /* Center horizontally */
-            padding: 0; /* Remove default padding */
-        }
-
-.subjects-info {
-  display: flex;
-  align-items: center; /* Center the content vertically */
-}
-
-#profile_subjects {
-  margin: 0; /* Remove default margin from <p> tag */
-  font-size: 16px; /* Adjust text size if needed */
-}
-
-
-/*The left div*/
-.details {
-    background-color: #fff; /* Sets the background color to white */
-    border-radius: 8px;
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
-    border: none; /* Ensures no border is visible */
-    padding: 10px; /* Adds some padding for better spacing */
-}
-
-.static-text {
-    color: #001549; /* Sets the color of static text to dark blue */
-    font-style: italic;
-}
-
-.detail-info {
-    color: #00a550; /* Sets the color of detail information to green */
-}
-
-/* Optional: Styling for the ratings and feedback items */
-.ratings, .feedback-item {
-    margin-top: 10px; /* Adds spacing between items */
-}
-
-#rate-icon, #back-icon {
-    margin-right: 5px; /* Adds spacing between icons and text */
-   
-}
-
-#rate-icon{
-    color: #fd590d;
-}
-
-
-
-/*Book tutor button*/
-.profile-action {
-    margin-top: 20px;
-    margin-left: 70px;
-}
-
-
-.book-tutor-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #02A552;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 170px;
-    
-}
-
-.find-tutor-button{
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #001549;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 170px;
-    margin-left: 30px;
-}
-
-.book-tutor-button:hover {
-    background-color: white;
-    color: #02A552;
-}
-
-.find-tutor-button:hover {
-    background-color: white;
-    color: #001549;
-}
-
-.button-action{
-    margin-right: 200px;
-}
-/* Start NavBar*/
-
-
-body, ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-/* Navbar container */
-.navbar {
-   
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    background-color: white;
-    padding: 10px;
-    font-family: 'Montserrat', sans-serif;
-    position: fixed; /* Fixes the navbar to the top of the viewport */
-    top: 0; /* Positions it at the top */
-    left: 0; /* Ensures it stretches from the left edge */
-    right: 0; /* Ensures it stretches to the right edge */
-    z-index: 1000; /* Ensures it stays on top of other content */
-}
-
-/* Logo image */
-.logo {
-    height: 60px;
-    margin-right: 20px;
-    margin-left: 95px;
-    width: 220px;
-}
-
-/* Navbar links container */
-.nav-links {
-    padding-left: 6%;
-    display: flex;
-    align-items: center;
-    margin-right: auto; /* Pushes the nav links to the left */
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Navbar links */
-.nav-links li {
-    position: relative;
-    margin: 0 10px;
-}
-
-.nav-links a {
-    color: #00154A;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-}
-
-/* Dropdown container */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.nav-links a:hover {
-    color: #02A552; /* Ensure text color remains white on hover */
-}
-
-/* Nav-right styling */
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adds spacing between items */
-}
-
-/* Search container */
-.search-container {
-    position: relative;
-    margin-right: 20px;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
-    z-index: 10; /* Ensures it's on top of other content */
-    height: 40px;
-}
-
-#search-input {
-    padding: 5px 30px 5px 30px;
-    border: 1px solid transparent; /* Hide the border */
-    border-radius: 4px;
-    font-size: 14px;
-    width: 0;
-    padding-left: 35px; /* Space for icon */
-    background: white;
-    outline: none;
-    transition: width 0.3s, padding 0.3s;
-}
-
-#search-input:focus {
-    width: 200px;
-    padding-left: 35px; /* Adjust for icon */
-}
-
-#search-button {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    z-index: 1;
-}
-
-#search-button .search-icon {
-    font-size: 18px;
-    color: #00a550; /* Set the icon color */
-}
-
-.login-register {
-    background-color: #00154A;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.login-register .login-icon {
-    margin-right: 8px;
-    font-size: 18px;
-}
-
-.login-register:hover {
-    background-color: white;
-    color: blue;
-}
-
-
-.main-class .tutorImage{
-	
-	  width: 100%;
-	  align-items: center;
-	  height: 235px;
-	
-}
-
-.the-left{
-   
-    margin-top: 10px;
-    margin-left: 7%;
-}
-
-.right-side{
-    width: 60%;
-    background-color: #e7eeff;
-   /*box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Creates the illusion of elevation */
-    border-radius: 8px;
-    margin-left:5%;
-    margin-top: 19px;
-    }
-
-/* End NavBar*/
-
-/* Responsive styles for smartphones */
-
-@media (max-width: 768px) {
-    .profile-row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .profile-picture {
-        width: 80px;
-        height: 90px;
-    }
-
-    .profile-info {
-        padding-left: 0;
-        margin-left: 0;
-    }
-
-  /*  .book-tutor-button {
-        width: auto;
-        font-size: 14px;
-    }*/
-
-    #profile_qualification {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    #profile_subjects {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .additional-info-row {
-        flex-direction: column;
-        
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-container {
-        width: 95%;
-        padding: 10px;
-        margin: 10px auto;
-    }
-
-    .profile-picture {
-        width: 70px;
-        height: 80px;
-    }
-
-    .profile-info h2 {
-        font-size: 1.2em;
-    }
-
-    .profile-info p {
-        font-size: 14px;
-    }
-
-   /* .book-tutor-button {
-        font-size: 12px;
-        padding: 8px 16px;
-        width: auto;
-    }*/
-
-    .about-tutor-title, .qualifications-title, .subjects-title, .reviews-title {
-        width: auto;
-        height: auto;
-        font-size: 1em;
-    }
-
-    #profile_subjects {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-.scroll-container {
-    overflow-x: hidden; /* Allow horizontal scrolling */
-    white-space: nowrap; /* Prevent text from wrapping */
-    border: none; /* Optional: for visual separation */
-    padding: 10px; /* Optional: for spacing */
-    width: 905px; /* Set a fixed width */
-    position: relative; /* Positioning context for arrows */
-    height: 300px; /* Fixed height for consistency */
-}
-
-.scroll-item {
-    display: inline-block; /* Allows items to be placed in a row */
-    margin-right: 20px; /* Space between items */
-    background-color: white; /* Light background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 10px; /* Padding around the item */
-    text-align: center;
-}
-
-#isthombe {
-    width: 180px; /* Set a fixed width for the image */
-    height: 180px; /* Set a fixed height for the image */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    padding: 5px; /* Padding around the image */
-    background-color: #fff; /* Optional: Background for the image */
-    border-radius: 10px; /* Rounded corners for the image */
-}
-
-.arrow {
-    cursor: pointer; /* Pointer cursor on hover */
-    background-color: #e7eeff; 
-    border: none; /* Remove default border */
-    padding: 5px; /* Padding for the arrow */
-    margin: 0 5px; /* Space between arrows and scroll container */
-    font-size: 35px; /* Adjust the size as needed */
-}
-
-.arrow-container {
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 300px; /* Set height */
-    border: none; /* No border */
-    background-color: #e7eeff; /* Light background color */
-    
-}
-
-.reviews {
-    display: inline-flex; /* Ensures icons are inline */
-    margin-top: 10px; /* Margin for reviews */
-    background-color: #fff;
-}
-
-.review-icon {
-    margin-right: 5px; /* Space between icons */
-    color: gold; /* Change color as needed */
-    font-size: 20px; /* Adjust size */
-}
-
-.subjects-title {
-            width: 150px;
-            height: 100px;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #021631;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex; /* Use flexbox */
-            flex-direction: column; /* Stack items vertically */
-        }
-        .school_head, .header1 {
-            display: flex; /* Use flexbox for icon and title */
-            align-items: center; /* Center items vertically */
-            font-size: 14px;
-            margin-right: 18px;
-           
-        }
-        .bongi {
-            color: #00a550; /* Color for the tutoring title */
-            font-size: 14px; /* Adjust font size as needed */
-            margin-top: 8px; /* Space between title and grades */
-            margin-left: 10px;
-        }
-        .tutoring-container1 {
-            color: #00a550; /* Color for the tutoring title */
-            font-size: 13px; /* Adjust font size as needed */
-            margin-top: 8px; /* Space between title and grades */
-            margin-left: 10px;
-        }
-
-
-        .grades, .modules {
-            color: #001549; /* Color for grades */
-            font-size: 10px; /* Adjust font size as needed */
-            margin-left: 20px;
-            background-color: #e7eeff; /* Light background color */
-            /*border-radius: 8px; /* Rounded corners */
-            /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-
-    </style>
+          <link href="profile.css" rel="stylesheet"> 
+    <title>ApexAcademicCentre</title>
 </head>
 <body>
-
+ 
     <nav class="navbar">
-    <img src="apex.png" alt="Logo" class="logo" id="logo_image">
-    <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="#">Online Tutoring</a>
-                <a href="#">In-person Tutor</a>
-                <a href="#">Matric Re-Write</a>
-                <a href="#">Special Need Tutoring</a>
-                <a href="#">University/ College Tutors</a>
-                <a href="#">Homeschooling Support</a>
-                <a href="#">Person Edexcel Tutoring</a>
-            </div>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
-            <div class="dropdown-content">
-                <a href="#">Cambridge</a>
-                <a href="#">A Level Tutoring</a>
-                <a href="#">Expert Cambridge Tutors</a>
-                <a href="#">IGCSE Level Tutoring</a>
-                <a href="#">Cambridge Exam Timetable</a>
-            </div>
-        </li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">Contact Us</a></li>
-    </ul>
-
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search...">
-        <button id="search-button">
-            <i class="fas fa-search search-icon"></i>
+        <img src="apex.png" alt="Logo" class="logo" id="logo_image">
+        <button class="navbar-toggle" id="navbar-toggle">
+            <i class="fas fa-bars"></i> <!-- Hamburger icon -->
         </button>
-    </div>
-    <button class="login-register" id="tutorBtn" onclick="openOpenopen()">
-        
-         Book A Tutor
-    </button>
-</div>
-</nav> 
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Online Tutoring</a>
+                    <a href="#">In-person Tutor</a>
+                    <a href="#">Matric Re-Write</a>
+                    <a href="#">Special Need Tutoring</a>
+                    <a href="#">University/ College Tutors</a>
+                    <a href="#">Homeschooling Support</a>
+                    <a href="#">Person Edexcel Tutoring</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Cambridge</a>
+                    <a href="#">A Level Tutoring</a>
+                    <a href="#">Expert Cambridge Tutors</a>
+                    <a href="#">IGCSE Level Tutoring</a>
+                    <a href="#">Cambridge Exam Timetable</a>
+                </div>
+            </li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Contact Us</a></li>
+
+
+            <li>
+                <button class="login-register">
+                   Book Tutor
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+
 
 
 
@@ -801,6 +116,7 @@ body, ul, li {
             String surname = tutor.getSurname();
             String modules = tutor.getModule();
             String fullName = name + " " + surname;
+            String grades = tutor.getGrades();
 
             
   %>
@@ -811,34 +127,35 @@ body, ul, li {
 
             <div class="the-left">
                 <!-- Tutor's Picture and Info Div -->
-                <div class="profile-picture-container">
-                    <img src="data:image/png;base64,<%= tutorImage %>" alt="Tutor's Picture">
-                    <div class="name"><%= name %> <%= surname %></div>
-                    <div class="age"><%= age %> years old</div>
-                </div>
-                <!-- Tutor's information div -->
-
-                <div class="details">
-                    <p>
-                        <span class="static-text">Country :</span> <span class="detail-info"><%= country %></span><br>
-                        <span class="static-text">Province :</span> <span class="detail-info"><%= province %></span><br>
-                        <span class="static-text">Area :</span> <span class="detail-info"><%= area %></span><br>
-                        <span class="static-text">Curriculum :</span> <span class="detail-info"><%= curriculum%></span><br>
-                        <span class="static-text">Tutoring Option :</span> <span class="detail-info"><%= tutoring %></span>
-                    </p>
-                    <div class="ratings">
-                        <i class="fas fa-star" id="rate-icon"></i>
-                        <span id="rate"> <%= ratings %> Ratings</span>
+                <div class="upper-line">
+                    <div class="profile-picture-container">
+                        <img src="data:image/png;base64,<%= tutorImage %>" alt="Tutor's Picture">
+                        <div class="name"><%= name %> <%= surname %></div>
+                        <div class="age"><%= age %> years old</div>
                     </div>
-                    <div class="feedback-item">
-                        <i class="fas fa-check-circle" id="back-icon"></i>
-                        <span class="back">Background Checked</span>
+                    <div class="details">
+                        <p>
+                            <span class="static-text">Country :</span> <span class="detail-info"><%= country %></span><br>
+                            <span class="static-text">Province :</span> <span class="detail-info"><%= province %></span><br>
+                            <span class="static-text">Area :</span> <span class="detail-info"><%= area %></span><br>
+                            <span class="static-text">Curriculum :</span> <span class="detail-info"><%= curriculum %></span><br>
+                            <span class="static-text">Tutoring Option :</span> <span class="detail-info"><%= tutoring %></span>
+                        </p>
+                        <div class="ratings">
+                            <i class="fas fa-star" id="rate-icon"></i>
+                            <span id="rate"> <%= ratings %> Ratings</span>
+                        </div>
+                        <div class="feedback-item">
+                            <i class="fas fa-check-circle" id="back-icon"></i>
+                            <span class="back">Background Checked</span>
+                        </div>
                     </div>
                 </div>
+                
 
                 <!--Book Tutor Button-->
                 <div class="profile-action">
-                    <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullName %>' , '<%= email %>')">Book <%= name %></button>
+                    <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullName %>' , '<%= email %>', '<%= curriculum %>', '<%= grades %> ', '<%= subjects %> ')">Book <%= name %></button>
                 </div>
 
 
@@ -1018,7 +335,7 @@ body, ul, li {
                     Your Personal Tutor in the Comfort of Your Own Home
                     <!--Book Tutor Button and find tutor-->
                     <div class="button-action">
-                        <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullName %>' , '<%= email %>')">Book <%= name %></button>
+                        <button id="book-tutor-button" class="book-tutor-button" onclick="openOpenopen('<%= fullName %>' , '<%= email %>', '<%= curriculum %>', '<%= grades %> ', '<%= subjects %>')">Book <%= name %></button>
                         <button id="find-tutor-button" class="find-tutor-button">Find Me A Tutor</button>
                     </div>
                 </div>
@@ -1174,7 +491,7 @@ body, ul, li {
                     </div>
                     <div class="btns_wrap">
                         <div class="common_btns form_1_btns">
-                            <button type="button" class="btn_next">Next <span class="icon">→</span></button>
+                            <button type="button" class="btn_next">Next</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1186,7 +503,7 @@ body, ul, li {
                 </form>
             </div>
             <div class="form_2" style="display: none;">
-                <h2><span class="directTutor"></span></h2>
+               <h2><span class="directTutor"></span></h2>
                 <br>
                 <div id="form-container-2" class="form-container hidden">
                     <form id="additional-form">
@@ -1239,30 +556,13 @@ body, ul, li {
                                     <label for="grade">Grade <span class="required">*</span></label><br>
                                     <select id="grade" name="grade" required>
                                         <option value="" disabled selected>Select grade</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+
                                     </select>
                                     <div id="grade-error" class="error"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="syllabus">Syllabus <span class="required">*</span></label>
                                     <select id="syllabus" name="syllabus" required>
-                                        <option value="" disabled selected>Select syllabus</option>
-                                        <option value="IEB">IEB</option>
-                                        <option value="CAPs">CAPS</option>
-                                        <option value="PEX">Pearson Edexcel</option>
-                                        <option value="CAMBRIDGE">Cambridge</option>
-                                        <option value="IB">IB</option>
                                         <option value="Other" id="other-option">Other</option>
                                     </select>
                                     <div id="syllabus-error" class="error"></div>
@@ -1319,8 +619,8 @@ body, ul, li {
 
                         <div class="btns_wrap">
                             <div class="common_btns form_2_btns">
-                                <button type="button" class="btn_back">Back <span class="icon">←</span></button>
-                                <button type="button" class="btn_next">Next <span class="icon">→</span></button>
+                                <button type="button" class="btn_back">Back</button>
+                                <button type="button" class="btn_next">Next</button>
                             </div>
                         </div>
                     </form>
@@ -1336,15 +636,7 @@ body, ul, li {
                         <div class="form-group">
                             <label for="subject">Select Subject <span class="required">*</span></label><br>
                             <input type="text" id="subject" name="subject" class="input" required readonly onclick="toggleSubjectOptions()">
-                            <div id="subjectContainer" style="display: none;">
-                                <label><input type="checkbox" value="English" onchange="updateSubjects()"> English</label>
-                                <label><input type="checkbox" value="isiZulu" onchange="updateSubjects()"> isiZulu</label>
-                                <label><input type="checkbox" value="Mathematics" onchange="updateSubjects()"> Mathematics</label>
-                                <label><input type="checkbox" value="Science" onchange="updateSubjects()"> Science</label>
-                                <label><input type="checkbox" value="History" onchange="updateSubjects()"> History</label>
-                                <label><input type="checkbox" value="Geography" onchange="updateSubjects()"> Geography</label>
-                                
-                            </div>
+                            <div id="subjectContainer" style="display: none;"></div>
                             <div id="subject-error" class="error"></div>
                         </div>
                     </div>
@@ -1381,7 +673,7 @@ body, ul, li {
 
                 <div class="btns_wrap">
                     <div class="common_btns form_3_btns">
-                        <button type="button" class="btn_back">Back <span class="icon">←</span></button>
+                        <button type="button" class="btn_back">Back</button>
                         <button type="button" class="btn_next">Next</button>
                     </div>
                 </div>
@@ -1395,7 +687,7 @@ body, ul, li {
                     <form id="formFour">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="message">Message <span class="required">*</span></label><br><br>
+                            <label for="message">Message <span class="required"></span></label><br><br>
                             <textarea id="message" name="message" placeholder="Is there anything else you would like to add?...." class="textarea" required></textarea>
                             <div id="message-error" class="error"></div>
                         </div>
@@ -1427,7 +719,7 @@ body, ul, li {
 
                 <div class="btns_wrap">
                     <div class="common_btns form_4_btns">
-                        <button type="button" class="btn_back">Back <span class="icon">←</span></button>
+                        <button type="button" class="btn_back">Back</button>
                         <button type="button" class="btn_next">Next</button>
                     </div>
                 </div>
@@ -1529,8 +821,8 @@ body, ul, li {
                 
                 <div class="btns_wrap">
                     <div class="common_btns form_5_btns">
-                        <button type="button" class="btn_back">Back <span class="icon">←</span></button>
-                        <button type="button" class="btn_next" id="consult_btn">Speak to consultant</button>
+                        <button type="button" class="btn_back">Back</button>
+                        <button type="button" class="btn_next" id="consult_btn" ">Speak to consultant</button>
                     </div>
                 </div>
             </div>
@@ -1552,11 +844,38 @@ body, ul, li {
 <!--</div>-->
     
 
+    
 
-<!--BOOKING FORM--> 
+
+     <!--BOOKING FORM--> 
     
     
     <script>
+
+const navbarToggle = document.getElementById('navbar-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+// Toggle menu on button click
+navbarToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('show');
+});
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('li a').forEach(link => {
+    link.addEventListener('click', function() {
+        navLinks.classList.remove('show'); // Close the menu
+    });
+});
+
+// Optional: Close menu when clicking outside of it
+window.addEventListener('click', function(event) {
+    if (!navbarToggle.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('show'); // Close the menu
+    }
+});
+
+
+
     const scrollContainer = document.getElementById('scrollContainer');
 
 document.getElementById('scrollLeft').addEventListener('click', () => {
@@ -1566,6 +885,8 @@ document.getElementById('scrollLeft').addEventListener('click', () => {
 document.getElementById('scrollRight').addEventListener('click', () => {
     scrollContainer.scrollLeft += 210; // Adjust as necessary
 });
+
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1807,41 +1128,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
             consult.addEventListener("click", function() {
 
-                    alert("Consultant will get in touch  with you shortly. Thank you.");
+                alert("Consultant will get in touch  with you shortly. Thank you.");
 
-                    const allData = combineFormData();
+                const allData = combineFormData();
 
-                    const dataToSend = {
-                        ...allData
-                    };
+                const dataToSend = {
+                    ...allData
+                };
 
-                            fetch('/other-booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(dataToSend)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                
-                                    setTimeout(function(){
-                                            window.location.href = '/';
-                                        } , 2000);
+                        fetch('/other-booking', { // Replace with your actual endpoint URL
+                                method: 'POST',
+                                headers: { 
+                                    'Content-Type': 'application/json' 
+                                },
+                                body: JSON.stringify(dataToSend)
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                            
+                                setTimeout(function(){
+                                        window.location.href = '/';
+                                    } , 2000);
 
-                                        
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
+                                    
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Optionally handle error response
+                            });
 
-                    setTimeout(function(){
-                        window.location.href = '/';
-                    } , 2000);
+                setTimeout(function(){
+                    window.location.href = '/';
+                } , 2000);
 
+            
+});
 
-                    });
 
             function validateForm4() {
 
@@ -1864,35 +1186,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
                     const basicPackage= document.getElementById('basicPackage');
-                    basicPackage.textContent = 'R1100 p/m'; // or button.innerHTML = 'Submit';
+                    basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
 
                     const premiumPackage = document.getElementById('premiumPackage');
-                    premiumPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+                    premiumPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
 
                     const advancedPackage = document.getElementById('advancedPackage');
-                    advancedPackage.textContent = 'R3250 p/m'; // or button.innerHTML = 'Submit';
+                    advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
 
                     const elitePackage =  document.getElementById('elitePackage');
-                    elitePackage.textContent = 'R4350 p/m'; // or button.innerHTML = 'Submit';
+                    elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
 
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
                         const basicPackage= document.getElementById('basicPackage');
-                        basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+                        basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
 
                         const premiumPackage = document.getElementById('premiumPackage');
-                        premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+                        premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
 
                         const advancedPackage = document.getElementById('advancedPackage');
-                        advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+                        advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
 
                         const elitePackage =  document.getElementById('elitePackage');
-                        elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+                        elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
 
                     }
                     else{
@@ -1902,36 +1224,36 @@ document.addEventListener('DOMContentLoaded', function() {
                             onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
                             const basicPackage= document.getElementById('basicPackage');
-                            basicPackage.textContent = 'R1550 p/m'; // or button.innerHTML = 'Submit';
+                            basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
 
                             const premiumPackage = document.getElementById('premiumPackage');
-                            premiumPackage.textContent = 'R3100 p/m'; // or button.innerHTML = 'Submit';
+                            premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
 
                             const advancedPackage = document.getElementById('advancedPackage');
-                            advancedPackage.textContent = 'R4650 p/m'; // or button.innerHTML = 'Submit';
+                            advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
 
                             const elitePackage =  document.getElementById('elitePackage');
-                            elitePackage.textContent = 'R6200 p/m'; // or button.innerHTML = 'Submit';
+                            elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
 
                                 }
 
                             else{
-                                if(ghg === "In Person" && syllabusId === "CAMBRIDGE" || syllabusId === "IB" || syllabusId === "PEX" ){
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        
                                         const onceOffPackage = document.getElementById('onceOffPackage');
                                         onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
 
                                         const basicPackage= document.getElementById('basicPackage');
-                                        basicPackage.textContent = 'R2150 p/m'; // or button.innerHTML = 'Submit';
+                                        basicPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
 
                                         const premiumPackage = document.getElementById('premiumPackage');
-                                        premiumPackage.textContent = 'R4300 p/m'; // or button.innerHTML = 'Submit';
+                                        premiumPackage.textContent = 'R4300'; // or button.innerHTML = 'Submit';
 
                                         const advancedPackage = document.getElementById('advancedPackage');
-                                        advancedPackage.textContent = 'R6350 p/m'; // or button.innerHTML = 'Submit';
+                                        advancedPackage.textContent = 'R6350'; // or button.innerHTML = 'Submit';
 
                                         const elitePackage =  document.getElementById('elitePackage');
-                                        elitePackage.textContent = 'R8500 p/m'; // or button.innerHTML = 'Submit';
+                                        elitePackage.textContent = 'R8500'; // or button.innerHTML = 'Submit';
 
                                     }
                                    
@@ -1953,22 +1275,24 @@ document.addEventListener('DOMContentLoaded', function() {
                        onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
 
                        const basicPackage= document.getElementById('twoTofivePackage');
-                       basicPackage.textContent = 'R450 pp'; // or button.innerHTML = 'Submit';
+                       basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
                        const premiumPackage = document.getElementById('sixTo10Package');
-                       premiumPackage.textContent = 'R350 pp'; // or button.innerHTML = 'Submit';
+                       premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
 
                         }
                         else{
 
+                          
+                       
                         const onceOffPackage = document.getElementById('oneOnone');
                         onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
                         const basicPackage= document.getElementById('twoTofivePackage');
-                        basicPackage.textContent = 'R300 pp'; // or button.innerHTML = 'Submit';
+                        basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
                         const premiumPackage = document.getElementById('sixTo10Package');
-                        premiumPackage.textContent = 'R200 pp'; // or button.innerHTML = 'Submit';
+                        premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
 
                         }
                   
@@ -2176,7 +1500,174 @@ document.addEventListener('DOMContentLoaded', function() {
 		/*var modal = document.getElementById("modal");
         var btn = document.getElementById("open-popup");*/
 
-		function openOpenopen(name,email){
+		function openOpenopen(name, email, subjects, grades , subsub) {
+
+            if(subjects === undefined){
+
+                const syll = "CAP,IEB,Cambridge,IB,Pearson Edexel";
+                const syllabusArray = syll.split(',').map(item => item.trim());
+
+                const syllabi = syllabusArray.map(item => {
+                        return { value: item, text: item };
+                    });
+
+                const syllabusSelect = document.getElementById('syllabus');
+
+                while (syllabusSelect.options.length > 1) {
+
+                    const secondOption = syllabusSelect.options[1];
+
+                    // Check if the second option exists and remove it
+                    if (secondOption) {
+                        syllabusSelect.remove(1); // Remove the second option
+                    } else {
+                        break; // Exit the loop if no second option exists
+                    }
+                }
+
+
+                syllabi.forEach(syllabus => {
+                    const option = document.createElement('option');
+                    option.value = syllabus.value;
+                    option.textContent = syllabus.text;
+
+                    syllabusSelect.appendChild(option);
+
+                });
+                            
+            }
+           else{
+            const syllabusArray = subjects.split(',').map(item => item.trim());
+
+            const syllabi = syllabusArray.map(item => {
+                    return { value: item, text: item };
+                });
+
+                const syllabusSelect = document.getElementById('syllabus');
+
+                while (syllabusSelect.options.length > 1) {
+
+                    const secondOption = syllabusSelect.options[1];
+
+                    // Check if the second option exists and remove it
+                    if (secondOption) {
+                        syllabusSelect.remove(1); // Remove the second option
+                    } else {
+                        break; // Exit the loop if no second option exists
+                    }
+                }
+
+
+                syllabi.forEach(syllabus => {
+                    const option = document.createElement('option');
+                    option.value = syllabus.value;
+                    option.textContent = syllabus.text;
+
+                    syllabusSelect.appendChild(option);
+
+                });
+
+           }
+
+           /*Grades Start Here*/
+
+           if(grades === undefined){
+
+                    const grd = "GRD:1,GRD:2,GRD:3,GRD:4,GRD:5,GRD:6,GRD:7,GRD:8,GRD:9,GRD:10,GRD:11,GRD:12";
+                    const gradesArray = grd.split(',').map(item => item.trim());
+
+                    const gr = gradesArray.map(item => {
+                            return { value: item, text: item };
+                        });
+
+                    const gradesSelect = document.getElementById('grade');
+
+                    while (gradesSelect.options.length > 0) {
+
+                        const secondOption = gradesSelect.options[0];
+
+                        // Check if the second option exists and remove it
+                        if (secondOption) {
+                            gradesSelect.remove(0); // Remove the second option
+                        } else {
+                            break; // Exit the loop if no second option exists
+                        }
+                    }
+
+
+                    gr.forEach(gradee => {
+                        const option = document.createElement('option');
+                        option.value = gradee.value;
+                        option.textContent = gradee.text;
+
+                        gradesSelect.appendChild(option);
+
+                    });
+                                
+                    }
+                        else{
+                            const gradesArray = grades.split(',').map(item => item.trim());
+
+                            const gr = gradesArray.map(item => {
+                                                    return { value: item, text: item };
+                                                });
+
+                                                const gradesSelect = document.getElementById('grade');
+
+                        while (gradesSelect.options.length > 0) {
+
+                            const secondOption = gradesSelect.options[0];
+
+                            // Check if the second option exists and remove it
+                            if (secondOption) {
+                                gradesSelect.remove(0); // Remove the second option
+                            } else {
+                                break; // Exit the loop if no second option exists
+                            }
+                        }
+
+
+                            gr.forEach(gradee => {
+                                const option = document.createElement('option');
+                                option.value = gradee.value;
+                                option.textContent = gradee.text;
+
+                                gradesSelect.appendChild(option);
+
+                            });
+
+                            }
+
+           /*Grades End Here*/
+
+           /*Subects Start Here*/
+
+           const defaultSubjects = "Mathematics, Mathematics Literacy, Biology, Chemistry,Physics,Life Sciences,Physical Sciences,Combined Science,Natural Science,Social Sciences,Technonology";
+    const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
+    
+    const subjectContainer = document.getElementById('subjectContainer');
+    
+    // Clear existing checkboxes
+    subjectContainer.innerHTML = '';
+
+    subjectsArray.forEach(subject => {
+        const label = document.createElement('label');
+        label.style.display = 'inline'; // Make each label take up a new line
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = subject;
+        checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+
+        // Set the label text
+        label.textContent = subject; // Set the text for the label
+
+        // Append checkbox to label and label to container
+        label.prepend(checkbox); // Add checkbox before the label text
+        subjectContainer.appendChild(label);
+    });
+
+           /*Subects End Here*/
 
             const button = document.getElementById('tutorBtn');
             const directTutors = document.querySelectorAll('.directTutor');
@@ -2188,6 +1679,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     tutor.textContent = 'Book a Personalized Tutor Across South Africa!';
                 });
                 otherOption.style.display = 'block'; // Show the "Other" option
+
+                
+
             } else {
                 directTutors.forEach(tutor => {
                     tutor.textContent = 'Book ' + name + ' for Tutoring!';
@@ -2272,12 +1766,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Get the ID of the button that was clicked
         const buttonId = event.target.id;
 
+        var tutoring = document.querySelector('input[name="tutor-style"]:checked');
+        var ghg = tutoring ? tutoring.value : 'None';
+        var syllabusId = document.getElementById('syllabus').value;
+  
         // You can use a switch statement or if-else logic to handle specific buttons
         switch (buttonId) {
             case 'onceOffPackage':
-                alert('Once Off Package selected');
+            alert('Once Off Package selected');
+            var amountTopay;
 
-                var amountTopay = '14.15';
+            if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '300'; // amount to pay;
+               }
+               else{
+
+               if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       
+                       amountTopay = '400'; // amount to pay;
+
+               }
+
+               else{
+
+                if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                        amountTopay = '400'; // amount to pay;
+
+                        }
+
+                        else{
+
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       
+                                    amountTopay = '550'; // amount to pay;
+                
+                                }
+
+                        }
+
+               }
+
+            }
 
                 const allData = combineFormData();
 
@@ -2311,7 +1841,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'basicPackage':
                 alert('Basic Package selected');
 
-                var amountTopay = '53.79';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '1100'; // amount to pay;
+                  }
+                  else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                      amountTopay = '1550'; // amount to pay;
+
+                  }
+
+                  else{
+
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                        amountTopay = '1550'; // or button.innerHTML = 'Submit';
+
+                        }
+                        else{
+
+                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                            amountTopay = '2150'; // amount to pay;
+                  }
+
+                            
+                        }
+                  }
+
+                }
 
                 const all = combineFormData();
 
@@ -2345,7 +1903,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'premiumPackage':
                 alert('Premium Package selected');
 
-                var amountTopay = '104.75';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                amountTopay = '2150'; // amount to pay;
+                }
+                else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '3100'; // amount to pay;
+                }
+
+                else{
+
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                            amountTopay = '3100'; // amount to pay;
+
+                            }
+                            else{
+
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '4300'; // amount to pay;
+                }
+
+             }
+
+                }
+
+                }
 
                 const dataall = combineFormData();
 
@@ -2379,7 +1964,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'advancedPackage':
                 alert('Advanced Package selected');
 
-                var amountTopay = '150.04';
+                var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '3250'; // amount to pay;
+                  }
+                  else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                     amountTopay = '4650'; // amount to pay;
+                  }
+
+                  else{
+                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                   amountTopay = '4650'; // amount to pay;
+                  }
+                  else{
+
+                    if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       amountTopay = '6350'; // amount to pay;
+                      }
+
+                  }
+
+                  }
+
+                  }
 
                 const data = combineFormData();
 
@@ -2414,7 +2023,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'elitePackage':
                alert('Elite Package selected');
 
-               var amountTopay = '189.68';
+               var amountTopay;
+
+                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                amountTopay = '4350'; // amount to pay;
+                }
+                else{
+                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                    }
+                    else{
+
+                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                        amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                            }
+                            else{
+
+                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                      amountTopay = '8500'; // or button.innerHTML = 'Submit';
+
+                   }
+
+                            }
+                    }
+
+                }
 
                 const gatherData = combineFormData();
 
@@ -2461,7 +2096,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 function openPopup(email) {
-
     fetch('/view-profile', {
         method: 'POST',
         headers: { 
@@ -2500,6 +2134,8 @@ function updateSubjects() {
     
     document.getElementById('subject').value = selectedSubjects.join(', ');
 }
+
+
 
 
 
