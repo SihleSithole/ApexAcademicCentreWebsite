@@ -9,9 +9,9 @@
     <script src="https://www.paypal.com/sdk/js?client-id=Af6Npuwe7XWQae1F2Z-d3Cpv182tycmxPbGhFSiP0PWtVQt8HEAEyZNm9GR9noxyVZHk9OelUYONUj8E"></script> <!-- Replace with your PayPal client ID -->
     <style>
 
-.center-button {
-    text-align: center;
-}
+        .center-button {
+            text-align: center;
+        }
 
     </style>
    
@@ -25,7 +25,7 @@
 
     <section class="main-section">
         <section class="main-class">
-            <p id="tutorPar" align="center">These are the Highest Quality Online Tutors. Process payment with Apex - the Best in Tutoring</p>
+            <p id="tutorPar" align="center">These are the Highest Quality Online and In-person Tutors. Get your personalized tutor with Apex Academic Centre</p>
             <br>
             <br>
         </section>

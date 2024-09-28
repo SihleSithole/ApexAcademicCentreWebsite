@@ -706,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-                                       /*#########################BOOKINGS#######################*/
+         /*#########################BOOKINGS#######################*/
 
  document.addEventListener('DOMContentLoaded', function() {
   const otherOption = document.getElementById('other-option');
@@ -1100,10 +1100,9 @@ document.addEventListener('DOMContentLoaded', function() {
                        premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
 
                         }
+
                         else{
 
-                          
-                       
                         const onceOffPackage = document.getElementById('oneOnone');
                         onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
@@ -1218,8 +1217,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(validateForm4()) {
 
                     var syllabus = document.getElementById("syllabus").value;
+                    var helpingFor = document.querySelector('input[name="help-with"]:checked');
+				    var forWho = helpingFor ? helpingFor.value : 'None';
 
-                    if(syllabus === "Other"){
+                    if(syllabus === "Other" && forWho !== "university"){
 
                     modal_wrapper.classList.add("active");
                     shadow.addEventListener("click", function() {
@@ -1578,6 +1579,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const advancedButton = document.getElementById('advancedPackage');
     const eliteButton = document.getElementById('elitePackage');
 
+    const oneOnone = document.getElementById('oneOnone');
+    const twoTofivePackage = document.getElementById('twoTofivePackage');
+    const sixTo10Package = document.getElementById('sixTo10Package');
+
     // Function to handle button clicks
     function handleButtonClick(event) {
         // Get the ID of the button that was clicked
@@ -1897,6 +1902,140 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     } , 2000);
 
                 break;
+
+                case 'oneOnone':
+                   alert("One on One Student Package Selected.");
+
+                   var amountTopay;
+
+                   if(ghg === "In Person"){
+
+                   amountTopay = '650'; 
+                   }
+                   else{
+                    amountTopay = '450';
+                   }
+
+                   const gatheredData = combineFormData();
+
+                    const dataSendout = {
+                        ...gatheredData, // Spread the existing data
+                        amount: amountTopay // Add the buttonId
+                    };
+
+                    fetch('/booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(dataSendout)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    
+                                    // Optionally show success message or handle response
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                                setTimeout(function(){
+                            window.location.href = '/payment';
+                        } , 2000);
+
+                break;
+
+                case 'twoTofivePackage':
+                   alert("Two - Five Student Package Selected.");
+
+                   var amountTopay;
+
+                    if(ghg === "In Person"){
+
+                    amountTopay = '450'; 
+                    }
+                    else{
+                    amountTopay = '300';
+                    }
+
+                    const gatheredDat = combineFormData();
+
+                    const ataSendout = {
+                        ...gatheredDat, // Spread the existing data
+                        amount: amountTopay // Add the buttonId
+                    };
+
+                    fetch('/booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(ataSendout)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    
+                                    // Optionally show success message or handle response
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                                setTimeout(function(){
+                            window.location.href = '/payment';
+                        } , 2000);
+
+
+                    
+
+                break;
+
+                case 'sixTo10Package':
+                   alert("Six - Ten Student Package Selected.");
+
+                   var amountTopay;
+
+                    if(ghg === "In Person"){
+
+                    amountTopay = '350';
+                    }
+                    else{
+                    amountTopay = '200';
+                    }
+
+                    const outData = combineFormData();
+
+                    const sendOut = {
+                        ...outData, // Spread the existing data
+                        amount: amountTopay // Add the buttonId
+                    };
+
+                    fetch('/booking', { // Replace with your actual endpoint URL
+                                    method: 'POST',
+                                    headers: { 
+                                        'Content-Type': 'application/json' 
+                                    },
+                                    body: JSON.stringify(sendOut)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    
+                                    // Optionally show success message or handle response
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // Optionally handle error response
+                                });
+
+                                setTimeout(function(){
+                            window.location.href = '/payment';
+                        } , 2000);
+
+
+
+                break;
             default:
                 console.log('Unknown button clicked');
         }
@@ -1908,6 +2047,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     premiumButton.addEventListener('click', handleButtonClick);
     advancedButton.addEventListener('click', handleButtonClick);
     eliteButton.addEventListener('click', handleButtonClick);
+    oneOnone.addEventListener('click' , handleButtonClick);
+    twoTofivePackage.addEventListener('click' , handleButtonClick);
+    sixTo10Package.addEventListener('click' , handleButtonClick);
 
 });
 
@@ -1952,55 +2094,6 @@ function updateSubjects() {
     document.getElementById('subject').value = selectedSubjects.join(', ');
 }
 
-
-
-
-
-
-
-function speakConsult(){
-
-    alert("WE ARE HERE");
-
-
-    modal_wrapper.classList.add("active");
-    shadow.addEventListener("click", function() {
-    modal_wrapper.classList.remove("active");
-     });
-
-                    const allData = combineFormData();
-
-                    const dataToSend = {
-                        ...allData
-                    };
-
-                            fetch('/other-booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(dataToSend)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                
-                                    setTimeout(function(){
-                                            window.location.href = '/';
-                                        } , 2000);
-
-                                        
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
-
-                    setTimeout(function(){
-                        window.location.href = '/';
-                    } , 2000);
-
-
-}
 
 
 </script>
