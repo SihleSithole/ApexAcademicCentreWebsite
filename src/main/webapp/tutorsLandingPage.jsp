@@ -1,3 +1,4 @@
+
 <%@ page import="java.sql.*, javax.sql.*, java.util.ArrayList, java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.demo.model.Tutor" %>
@@ -11,6 +12,128 @@
     
     <link href="assets/css/pavillion.css" rel="stylesheet">
     <link href="bookBook.css" rel="stylesheet">
+    <style>
+        .checkbox-container{
+            display: inline-flex;
+        }
+
+        .opt{
+            display: none;
+        }
+
+        #fProvince{
+            display: none; /* Hide province by default */
+        }
+
+        .popup {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                width: 500px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .popup-content:hover {
+                    transform: scale(1.05); /* Slightly enlarge on hover */
+                }
+
+            .close {
+                cursor: pointer;
+                float: right;
+                font-size: 20px;
+            }
+            .hide {
+                display: none;
+            }
+
+            #pack-details {
+                text-align: left; /* Aligns text to the left */
+                /* Optional: You can also add padding or margin for better appearance */
+                padding: 10px; 
+            }
+
+            .package-details:hover{
+                transform: scale(1.05); /* Slightly enlarge on hover */
+            }
+
+            #popular{
+                color: #001549;
+                font-weight: bold;
+            }
+
+            @media screen and (max-width: 768px) {
+
+                
+        .popup {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                width: 300px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .popup-content:hover {
+                    transform: scale(1.05); /* Slightly enlarge on hover */
+                    cursor: pointer;
+                }
+
+            .close {
+                cursor: pointer;
+                float: right;
+                font-size: 20px;
+            }
+            .hide {
+                display: none;
+            }
+
+            #pack-details {
+                text-align: left; /* Aligns text to the left */
+                /* Optional: You can also add padding or margin for better appearance */
+                padding: 10px; 
+            }
+
+            .package-details:hover{
+                transform: scale(1.05); /* Slightly enlarge on hover */
+                cursor: pointer;
+            }
+
+            #popular{
+                color: #001549;
+                font-weight: bold;
+
+            }
+                
+            }
+
+    </style>
 
  </head>
     <body>
@@ -245,23 +368,6 @@
                                     </div>
   
                                     <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="province">Province <span class="required">*</span></label>
-                                            <select id="province" name="province" class="input" required>
-                                                <option value="" disabled selected>Select your province</option>
-                                                <option value="limpopo">Limpopo</option>
-                                                <option value="gauteng">Gauteng</option>
-                                                <option value="free-state">Free State</option>
-                                                <option value="north-west">North West</option>
-                                                <option value="northern-cape">Northern Cape</option>
-                                                <option value="eastern-cape">Eastern Cape</option>
-                                                <option value="kwa-zulu-natal">Kwa Zulu Natal</option>
-                                                <option value="mpumalanga">Mpumalanga</option>
-                                                <option value="western-cape">Western Cape</option>
-                                                <option value="Internationally">Internationally</option>
-                                            </select>
-                                            <div id="province-error" class="error"></div>
-                                        </div>
 
                                         <div class="form-group">
                                             <label for="country">Country <span class="required">*</span></label>
@@ -280,6 +386,22 @@
                                             <div id="country-error" class="error"></div>
                                         </div>
 
+                                        <div class="form-group" id="fProvince">
+                                            <label for="province">Province <span class="required">*</span></label>
+                                            <select id="province" name="province" class="input" required>
+                                                <option value="" disabled selected>Select your province</option>
+                                                <option value="limpopo">Limpopo</option>
+                                                <option value="gauteng">Gauteng</option>
+                                                <option value="free-state">Free State</option>
+                                                <option value="north-west">North West</option>
+                                                <option value="northern-cape">Northern Cape</option>
+                                                <option value="eastern-cape">Eastern Cape</option>
+                                                <option value="kwa-zulu-natal">Kwa Zulu Natal</option>
+                                                <option value="mpumalanga">Mpumalanga</option>
+                                                <option value="western-cape">Western Cape</option>
+                                            </select>
+                                            <div id="province-error" class="error"></div>
+                                        </div>
 
                                     </div>
 
@@ -318,7 +440,7 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="tutoring-for">Who is the tutoring for? <span class="required">*</span></label>
-                                            <select id="tutoring-for" name="tutoring-for" required>
+                                            <select id="tutoring-for" name="tutoring-for" required onchange="toggleReadOnly()">
                                                 <option value="" disabled selected>Select one</option>
                                                 <option value="my-son">My son</option>
                                                 <option value="my-daughter">My daughter</option>
@@ -344,7 +466,7 @@
                                             </div>
                                         </div>
                                     </div>
-    
+                                
                                     <div id="student-info" class="hidden">
                                         <div class="form-row">
                                             <div class="form-group">
@@ -358,13 +480,12 @@
                                                 <div id="student-last-name-error" class="error"></div>
                                             </div>
                                         </div>
-                                   
+                                    
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <label for="grade">Grade <span class="required">*</span></label><br>
                                                 <select id="grade" name="grade" required>
                                                     <option value="" disabled selected>Select grade</option>
-
                                                 </select>
                                                 <div id="grade-error" class="error"></div>
                                             </div>
@@ -376,12 +497,9 @@
                                                 <div id="syllabus-error" class="error"></div>
                                             </div>
                                         </div>
-                                    
                                     </div>
-
-
+                                
                                     <div id="year-selection-container" class="hidden">
-
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <label for="stud-name">Student Name <span class="required">*</span></label><br>
@@ -394,37 +512,49 @@
                                                 <div id="stud-last-error" class="error"></div>
                                             </div>
                                         </div>
-
+                                
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <label>Select year <span class="required">*</span></label>
-                                                <div class="radio-group">
+                                                <div class="radio-group">   
                                                     <label>
-                                                        <input type="radio" id="year" name="year" value="1st" required>
+                                                        <input type="radio" id="year" name="year" value="1st" required onchange="checkPostgrad()">
                                                         1st
                                                     </label>
                                                     <label>
-                                                        <input type="radio" id="year" name="year" value="2nd" required>
+                                                        <input type="radio" id="year" name="year" value="2nd" required onchange="checkPostgrad()">
                                                         2nd
                                                     </label>
                                                     <label>
-                                                        <input type="radio" id="year" name="year" value="3rd" required>
+                                                        <input type="radio" id="year" name="year" value="3rd" required onchange="checkPostgrad()">
                                                         3rd
                                                     </label>
                                                     <label>
-                                                        <input type="radio" id="year" name="year" value="4th" required>
+                                                        <input type="radio" id="year" name="year" value="4th" required onchange="checkPostgrad()">
                                                         4th
                                                     </label>
                                                     <label>
-                                                        <input type="radio" id="year" name="year" value="postgrad" required>
+                                                        <input type="radio" id="year-postgrad" name="year" value="postgrad" required onchange="checkPostgrad()">
                                                         Postgrad
                                                     </label>
                                                     <div id="year-error" class="error"></div>
                                                 </div>
+                                                <div id="postgrad-options" class="opt">
+                                                    <label>
+                                                        <input type="radio" name="postgrad-type" value="Honors" required>
+                                                        Honors
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="postgrad-type" value="Masters" required>
+                                                        Masters
+                                                    </label>
+                                                    <div id="postType-error" class="error"></div> 
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div> 
-    
+                                
                                     <div class="btns_wrap">
                                         <div class="common_btns form_2_btns">
                                             <button type="button" class="btn_back">Back</button>
@@ -450,31 +580,44 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tutoring Option<span class="required">*</span></label>
-                                    <div class="radio-group">
+                                    <label for="tutor-style">Tutoring Option<span class="required">*</span></label>
+                                    <select id="tutor-style" name="tutor-style" required onchange="handleTutorStyleChange()">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Online">Online</option>
+                                        <option value="In Person" id="in-peerson">In-Person</option>
+                                    </select>
+                                    <div id="tutor-style-error" class="error"></div>
+                                </div>
+
+                                <div class="row" id="internetCheck">
+                                    <div class="checkbox-container">
                                         <br>
-                                        <label>
-                                            <input type="radio" id="tutor-style" name="tutor-style" value="Online" onclick="onlineInfo()" required>
-                                            Online
+                                        <input type="checkbox" id="internet-check" name="internet-check" />
+                                        <label for="internet-check">
+                                            You have fast, stable internet (2Mbps or higher). You must have a computer, laptop, tablet, or phone with a Webcam, microphone and speakers.
                                         </label>
-                                        <label>
-                                            <input type="radio" id="tutor-style" name="tutor-style" value="In Person" onclick="inPersonInfo()" required>
-                                            In-Person
-                                        </label>
-                                        <div id="tutor-style-error" class="error"></div>
+                                        <div id="internet-error" class="error"></div>
                                     </div>
                                 </div>
 
                                 <div class="form-row" id="in-person-teaching">
-                                    <div class="form-group">
-                                        <label for="address">Address<span class="required">*</span></label><br>
-                                        <input type="text" id="address-inperson" name="address-inperson" placeholder="" class="input" required>
-                                        <div id="inperson-error" class="error"></div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="suburb-inperson">Suburb<span class="required">*</span></label><br>
-                                        <input type="text" id="suburb-inperson" name="suburb-inperson" placeholder="" class="input" required>
+                                        <input type="text" id="suburb-inperson" name="suburb-inperson" placeholder="Which suburb do you stay" class="input" required>
                                         <div id="suburb-inperson-error" class="error"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">When would you like to start<span class="required">*</span></label><br>
+                                        <select id="address-inperson" name="address-inperson" class="input" required>
+                                            <option value="" disabled selected>Select an option</option>
+                                            <option value="ASAP">ASAP</option>
+                                            <option value="This Week">This Week</option>
+                                            <option value="This Month">This Month</option>
+                                            <option value="Not right now">Not right now</option>
+                                        </select>
+                                        <div id="inperson-error" class="error"></div>
                                     </div>
                                 </div>
 
@@ -501,17 +644,17 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" id="tutor-option-group">
                                     <label>Would you like a second tutor option?<span class="required">*</span></label>
                                     <div class="radio-group">
                                         <br>
                                         <label>
-                                            <input type="radio" id="tutor-option" name="tutor-option" value="Yes" required>
+                                            <input type="radio" name="tutor-option" value="Yes" required>
                                             Yes
                                         </label>
                                         <label>
-                                            <input type="radio" id="tutor-option" name="tutor-option" value="No" required>
-                                           No
+                                            <input type="radio" name="tutor-option" value="No" required >
+                                            No
                                         </label>
                                         <div id="tutor-option-error" class="error"></div>
                                     </div>
@@ -545,7 +688,7 @@
                                     <h3>Once Off Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">1 Session per month<br>(once off)</div>
-                                        <div class="package-details">Package Details</div>
+                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="onceOffPackage"></button>
                                       
@@ -555,7 +698,7 @@
                                     <h3>Basic Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                                 
                                         <button type="submit" class="package-btn" id="basicPackage"></button>
                                      
@@ -564,8 +707,8 @@
                                 <div class="custom-div">
                                     <h3>Premium Package</h3>
                                     <div class="content">
-                                        <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Popular</div>
+                                        <div class="session-per-month">8 Sessions per month<br>(twice a week)</div>
+                                        <div class="package-details" onclick="openPackageDetails()" id="popular">Popular</div>
                                  
                                         <button type="submit" class="package-btn" id="premiumPackage"></button>
                                     
@@ -574,8 +717,8 @@
                                 <div class="custom-div">
                                     <h3>Advanced Package</h3>
                                     <div class="content">
-                                        <div class="session-per-month">12 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                        <div class="session-per-month">12 Sessions per month<br>(three times a week)</div>
+                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                                     
                                         <button type="submit" class="package-btn" id="advancedPackage"></button>
                                       
@@ -584,8 +727,8 @@
                                 <div class="custom-div">
                                     <h3>Elite Package</h3>
                                     <div class="content">
-                                        <div class="session-per-month">16 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                        <div class="session-per-month">16 Sessions per month<br>(four times a week)</div>
+                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                                         
                                         <button type="submit" class="package-btn" id="elitePackage"></button>
                                     
@@ -597,8 +740,8 @@
                                 <div class="custom-div">
                                     <h3>One on One</h3>
                                     <div class="content">
-                                        <div class="session-per-month">1 Session per month<br>(once off)</div>
-                                        <div class="package-details">Package Details</div>
+                                        
+                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="oneOnone"></button>
                                       
@@ -607,8 +750,8 @@
                                 <div class="custom-div">
                                     <h3>2 to 5 students</h3>
                                     <div class="content">
-                                        <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                        
+                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                                 
                                         <button type="submit" class="package-btn" id="twoTofivePackage"></button>
                                         
@@ -617,8 +760,8 @@
                                 <div class="custom-div">
                                     <h3>6 to 10 students</h3>
                                     <div class="content">
-                                        <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details">Package Details</div>
+                                      
+                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="sixTo10Package"></button>
                                     
@@ -630,7 +773,7 @@
                             <div class="btns_wrap">
                                 <div class="common_btns form_5_btns">
                                     <button type="button" class="btn_back">Back</button>
-                                    <button type="button" class="btn_next" id="consult_btn" ">Speak to consultant</button>
+                                    <button type="button" class="btn_next" id="consult_btn">Speak to consultant</button>
                                 </div>
                             </div>
                         </div>
@@ -638,6 +781,17 @@
                         <!--form 5-->
 
                     </div>
+
+
+                    <div id="popup" class="popup hide">
+                        <div class="popup-content">
+                            <span class="close" onclick="closePopup()">&times;</span>
+                            <h2>Package Details</h2>
+                            <div id="pack-details"></div>
+                            <!-- Add more details as needed -->
+                        </div>
+                    </div>
+
 
                     <!--END OF FORMS-->
                     <div class="modal_wrapper">
@@ -650,9 +804,6 @@
                 </div>
             </div>
         <!--</div>-->
-                
-      
-
    <!--BOOKING FORM--> 
 
 
@@ -707,6 +858,82 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
          /*#########################BOOKINGS#######################*/
+
+         function openPackageDetails(){
+
+  var pack_details = document.getElementById('pack-details');
+  var syllabusId = document.getElementById('syllabus').value;
+  var ghg = document.getElementById('tutor-style').value.trim(); 
+
+  if (ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
+  pack_details.innerHTML = `
+      •Each session is 60 minutes
+      <ul>
+          <li>•One-on-one live sessions</li>
+          <li>•We offer a 10% sibling discount</li>
+          <li>•All prices are in South African currency</li>
+          <li>•Each can cover only one subject (basic)</li>
+          <li>•It can cover 2 subjects (premium)</li>
+          <li>•It can cover 2 subjects and above (advanced and elite)</li>
+      </ul>`;
+   }
+
+   else{
+
+      if (ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
+          pack_details.innerHTML = `
+      •Each session is 60 minutes
+      <ul>
+          <li>•One-on-one in-person tutoring at your home</li>
+          <li>•We offer a 10% sibling discount</li>
+          <li>•All prices are in South African currency</li>
+          <li>•Each can cover only one subject (basic)</li>
+          <li>•It can cover 2 subjects (premium)</li>
+          <li>•It can cover 2 subjects and above (advanced and elite)</li>
+      </ul>`;
+            
+      }
+
+   }
+
+  document.getElementById('popup').classList.remove('hide');
+  }
+
+function closePopup() {
+  document.getElementById('popup').classList.add('hide');
+}
+
+function openPackageDetailsUniversity(){
+
+    var pack_details = document.getElementById('pack-details');
+    var ghg = document.getElementById('tutor-style').value.trim(); 
+
+     if (ghg === "In Person"){
+
+        pack_details.innerHTML = `
+      •Each session is 60 minutes
+      <ul>
+          <li>•Campus Tutoring or home tutoring (in-person)</li>
+          <li>•All prices are in South African currency</li>
+      </ul>`;
+
+     }
+     else{
+
+        
+        pack_details.innerHTML = `
+      •Live sessions
+      <ul>
+          <li>•These prices are per session</li>
+          <li>•All prices are in South African currency</li>
+      </ul>`;
+
+     }
+
+     document.getElementById('popup').classList.remove('hide');
+
+
+}
 
  document.addEventListener('DOMContentLoaded', function() {
   const otherOption = document.getElementById('other-option');
@@ -801,14 +1028,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Validate dropdown
-                if (!province) {
+                if(country === "South Africa"){
+                     document.getElementById("in-peerson").style.display = 'block';
+                    if (!province) {
                     document.getElementById('province-error').textContent = "Please select a province.";
                     isValid = false;
                 } else {
                     document.getElementById('province-error').textContent = "";
                 }
 
-                return isValid;
+                }
+               else{
+
+                   document.getElementById("in-peerson").style.display = 'none';
+               }
+
+
+                return isValid;                
+
+
+
             }
 
             function validateForm2() {
@@ -865,6 +1104,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('year-error').textContent = "";
                     }
 
+                    const postgradRadio = document.getElementById('year-postgrad');
+                    var postType = document.querySelector('input[name="postgrad-type"]:checked');
+
+                    if (postgradRadio.checked) {
+                    
+                         if(!postType){
+
+                            document.getElementById('postType-error').textContent = "Please select qualification.";
+                            isValid = false;
+
+                         }
+
+                         else{
+
+                            document.getElementById('postType-error').textContent = "";
+
+                         }
+                       
+
+                    }
+                
+
+
                     if (!studname) {
                     document.getElementById('stud-name-error').textContent = "Student name required.";
                     isValid = false;
@@ -902,13 +1164,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function validateForm3() {
 
-                 var isValid = true;
+            var isValid = true;
             
             var subject = document.getElementById('subject').value.trim();
-            var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-            var ghg = tutoring ? tutoring.value : 'None';
+            var ghg = document.getElementById('tutor-style').value.trim(); 
             var addressTeaching = document.getElementById('address-inperson').value.trim(); 
             var suburbTeaching = document.getElementById('suburb-inperson').value.trim(); 
+            var internet_check = document.getElementById('internet-check').value.trim();
 
             if (!subject) {
                     document.getElementById('subject-error').textContent = "Please select subject(s) type.";
@@ -917,7 +1179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('subject-error').textContent = "";
                 }
 
-            if (!tutoring) {
+            if (!ghg) {
                     document.getElementById('tutor-style-error').textContent = "Please select a tutoring type.";
                     isValid = false;
                 } else {
@@ -927,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(ghg === "In Person"){
 					
 					if (!addressTeaching) {
-                    document.getElementById('inperson-error').textContent = "please fill in your address.";
+                    document.getElementById('inperson-error').textContent = "please specify.";
                     isValid = false;
                 } else {
                     document.getElementById('inperson-error').textContent = "";
@@ -940,6 +1202,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('suburb-inperson-error').textContent = "";
                 }
               }
+             
                 
 				return isValid;
 
@@ -986,8 +1249,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function validateForm4() {
 
-                var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-                var ghg = tutoring ? tutoring.value : 'None';
+                var ghg = document.getElementById('tutor-style').value.trim(); 
                 var helpingFor = document.querySelector('input[name="help-with"]:checked');
 				var forWho = helpingFor ? helpingFor.value : 'None';
                 var syllabusId = document.getElementById('syllabus').value;
@@ -1019,6 +1281,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 else{
                     if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                       
                        
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
@@ -1088,7 +1351,11 @@ document.addEventListener('DOMContentLoaded', function() {
                      var universityPackages = document.getElementById("universityPackages");
                      universityPackages.style.display = 'flex';
 
-                     if(ghg === "In Person"){
+
+                        var yearFor = document.querySelector('input[name="year"]:checked');
+                        var yearIn = yearFor ? yearFor.value : 'None';
+
+                       if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
                        
                        const onceOffPackage = document.getElementById('oneOnone');
                        onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
@@ -1103,16 +1370,94 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         else{
 
-                        const onceOffPackage = document.getElementById('oneOnone');
-                        onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+                            if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
 
-                        const basicPackage= document.getElementById('twoTofivePackage');
-                        basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
-                        const premiumPackage = document.getElementById('sixTo10Package');
-                        premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
 
                         }
+
+                        else{
+
+                            if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R750'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                        }
+
+                        else{
+
+                            if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+
+                        }
+
+
+                        else{
+
+                            if(ghg === "In Person" && yearIn === 'postgrad'){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R850'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R750'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                        }
+                        else{
+
+                            if(ghg === "Online" && yearIn === 'postgrad'){
+                       
+                       const onceOffPackage = document.getElementById('oneOnone');
+                       onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
+
+                       const basicPackage= document.getElementById('twoTofivePackage');
+                       basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                       const premiumPackage = document.getElementById('sixTo10Package');
+                       premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
+
+                        }
+                        }
+
+    
+
+                        }
+
+
+                        }
+
+
+                        }
+
+
+                        }
+
+                
                   
 
                 }
@@ -1305,17 +1650,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
            }
 
+           function handleTutorStyleChange() {
+        const selectedValue = document.getElementById('tutor-style').value;
+        if (selectedValue === 'Online') {
+            onlineInfo();
+        } else if (selectedValue === 'In Person') {
+            inPersonInfo();
+        }
+    }
+
         function inPersonInfo(){
 
+            document.getElementById("internetCheck").style.display = 'none';
           document.getElementById("in-person-teaching").style.display = 'block';
            
          }
 
+         document.getElementById("internetCheck").style.display = 'none';
+
          function onlineInfo(){
 
                 document.getElementById("in-person-teaching").style.display = 'none';
-                
-                }
+                document.getElementById("internetCheck").style.display = 'block';
+
+            }
 
 		/*var modal = document.getElementById("modal");
         var btn = document.getElementById("open-popup");*/
@@ -1486,7 +1844,7 @@ document.addEventListener('DOMContentLoaded', function() {
         label.prepend(checkbox); // Add checkbox before the label text
         subjectContainer.appendChild(label);
     });
-
+  
            /*Subects End Here*/
 
             const button = document.getElementById('tutorBtn');
@@ -1500,13 +1858,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 otherOption.style.display = 'block'; // Show the "Other" option
 
+                const tutorOptionGroup = document.getElementById('tutor-option-group');
+                tutorOptionGroup.style.display = 'none'; // Hide the radio buttons
+
+                
+                const tutorOptionInputs = document.getElementsByName('tutor-option');
+                for (let input of tutorOptionInputs) {
+                    if (input.value === 'No') {
+                        input.checked = true; 
+                    }
+                }
+                
+
             } else {
                 directTutors.forEach(tutor => {
                     tutor.textContent = 'Book ' + name + ' for Tutoring!';
                 });
                 otherOption.style.display = 'none'; // Hide the "Other" option
                 document.querySelector("#syllabus option:first-child").textContent = "";
-            }
+
+                const tutorOptionGroup = document.getElementById('tutor-option-group');
+                    tutorOptionGroup.style.display = 'block'; // Hide the radio buttons
+
+
+
+                 }
 
 			document.getElementById("modal").style.display = 'block';
 			var span = document.getElementById("close-popup");
@@ -1588,8 +1964,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Get the ID of the button that was clicked
         const buttonId = event.target.id;
 
-        var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-        var ghg = tutoring ? tutoring.value : 'None';
+        var ghg = document.getElementById('tutor-style').value.trim(); 
         var syllabusId = document.getElementById('syllabus').value;
   
         // You can use a switch statement or if-else logic to handle specific buttons
@@ -1904,16 +2279,354 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 break;
 
                 case 'oneOnone':
-                   alert("One on One Student Package Selected.");
+
+                let value;
+
+                          do {
+                                value = prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                                
+                                // If user cancels, exit the loop
+                                if (value === null) {
+                                    console.log("Prompt was canceled.");
+                                    break; // Exit the loop
+                                }
+
+                            } while (isNaN(value) || value <= 0);
+
+                  //const value = prompt("How many sessions do you want?");
+
+                  var yearFor = document.querySelector('input[name="year"]:checked');
+                  var yearIn = yearFor ? yearFor.value : 'None';
 
                    var amountTopay;
+                   var calcAmount;
+                   var discountAmount;
+                   var amountAfterDiscount;
+                   var trackDiscount = 0;
 
-                   if(ghg === "In Person"){
+                   if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
 
-                   amountTopay = '650'; 
+                         calcAmount = 650 * value;
+
+                              if(value >= 8 && value <= 11){
+
+                                 discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                                 amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                 amountAfterDiscount = amountAfterDiscount.toString();
+                                 amountTopay = amountAfterDiscount;
+                                 trackDiscount = 1;
+                                
+                              }
+                              else{
+                                if(value >= 12 && value <= 19){
+
+                                    discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                    amountAfterDiscount = amountAfterDiscount.toString();
+                                    amountTopay = amountAfterDiscount;
+                                    trackDiscount = 2;
+                                  
+                                    }
+                                    else{
+                                        if(value >= 20 ){
+
+                                        discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                        amountAfterDiscount = amountAfterDiscount.toString();
+                                        amountTopay = amountAfterDiscount;
+                                        trackDiscount =3;
+                                        }
+                                        else{
+
+                                            if(value <= 7){
+
+                                            calcAmount = calcAmount.toString();
+                                            amountTopay = calcAmount;
+
+                                            }
+                                        }
+                                    }
+                              }
+
                    }
                    else{
-                    amountTopay = '450';
+
+                    if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+
+                         calcAmount = 450 * value;
+
+                         if(value >= 8 && value <= 11){
+
+                            discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                            amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                            amountAfterDiscount = amountAfterDiscount.toString();
+                            amountTopay = amountAfterDiscount;
+                            trackDiscount = 1;
+                            
+                            }
+                            else{
+                            if(value >= 12 && value <= 19){
+
+                            discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                            amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                            amountAfterDiscount = amountAfterDiscount.toString();
+                            amountTopay = amountAfterDiscount;
+                            trackDiscount = 2;
+                            
+                            }
+                            else{
+                                if(value >= 20 ){
+
+                                discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                amountAfterDiscount = amountAfterDiscount.toString();
+                                amountTopay = amountAfterDiscount;
+                                trackDiscount = 3;
+                                
+                                }
+                                else{
+
+                                    if(value <= 7){
+
+                                    calcAmount = calcAmount.toString();
+                                    amountTopay = calcAmount;
+
+                                    }
+                                }
+                            }
+                            }
+
+                    }
+                    else{
+                        if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+                            calcAmount = 550 * value;
+                            
+                              if(value >= 8 && value <= 11){
+
+                                 discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                                 amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                 amountAfterDiscount = amountAfterDiscount.toString();
+                                 amountTopay = amountAfterDiscount;
+                                 trackDiscount = 1;
+                                 
+                              }
+                              else{
+                                if(value >= 12 && value <= 19){
+
+                                    discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                    amountAfterDiscount = amountAfterDiscount.toString();
+                                    amountTopay = amountAfterDiscount;
+                                    trackDiscount = 2;
+                                    
+                                    }
+                                    else{
+                                        if(value >= 20 ){
+
+                                        discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                        amountAfterDiscount = amountAfterDiscount.toString();
+                                        amountTopay = amountAfterDiscount;
+                                        trackDiscount = 3;
+                                        
+                                        }
+                                        else{
+
+                                            if(value <= 7){
+
+                                            calcAmount = calcAmount.toString();
+                                            amountTopay = calcAmount;
+
+                                            }
+                                        }
+                                    }
+                              }
+                           
+
+                            }
+                            else{
+                                if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+                                calcAmount = 750 * value;
+
+                              if(value >= 8 && value <= 11){
+
+                                 discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                                 amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                 amountAfterDiscount = amountAfterDiscount.toString();
+                                 amountTopay = amountAfterDiscount;
+                                 trackDiscount = 1;
+                                
+                              }
+                              else{
+                                if(value >= 12 && value <= 19){
+
+                                    discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                    amountAfterDiscount = amountAfterDiscount.toString();
+                                    amountTopay = amountAfterDiscount;
+                                    trackDiscount = 2;
+                                   
+                                    }
+                                    else{
+                                        if(value >= 20 ){
+
+                                        discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                        amountAfterDiscount = amountAfterDiscount.toString();
+                                        amountTopay = amountAfterDiscount;
+                                        trackDiscount = 3;
+                                        
+                                        }
+                                        else{
+
+                                            if(value <= 7){
+
+                                            calcAmount = calcAmount.toString();
+                                            amountTopay = calcAmount;
+
+                                            }
+                                        }
+                                    }
+                              }
+
+                                }
+
+                                else{
+                                    if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                                        calcAmount = 850 * value;
+
+                              if(value >= 8 && value <= 11){
+
+                                 discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                                 amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                 amountAfterDiscount = amountAfterDiscount.toString();
+                                 amountTopay = amountAfterDiscount;
+                                 trackDiscount = 1;
+                                 
+                              }
+                              else{
+                                if(value >= 12 && value <= 19){
+
+                                    discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                    amountAfterDiscount = amountAfterDiscount.toString();
+                                    amountTopay = amountAfterDiscount;
+                                    trackDiscount = 2;
+                                    
+                                    }
+                                    else{
+                                        if(value >= 20 ){
+
+                                        discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                        amountAfterDiscount = amountAfterDiscount.toString();
+                                        amountTopay = amountAfterDiscount;
+                                        trackDiscount = 3;
+                                        
+                                        }
+                                        else{
+
+                                            if(value <= 7){
+
+                                            calcAmount = calcAmount.toString();
+                                            amountTopay = calcAmount;
+
+                                            }
+                                        }
+                                    }
+                              }
+
+                                        }
+                                        else{
+                                            if(ghg === "Online" && yearIn === 'postgrad'){
+
+                                            calcAmount = 650 * value;
+
+                              if(value >= 8 && value <= 11){
+
+                                 discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                                 amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                 amountAfterDiscount = amountAfterDiscount.toString();
+                                 amountTopay = amountAfterDiscount;
+                                 trackDiscount = 1;
+                                
+                              }
+                              else{
+                                if(value >= 12 && value <= 19){
+
+                                    discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                    amountAfterDiscount = amountAfterDiscount.toString();
+                                    amountTopay = amountAfterDiscount;
+                                    trackDiscount = 2;
+                                    
+                                    }
+                                    else{
+                                        if(value >= 20 ){
+
+                                        discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                        amountAfterDiscount = amountAfterDiscount.toString();
+                                        amountTopay = amountAfterDiscount;
+                                        trackDiscount = 3;
+                                        
+
+                                        }
+                                        else{
+
+                                            if(value <= 7){
+
+                                            calcAmount = calcAmount.toString();
+                                            amountTopay = calcAmount;
+
+                                            }
+                                        }
+                                    }
+                              }
+
+                                          }
+
+                                        }
+
+                                }
+
+                            }
+
+                    }
+
+                   }
+
+                   if (value !== null) {
+                                  
+                    if(trackDiscount === 1){
+
+                       alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                   }
+                   else{
+                    if(trackDiscount === 2){
+
+                        alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                            }
+                            else{
+
+                                if(trackDiscount === 3){
+
+                                    alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                                }
+
+                                else{
+
+                                    alert("Amount to pay R"+amountTopay);
+                                }
+
+                            }
+
                    }
 
                    const gatheredData = combineFormData();
@@ -1944,21 +2657,359 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             window.location.href = '/payment';
                         } , 2000);
 
+                    }
+
                 break;
 
                 case 'twoTofivePackage':
-                   alert("Two - Five Student Package Selected.");
+               
 
-                   var amountTopay;
+                let valuee;
 
-                    if(ghg === "In Person"){
+                    do {
+                        valuee= prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                        
+                        // If user cancels, exit the loop
+                        if (valuee === null) {
+                            console.log("Prompt was canceled.");
+                            break; // Exit the loop
+                        }
 
-                    amountTopay = '450'; 
-                    }
-                    else{
-                    amountTopay = '300';
-                    }
+                    } while (isNaN(valuee) || valuee <= 0);
 
+var yearFor = document.querySelector('input[name="year"]:checked');
+var yearIn = yearFor ? yearFor.value : 'None';
+
+ var amountTopay;
+ var calcAmount;
+ var discountAmount;
+ var amountAfterDiscount;
+ var trackDiscount = 0;
+
+ if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+
+       calcAmount = 450 * valuee;
+
+            if(valuee >= 8 && valuee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valuee >= 12 && valuee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                
+                  }
+                  else{
+                      if(valuee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount =3;
+                      }
+                      else{
+
+                          if(valuee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+ }
+ else{
+
+  if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+
+       calcAmount = 300 * valuee;
+
+       if(valuee >= 8 && valuee <= 11){
+
+          discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+          amountAfterDiscount = amountAfterDiscount.toString();
+          amountTopay = amountAfterDiscount;
+          trackDiscount = 1;
+          
+          }
+          else{
+          if(valuee >= 12 && valuee <= 19){
+
+          discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+          amountAfterDiscount = amountAfterDiscount.toString();
+          amountTopay = amountAfterDiscount;
+          trackDiscount = 2;
+          
+          }
+          else{
+              if(valuee >= 20 ){
+
+              discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+              amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+              amountAfterDiscount = amountAfterDiscount.toString();
+              amountTopay = amountAfterDiscount;
+              trackDiscount = 3;
+              
+              }
+              else{
+
+                  if(valuee <= 7){
+
+                  calcAmount = calcAmount.toString();
+                  amountTopay = calcAmount;
+
+                  }
+              }
+          }
+          }
+
+  }
+  else{
+      if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+          calcAmount = 400 * valuee;
+          
+            if(valuee >= 8 && valuee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+               
+            }
+            else{
+              if(valuee >= 12 && valuee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valuee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valuee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+         
+
+          }
+          else{
+              if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+              calcAmount = 550 * valuee;
+
+            if(valuee >= 8 && valuee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valuee >= 12 && valuee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                 
+                  }
+                  else{
+                      if(valuee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valuee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+              }
+
+              else{
+                  if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                      calcAmount = 750 * valuee;
+
+            if(valuee >= 8 && valuee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+               
+            }
+            else{
+              if(valuee >= 12 && valuee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valuee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valuee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+                      }
+                      else{
+                          if(ghg === "Online" && yearIn === 'postgrad'){
+
+                          calcAmount = 450 * valuee;
+
+            if(valuee >= 8 && valuee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valuee >= 12 && valuee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valuee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+
+                      }
+                      else{
+
+                          if(valuee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+                        }
+
+                      }
+
+              }
+
+          }
+
+  }
+
+ }
+
+ if (valuee !== null) {
+
+ if(trackDiscount === 1){
+
+     alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+ }
+ else{
+  if(trackDiscount === 2){
+
+      alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+          }
+          else{
+
+              if(trackDiscount === 3){
+
+                  alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+              }
+
+              else{
+
+                  alert("Amount to pay R"+amountTopay);
+              }
+
+          }
+
+ }
                     const gatheredDat = combineFormData();
 
                     const ataSendout = {
@@ -1988,22 +3039,360 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         } , 2000);
 
 
-                    
+ }
 
                 break;
 
                 case 'sixTo10Package':
-                   alert("Six - Ten Student Package Selected.");
 
-                   var amountTopay;
+                let valueee;
 
-                    if(ghg === "In Person"){
+                    do {
+                        valueee = prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                        
+                        // If user cancels, exit the loop
+                        if (valueee === null) {
+                            console.log("Prompt was canceled.");
+                            break; // Exit the loop
+                        }
 
-                    amountTopay = '350';
-                    }
-                    else{
-                    amountTopay = '200';
-                    }
+                    } while (isNaN(valueee) || valueee <= 0);
+               
+                
+
+
+var yearFor = document.querySelector('input[name="year"]:checked');
+var yearIn = yearFor ? yearFor.value : 'None';
+
+ var amountTopay;
+ var calcAmount;
+ var discountAmount;
+ var amountAfterDiscount;
+ var trackDiscount = 0;
+
+ if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+
+       calcAmount = 350 * valueee;
+
+            if(valueee >= 8 && valueee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valueee >= 12 && valueee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                
+                  }
+                  else{
+                      if(valueee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount =3;
+                      }
+                      else{
+
+                          if(valueee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+ }
+ else{
+
+  if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+
+       calcAmount = 200 * valueee;
+
+       if(valueee >= 8 && valueee <= 11){
+
+          discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+          amountAfterDiscount = amountAfterDiscount.toString();
+          amountTopay = amountAfterDiscount;
+          trackDiscount = 1;
+          
+          }
+          else{
+          if(valueee >= 12 && valueee <= 19){
+
+          discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+          amountAfterDiscount = amountAfterDiscount.toString();
+          amountTopay = amountAfterDiscount;
+          trackDiscount = 2;
+          
+          }
+          else{
+              if(valueee >= 20 ){
+
+              discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+              amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+              amountAfterDiscount = amountAfterDiscount.toString();
+              amountTopay = amountAfterDiscount;
+              trackDiscount = 3;
+              
+              }
+              else{
+
+                  if(valueee <= 7){
+
+                  calcAmount = calcAmount.toString();
+                  amountTopay = calcAmount;
+
+                  }
+              }
+          }
+          }
+
+  }
+  else{
+      if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+          calcAmount = 300 * valueee;
+          
+            if(valueee >= 8 && valueee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+               
+            }
+            else{
+              if(valueee >= 12 && valueee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valueee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valueee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+         
+
+          }
+          else{
+              if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+              calcAmount = 450 * valueee;
+
+            if(valueee >= 8 && valueee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valueee >= 12 && valueee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                 
+                  }
+                  else{
+                      if(valueee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valueee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+              }
+
+              else{
+                  if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                      calcAmount = 550 * valueee;
+
+            if(valueee >= 8 && valueee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+               
+            }
+            else{
+              if(valueee >= 12 && valueee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valueee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+                      }
+                      else{
+
+                          if(valueee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+                      }
+                      else{
+                          if(ghg === "Online" && yearIn === 'postgrad'){
+
+                          calcAmount = 350 * valueee;
+
+            if(valueee >= 8 && valueee <= 11){
+
+               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+               amountAfterDiscount = amountAfterDiscount.toString();
+               amountTopay = amountAfterDiscount;
+               trackDiscount = 1;
+              
+            }
+            else{
+              if(valueee >= 12 && valueee <= 19){
+
+                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                  amountAfterDiscount = amountAfterDiscount.toString();
+                  amountTopay = amountAfterDiscount;
+                  trackDiscount = 2;
+                  
+                  }
+                  else{
+                      if(valueee >= 20 ){
+
+                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                      amountAfterDiscount = amountAfterDiscount.toString();
+                      amountTopay = amountAfterDiscount;
+                      trackDiscount = 3;
+                      
+
+                      }
+                      else{
+
+                          if(valueee <= 7){
+
+                          calcAmount = calcAmount.toString();
+                          amountTopay = calcAmount;
+
+                          }
+                      }
+                  }
+            }
+
+                        }
+
+                      }
+
+              }
+
+          }
+
+  }
+
+ }
+ if (valueee !== null) {
+
+ if(trackDiscount === 1){
+
+     alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+ }
+ else{
+  if(trackDiscount === 2){
+
+      alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+          }
+          else{
+
+              if(trackDiscount === 3){
+
+                  alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+              }
+
+              else{
+
+                  alert("Amount to pay R"+amountTopay);
+              }
+
+          }
+
+ }
 
                     const outData = combineFormData();
 
@@ -2033,7 +3422,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             window.location.href = '/payment';
                         } , 2000);
 
-
+                    }
 
                 break;
             default:
@@ -2094,7 +3483,80 @@ function updateSubjects() {
     document.getElementById('subject').value = selectedSubjects.join(', ');
 }
 
+function toggleReadOnly() {
+        const tutoringFor = document.getElementById('tutoring-for').value;
+        const studentName = document.getElementById('student-name');
+        const studentLastName = document.getElementById('student-last-name');
+        const studName = document.getElementById('stud-name');
+        const studLast = document.getElementById('stud-last');
 
+        var firstName = document.getElementById('first-name').value.trim();
+        var lastName = document.getElementById('last-name').value.trim();
+
+   
+
+        const isMe = tutoringFor === 'me';
+
+        studentName.readOnly = isMe;
+        studentLastName.readOnly = isMe;
+        studName.readOnly = isMe;
+        studLast.readOnly = isMe;
+
+        // Optionally clear values if readOnly is set
+        if (isMe) {
+            studentName.value = firstName;
+            studentName.placeholder = firstName;
+            studentLastName.value = lastName;
+            studentLastName.placeholder = lastName;
+            studName.value = firstName;
+            studName.placeholder = firstName;
+            studLast.value = lastName;
+            studLast.placeholder = lastName;
+        }
+         else{
+
+            studentName.value = '';
+            studentName.placeholder = '';
+            studentLastName.value = '';
+            studentLastName.placeholder = '';
+            studName.value = '';
+            studName.placeholder = '';
+            studLast.value = '';
+            studLast.placeholder = '';
+
+            }
+
+
+    }
+
+
+    function checkPostgrad() {
+        const postgradRadio = document.getElementById('year-postgrad');
+        const postgradOptions = document.getElementById('postgrad-options');
+
+        if (postgradRadio.checked) {
+            postgradOptions.classList.remove('opt');
+        } else {
+            postgradOptions.classList.add('opt');
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const countrySelect = document.getElementById("country");
+        const provinceGroup = document.getElementById("fProvince");
+
+        function toggleProvince() {
+            if (countrySelect.value === "South Africa") {
+                provinceGroup.style.display = "block";
+            } else {
+                provinceGroup.style.display = "none";
+                document.getElementById("province").value = "";
+            }
+        }
+
+        toggleProvince();
+        countrySelect.addEventListener("change", toggleProvince);
+    });
 
 </script>
 <script src="js/jquery-3.3.1.slim.min.js"></script>
