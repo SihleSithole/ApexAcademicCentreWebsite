@@ -24,6 +24,128 @@
           <link rel="stylesheet" href="assets/styles.css">
           <link href="bookBook.css" rel="stylesheet">
           <link href="prop.css" rel="stylesheet"> 
+          <style>
+              .checkbox-container{
+            display: inline-flex;
+        }
+
+        .opt{
+            display: none;
+        }
+
+        #fProvince{
+            display: none; /* Hide province by default */
+        }
+
+        .popup {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                width: 500px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .popup-content:hover {
+                    transform: scale(1.05); /* Slightly enlarge on hover */
+                }
+
+            .close {
+                cursor: pointer;
+                float: right;
+                font-size: 20px;
+            }
+            .hide {
+                display: none;
+            }
+
+            #pack-details {
+                text-align: left; /* Aligns text to the left */
+                /* Optional: You can also add padding or margin for better appearance */
+                padding: 10px; 
+            }
+
+            .package-details:hover{
+                transform: scale(1.05); /* Slightly enlarge on hover */
+            }
+
+            #popular{
+                color: #001549;
+                font-weight: bold;
+            }
+
+            @media screen and (max-width: 768px) {
+
+                
+        .popup {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                width: 300px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .popup-content:hover {
+                    transform: scale(1.05); /* Slightly enlarge on hover */
+                    cursor: pointer;
+                }
+
+            .close {
+                cursor: pointer;
+                float: right;
+                font-size: 20px;
+            }
+            .hide {
+                display: none;
+            }
+
+            #pack-details {
+                text-align: left; /* Aligns text to the left */
+                /* Optional: You can also add padding or margin for better appearance */
+                padding: 10px; 
+            }
+
+            .package-details:hover{
+                transform: scale(1.05); /* Slightly enlarge on hover */
+                cursor: pointer;
+            }
+
+            #popular{
+                color: #001549;
+                font-weight: bold;
+
+            }
+                
+            }
+
+    </style>
     <title>ApexAcademicCentre</title>
 </head>
 <body>
@@ -432,23 +554,6 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="province">Province <span class="required">*</span></label>
-                                <select id="province" name="province" class="input" required>
-                                    <option value="" disabled selected>Select your province</option>
-                                    <option value="limpopo">Limpopo</option>
-                                    <option value="gauteng">Gauteng</option>
-                                    <option value="free-state">Free State</option>
-                                    <option value="north-west">North West</option>
-                                    <option value="northern-cape">Northern Cape</option>
-                                    <option value="eastern-cape">Eastern Cape</option>
-                                    <option value="kwa-zulu-natal">Kwa Zulu Natal</option>
-                                    <option value="mpumalanga">Mpumalanga</option>
-                                    <option value="western-cape">Western Cape</option>
-                                    <option value="Internationally">Internationally</option>
-                                </select>
-                                <div id="province-error" class="error"></div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="country">Country <span class="required">*</span></label>
@@ -467,6 +572,22 @@
                                 <div id="country-error" class="error"></div>
                             </div>
 
+                            <div class="form-group" id="fProvince">
+                                <label for="province">Province <span class="required">*</span></label>
+                                <select id="province" name="province" class="input" required>
+                                    <option value="" disabled selected>Select your province</option>
+                                    <option value="limpopo">Limpopo</option>
+                                    <option value="gauteng">Gauteng</option>
+                                    <option value="free-state">Free State</option>
+                                    <option value="north-west">North West</option>
+                                    <option value="northern-cape">Northern Cape</option>
+                                    <option value="eastern-cape">Eastern Cape</option>
+                                    <option value="kwa-zulu-natal">Kwa Zulu Natal</option>
+                                    <option value="mpumalanga">Mpumalanga</option>
+                                    <option value="western-cape">Western Cape</option>
+                                </select>
+                                <div id="province-error" class="error"></div>
+                            </div>
 
                         </div>
 
@@ -505,7 +626,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="tutoring-for">Who is the tutoring for? <span class="required">*</span></label>
-                                <select id="tutoring-for" name="tutoring-for" required>
+                                <select id="tutoring-for" name="tutoring-for" required onchange="toggleReadOnly()">
                                     <option value="" disabled selected>Select one</option>
                                     <option value="my-son">My son</option>
                                     <option value="my-daughter">My daughter</option>
@@ -531,7 +652,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div id="student-info" class="hidden">
                             <div class="form-row">
                                 <div class="form-group">
@@ -545,13 +666,12 @@
                                     <div id="student-last-name-error" class="error"></div>
                                 </div>
                             </div>
-                       
+                        
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="grade">Grade <span class="required">*</span></label><br>
                                     <select id="grade" name="grade" required>
                                         <option value="" disabled selected>Select grade</option>
-
                                     </select>
                                     <div id="grade-error" class="error"></div>
                                 </div>
@@ -563,12 +683,9 @@
                                     <div id="syllabus-error" class="error"></div>
                                 </div>
                             </div>
-                        
                         </div>
-
-
+                    
                         <div id="year-selection-container" class="hidden">
-
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="stud-name">Student Name <span class="required">*</span></label><br>
@@ -581,37 +698,49 @@
                                     <div id="stud-last-error" class="error"></div>
                                 </div>
                             </div>
-
+                    
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Select year <span class="required">*</span></label>
-                                    <div class="radio-group">
+                                    <div class="radio-group">   
                                         <label>
-                                            <input type="radio" id="year" name="year" value="1st" required>
+                                            <input type="radio" id="year" name="year" value="1st" required onchange="checkPostgrad()">
                                             1st
                                         </label>
                                         <label>
-                                            <input type="radio" id="year" name="year" value="2nd" required>
+                                            <input type="radio" id="year" name="year" value="2nd" required onchange="checkPostgrad()">
                                             2nd
                                         </label>
                                         <label>
-                                            <input type="radio" id="year" name="year" value="3rd" required>
+                                            <input type="radio" id="year" name="year" value="3rd" required onchange="checkPostgrad()">
                                             3rd
                                         </label>
                                         <label>
-                                            <input type="radio" id="year" name="year" value="4th" required>
+                                            <input type="radio" id="year" name="year" value="4th" required onchange="checkPostgrad()">
                                             4th
                                         </label>
                                         <label>
-                                            <input type="radio" id="year" name="year" value="postgrad" required>
+                                            <input type="radio" id="year-postgrad" name="year" value="postgrad" required onchange="checkPostgrad()">
                                             Postgrad
                                         </label>
                                         <div id="year-error" class="error"></div>
                                     </div>
+                                    <div id="postgrad-options" class="opt">
+                                        <label>
+                                            <input type="radio" name="postgrad-type" value="Honors" required>
+                                            Honors
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="postgrad-type" value="Masters" required>
+                                            Masters
+                                        </label>
+                                        <div id="postType-error" class="error"></div> 
+                                    </div>
+
                                 </div>
                             </div>
                         </div> 
-
+                    
                         <div class="btns_wrap">
                             <div class="common_btns form_2_btns">
                                 <button type="button" class="btn_back">Back</button>
@@ -637,31 +766,44 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Tutoring Option<span class="required">*</span></label>
-                        <div class="radio-group">
+                        <label for="tutor-style">Tutoring Option<span class="required">*</span></label>
+                        <select id="tutor-style" name="tutor-style" required onchange="handleTutorStyleChange()">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Online">Online</option>
+                            <option value="In Person" id="in-peerson">In-Person</option>
+                        </select>
+                        <div id="tutor-style-error" class="error"></div>
+                    </div>
+
+                    <div class="row" id="internetCheck">
+                        <div class="checkbox-container">
                             <br>
-                            <label>
-                                <input type="radio" id="tutor-style" name="tutor-style" value="Online" onclick="onlineInfo()" required>
-                                Online
+                            <input type="checkbox" id="internet-check" name="internet-check" />
+                            <label for="internet-check">
+                                You have fast, stable internet (2Mbps or higher). You must have a computer, laptop, tablet, or phone with a Webcam, microphone and speakers.
                             </label>
-                            <label>
-                                <input type="radio" id="tutor-style" name="tutor-style" value="In Person" onclick="inPersonInfo()" required>
-                                In-Person
-                            </label>
-                            <div id="tutor-style-error" class="error"></div>
+                            <div id="internet-error" class="error"></div>
                         </div>
                     </div>
 
                     <div class="form-row" id="in-person-teaching">
-                        <div class="form-group">
-                            <label for="address">Address<span class="required">*</span></label><br>
-                            <input type="text" id="address-inperson" name="address-inperson" placeholder="" class="input" required>
-                            <div id="inperson-error" class="error"></div>
-                        </div>
+
                         <div class="form-group">
                             <label for="suburb-inperson">Suburb<span class="required">*</span></label><br>
-                            <input type="text" id="suburb-inperson" name="suburb-inperson" placeholder="" class="input" required>
+                            <input type="text" id="suburb-inperson" name="suburb-inperson" placeholder="Which suburb do you stay" class="input" required>
                             <div id="suburb-inperson-error" class="error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">When would you like to start<span class="required">*</span></label><br>
+                            <select id="address-inperson" name="address-inperson" class="input" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="ASAP">ASAP</option>
+                                <option value="This Week">This Week</option>
+                                <option value="This Month">This Month</option>
+                                <option value="Not right now">Not right now</option>
+                            </select>
+                            <div id="inperson-error" class="error"></div>
                         </div>
                     </div>
 
@@ -688,17 +830,17 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="tutor-option-group">
                         <label>Would you like a second tutor option?<span class="required">*</span></label>
                         <div class="radio-group">
                             <br>
                             <label>
-                                <input type="radio" id="tutor-option" name="tutor-option" value="Yes" required>
+                                <input type="radio" name="tutor-option" value="Yes" required>
                                 Yes
                             </label>
                             <label>
-                                <input type="radio" id="tutor-option" name="tutor-option" value="No" required>
-                               No
+                                <input type="radio" name="tutor-option" value="No" required >
+                                No
                             </label>
                             <div id="tutor-option-error" class="error"></div>
                         </div>
@@ -732,7 +874,7 @@
                         <h3>Once Off Package</h3>
                         <div class="content">
                             <div class="session-per-month">1 Session per month<br>(once off)</div>
-                            <div class="package-details">Package Details</div>
+                            <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                      
                             <button type="submit" class="package-btn" id="onceOffPackage"></button>
                           
@@ -742,7 +884,7 @@
                         <h3>Basic Package</h3>
                         <div class="content">
                             <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                            <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                     
                             <button type="submit" class="package-btn" id="basicPackage"></button>
                          
@@ -751,8 +893,8 @@
                     <div class="custom-div">
                         <h3>Premium Package</h3>
                         <div class="content">
-                            <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Popular</div>
+                            <div class="session-per-month">8 Sessions per month<br>(twice a week)</div>
+                            <div class="package-details" onclick="openPackageDetails()" id="popular">Popular</div>
                      
                             <button type="submit" class="package-btn" id="premiumPackage"></button>
                         
@@ -761,8 +903,8 @@
                     <div class="custom-div">
                         <h3>Advanced Package</h3>
                         <div class="content">
-                            <div class="session-per-month">12 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                            <div class="session-per-month">12 Sessions per month<br>(three times a week)</div>
+                            <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                         
                             <button type="submit" class="package-btn" id="advancedPackage"></button>
                           
@@ -771,8 +913,8 @@
                     <div class="custom-div">
                         <h3>Elite Package</h3>
                         <div class="content">
-                            <div class="session-per-month">16 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                            <div class="session-per-month">16 Sessions per month<br>(four times a week)</div>
+                            <div class="package-details" onclick="openPackageDetails()">Package Details</div>
                             
                             <button type="submit" class="package-btn" id="elitePackage"></button>
                         
@@ -784,8 +926,8 @@
                     <div class="custom-div">
                         <h3>One on One</h3>
                         <div class="content">
-                            <div class="session-per-month">1 Session per month<br>(once off)</div>
-                            <div class="package-details">Package Details</div>
+                            
+                            <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                      
                             <button type="submit" class="package-btn" id="oneOnone"></button>
                           
@@ -794,8 +936,8 @@
                     <div class="custom-div">
                         <h3>2 to 5 students</h3>
                         <div class="content">
-                            <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                            
+                            <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                     
                             <button type="submit" class="package-btn" id="twoTofivePackage"></button>
                             
@@ -804,8 +946,8 @@
                     <div class="custom-div">
                         <h3>6 to 10 students</h3>
                         <div class="content">
-                            <div class="session-per-month">8 Sessions per month<br>(once a week)</div>
-                            <div class="package-details">Package Details</div>
+                          
+                            <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
                      
                             <button type="submit" class="package-btn" id="sixTo10Package"></button>
                         
@@ -817,7 +959,7 @@
                 <div class="btns_wrap">
                     <div class="common_btns form_5_btns">
                         <button type="button" class="btn_back">Back</button>
-                        <button type="button" class="btn_next" id="consult_btn" ">Speak to consultant</button>
+                        <button type="button" class="btn_next" id="consult_btn">Speak to consultant</button>
                     </div>
                 </div>
             </div>
@@ -825,6 +967,17 @@
             <!--form 5-->
 
         </div>
+
+
+        <div id="popup" class="popup hide">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h2>Package Details</h2>
+                <div id="pack-details"></div>
+                <!-- Add more details as needed -->
+            </div>
+        </div>
+
 
         <!--END OF FORMS-->
         <div class="modal_wrapper">
@@ -884,1391 +1037,2704 @@ document.getElementById('scrollRight').addEventListener('click', () => {
 
          /*#########################BOOKINGS#######################*/
 
-         document.addEventListener('DOMContentLoaded', function() {
-  const otherOption = document.getElementById('other-option');
-  otherOption.style.display = 'none'; // Hide the "Other" option
+         function openPackageDetails(){
+
+var pack_details = document.getElementById('pack-details');
+var syllabusId = document.getElementById('syllabus').value;
+var ghg = document.getElementById('tutor-style').value.trim(); 
+
+if (ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
+pack_details.innerHTML = `
+    •Each session is 60 minutes
+    <ul>
+        <li>•One-on-one live sessions</li>
+        <li>•We offer a 10% sibling discount</li>
+        <li>•All prices are in South African currency</li>
+        <li>•Each can cover only one subject (basic)</li>
+        <li>•It can cover 2 subjects (premium)</li>
+        <li>•It can cover 2 subjects and above (advanced and elite)</li>
+    </ul>`;
+ }
+
+ else{
+
+    if (ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
+        pack_details.innerHTML = `
+    •Each session is 60 minutes
+    <ul>
+        <li>•One-on-one in-person tutoring at your home</li>
+        <li>•We offer a 10% sibling discount</li>
+        <li>•All prices are in South African currency</li>
+        <li>•Each can cover only one subject (basic)</li>
+        <li>•It can cover 2 subjects (premium)</li>
+        <li>•It can cover 2 subjects and above (advanced and elite)</li>
+    </ul>`;
+          
+    }
+
+ }
+
+document.getElementById('popup').classList.remove('hide');
+}
+
+function closePopup() {
+document.getElementById('popup').classList.add('hide');
+}
+
+function openPackageDetailsUniversity(){
+
+  var pack_details = document.getElementById('pack-details');
+  var ghg = document.getElementById('tutor-style').value.trim(); 
+
+   if (ghg === "In Person"){
+
+      pack_details.innerHTML = `
+    •Each session is 60 minutes
+    <ul>
+        <li>•Campus Tutoring or home tutoring (in-person)</li>
+        <li>•All prices are in South African currency</li>
+    </ul>`;
+
+   }
+   else{
+
+      
+      pack_details.innerHTML = `
+    •Live sessions
+    <ul>
+        <li>•These prices are per session</li>
+        <li>•All prices are in South African currency</li>
+    </ul>`;
+
+   }
+
+   document.getElementById('popup').classList.remove('hide');
+
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+const otherOption = document.getElementById('other-option');
+otherOption.style.display = 'none'; // Hide the "Other" option
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-            var form_1 = document.querySelector(".form_1");
-            var form_2 = document.querySelector(".form_2");
-            var form_3 = document.querySelector(".form_3");
-            var form_4 = document.querySelector(".form_4");
-            var form_5 = document.querySelector(".form_5");
+          var form_1 = document.querySelector(".form_1");
+          var form_2 = document.querySelector(".form_2");
+          var form_3 = document.querySelector(".form_3");
+          var form_4 = document.querySelector(".form_4");
+          var form_5 = document.querySelector(".form_5");
 
-            var form_1_btns = document.querySelector(".form_1_btns");
-            var form_2_btns = document.querySelector(".form_2_btns");
-            var form_3_btns = document.querySelector(".form_3_btns");
-            var form_4_btns = document.querySelector(".form_4_btns");
-            var form_5_btns = document.querySelector(".form_5_btns");
+          var form_1_btns = document.querySelector(".form_1_btns");
+          var form_2_btns = document.querySelector(".form_2_btns");
+          var form_3_btns = document.querySelector(".form_3_btns");
+          var form_4_btns = document.querySelector(".form_4_btns");
+          var form_5_btns = document.querySelector(".form_5_btns");
 
-            var form_1_next_btn = document.querySelector(".form_1_btns .btn_next");
-            var form_2_back_btn = document.querySelector(".form_2_btns .btn_back");
-            var form_2_next_btn = document.querySelector(".form_2_btns .btn_next");
-            var form_3_back_btn = document.querySelector(".form_3_btns .btn_back");
-            var form_3_next_btn = document.querySelector(".form_3_btns .btn_next");
-            var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
-            var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
-            var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
-            var consult = document.querySelector(".form_5_btns .btn_next");
+          var form_1_next_btn = document.querySelector(".form_1_btns .btn_next");
+          var form_2_back_btn = document.querySelector(".form_2_btns .btn_back");
+          var form_2_next_btn = document.querySelector(".form_2_btns .btn_next");
+          var form_3_back_btn = document.querySelector(".form_3_btns .btn_back");
+          var form_3_next_btn = document.querySelector(".form_3_btns .btn_next");
+          var form_4_back_btn = document.querySelector(".form_4_btns .btn_back");
+          var form_4_next_btn = document.querySelector(".form_4_btns .btn_next");
+          var form_5_back_btn = document.querySelector(".form_5_btns .btn_back");
+          var consult = document.querySelector(".form_5_btns .btn_next");
 
 
-            var form_2_progessbar = document.querySelector(".form_2_progessbar");
-            var form_3_progessbar = document.querySelector(".form_3_progessbar");
+          var form_2_progessbar = document.querySelector(".form_2_progessbar");
+          var form_3_progessbar = document.querySelector(".form_3_progessbar");
 
-            var btn_done = document.querySelector(".btn_done");
-            var modal_wrapper = document.querySelector(".modal_wrapper");
-            var shadow = document.querySelector(".shadow");
+          var btn_done = document.querySelector(".btn_done");
+          var modal_wrapper = document.querySelector(".modal_wrapper");
+          var shadow = document.querySelector(".shadow");
 
-            function validateForm1() {
+          function validateForm1() {
 
-                var firstName = document.getElementById('first-name').value.trim();
-                var lastName = document.getElementById('last-name').value.trim();
-                var email = document.getElementById('email').value.trim();
-                var phone = document.getElementById('phone').value.trim();
-                var province = document.getElementById('province').value;
-                var country = document.getElementById('country').value;
-                var language = document.getElementById('language').value;
+              var firstName = document.getElementById('first-name').value.trim();
+              var lastName = document.getElementById('last-name').value.trim();
+              var email = document.getElementById('email').value.trim();
+              var phone = document.getElementById('phone').value.trim();
+              var province = document.getElementById('province').value;
+              var country = document.getElementById('country').value;
+              var language = document.getElementById('language').value;
 
-                var isValid = true;
+              var isValid = true;
 
-                // Validate required text inputs
-                if (!firstName) {
-                    document.getElementById('first-name-error').textContent = "First name is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('first-name-error').textContent = "";
-                }
-
-                if (!lastName) {
-                    document.getElementById('last-name-error').textContent = "Last name is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('last-name-error').textContent = "";
-                }
-
-                if (!email) {
-                    document.getElementById('email-error').textContent = "Email is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('email-error').textContent = "";
-                }
-
-                if (!phone) {
-                    document.getElementById('phone-error').textContent = "Phone number is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('phone-error').textContent = "";
-                }
-
-                if (!country) {
-                    document.getElementById('country-error').textContent = "Country is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('country-error').textContent = "";
-                }
-
-                // Validate radio buttons
-                if (!language) {
-                    document.getElementById('language-error').textContent = "Language is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('language-error').textContent = "";
-                }
-
-                // Validate dropdown
-                if (!province) {
-                    document.getElementById('province-error').textContent = "Please select a province.";
-                    isValid = false;
-                } else {
-                    document.getElementById('province-error').textContent = "";
-                }
-
-                return isValid;
-            }
-
-            function validateForm2() {
-        
-                var isValid = true;
-				var tutoringfor = document.getElementById("tutoring-for").value;
-				var helpingFor = document.querySelector('input[name="help-with"]:checked');
-				var ghg = helpingFor ? helpingFor.value : 'None';
-				var studentName = document.getElementById('student-name').value.trim();
-				var studentLastName = document.getElementById('student-last-name').value.trim();
-				var yearFor = document.querySelector('input[name="year"]:checked');
-				var syllabusId = document.getElementById('syllabus').value;
-				var gradeId = document.getElementById('grade').value;
-                var studname =  document.getElementById('stud-name').value;
-                var studlast =  document.getElementById('stud-last').value;
-				
-				
-				if(ghg === "school"){
-					
-					if (!studentName) {
-                    document.getElementById('student-name-error').textContent = "Student name is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('student-name-error').textContent = "";
-                }
-
-				if (!studentLastName) {
-                    document.getElementById('student-last-name-error').textContent = "Last name is required.";
-                    isValid = false;
-                } else {
-                    document.getElementById('student-last-name-error').textContent = "";
-                }
-
-				if (!syllabusId) {
-                    document.getElementById('syllabus-error').textContent = "Please select syllabus.";
-                    isValid = false;
-                } else {
-                    document.getElementById('syllabus-error').textContent = "";
-                }
-
-				if (!gradeId) {
-                    document.getElementById('grade-error').textContent = "Please select grade.";
-                    isValid = false;
-                } else {
-                    document.getElementById('grade-error').textContent = "";
-                }
-
-				}else{
-					
-					if (!yearFor) {
-                    document.getElementById('year-error').textContent = "Please select year.";
-                    isValid = false;
-                    } else {
-                    document.getElementById('year-error').textContent = "";
-                    }
-
-                    if (!studname) {
-                    document.getElementById('stud-name-error').textContent = "Student name required.";
-                    isValid = false;
-                    } else {
-                    document.getElementById('stud-name-error').textContent = "";
-                    }
-
-                    if (!studlast) {
-                    document.getElementById('stud-last-error').textContent = "Student surname required.";
-                    isValid = false;
-                    } else {
-                    document.getElementById('stud-last-error').textContent = "";
-                    }
-
-				}
-
-				// Validate dropdown
-                if (!tutoringfor) {
-                    document.getElementById('tutoring-for-error').textContent = "Please select one.";
-                    isValid = false;
-                } else {
-                    document.getElementById('tutoring-for-error').textContent = "";
-                }
-
-				// Validate radio buttons
-                if (!helpingFor) {
-                    document.getElementById('help-with-error').textContent = "Please choose what you need help with.";
-                    isValid = false;
-                } else {
-                    document.getElementById('help-with-error').textContent = "";
-                }
-
-                return isValid;
-            }
-
-            function validateForm3() {
-
-                 var isValid = true;
-            
-            var subject = document.getElementById('subject').value.trim();
-            var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-            var ghg = tutoring ? tutoring.value : 'None';
-            var addressTeaching = document.getElementById('address-inperson').value.trim(); 
-            var suburbTeaching = document.getElementById('suburb-inperson').value.trim(); 
-
-            if (!subject) {
-                    document.getElementById('subject-error').textContent = "Please select subject(s) type.";
-                    isValid = false;
-                } else {
-                    document.getElementById('subject-error').textContent = "";
-                }
-
-            if (!tutoring) {
-                    document.getElementById('tutor-style-error').textContent = "Please select a tutoring type.";
-                    isValid = false;
-                } else {
-                    document.getElementById('tutor-style-error').textContent = "";
-                }
-
-                if(ghg === "In Person"){
-					
-					if (!addressTeaching) {
-                    document.getElementById('inperson-error').textContent = "please fill in your address.";
-                    isValid = false;
-                } else {
-                    document.getElementById('inperson-error').textContent = "";
-                }
-
-				if (!suburbTeaching) {
-                    document.getElementById('suburb-inperson-error').textContent = "please fill in your suburb.";
-                    isValid = false;
-                } else {
-                    document.getElementById('suburb-inperson-error').textContent = "";
-                }
+              // Validate required text inputs
+              if (!firstName) {
+                  document.getElementById('first-name-error').textContent = "First name is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('first-name-error').textContent = "";
               }
-                
-				return isValid;
 
+              if (!lastName) {
+                  document.getElementById('last-name-error').textContent = "Last name is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('last-name-error').textContent = "";
+              }
+
+              if (!email) {
+                  document.getElementById('email-error').textContent = "Email is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('email-error').textContent = "";
+              }
+
+              if (!phone) {
+                  document.getElementById('phone-error').textContent = "Phone number is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('phone-error').textContent = "";
+              }
+
+              if (!country) {
+                  document.getElementById('country-error').textContent = "Country is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('country-error').textContent = "";
+              }
+
+              // Validate radio buttons
+              if (!language) {
+                  document.getElementById('language-error').textContent = "Language is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('language-error').textContent = "";
+              }
+
+              // Validate dropdown
+              if(country === "South Africa"){
+                   document.getElementById("in-peerson").style.display = 'block';
+                  if (!province) {
+                  document.getElementById('province-error').textContent = "Please select a province.";
+                  isValid = false;
+              } else {
+                  document.getElementById('province-error').textContent = "";
+              }
+
+              }
+             else{
+
+                 document.getElementById("in-peerson").style.display = 'none';
+             }
+
+
+              return isValid;                
+
+
+
+          }
+
+          function validateForm2() {
+      
+              var isValid = true;
+              var tutoringfor = document.getElementById("tutoring-for").value;
+              var helpingFor = document.querySelector('input[name="help-with"]:checked');
+              var ghg = helpingFor ? helpingFor.value : 'None';
+              var studentName = document.getElementById('student-name').value.trim();
+              var studentLastName = document.getElementById('student-last-name').value.trim();
+              var yearFor = document.querySelector('input[name="year"]:checked');
+              var syllabusId = document.getElementById('syllabus').value;
+              var gradeId = document.getElementById('grade').value;
+              var studname =  document.getElementById('stud-name').value;
+              var studlast =  document.getElementById('stud-last').value;
+              
+              
+              if(ghg === "school"){
+                  
+                  if (!studentName) {
+                  document.getElementById('student-name-error').textContent = "Student name is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('student-name-error').textContent = "";
+              }
+
+              if (!studentLastName) {
+                  document.getElementById('student-last-name-error').textContent = "Last name is required.";
+                  isValid = false;
+              } else {
+                  document.getElementById('student-last-name-error').textContent = "";
+              }
+
+              if (!syllabusId) {
+                  document.getElementById('syllabus-error').textContent = "Please select syllabus.";
+                  isValid = false;
+              } else {
+                  document.getElementById('syllabus-error').textContent = "";
+              }
+
+              if (!gradeId) {
+                  document.getElementById('grade-error').textContent = "Please select grade.";
+                  isValid = false;
+              } else {
+                  document.getElementById('grade-error').textContent = "";
+              }
+
+              }else{
+                  
+                  if (!yearFor) {
+                  document.getElementById('year-error').textContent = "Please select year.";
+                  isValid = false;
+                  } else {
+                  document.getElementById('year-error').textContent = "";
+                  }
+
+                  const postgradRadio = document.getElementById('year-postgrad');
+                  var postType = document.querySelector('input[name="postgrad-type"]:checked');
+
+                  if (postgradRadio.checked) {
+                  
+                       if(!postType){
+
+                          document.getElementById('postType-error').textContent = "Please select qualification.";
+                          isValid = false;
+
+                       }
+
+                       else{
+
+                          document.getElementById('postType-error').textContent = "";
+
+                       }
+                     
+
+                  }
+              
+
+
+                  if (!studname) {
+                  document.getElementById('stud-name-error').textContent = "Student name required.";
+                  isValid = false;
+                  } else {
+                  document.getElementById('stud-name-error').textContent = "";
+                  }
+
+                  if (!studlast) {
+                  document.getElementById('stud-last-error').textContent = "Student surname required.";
+                  isValid = false;
+                  } else {
+                  document.getElementById('stud-last-error').textContent = "";
+                  }
+
+              }
+
+              // Validate dropdown
+              if (!tutoringfor) {
+                  document.getElementById('tutoring-for-error').textContent = "Please select one.";
+                  isValid = false;
+              } else {
+                  document.getElementById('tutoring-for-error').textContent = "";
+              }
+
+              // Validate radio buttons
+              if (!helpingFor) {
+                  document.getElementById('help-with-error').textContent = "Please choose what you need help with.";
+                  isValid = false;
+              } else {
+                  document.getElementById('help-with-error').textContent = "";
+              }
+
+              return isValid;
+          }
+
+          function validateForm3() {
+
+          var isValid = true;
+          
+          var subject = document.getElementById('subject').value.trim();
+          var ghg = document.getElementById('tutor-style').value.trim(); 
+          var addressTeaching = document.getElementById('address-inperson').value.trim(); 
+          var suburbTeaching = document.getElementById('suburb-inperson').value.trim(); 
+          var internet_check = document.getElementById('internet-check').value.trim();
+
+          if (!subject) {
+                  document.getElementById('subject-error').textContent = "Please select subject(s) type.";
+                  isValid = false;
+              } else {
+                  document.getElementById('subject-error').textContent = "";
+              }
+
+          if (!ghg) {
+                  document.getElementById('tutor-style-error').textContent = "Please select a tutoring type.";
+                  isValid = false;
+              } else {
+                  document.getElementById('tutor-style-error').textContent = "";
+              }
+
+              if(ghg === "In Person"){
+                  
+                  if (!addressTeaching) {
+                  document.getElementById('inperson-error').textContent = "please specify.";
+                  isValid = false;
+              } else {
+                  document.getElementById('inperson-error').textContent = "";
+              }
+
+              if (!suburbTeaching) {
+                  document.getElementById('suburb-inperson-error').textContent = "please fill in your suburb.";
+                  isValid = false;
+              } else {
+                  document.getElementById('suburb-inperson-error').textContent = "";
+              }
             }
+           
+              
+              return isValid;
 
-            consult.addEventListener("click", function() {
+          }
 
-                alert("Consultant will get in touch  with you shortly. Thank you.");
+          consult.addEventListener("click", function() {
 
-                const allData = combineFormData();
+              alert("Consultant will get in touch  with you shortly. Thank you.");
 
-                const dataToSend = {
-                    ...allData
-                };
+              const allData = combineFormData();
 
-                        fetch('/other-booking', { // Replace with your actual endpoint URL
-                                method: 'POST',
-                                headers: { 
-                                    'Content-Type': 'application/json' 
-                                },
-                                body: JSON.stringify(dataToSend)
-                            })
-                            .then(response => response.json())
-                            .then(result => {
-                            
-                                setTimeout(function(){
-                                        window.location.href = '/';
-                                    } , 2000);
+              const dataToSend = {
+                  ...allData
+              };
 
-                                    
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                // Optionally handle error response
-                            });
+                      fetch('/other-booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(dataToSend)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                          
+                              setTimeout(function(){
+                                      window.location.href = '/';
+                                  } , 2000);
 
-                setTimeout(function(){
-                    window.location.href = '/';
-                } , 2000);
+                                  
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
 
-            
+              setTimeout(function(){
+                  window.location.href = '/';
+              } , 2000);
+
+          
 });
 
 
-            function validateForm4() {
+          function validateForm4() {
 
-                var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-                var ghg = tutoring ? tutoring.value : 'None';
-                var helpingFor = document.querySelector('input[name="help-with"]:checked');
-				var forWho = helpingFor ? helpingFor.value : 'None';
-                var syllabusId = document.getElementById('syllabus').value;
+              var ghg = document.getElementById('tutor-style').value.trim(); 
+              var helpingFor = document.querySelector('input[name="help-with"]:checked');
+              var forWho = helpingFor ? helpingFor.value : 'None';
+              var syllabusId = document.getElementById('syllabus').value;
 
-                if(forWho === "school"){
+              if(forWho === "school"){
 
-                    var universityPackages = document.getElementById("universityPackages");
-                    universityPackages.style.display = 'none';
-                    var schoolPackages = document.getElementById("schoolPackages");
-                    schoolPackages.style.display = 'flex';
+                  var universityPackages = document.getElementById("universityPackages");
+                  universityPackages.style.display = 'none';
+                  var schoolPackages = document.getElementById("schoolPackages");
+                  schoolPackages.style.display = 'flex';
 
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+              if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
 
-                    const onceOffPackage = document.getElementById('onceOffPackage');
-                    onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+                  const onceOffPackage = document.getElementById('onceOffPackage');
+                  onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
 
-                    const basicPackage= document.getElementById('basicPackage');
-                    basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
+                  const basicPackage= document.getElementById('basicPackage');
+                  basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
 
-                    const premiumPackage = document.getElementById('premiumPackage');
-                    premiumPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
+                  const premiumPackage = document.getElementById('premiumPackage');
+                  premiumPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
 
-                    const advancedPackage = document.getElementById('advancedPackage');
-                    advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
+                  const advancedPackage = document.getElementById('advancedPackage');
+                  advancedPackage.textContent = 'R3250'; // or button.innerHTML = 'Submit';
 
-                    const elitePackage =  document.getElementById('elitePackage');
-                    elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
+                  const elitePackage =  document.getElementById('elitePackage');
+                  elitePackage.textContent = 'R4350'; // or button.innerHTML = 'Submit';
 
-                }
-                else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
-                       
-                        const onceOffPackage = document.getElementById('onceOffPackage');
-                        onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+              }
+              else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                     
+                     
+                      const onceOffPackage = document.getElementById('onceOffPackage');
+                      onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
-                        const basicPackage= document.getElementById('basicPackage');
-                        basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
+                      const basicPackage= document.getElementById('basicPackage');
+                      basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
 
-                        const premiumPackage = document.getElementById('premiumPackage');
-                        premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
+                      const premiumPackage = document.getElementById('premiumPackage');
+                      premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
 
-                        const advancedPackage = document.getElementById('advancedPackage');
-                        advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
+                      const advancedPackage = document.getElementById('advancedPackage');
+                      advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
 
-                        const elitePackage =  document.getElementById('elitePackage');
-                        elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
+                      const elitePackage =  document.getElementById('elitePackage');
+                      elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
 
-                    }
-                    else{
-                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-
-                            const onceOffPackage = document.getElementById('onceOffPackage');
-                            onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
-
-                            const basicPackage= document.getElementById('basicPackage');
-                            basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
-
-                            const premiumPackage = document.getElementById('premiumPackage');
-                            premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
-
-                            const advancedPackage = document.getElementById('advancedPackage');
-                            advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
-
-                            const elitePackage =  document.getElementById('elitePackage');
-                            elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
-
-                                }
-
-                            else{
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
-                       
-                                        const onceOffPackage = document.getElementById('onceOffPackage');
-                                        onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
-
-                                        const basicPackage= document.getElementById('basicPackage');
-                                        basicPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
-
-                                        const premiumPackage = document.getElementById('premiumPackage');
-                                        premiumPackage.textContent = 'R4300'; // or button.innerHTML = 'Submit';
-
-                                        const advancedPackage = document.getElementById('advancedPackage');
-                                        advancedPackage.textContent = 'R6350'; // or button.innerHTML = 'Submit';
-
-                                        const elitePackage =  document.getElementById('elitePackage');
-                                        elitePackage.textContent = 'R8500'; // or button.innerHTML = 'Submit';
-
-                                    }
-                                   
-                            }
-                    }
-                }
-            }
-
-                else{
-
-                     var schoolPackages = document.getElementById("schoolPackages");
-                     schoolPackages.style.display = 'none';
-                     var universityPackages = document.getElementById("universityPackages");
-                     universityPackages.style.display = 'flex';
-
-                     if(ghg === "In Person"){
-                       
-                       const onceOffPackage = document.getElementById('oneOnone');
-                       onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
-
-                       const basicPackage= document.getElementById('twoTofivePackage');
-                       basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
-
-                       const premiumPackage = document.getElementById('sixTo10Package');
-                       premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
-
-                        }
-
-                        else{
-
-                        const onceOffPackage = document.getElementById('oneOnone');
-                        onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
-
-                        const basicPackage= document.getElementById('twoTofivePackage');
-                        basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
-
-                        const premiumPackage = document.getElementById('sixTo10Package');
-                        premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
-
-                        }
-                  
-
-                }
-
-                    var isValid = true;
-
-                    var message = document.getElementById('message').value.trim();
-                    var secondTutor = document.querySelector('input[name="tutor-option"]:checked');
-                    var ghg = secondTutor ? secondTutor.value : 'None';
-
-                    if (!secondTutor) {
-                    document.getElementById('tutor-option-error').textContent = "Please specify.";
-                    isValid = false;
-                    } else {
-                    document.getElementById('tutor-option-error').textContent = "";
-                    }
-                    
-                    var termsCheckbox = document.getElementById('terms');
-                        if (termsCheckbox.checked) {
-                            document.getElementById('terms-error').textContent = "";
-                        } else {
-                            document.getElementById('terms-error').textContent = "Required";
-                            isValid = false;
-                        }
-
-
-                         return isValid;
-
-                    }
-
-            form_1_next_btn.addEventListener("click", function() {
-
-                if (validateForm1()) {
-                    form_1.style.display = "none";
-                    form_2.style.display = "block";
-
-                    form_1_btns.style.display = "none";
-                    form_2_btns.style.display = "flex";
-
-                    form_2_progessbar.classList.add("active");
-                    form_1.classList.remove("active");
-                }
-            });
-
-            form_2_back_btn.addEventListener("click", function() {
-                form_1.style.display = "block";
-                form_2.style.display = "none";
-
-                form_1_btns.style.display = "flex";
-                form_2_btns.style.display = "none";
-
-                form_2_progessbar.classList.remove("active");
-                form_1.classList.add("active");
-            });
-
-            form_2_next_btn.addEventListener("click", function() {
-                if (validateForm2()) {
-                    form_2.style.display = "none";
-                    form_3.style.display = "block";
-
-                    form_2_btns.style.display = "none";
-                    form_3_btns.style.display = "flex";
-
-                    form_3_progessbar.classList.add("active");
-                    form_2.classList.remove("active");
-                }
-            });
-
-            form_3_back_btn.addEventListener("click", function() {
-                form_2.style.display = "block";
-                form_3.style.display = "none";
-
-                form_2_btns.style.display = "flex";
-                form_3_btns.style.display = "none";
-
-                form_3_progessbar.classList.remove("active");
-                form_2.classList.add("active");
-            });
-
-            form_3_next_btn.addEventListener("click", function() {
-               if (validateForm3()) {
-                    form_2.style.display = "none";
-                    form_3.style.display = "none";
-                    form_4.style.display = "block";
-
-                    form_2_btns.style.display = "none";
-                    form_4_btns.style.display = "flex";
-
-                }
-            });
-
-            form_4_back_btn.addEventListener("click", function() {
-                form_3.style.display = "block";
-                form_4.style.display = "none";
-
-                form_3_btns.style.display = "flex";
-                form_4_btns.style.display = "none";
-
-            });
-
-            form_4_next_btn.addEventListener("click", function() {
-                if(validateForm4()) {
-
-                    var syllabus = document.getElementById("syllabus").value;
-                    var helpingFor = document.querySelector('input[name="help-with"]:checked');
-				    var forWho = helpingFor ? helpingFor.value : 'None';
-
-                    if(syllabus === "Other" && forWho !== "university"){
-
-                    modal_wrapper.classList.add("active");
-                    shadow.addEventListener("click", function() {
-                        modal_wrapper.classList.remove("active");
-                    });
-
-                    const allData = combineFormData();
-
-                    const dataToSend = {
-                        ...allData
-                    };
-
-                            fetch('/other-booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(dataToSend)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                
-                                    setTimeout(function(){
-                                            window.location.href = '/';
-                                        } , 2000);
-
-                                        
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
-
-                    setTimeout(function(){
-                        window.location.href = '/';
-                    } , 2000);
-
-                    }
-
+                  }
                   else{
+                      if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                          const onceOffPackage = document.getElementById('onceOffPackage');
+                          onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+
+                          const basicPackage= document.getElementById('basicPackage');
+                          basicPackage.textContent = 'R1550'; // or button.innerHTML = 'Submit';
+
+                          const premiumPackage = document.getElementById('premiumPackage');
+                          premiumPackage.textContent = 'R3100'; // or button.innerHTML = 'Submit';
+
+                          const advancedPackage = document.getElementById('advancedPackage');
+                          advancedPackage.textContent = 'R4650'; // or button.innerHTML = 'Submit';
+
+                          const elitePackage =  document.getElementById('elitePackage');
+                          elitePackage.textContent = 'R6200'; // or button.innerHTML = 'Submit';
+
+                              }
+
+                          else{
+                              if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                     
+                                      const onceOffPackage = document.getElementById('onceOffPackage');
+                                      onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                                      const basicPackage= document.getElementById('basicPackage');
+                                      basicPackage.textContent = 'R2150'; // or button.innerHTML = 'Submit';
+
+                                      const premiumPackage = document.getElementById('premiumPackage');
+                                      premiumPackage.textContent = 'R4300'; // or button.innerHTML = 'Submit';
+
+                                      const advancedPackage = document.getElementById('advancedPackage');
+                                      advancedPackage.textContent = 'R6350'; // or button.innerHTML = 'Submit';
+
+                                      const elitePackage =  document.getElementById('elitePackage');
+                                      elitePackage.textContent = 'R8500'; // or button.innerHTML = 'Submit';
+
+                                  }
+                                 
+                          }
+                  }
+              }
+          }
+
+              else{
+
+                   var schoolPackages = document.getElementById("schoolPackages");
+                   schoolPackages.style.display = 'none';
+                   var universityPackages = document.getElementById("universityPackages");
+                   universityPackages.style.display = 'flex';
 
 
-                    form_3.style.display = "none";
-                    form_4.style.display = "none";
-                    form_5.style.display = "block";
+                      var yearFor = document.querySelector('input[name="year"]:checked');
+                      var yearIn = yearFor ? yearFor.value : 'None';
 
-                    form_4_btns.style.display = "none";
-                    form_5_btns.style.display = "flex";
+                     if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
+
+                      }
+
+                      else{
+
+                          if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R200'; // or button.innerHTML = 'Submit';
+
+                      }
+
+                      else{
+
+                          if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R750'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                      }
+
+                      else{
+
+                          if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+
+                      }
+
+
+                      else{
+
+                          if(ghg === "In Person" && yearIn === 'postgrad'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R850'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R750'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
+
+                      }
+                      else{
+
+                          if(ghg === "Online" && yearIn === 'postgrad'){
+                     
+                     const onceOffPackage = document.getElementById('oneOnone');
+                     onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
+
+                     const basicPackage= document.getElementById('twoTofivePackage');
+                     basicPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
+
+                     const premiumPackage = document.getElementById('sixTo10Package');
+                     premiumPackage.textContent = 'R350'; // or button.innerHTML = 'Submit';
+
+                      }
+                      }
+
+  
+
+                      }
+
+
+                      }
+
+
+                      }
+
+
+                      }
+
+              
+                
+
+              }
+
+                  var isValid = true;
+
+                  var message = document.getElementById('message').value.trim();
+                  var secondTutor = document.querySelector('input[name="tutor-option"]:checked');
+                  var ghg = secondTutor ? secondTutor.value : 'None';
+
+                  if (!secondTutor) {
+                  document.getElementById('tutor-option-error').textContent = "Please specify.";
+                  isValid = false;
+                  } else {
+                  document.getElementById('tutor-option-error').textContent = "";
+                  }
+                  
+                  var termsCheckbox = document.getElementById('terms');
+                      if (termsCheckbox.checked) {
+                          document.getElementById('terms-error').textContent = "";
+                      } else {
+                          document.getElementById('terms-error').textContent = "Required";
+                          isValid = false;
+                      }
+
+
+                       return isValid;
 
                   }
 
+          form_1_next_btn.addEventListener("click", function() {
+
+              if (validateForm1()) {
+                  form_1.style.display = "none";
+                  form_2.style.display = "block";
+
+                  form_1_btns.style.display = "none";
+                  form_2_btns.style.display = "flex";
+
+                  form_2_progessbar.classList.add("active");
+                  form_1.classList.remove("active");
+              }
+          });
+
+          form_2_back_btn.addEventListener("click", function() {
+              form_1.style.display = "block";
+              form_2.style.display = "none";
+
+              form_1_btns.style.display = "flex";
+              form_2_btns.style.display = "none";
+
+              form_2_progessbar.classList.remove("active");
+              form_1.classList.add("active");
+          });
+
+          form_2_next_btn.addEventListener("click", function() {
+              if (validateForm2()) {
+                  form_2.style.display = "none";
+                  form_3.style.display = "block";
+
+                  form_2_btns.style.display = "none";
+                  form_3_btns.style.display = "flex";
+
+                  form_3_progessbar.classList.add("active");
+                  form_2.classList.remove("active");
+              }
+          });
+
+          form_3_back_btn.addEventListener("click", function() {
+              form_2.style.display = "block";
+              form_3.style.display = "none";
+
+              form_2_btns.style.display = "flex";
+              form_3_btns.style.display = "none";
+
+              form_3_progessbar.classList.remove("active");
+              form_2.classList.add("active");
+          });
+
+          form_3_next_btn.addEventListener("click", function() {
+             if (validateForm3()) {
+                  form_2.style.display = "none";
+                  form_3.style.display = "none";
+                  form_4.style.display = "block";
+
+                  form_2_btns.style.display = "none";
+                  form_4_btns.style.display = "flex";
+
+              }
+          });
+
+          form_4_back_btn.addEventListener("click", function() {
+              form_3.style.display = "block";
+              form_4.style.display = "none";
+
+              form_3_btns.style.display = "flex";
+              form_4_btns.style.display = "none";
+
+          });
+
+          form_4_next_btn.addEventListener("click", function() {
+              if(validateForm4()) {
+
+                  var syllabus = document.getElementById("syllabus").value;
+                  var helpingFor = document.querySelector('input[name="help-with"]:checked');
+                  var forWho = helpingFor ? helpingFor.value : 'None';
+
+                  if(syllabus === "Other" && forWho !== "university"){
+
+                  modal_wrapper.classList.add("active");
+                  shadow.addEventListener("click", function() {
+                      modal_wrapper.classList.remove("active");
+                  });
+
+                  const allData = combineFormData();
+
+                  const dataToSend = {
+                      ...allData
+                  };
+
+                          fetch('/other-booking', { // Replace with your actual endpoint URL
+                                  method: 'POST',
+                                  headers: { 
+                                      'Content-Type': 'application/json' 
+                                  },
+                                  body: JSON.stringify(dataToSend)
+                              })
+                              .then(response => response.json())
+                              .then(result => {
+                              
+                                  setTimeout(function(){
+                                          window.location.href = '/';
+                                      } , 2000);
+
+                                      
+                              })
+                              .catch(error => {
+                                  console.error('Error:', error);
+                                  // Optionally handle error response
+                              });
+
+                  setTimeout(function(){
+                      window.location.href = '/';
+                  } , 2000);
+
+                  }
+
+                else{
+
+
+                  form_3.style.display = "none";
+                  form_4.style.display = "none";
+                  form_5.style.display = "block";
+
+                  form_4_btns.style.display = "none";
+                  form_5_btns.style.display = "flex";
+
                 }
-            });
 
-            form_5_back_btn.addEventListener("click", function() {
-                form_4.style.display = "block";
-                form_5.style.display = "none";
+              }
+          });
 
-                form_4_btns.style.display = "flex";
-                form_4_btns.style.display = "flex";
+          form_5_back_btn.addEventListener("click", function() {
+              form_4.style.display = "block";
+              form_5.style.display = "none";
 
-            });
+              form_4_btns.style.display = "flex";
+              form_4_btns.style.display = "flex";
 
-						
-        });
+          });
+
+                      
+      });
 
 
-        document.getElementById("student-info").style.display = 'none';
-        document.getElementById("year-selection-container").style.display='none';
-        document.getElementById("in-person-teaching").style.display='none';
+      document.getElementById("student-info").style.display = 'none';
+      document.getElementById("year-selection-container").style.display='none';
+      document.getElementById("in-person-teaching").style.display='none';
+    
+         function studentInfo(){
+
+          document.getElementById("student-info").style.display = 'block';
+          document.getElementById("year-selection-container").style.display='none';
+
+         }
+
+         function vasityInfo(){
+          document.getElementById("year-selection-container").style.display='block';
+          document.getElementById("student-info").style.display = 'none';
       
-           function studentInfo(){
-
-            document.getElementById("student-info").style.display = 'block';
-            document.getElementById("year-selection-container").style.display='none';
-
-           }
-
-           function vasityInfo(){
-            document.getElementById("year-selection-container").style.display='block';
-            document.getElementById("student-info").style.display = 'none';
-        
-           }
-
-        function inPersonInfo(){
-
-          document.getElementById("in-person-teaching").style.display = 'block';
-           
          }
 
-         function onlineInfo(){
+         function handleTutorStyleChange() {
+      const selectedValue = document.getElementById('tutor-style').value;
+      if (selectedValue === 'Online') {
+          onlineInfo();
+      } else if (selectedValue === 'In Person') {
+          inPersonInfo();
+      }
+  }
 
-                document.getElementById("in-person-teaching").style.display = 'none';
-                
-                }
+      function inPersonInfo(){
 
-		/*var modal = document.getElementById("modal");
-        var btn = document.getElementById("open-popup");*/
+          document.getElementById("internetCheck").style.display = 'none';
+        document.getElementById("in-person-teaching").style.display = 'block';
+         
+       }
 
-		function openOpenopen(name, email, subjects, grades , subsub) {
+       document.getElementById("internetCheck").style.display = 'none';
 
-            if(subjects === undefined){
+       function onlineInfo(){
 
-                const syll = "CAPs,IEB,Cambridge,IB,Pearson Edexcel";
-                const syllabusArray = syll.split(',').map(item => item.trim());
+              document.getElementById("in-person-teaching").style.display = 'none';
+              document.getElementById("internetCheck").style.display = 'block';
 
-                const syllabi = syllabusArray.map(item => {
-                        return { value: item, text: item };
-                    });
+          }
 
-                const syllabusSelect = document.getElementById('syllabus');
+      /*var modal = document.getElementById("modal");
+      var btn = document.getElementById("open-popup");*/
 
-                while (syllabusSelect.options.length > 1) {
+      function openOpenopen(name, email, subjects, grades , subsub) {
 
-                    const secondOption = syllabusSelect.options[1];
+          if(subjects === undefined){
 
-                    // Check if the second option exists and remove it
-                    if (secondOption) {
-                        syllabusSelect.remove(1); // Remove the second option
-                    } else {
-                        break; // Exit the loop if no second option exists
-                    }
-                }
+              const syll = "CAPs,IEB,Cambridge,IB,Pearson Edexcel";
+              const syllabusArray = syll.split(',').map(item => item.trim());
 
+              const syllabi = syllabusArray.map(item => {
+                      return { value: item, text: item };
+                  });
 
-                syllabi.forEach(syllabus => {
-                    const option = document.createElement('option');
-                    option.value = syllabus.value;
-                    option.textContent = syllabus.text;
+              const syllabusSelect = document.getElementById('syllabus');
 
-                    syllabusSelect.appendChild(option);
+              while (syllabusSelect.options.length > 1) {
 
-                });
-                            
-            }
-           else{
-            const syllabusArray = subjects.split(',').map(item => item.trim());
+                  const secondOption = syllabusSelect.options[1];
 
-            const syllabi = syllabusArray.map(item => {
-                    return { value: item, text: item };
-                });
-
-                const syllabusSelect = document.getElementById('syllabus');
-
-                while (syllabusSelect.options.length > 1) {
-
-                    const secondOption = syllabusSelect.options[1];
-
-                    // Check if the second option exists and remove it
-                    if (secondOption) {
-                        syllabusSelect.remove(1); // Remove the second option
-                    } else {
-                        break; // Exit the loop if no second option exists
-                    }
-                }
+                  // Check if the second option exists and remove it
+                  if (secondOption) {
+                      syllabusSelect.remove(1); // Remove the second option
+                  } else {
+                      break; // Exit the loop if no second option exists
+                  }
+              }
 
 
-                syllabi.forEach(syllabus => {
-                    const option = document.createElement('option');
-                    option.value = syllabus.value;
-                    option.textContent = syllabus.text;
+              syllabi.forEach(syllabus => {
+                  const option = document.createElement('option');
+                  option.value = syllabus.value;
+                  option.textContent = syllabus.text;
 
-                    syllabusSelect.appendChild(option);
+                  syllabusSelect.appendChild(option);
 
-                });
+              });
+                          
+          }
+         else{
+          const syllabusArray = subjects.split(',').map(item => item.trim());
 
-           }
+          const syllabi = syllabusArray.map(item => {
+                  return { value: item, text: item };
+              });
 
-           /*Grades Start Here*/
+              const syllabusSelect = document.getElementById('syllabus');
 
-           if(grades === undefined){
+              while (syllabusSelect.options.length > 1) {
 
-                    const grd = "GRD:1,GRD:2,GRD:3,GRD:4,GRD:5,GRD:6,GRD:7,GRD:8,GRD:9,GRD:10,GRD:11,GRD:12";
-                    const gradesArray = grd.split(',').map(item => item.trim());
+                  const secondOption = syllabusSelect.options[1];
 
-                    const gr = gradesArray.map(item => {
-                            return { value: item, text: item };
-                        });
-
-                    const gradesSelect = document.getElementById('grade');
-
-                    while (gradesSelect.options.length > 0) {
-
-                        const secondOption = gradesSelect.options[0];
-
-                        // Check if the second option exists and remove it
-                        if (secondOption) {
-                            gradesSelect.remove(0); // Remove the second option
-                        } else {
-                            break; // Exit the loop if no second option exists
-                        }
-                    }
+                  // Check if the second option exists and remove it
+                  if (secondOption) {
+                      syllabusSelect.remove(1); // Remove the second option
+                  } else {
+                      break; // Exit the loop if no second option exists
+                  }
+              }
 
 
-                    gr.forEach(gradee => {
-                        const option = document.createElement('option');
-                        option.value = gradee.value;
-                        option.textContent = gradee.text;
+              syllabi.forEach(syllabus => {
+                  const option = document.createElement('option');
+                  option.value = syllabus.value;
+                  option.textContent = syllabus.text;
 
-                        gradesSelect.appendChild(option);
+                  syllabusSelect.appendChild(option);
 
-                    });
-                                
-                    }
-                        else{
-                            const gradesArray = grades.split(',').map(item => item.trim());
+              });
 
-                            const gr = gradesArray.map(item => {
-                                                    return { value: item, text: item };
-                                                });
-
-                                                const gradesSelect = document.getElementById('grade');
-
-                        while (gradesSelect.options.length > 0) {
-
-                            const secondOption = gradesSelect.options[0];
-
-                            // Check if the second option exists and remove it
-                            if (secondOption) {
-                                gradesSelect.remove(0); // Remove the second option
-                            } else {
-                                break; // Exit the loop if no second option exists
-                            }
-                        }
-
-
-                            gr.forEach(gradee => {
-                                const option = document.createElement('option');
-                                option.value = gradee.value;
-                                option.textContent = gradee.text;
-
-                                gradesSelect.appendChild(option);
-
-                            });
-
-                            }
-
-           /*Grades End Here*/
-
-           /*Subects Start Here*/
-
-           const defaultSubjects = "Mathematics, Mathematics Literacy, Biology, Chemistry,Physics,Life Sciences,Physical Sciences,Combined Science,Natural Science,Social Sciences,Technonology";
-    const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
-    
-    const subjectContainer = document.getElementById('subjectContainer');
-    
-    // Clear existing checkboxes
-    subjectContainer.innerHTML = '';
-
-    subjectsArray.forEach(subject => {
-        const label = document.createElement('label');
-        label.style.display = 'inline'; // Make each label take up a new line
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = subject;
-        checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
-
-        // Set the label text
-        label.textContent = subject; // Set the text for the label
-
-        // Append checkbox to label and label to container
-        label.prepend(checkbox); // Add checkbox before the label text
-        subjectContainer.appendChild(label);
-    });
-
-           /*Subects End Here*/
-
-            const button = document.getElementById('tutorBtn');
-            const directTutors = document.querySelectorAll('.directTutor');
-            const otherOption = document.getElementById('other-option');
-
-            if (event.target === button) {
-                // The button was clicked
-                directTutors.forEach(tutor => {
-                    tutor.textContent = 'BOOK A PERSONALIZED TUTOR';
-                });
-                otherOption.style.display = 'block'; // Show the "Other" option
-
-            } else {
-                directTutors.forEach(tutor => {
-                    tutor.textContent = 'Book ' + name + ' for Tutoring!';
-                });
-                otherOption.style.display = 'none'; // Hide the "Other" option
-                document.querySelector("#syllabus option:first-child").textContent = "";
-            }
-
-			document.getElementById("modal").style.display = 'block';
-			var span = document.getElementById("close-popup");
-
-			var tutorName = document.getElementById('hiddenTutorName');
-			tutorName.value = name;
-
-			var tutorEmail = document.getElementById('hiddenTutorEmail');
-			tutorEmail.value = email;
-
-			span.onclick = function() {
-            modal.style.display = "none";
-            }
-
-			window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
          }
 
-		}
+         /*Grades Start Here*/
 
-		function formDataToObject(formData) {
-    const data = {};
-    formData.forEach((value, key) => {
-        // Handle multiple values for the same key
-        if (data[key]) {
-            // If value is already an array, push the new value
-            if (Array.isArray(data[key])) {
-                data[key].push(value);
-            } else {
-                // Convert existing value to an array and add new value
-                data[key] = [data[key], value];
-            }
-        } else {
-            data[key] = value;
-        }
-    });
-    return data;
+         if(grades === undefined){
+
+                  const grd = "GRD:1,GRD:2,GRD:3,GRD:4,GRD:5,GRD:6,GRD:7,GRD:8,GRD:9,GRD:10,GRD:11,GRD:12";
+                  const gradesArray = grd.split(',').map(item => item.trim());
+
+                  const gr = gradesArray.map(item => {
+                          return { value: item, text: item };
+                      });
+
+                  const gradesSelect = document.getElementById('grade');
+
+                  while (gradesSelect.options.length > 0) {
+
+                      const secondOption = gradesSelect.options[0];
+
+                      // Check if the second option exists and remove it
+                      if (secondOption) {
+                          gradesSelect.remove(0); // Remove the second option
+                      } else {
+                          break; // Exit the loop if no second option exists
+                      }
+                  }
+
+
+                  gr.forEach(gradee => {
+                      const option = document.createElement('option');
+                      option.value = gradee.value;
+                      option.textContent = gradee.text;
+
+                      gradesSelect.appendChild(option);
+
+                  });
+                              
+                  }
+                      else{
+                          const gradesArray = grades.split(',').map(item => item.trim());
+
+                          const gr = gradesArray.map(item => {
+                                                  return { value: item, text: item };
+                                              });
+
+                                              const gradesSelect = document.getElementById('grade');
+
+                      while (gradesSelect.options.length > 0) {
+
+                          const secondOption = gradesSelect.options[0];
+
+                          // Check if the second option exists and remove it
+                          if (secondOption) {
+                              gradesSelect.remove(0); // Remove the second option
+                          } else {
+                              break; // Exit the loop if no second option exists
+                          }
+                      }
+
+
+                          gr.forEach(gradee => {
+                              const option = document.createElement('option');
+                              option.value = gradee.value;
+                              option.textContent = gradee.text;
+
+                              gradesSelect.appendChild(option);
+
+                          });
+
+                          }
+
+         /*Grades End Here*/
+
+         /*Subects Start Here*/
+
+         const defaultSubjects = "Mathematics, Mathematics Literacy, Biology, Chemistry,Physics,Life Sciences,Physical Sciences,Combined Science,Natural Science,Social Sciences,Technonology";
+  const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
+  
+  const subjectContainer = document.getElementById('subjectContainer');
+  
+  // Clear existing checkboxes
+  subjectContainer.innerHTML = '';
+
+  subjectsArray.forEach(subject => {
+      const label = document.createElement('label');
+      label.style.display = 'inline'; // Make each label take up a new line
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.value = subject;
+      checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+
+      // Set the label text
+      label.textContent = subject; // Set the text for the label
+
+      // Append checkbox to label and label to container
+      label.prepend(checkbox); // Add checkbox before the label text
+      subjectContainer.appendChild(label);
+  });
+
+         /*Subects End Here*/
+
+          const button = document.getElementById('tutorBtn');
+          const directTutors = document.querySelectorAll('.directTutor');
+          const otherOption = document.getElementById('other-option');
+
+          if (event.target === button) {
+              // The button was clicked
+              directTutors.forEach(tutor => {
+                  tutor.textContent = 'BOOK A PERSONALIZED TUTOR';
+              });
+              otherOption.style.display = 'block'; // Show the "Other" option
+
+              const tutorOptionGroup = document.getElementById('tutor-option-group');
+              tutorOptionGroup.style.display = 'none'; // Hide the radio buttons
+
+              
+              const tutorOptionInputs = document.getElementsByName('tutor-option');
+              for (let input of tutorOptionInputs) {
+                  if (input.value === 'No') {
+                      input.checked = true; 
+                  }
+              }
+              
+
+          } else {
+              directTutors.forEach(tutor => {
+                  tutor.textContent = 'Book ' + name + ' for Tutoring!';
+              });
+              otherOption.style.display = 'none'; // Hide the "Other" option
+              document.querySelector("#syllabus option:first-child").textContent = "";
+
+              const tutorOptionGroup = document.getElementById('tutor-option-group');
+                  tutorOptionGroup.style.display = 'block'; // Hide the radio buttons
+
+
+
+               }
+
+          document.getElementById("modal").style.display = 'block';
+          var span = document.getElementById("close-popup");
+
+          var tutorName = document.getElementById('hiddenTutorName');
+          tutorName.value = name;
+
+          var tutorEmail = document.getElementById('hiddenTutorEmail');
+          tutorEmail.value = email;
+
+          span.onclick = function() {
+          modal.style.display = "none";
+          }
+
+          window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+       }
+
+      }
+
+      function formDataToObject(formData) {
+  const data = {};
+  formData.forEach((value, key) => {
+      // Handle multiple values for the same key
+      if (data[key]) {
+          // If value is already an array, push the new value
+          if (Array.isArray(data[key])) {
+              data[key].push(value);
+          } else {
+              // Convert existing value to an array and add new value
+              data[key] = [data[key], value];
+          }
+      } else {
+          data[key] = value;
+      }
+  });
+  return data;
 }
 
 function combineFormData() {
 
-    const form1 = document.getElementById('contact-form');
-    const form2 = document.getElementById('additional-form');
-    const form3 = document.getElementById('submit-form');
-    const form4 = document.getElementById('formFour');
+  const form1 = document.getElementById('contact-form');
+  const form2 = document.getElementById('additional-form');
+  const form3 = document.getElementById('submit-form');
+  const form4 = document.getElementById('formFour');
 
-    const form1Data = new FormData(form1);
-    const form2Data = new FormData(form2);
-    const form3Data = new FormData(form3);
-    const form4Data = new FormData(form4);
+  const form1Data = new FormData(form1);
+  const form2Data = new FormData(form2);
+  const form3Data = new FormData(form3);
+  const form4Data = new FormData(form4);
 
-    const data1 = formDataToObject(form1Data);
-    const data2 = formDataToObject(form2Data);
-    const data3 = formDataToObject(form3Data);
-    const data4 = formDataToObject(form4Data);
+  const data1 = formDataToObject(form1Data);
+  const data2 = formDataToObject(form2Data);
+  const data3 = formDataToObject(form3Data);
+  const data4 = formDataToObject(form4Data);
 
-    // Combine all data into a single object
-    return { ...data1, ...data2, ...data3, ...data4,};
+  // Combine all data into a single object
+  return { ...data1, ...data2, ...data3, ...data4,};
 }
 
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Get the buttons by their IDs
-    const onceOffButton = document.getElementById('onceOffPackage');
-    const basicButton = document.getElementById('basicPackage');
-    const premiumButton = document.getElementById('premiumPackage');
-    const advancedButton = document.getElementById('advancedPackage');
-    const eliteButton = document.getElementById('elitePackage');
+  // Get the buttons by their IDs
+  const onceOffButton = document.getElementById('onceOffPackage');
+  const basicButton = document.getElementById('basicPackage');
+  const premiumButton = document.getElementById('premiumPackage');
+  const advancedButton = document.getElementById('advancedPackage');
+  const eliteButton = document.getElementById('elitePackage');
 
-    const oneOnone = document.getElementById('oneOnone');
-    const twoTofivePackage = document.getElementById('twoTofivePackage');
-    const sixTo10Package = document.getElementById('sixTo10Package');
+  const oneOnone = document.getElementById('oneOnone');
+  const twoTofivePackage = document.getElementById('twoTofivePackage');
+  const sixTo10Package = document.getElementById('sixTo10Package');
 
-    // Function to handle button clicks
-    function handleButtonClick(event) {
-        // Get the ID of the button that was clicked
-        const buttonId = event.target.id;
+  // Function to handle button clicks
+  function handleButtonClick(event) {
+      // Get the ID of the button that was clicked
+      const buttonId = event.target.id;
 
-        var tutoring = document.querySelector('input[name="tutor-style"]:checked');
-        var ghg = tutoring ? tutoring.value : 'None';
-        var syllabusId = document.getElementById('syllabus').value;
-  
-        // You can use a switch statement or if-else logic to handle specific buttons
-        switch (buttonId) {
-            case 'onceOffPackage':
-            alert('Once Off Package selected');
-            var amountTopay;
+      var ghg = document.getElementById('tutor-style').value.trim(); 
+      var syllabusId = document.getElementById('syllabus').value;
 
-            if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '300'; // amount to pay;
-               }
-               else{
+      // You can use a switch statement or if-else logic to handle specific buttons
+      switch (buttonId) {
+          case 'onceOffPackage':
+          alert('Once Off Package selected');
+          var amountTopay;
 
-               if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                       
-                       amountTopay = '400'; // amount to pay;
+          if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+               amountTopay = '300'; // amount to pay;
+             }
+             else{
 
-               }
-
-               else{
-
-                if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-
-                        amountTopay = '400'; // amount to pay;
-
-                        }
-
-                        else{
-
-                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                       
-                                    amountTopay = '550'; // amount to pay;
-                
-                                }
-
-                        }
-
-               }
-
-            }
-
-                const allData = combineFormData();
-
-                const dataToSend = {
-                    ...allData, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
-                };
-
-                fetch('/booking', { // Replace with your actual endpoint URL
-								method: 'POST',
-								headers: { 
-									'Content-Type': 'application/json' 
-								},
-								body: JSON.stringify(dataToSend)
-							})
-							.then(response => response.json())
-							.then(result => {
-							
-								// Optionally show success message or handle response
-							})
-							.catch(error => {
-								console.error('Error:', error);
-								// Optionally handle error response
-							});
-
-                            setTimeout(function(){
-                        window.location.href = '/payment';
-                    } , 2000);
-
-                break;
-            case 'basicPackage':
-                alert('Basic Package selected');
-
-                var amountTopay;
-
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '1100'; // amount to pay;
-                  }
-                  else{
-                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                      amountTopay = '1550'; // amount to pay;
-
-                  }
-
-                  else{
-
-                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-
-                        amountTopay = '1550'; // or button.innerHTML = 'Submit';
-
-                        }
-                        else{
-
-                            if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                            amountTopay = '2150'; // amount to pay;
-                  }
-
-                            
-                        }
-                  }
-
-                }
-
-                const all = combineFormData();
-
-                const ToSend = {
-                    ...all, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
-                };
-
-                fetch('/booking', { // Replace with your actual endpoint URL
-								method: 'POST',
-								headers: { 
-									'Content-Type': 'application/json' 
-								},
-								body: JSON.stringify(ToSend)
-							})
-							.then(response => response.json())
-							.then(result => {
-								
-								// Optionally show success message or handle response
-							})
-							.catch(error => {
-								console.error('Error:', error);
-								// Optionally handle error response
-							});
-
-                            setTimeout(function(){
-                        window.location.href = '/payment';
-                    } , 2000);
-
-                break;
-            case 'premiumPackage':
-                alert('Premium Package selected');
-
-                var amountTopay;
-
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                amountTopay = '2150'; // amount to pay;
-                }
-                else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                       amountTopay = '3100'; // amount to pay;
-                }
-
-                else{
-
-                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-
-                            amountTopay = '3100'; // amount to pay;
-
-                            }
-                            else{
-
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                       amountTopay = '4300'; // amount to pay;
-                }
+             if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                     
+                     amountTopay = '400'; // amount to pay;
 
              }
 
-                }
+             else{
 
-                }
+              if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
 
-                const dataall = combineFormData();
+                      amountTopay = '400'; // amount to pay;
 
-                const ToSendData = {
-                    ...dataall, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
-                };
-
-                fetch('/booking', { // Replace with your actual endpoint URL
-								method: 'POST',
-								headers: { 
-									'Content-Type': 'application/json' 
-								},
-								body: JSON.stringify(ToSendData)
-							})
-							.then(response => response.json())
-							.then(result => {
-								
-								// Optionally show success message or handle response
-							})
-							.catch(error => {
-								console.error('Error:', error);
-								// Optionally handle error response
-							});
-
-                            setTimeout(function(){
-                        window.location.href = '/payment';
-                    } , 2000);
-
-                break;
-            case 'advancedPackage':
-                alert('Advanced Package selected');
-
-                var amountTopay;
-
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '3250'; // amount to pay;
-                  }
-                  else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                     amountTopay = '4650'; // amount to pay;
-                  }
-
-                  else{
-                    if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                   amountTopay = '4650'; // amount to pay;
-                  }
-                  else{
-
-                    if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                       amountTopay = '6350'; // amount to pay;
                       }
 
-                  }
+                      else{
 
-                  }
+                          if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                     
+                                  amountTopay = '550'; // amount to pay;
+              
+                              }
 
-                  }
+                      }
 
-                const data = combineFormData();
+             }
 
-                const sendData = {
-                    ...data, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
-                };
+          }
 
-                fetch('/booking', { // Replace with your actual endpoint URL
-                                method: 'POST',
-                                headers: { 
-                                    'Content-Type': 'application/json' 
-                                },
-                                body: JSON.stringify(sendData)
-                            })
-                            .then(response => response.json())
-                            .then(result => {
-                                
-                                // Optionally show success message or handle response
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                // Optionally handle error response
-                            });
+              const allData = combineFormData();
 
-                            setTimeout(function(){
-                        window.location.href = '/payment';
-                    } , 2000);
+              const dataToSend = {
+                  ...allData, // Spread the existing data
+                  amount: amountTopay // Add the buttonId
+              };
 
+              fetch('/booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(dataToSend)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                          
+                              // Optionally show success message or handle response
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
 
-                break;
-            case 'elitePackage':
-               alert('Elite Package selected');
+                          setTimeout(function(){
+                      window.location.href = '/payment';
+                  } , 2000);
 
-               var amountTopay;
+              break;
+          case 'basicPackage':
+              alert('Basic Package selected');
 
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                amountTopay = '4350'; // amount to pay;
+              var amountTopay;
+
+              if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+               amountTopay = '1100'; // amount to pay;
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                    amountTopay = '6200'; // or button.innerHTML = 'Submit';
+                if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                    amountTopay = '1550'; // amount to pay;
 
-                    }
-                    else{
+                }
 
-                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                        amountTopay = '6200'; // or button.innerHTML = 'Submit';
+                else{
 
-                            }
-                            else{
+                  if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
 
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
-                      amountTopay = '8500'; // or button.innerHTML = 'Submit';
+                      amountTopay = '1550'; // or button.innerHTML = 'Submit';
 
-                   }
+                      }
+                      else{
 
-                            }
+                          if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                          amountTopay = '2150'; // amount to pay;
+                }
+
+                          
+                      }
+                }
+
+              }
+
+              const all = combineFormData();
+
+              const ToSend = {
+                  ...all, // Spread the existing data
+                  amount: amountTopay // Add the buttonId
+              };
+
+              fetch('/booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(ToSend)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                              
+                              // Optionally show success message or handle response
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
+
+                          setTimeout(function(){
+                      window.location.href = '/payment';
+                  } , 2000);
+
+              break;
+          case 'premiumPackage':
+              alert('Premium Package selected');
+
+              var amountTopay;
+
+              if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+              amountTopay = '2150'; // amount to pay;
+              }
+              else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                     amountTopay = '3100'; // amount to pay;
+              }
+
+              else{
+
+                  if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+
+                          amountTopay = '3100'; // amount to pay;
+
+                          }
+                          else{
+
+                              if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                     amountTopay = '4300'; // amount to pay;
+              }
+
+           }
+
+              }
+
+              }
+
+              const dataall = combineFormData();
+
+              const ToSendData = {
+                  ...dataall, // Spread the existing data
+                  amount: amountTopay // Add the buttonId
+              };
+
+              fetch('/booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(ToSendData)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                              
+                              // Optionally show success message or handle response
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
+
+                          setTimeout(function(){
+                      window.location.href = '/payment';
+                  } , 2000);
+
+              break;
+          case 'advancedPackage':
+              alert('Advanced Package selected');
+
+              var amountTopay;
+
+              if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+               amountTopay = '3250'; // amount to pay;
+                }
+                else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                   amountTopay = '4650'; // amount to pay;
+                }
+
+                else{
+                  if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                 amountTopay = '4650'; // amount to pay;
+                }
+                else{
+
+                  if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                     amountTopay = '6350'; // amount to pay;
                     }
 
                 }
 
-                const gatherData = combineFormData();
+                }
 
-                const dataSend = {
-                    ...gatherData, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
-                };
+                }
 
-                fetch('/booking', { // Replace with your actual endpoint URL
-                                method: 'POST',
-                                headers: { 
-                                    'Content-Type': 'application/json' 
-                                },
-                                body: JSON.stringify(dataSend)
-                            })
-                            .then(response => response.json())
-                            .then(result => {
+              const data = combineFormData();
+
+              const sendData = {
+                  ...data, // Spread the existing data
+                  amount: amountTopay // Add the buttonId
+              };
+
+              fetch('/booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(sendData)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                              
+                              // Optionally show success message or handle response
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
+
+                          setTimeout(function(){
+                      window.location.href = '/payment';
+                  } , 2000);
+
+
+              break;
+          case 'elitePackage':
+             alert('Elite Package selected');
+
+             var amountTopay;
+
+              if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+              amountTopay = '4350'; // amount to pay;
+              }
+              else{
+                  if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                  amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                  }
+                  else{
+
+                      if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                      amountTopay = '6200'; // or button.innerHTML = 'Submit';
+
+                          }
+                          else{
+
+                              if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel" ){
+                    amountTopay = '8500'; // or button.innerHTML = 'Submit';
+
+                 }
+
+                          }
+                  }
+
+              }
+
+              const gatherData = combineFormData();
+
+              const dataSend = {
+                  ...gatherData, // Spread the existing data
+                  amount: amountTopay // Add the buttonId
+              };
+
+              fetch('/booking', { // Replace with your actual endpoint URL
+                              method: 'POST',
+                              headers: { 
+                                  'Content-Type': 'application/json' 
+                              },
+                              body: JSON.stringify(dataSend)
+                          })
+                          .then(response => response.json())
+                          .then(result => {
+                              
+                              // Optionally show success message or handle response
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Optionally handle error response
+                          });
+
+                          setTimeout(function(){
+                      window.location.href = '/payment';
+                  } , 2000);
+
+              break;
+
+              case 'oneOnone':
+
+              let value;
+
+                        do {
+                              value = prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                              
+                              // If user cancels, exit the loop
+                              if (value === null) {
+                                  console.log("Prompt was canceled.");
+                                  break; // Exit the loop
+                              }
+
+                          } while (isNaN(value) || value <= 0);
+
+                //const value = prompt("How many sessions do you want?");
+
+                var yearFor = document.querySelector('input[name="year"]:checked');
+                var yearIn = yearFor ? yearFor.value : 'None';
+
+                 var amountTopay;
+                 var calcAmount;
+                 var discountAmount;
+                 var amountAfterDiscount;
+                 var trackDiscount = 0;
+
+                 if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+
+                       calcAmount = 650 * value;
+
+                            if(value >= 8 && value <= 11){
+
+                               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                               amountAfterDiscount = amountAfterDiscount.toString();
+                               amountTopay = amountAfterDiscount;
+                               trackDiscount = 1;
+                              
+                            }
+                            else{
+                              if(value >= 12 && value <= 19){
+
+                                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                  amountAfterDiscount = amountAfterDiscount.toString();
+                                  amountTopay = amountAfterDiscount;
+                                  trackDiscount = 2;
                                 
-                                // Optionally show success message or handle response
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                // Optionally handle error response
-                            });
+                                  }
+                                  else{
+                                      if(value >= 20 ){
 
-                            setTimeout(function(){
-                        window.location.href = '/payment';
-                    } , 2000);
+                                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                      amountAfterDiscount = amountAfterDiscount.toString();
+                                      amountTopay = amountAfterDiscount;
+                                      trackDiscount =3;
+                                      }
+                                      else{
 
-                break;
+                                          if(value <= 7){
 
-                case 'oneOnone':
-                   alert("One on One Student Package Selected.");
+                                          calcAmount = calcAmount.toString();
+                                          amountTopay = calcAmount;
 
-                   var amountTopay;
+                                          }
+                                      }
+                                  }
+                            }
 
-                   if(ghg === "In Person"){
+                 }
+                 else{
 
-                   amountTopay = '650'; 
-                   }
-                   else{
-                    amountTopay = '450';
-                   }
+                  if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
 
-                   const gatheredData = combineFormData();
+                       calcAmount = 450 * value;
 
-                    const dataSendout = {
-                        ...gatheredData, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
-                    };
+                       if(value >= 8 && value <= 11){
 
-                    fetch('/booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(dataSendout)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                    
-                                    // Optionally show success message or handle response
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
+                          discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                          amountAfterDiscount = amountAfterDiscount.toString();
+                          amountTopay = amountAfterDiscount;
+                          trackDiscount = 1;
+                          
+                          }
+                          else{
+                          if(value >= 12 && value <= 19){
 
-                                setTimeout(function(){
-                            window.location.href = '/payment';
-                        } , 2000);
+                          discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                          amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                          amountAfterDiscount = amountAfterDiscount.toString();
+                          amountTopay = amountAfterDiscount;
+                          trackDiscount = 2;
+                          
+                          }
+                          else{
+                              if(value >= 20 ){
 
-                break;
+                              discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                              amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                              amountAfterDiscount = amountAfterDiscount.toString();
+                              amountTopay = amountAfterDiscount;
+                              trackDiscount = 3;
+                              
+                              }
+                              else{
 
-                case 'twoTofivePackage':
-                   alert("Two - Five Student Package Selected.");
+                                  if(value <= 7){
 
-                   var amountTopay;
+                                  calcAmount = calcAmount.toString();
+                                  amountTopay = calcAmount;
 
-                    if(ghg === "In Person"){
+                                  }
+                              }
+                          }
+                          }
 
-                    amountTopay = '450'; 
+                  }
+                  else{
+                      if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+                          calcAmount = 550 * value;
+                          
+                            if(value >= 8 && value <= 11){
+
+                               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                               amountAfterDiscount = amountAfterDiscount.toString();
+                               amountTopay = amountAfterDiscount;
+                               trackDiscount = 1;
+                               
+                            }
+                            else{
+                              if(value >= 12 && value <= 19){
+
+                                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                  amountAfterDiscount = amountAfterDiscount.toString();
+                                  amountTopay = amountAfterDiscount;
+                                  trackDiscount = 2;
+                                  
+                                  }
+                                  else{
+                                      if(value >= 20 ){
+
+                                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                      amountAfterDiscount = amountAfterDiscount.toString();
+                                      amountTopay = amountAfterDiscount;
+                                      trackDiscount = 3;
+                                      
+                                      }
+                                      else{
+
+                                          if(value <= 7){
+
+                                          calcAmount = calcAmount.toString();
+                                          amountTopay = calcAmount;
+
+                                          }
+                                      }
+                                  }
+                            }
+                         
+
+                          }
+                          else{
+                              if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+                              calcAmount = 750 * value;
+
+                            if(value >= 8 && value <= 11){
+
+                               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                               amountAfterDiscount = amountAfterDiscount.toString();
+                               amountTopay = amountAfterDiscount;
+                               trackDiscount = 1;
+                              
+                            }
+                            else{
+                              if(value >= 12 && value <= 19){
+
+                                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                  amountAfterDiscount = amountAfterDiscount.toString();
+                                  amountTopay = amountAfterDiscount;
+                                  trackDiscount = 2;
+                                 
+                                  }
+                                  else{
+                                      if(value >= 20 ){
+
+                                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                      amountAfterDiscount = amountAfterDiscount.toString();
+                                      amountTopay = amountAfterDiscount;
+                                      trackDiscount = 3;
+                                      
+                                      }
+                                      else{
+
+                                          if(value <= 7){
+
+                                          calcAmount = calcAmount.toString();
+                                          amountTopay = calcAmount;
+
+                                          }
+                                      }
+                                  }
+                            }
+
+                              }
+
+                              else{
+                                  if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                                      calcAmount = 850 * value;
+
+                            if(value >= 8 && value <= 11){
+
+                               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                               amountAfterDiscount = amountAfterDiscount.toString();
+                               amountTopay = amountAfterDiscount;
+                               trackDiscount = 1;
+                               
+                            }
+                            else{
+                              if(value >= 12 && value <= 19){
+
+                                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                  amountAfterDiscount = amountAfterDiscount.toString();
+                                  amountTopay = amountAfterDiscount;
+                                  trackDiscount = 2;
+                                  
+                                  }
+                                  else{
+                                      if(value >= 20 ){
+
+                                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                      amountAfterDiscount = amountAfterDiscount.toString();
+                                      amountTopay = amountAfterDiscount;
+                                      trackDiscount = 3;
+                                      
+                                      }
+                                      else{
+
+                                          if(value <= 7){
+
+                                          calcAmount = calcAmount.toString();
+                                          amountTopay = calcAmount;
+
+                                          }
+                                      }
+                                  }
+                            }
+
+                                      }
+                                      else{
+                                          if(ghg === "Online" && yearIn === 'postgrad'){
+
+                                          calcAmount = 650 * value;
+
+                            if(value >= 8 && value <= 11){
+
+                               discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+                               amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                               amountAfterDiscount = amountAfterDiscount.toString();
+                               amountTopay = amountAfterDiscount;
+                               trackDiscount = 1;
+                              
+                            }
+                            else{
+                              if(value >= 12 && value <= 19){
+
+                                  discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                                  amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                  amountAfterDiscount = amountAfterDiscount.toString();
+                                  amountTopay = amountAfterDiscount;
+                                  trackDiscount = 2;
+                                  
+                                  }
+                                  else{
+                                      if(value >= 20 ){
+
+                                      discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                                      amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                                      amountAfterDiscount = amountAfterDiscount.toString();
+                                      amountTopay = amountAfterDiscount;
+                                      trackDiscount = 3;
+                                      
+
+                                      }
+                                      else{
+
+                                          if(value <= 7){
+
+                                          calcAmount = calcAmount.toString();
+                                          amountTopay = calcAmount;
+
+                                          }
+                                      }
+                                  }
+                            }
+
+                                        }
+
+                                      }
+
+                              }
+
+                          }
+
+                  }
+
+                 }
+
+                 if (value !== null) {
+                                
+                  if(trackDiscount === 1){
+
+                     alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                 }
+                 else{
+                  if(trackDiscount === 2){
+
+                      alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                          }
+                          else{
+
+                              if(trackDiscount === 3){
+
+                                  alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+                              }
+
+                              else{
+
+                                  alert("Amount to pay R"+amountTopay);
+                              }
+
+                          }
+
+                 }
+
+                 const gatheredData = combineFormData();
+
+                  const dataSendout = {
+                      ...gatheredData, // Spread the existing data
+                      amount: amountTopay // Add the buttonId
+                  };
+
+                  fetch('/booking', { // Replace with your actual endpoint URL
+                                  method: 'POST',
+                                  headers: { 
+                                      'Content-Type': 'application/json' 
+                                  },
+                                  body: JSON.stringify(dataSendout)
+                              })
+                              .then(response => response.json())
+                              .then(result => {
+                                  
+                                  // Optionally show success message or handle response
+                              })
+                              .catch(error => {
+                                  console.error('Error:', error);
+                                  // Optionally handle error response
+                              });
+
+                              setTimeout(function(){
+                          window.location.href = '/payment';
+                      } , 2000);
+
+                  }
+
+              break;
+
+              case 'twoTofivePackage':
+             
+
+              let valuee;
+
+                  do {
+                      valuee= prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                      
+                      // If user cancels, exit the loop
+                      if (valuee === null) {
+                          console.log("Prompt was canceled.");
+                          break; // Exit the loop
+                      }
+
+                  } while (isNaN(valuee) || valuee <= 0);
+
+var yearFor = document.querySelector('input[name="year"]:checked');
+var yearIn = yearFor ? yearFor.value : 'None';
+
+var amountTopay;
+var calcAmount;
+var discountAmount;
+var amountAfterDiscount;
+var trackDiscount = 0;
+
+if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+
+     calcAmount = 450 * valuee;
+
+          if(valuee >= 8 && valuee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valuee >= 12 && valuee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+              
+                }
+                else{
+                    if(valuee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount =3;
                     }
                     else{
-                    amountTopay = '300';
+
+                        if(valuee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
                     }
+                }
+          }
 
-                    const gatheredDat = combineFormData();
+}
+else{
 
-                    const ataSendout = {
-                        ...gatheredDat, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
-                    };
+if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
 
-                    fetch('/booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(ataSendout)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                    
-                                    // Optionally show success message or handle response
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
+     calcAmount = 300 * valuee;
 
-                                setTimeout(function(){
-                            window.location.href = '/payment';
-                        } , 2000);
+     if(valuee >= 8 && valuee <= 11){
 
+        discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+        amountAfterDiscount = amountAfterDiscount.toString();
+        amountTopay = amountAfterDiscount;
+        trackDiscount = 1;
+        
+        }
+        else{
+        if(valuee >= 12 && valuee <= 19){
 
+        discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+        amountAfterDiscount = amountAfterDiscount.toString();
+        amountTopay = amountAfterDiscount;
+        trackDiscount = 2;
+        
+        }
+        else{
+            if(valuee >= 20 ){
+
+            discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+            amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+            amountAfterDiscount = amountAfterDiscount.toString();
+            amountTopay = amountAfterDiscount;
+            trackDiscount = 3;
+            
+            }
+            else{
+
+                if(valuee <= 7){
+
+                calcAmount = calcAmount.toString();
+                amountTopay = calcAmount;
+
+                }
+            }
+        }
+        }
+
+}
+else{
+    if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+        calcAmount = 400 * valuee;
+        
+          if(valuee >= 8 && valuee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+             
+          }
+          else{
+            if(valuee >= 12 && valuee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valuee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valuee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+       
+
+        }
+        else{
+            if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+            calcAmount = 550 * valuee;
+
+          if(valuee >= 8 && valuee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valuee >= 12 && valuee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+               
+                }
+                else{
+                    if(valuee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valuee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+            }
+
+            else{
+                if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                    calcAmount = 750 * valuee;
+
+          if(valuee >= 8 && valuee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+             
+          }
+          else{
+            if(valuee >= 12 && valuee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valuee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valuee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+                    }
+                    else{
+                        if(ghg === "Online" && yearIn === 'postgrad'){
+
+                        calcAmount = 450 * valuee;
+
+          if(valuee >= 8 && valuee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valuee >= 12 && valuee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valuee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
                     
 
-                break;
-
-                case 'sixTo10Package':
-                   alert("Six - Ten Student Package Selected.");
-
-                   var amountTopay;
-
-                    if(ghg === "In Person"){
-
-                    amountTopay = '350';
                     }
                     else{
-                    amountTopay = '200';
+
+                        if(valuee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+                      }
+
                     }
 
-                    const outData = combineFormData();
+            }
 
-                    const sendOut = {
-                        ...outData, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
-                    };
-
-                    fetch('/booking', { // Replace with your actual endpoint URL
-                                    method: 'POST',
-                                    headers: { 
-                                        'Content-Type': 'application/json' 
-                                    },
-                                    body: JSON.stringify(sendOut)
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                    
-                                    // Optionally show success message or handle response
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Optionally handle error response
-                                });
-
-                                setTimeout(function(){
-                            window.location.href = '/payment';
-                        } , 2000);
-
-
-
-                break;
-            default:
-                console.log('Unknown button clicked');
         }
-    }
 
-    // Add click event listeners to the buttons
-    onceOffButton.addEventListener('click', handleButtonClick);
-    basicButton.addEventListener('click', handleButtonClick);
-    premiumButton.addEventListener('click', handleButtonClick);
-    advancedButton.addEventListener('click', handleButtonClick);
-    eliteButton.addEventListener('click', handleButtonClick);
-    oneOnone.addEventListener('click' , handleButtonClick);
-    twoTofivePackage.addEventListener('click' , handleButtonClick);
-    sixTo10Package.addEventListener('click' , handleButtonClick);
+}
+
+}
+
+if (valuee !== null) {
+
+if(trackDiscount === 1){
+
+   alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+}
+else{
+if(trackDiscount === 2){
+
+    alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+        }
+        else{
+
+            if(trackDiscount === 3){
+
+                alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+            }
+
+            else{
+
+                alert("Amount to pay R"+amountTopay);
+            }
+
+        }
+
+}
+                  const gatheredDat = combineFormData();
+
+                  const ataSendout = {
+                      ...gatheredDat, // Spread the existing data
+                      amount: amountTopay // Add the buttonId
+                  };
+
+                  fetch('/booking', { // Replace with your actual endpoint URL
+                                  method: 'POST',
+                                  headers: { 
+                                      'Content-Type': 'application/json' 
+                                  },
+                                  body: JSON.stringify(ataSendout)
+                              })
+                              .then(response => response.json())
+                              .then(result => {
+                                  
+                                  // Optionally show success message or handle response
+                              })
+                              .catch(error => {
+                                  console.error('Error:', error);
+                                  // Optionally handle error response
+                              });
+
+                              setTimeout(function(){
+                          window.location.href = '/payment';
+                      } , 2000);
+
+
+}
+
+              break;
+
+              case 'sixTo10Package':
+
+              let valueee;
+
+                  do {
+                      valueee = prompt("How many sessions do you want? (Please enter a number greater than 0)");
+                      
+                      // If user cancels, exit the loop
+                      if (valueee === null) {
+                          console.log("Prompt was canceled.");
+                          break; // Exit the loop
+                      }
+
+                  } while (isNaN(valueee) || valueee <= 0);
+             
+              
+
+
+var yearFor = document.querySelector('input[name="year"]:checked');
+var yearIn = yearFor ? yearFor.value : 'None';
+
+var amountTopay;
+var calcAmount;
+var discountAmount;
+var amountAfterDiscount;
+var trackDiscount = 0;
+
+if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+
+     calcAmount = 350 * valueee;
+
+          if(valueee >= 8 && valueee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valueee >= 12 && valueee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+              
+                }
+                else{
+                    if(valueee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount =3;
+                    }
+                    else{
+
+                        if(valueee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+}
+else{
+
+if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+
+     calcAmount = 200 * valueee;
+
+     if(valueee >= 8 && valueee <= 11){
+
+        discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+        amountAfterDiscount = amountAfterDiscount.toString();
+        amountTopay = amountAfterDiscount;
+        trackDiscount = 1;
+        
+        }
+        else{
+        if(valueee >= 12 && valueee <= 19){
+
+        discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+        amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+        amountAfterDiscount = amountAfterDiscount.toString();
+        amountTopay = amountAfterDiscount;
+        trackDiscount = 2;
+        
+        }
+        else{
+            if(valueee >= 20 ){
+
+            discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+            amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+            amountAfterDiscount = amountAfterDiscount.toString();
+            amountTopay = amountAfterDiscount;
+            trackDiscount = 3;
+            
+            }
+            else{
+
+                if(valueee <= 7){
+
+                calcAmount = calcAmount.toString();
+                amountTopay = calcAmount;
+
+                }
+            }
+        }
+        }
+
+}
+else{
+    if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+
+        calcAmount = 300 * valueee;
+        
+          if(valueee >= 8 && valueee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+             
+          }
+          else{
+            if(valueee >= 12 && valueee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valueee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valueee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+       
+
+        }
+        else{
+            if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+
+            calcAmount = 450 * valueee;
+
+          if(valueee >= 8 && valueee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valueee >= 12 && valueee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+               
+                }
+                else{
+                    if(valueee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valueee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+            }
+
+            else{
+                if(ghg === "In Person" && yearIn === 'postgrad'){
+
+                    calcAmount = 550 * valueee;
+
+          if(valueee >= 8 && valueee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+             
+          }
+          else{
+            if(valueee >= 12 && valueee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valueee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+                    }
+                    else{
+
+                        if(valueee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+                    }
+                    else{
+                        if(ghg === "Online" && yearIn === 'postgrad'){
+
+                        calcAmount = 350 * valueee;
+
+          if(valueee >= 8 && valueee <= 11){
+
+             discountAmount = (5 / 100) * calcAmount; // 5% discount applied
+             amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+             amountAfterDiscount = amountAfterDiscount.toString();
+             amountTopay = amountAfterDiscount;
+             trackDiscount = 1;
+            
+          }
+          else{
+            if(valueee >= 12 && valueee <= 19){
+
+                discountAmount = (10 / 100) * calcAmount; // 10% discount applied
+                amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                amountAfterDiscount = amountAfterDiscount.toString();
+                amountTopay = amountAfterDiscount;
+                trackDiscount = 2;
+                
+                }
+                else{
+                    if(valueee >= 20 ){
+
+                    discountAmount = (20 / 100) * calcAmount; // 20% discount applied
+                    amountAfterDiscount = calcAmount - discountAmount; // Subtract the discount
+                    amountAfterDiscount = amountAfterDiscount.toString();
+                    amountTopay = amountAfterDiscount;
+                    trackDiscount = 3;
+                    
+
+                    }
+                    else{
+
+                        if(valueee <= 7){
+
+                        calcAmount = calcAmount.toString();
+                        amountTopay = calcAmount;
+
+                        }
+                    }
+                }
+          }
+
+                      }
+
+                    }
+
+            }
+
+        }
+
+}
+
+}
+if (valueee !== null) {
+
+if(trackDiscount === 1){
+
+   alert("5% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+}
+else{
+if(trackDiscount === 2){
+
+    alert("10% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+        }
+        else{
+
+            if(trackDiscount === 3){
+
+                alert("20% discount of R"+calcAmount  + " applied. Amount to pay R"+amountTopay);
+
+            }
+
+            else{
+
+                alert("Amount to pay R"+amountTopay);
+            }
+
+        }
+
+}
+
+                  const outData = combineFormData();
+
+                  const sendOut = {
+                      ...outData, // Spread the existing data
+                      amount: amountTopay // Add the buttonId
+                  };
+
+                  fetch('/booking', { // Replace with your actual endpoint URL
+                                  method: 'POST',
+                                  headers: { 
+                                      'Content-Type': 'application/json' 
+                                  },
+                                  body: JSON.stringify(sendOut)
+                              })
+                              .then(response => response.json())
+                              .then(result => {
+                                  
+                                  // Optionally show success message or handle response
+                              })
+                              .catch(error => {
+                                  console.error('Error:', error);
+                                  // Optionally handle error response
+                              });
+
+                              setTimeout(function(){
+                          window.location.href = '/payment';
+                      } , 2000);
+
+                  }
+
+              break;
+          default:
+              console.log('Unknown button clicked');
+      }
+  }
+
+  // Add click event listeners to the buttons
+  onceOffButton.addEventListener('click', handleButtonClick);
+  basicButton.addEventListener('click', handleButtonClick);
+  premiumButton.addEventListener('click', handleButtonClick);
+  advancedButton.addEventListener('click', handleButtonClick);
+  eliteButton.addEventListener('click', handleButtonClick);
+  oneOnone.addEventListener('click' , handleButtonClick);
+  twoTofivePackage.addEventListener('click' , handleButtonClick);
+  sixTo10Package.addEventListener('click' , handleButtonClick);
 
 });
 
 
 function openPopup(email) {
-    fetch('/view-profile', {
-        method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({ email: email })
-    })
-    .then(response => {
-        if (response.ok) {
-            // Redirect to profile page after successful response
-            window.location.href = '/profile'; // Adjust the path as needed
-        } else {
-            throw new Error('Network response was not ok');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+  fetch('/view-profile', {
+      method: 'POST',
+      headers: { 
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({ email: email })
+  })
+  .then(response => {
+      if (response.ok) {
+          // Redirect to profile page after successful response
+          window.location.href = '/profile'; // Adjust the path as needed
+      } else {
+          throw new Error('Network response was not ok');
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
 
 }
 
 function toggleSubjectOptions() {
-    const container = document.getElementById('subjectContainer');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+  const container = document.getElementById('subjectContainer');
+  container.style.display = container.style.display === 'none' ? 'block' : 'none';
 }
 
 function updateSubjects() {
-    const checkboxes = document.querySelectorAll('#subjectContainer input[type="checkbox"]');
-    const selectedSubjects = [];
-    
-    checkboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-            selectedSubjects.push(checkbox.value);
-        }
-    });
-    
-    document.getElementById('subject').value = selectedSubjects.join(', ');
+  const checkboxes = document.querySelectorAll('#subjectContainer input[type="checkbox"]');
+  const selectedSubjects = [];
+  
+  checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+          selectedSubjects.push(checkbox.value);
+      }
+  });
+  
+  document.getElementById('subject').value = selectedSubjects.join(', ');
 }
+
+function toggleReadOnly() {
+      const tutoringFor = document.getElementById('tutoring-for').value;
+      const studentName = document.getElementById('student-name');
+      const studentLastName = document.getElementById('student-last-name');
+      const studName = document.getElementById('stud-name');
+      const studLast = document.getElementById('stud-last');
+
+      var firstName = document.getElementById('first-name').value.trim();
+      var lastName = document.getElementById('last-name').value.trim();
+
+ 
+
+      const isMe = tutoringFor === 'me';
+
+      studentName.readOnly = isMe;
+      studentLastName.readOnly = isMe;
+      studName.readOnly = isMe;
+      studLast.readOnly = isMe;
+
+      // Optionally clear values if readOnly is set
+      if (isMe) {
+          studentName.value = firstName;
+          studentName.placeholder = firstName;
+          studentLastName.value = lastName;
+          studentLastName.placeholder = lastName;
+          studName.value = firstName;
+          studName.placeholder = firstName;
+          studLast.value = lastName;
+          studLast.placeholder = lastName;
+      }
+       else{
+
+          studentName.value = '';
+          studentName.placeholder = '';
+          studentLastName.value = '';
+          studentLastName.placeholder = '';
+          studName.value = '';
+          studName.placeholder = '';
+          studLast.value = '';
+          studLast.placeholder = '';
+
+          }
+
+
+  }
+
+
+  function checkPostgrad() {
+      const postgradRadio = document.getElementById('year-postgrad');
+      const postgradOptions = document.getElementById('postgrad-options');
+
+      if (postgradRadio.checked) {
+          postgradOptions.classList.remove('opt');
+      } else {
+          postgradOptions.classList.add('opt');
+      }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+      const countrySelect = document.getElementById("country");
+      const provinceGroup = document.getElementById("fProvince");
+
+      function toggleProvince() {
+          if (countrySelect.value === "South Africa") {
+              provinceGroup.style.display = "block";
+          } else {
+              provinceGroup.style.display = "none";
+              document.getElementById("province").value = "";
+          }
+      }
+
+      toggleProvince();
+      countrySelect.addEventListener("change", toggleProvince);
+  });
 
 
 
