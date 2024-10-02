@@ -11,7 +11,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link href="assets/css/frontfront.css" rel="stylesheet">
-    <link href="bookBook.css" rel="stylesheet">
+    <link href="tutorBookings.css" rel="stylesheet">
     <style>
         .checkbox-container{
             display: inline-flex;
@@ -780,7 +780,7 @@
             
                         <!--form 5-->
 
-                    </div>
+                   <!--</div>-->
 
 
                     <div id="popup" class="popup hide">
@@ -802,6 +802,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         <!--</div>-->
    <!--BOOKING FORM--> 
