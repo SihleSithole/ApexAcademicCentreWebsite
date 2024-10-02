@@ -1,4 +1,3 @@
-
 	@-ms-viewport {
 		width: device-width;
 	}
@@ -165,8 +164,7 @@ body, ul, li {
   
 }
 
-/* Styles for the mobile view */
-@media screen and (max-width: 768px) {
+@media  (max-width: 480px)  {
     .navbar {
         height: 50px; /* Adjust the height as needed */
     }
@@ -187,6 +185,7 @@ body, ul, li {
         flex-direction: column; /* Stack vertically */
         transition: right 0.3s ease; /* Sliding effect */
         z-index: 999; /* Ensure it is above other content */
+        
     }
 
     .nav-links.show {
@@ -208,6 +207,70 @@ body, ul, li {
         top: 10px; /* Adjust as needed */
         left: 0; /* Align to the left */
     }
+    
+    .tutorImage{
+		display: none;
+	}
+	
+	.main-class{
+		margin-top:-8%;
+	}
+
+	
+}
+
+/* Styles for the mobile view */
+@media  (min-width: 480px) and (max-width: 1024px) {
+    .navbar {
+        height: 50px; /* Adjust the height as needed */
+    }
+
+    .navbar-toggle {
+		color: #00a550;
+        display: block; /* Show toggle button */
+    }
+
+    .nav-links {
+        margin-top: 5%;
+        position: fixed; /* Fix position */
+        top: 0; /* Align to top */
+        right: -300px; /* Start off-screen */
+        height: 100%; /* Full height */
+        width: 250px; /* Width of the nav */
+        background-color: white; /* Background color */
+        flex-direction: column; /* Stack vertically */
+        transition: right 0.3s ease; /* Sliding effect */
+        z-index: 999; /* Ensure it is above other content */
+        
+    }
+
+    .nav-links.show {
+        right: 0; /* Slide in */
+    }
+
+    .search-container {
+        display: none; /* Hide search on small screens */
+    }
+
+    .login-register {
+        width: 100%; /* Full width */
+        margin: 10px 0; /* Add spacing */
+    }
+
+    .logo {
+        margin: 0; /* Remove margins */
+        position: absolute; /* Position it absolutely */
+        top: 10px; /* Adjust as needed */
+        left: 0; /* Align to the left */
+    }
+    
+    .tutorImage{
+		display: none;
+	}
+	
+	.main-class{
+		margin-top:-3%;
+	}
 
 	
 }
@@ -256,6 +319,76 @@ body, ul, li {
 }
 
 @media screen and (max-width: 768px) {
+	
+	.tutorImage {
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain aspect ratio */
+
+    object-fit: cover; /* Prevent stretching */
+    position: relative; /* Allow positioning adjustments */
+   }
+   
+	.image-wrapper .image1,
+	.image-wrapper .image2 {
+	    display: none; /* Hide both images */
+	}
+	
+	#tutorHead {
+        font-size: 2rem; /* Smaller font size for mobile */
+    }
+
+    #tutorPar {
+        font-size: 1rem; /* Smaller font size for mobile */
+    }
+
+    #tutorBtn {
+        height: 40px; /* Slightly reduce height */
+        font-size: 1rem; /* Smaller font size for mobile */
+    }
+    
+    .main-class br:nth-of-type(2) {
+        display: none; /* Hides the second <br> element */
+    }
+    
+ 	
+}
+
+@media screen and (max-width: 834px) {
+	
+	.tutorImage {
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain aspect ratio */
+
+    object-fit: cover; /* Prevent stretching */
+    position: relative; /* Allow positioning adjustments */
+   }
+   
+	.image-wrapper .image1,
+	.image-wrapper .image2 {
+	    display: none; /* Hide both images */
+	}
+	
+	#tutorHead {
+        font-size: 2rem; /* Smaller font size for mobile */
+    }
+
+    #tutorPar {
+        font-size: 1rem; /* Smaller font size for mobile */
+    }
+
+    #tutorBtn {
+        height: 40px; /* Slightly reduce height */
+        font-size: 1rem; /* Smaller font size for mobile */
+    }
+    
+    .main-class br:nth-of-type(2) {
+        display: none; /* Hides the second <br> element */
+    }
+    
+ 	
+}
+
+@media screen and (max-width: 1024px) {
 	
 	.tutorImage {
     width: 100%; /* Make the image fill the container */
@@ -354,6 +487,34 @@ body, ul, li {
     }
 }
 
+@media screen and  (max-width: 824px) {
+    .main-section .top,
+    .main-section .last {
+        width: 90%; /* Increase width on smaller screens */
+        margin-left: auto; /* Center the section */
+        margin-right: auto; /* Center the section */
+    }
+
+    .main-section .top .row {
+        flex-direction: column; /* Stack profile and details vertically */
+    }
+}
+
+@media screen and  (max-width: 1024px) {
+    .main-section .top,
+    .main-section .last {
+        width: 90%; /* Increase width on smaller screens */
+        margin-left: auto; /* Center the section */
+        margin-right: auto; /* Center the section */
+    }
+
+    .main-section .top .row {
+        flex-direction: column; /* Stack profile and details vertically */
+    }
+}
+
+
+
 @media screen and  (max-width: 480px) {
     .main-section .top {
         width: 100%; /* Full width on very small screens */
@@ -373,6 +534,47 @@ body, ul, li {
         flex-direction: column; /* Ensure vertical stacking on smaller screens */
     }
 }
+
+@media (min-width: 768px) and (max-width: 833px) {
+    .main-section .top {
+        width: 70%; /* Full width on very small screens */
+        margin-left: 15%; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        border-radius: 10px 10px 0 0; /* Keep border-radius */
+    }
+    
+    .main-section .last {
+        width: 70%; /* Full width on very small screens */
+        margin-left: 15%; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        border-radius: 0 0 10px 10px; /* Keep border-radius */
+    }
+
+    .main-section .top .row {
+        flex-direction: column; /* Ensure vertical stacking on smaller screens */
+    }
+}
+
+@media (min-width: 834px) and (max-width: 1023px) {
+    .main-section .top {
+        width: 100%; /* Full width on very small screens */
+        margin-left: 0; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        border-radius: 10px 10px 0 0; /* Keep border-radius */
+    }
+
+    .main-section .last {
+        width: 100%; /* Full width on very small screens */
+        margin-left: 0; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        border-radius: 0 0 10px 10px; /* Keep border-radius */
+    }
+
+    .main-section .top .row {
+        flex-direction: column; /* Ensure vertical stacking on smaller screens */
+    }
+}
+
 
 
 /* Profile Section */
@@ -511,6 +713,153 @@ body, ul, li {
     
 }
 
+@media  (min-width: 768px) and (max-width: 833px)  {
+	
+	.main-section .top {
+       flex-direction: column; /* Stack elements vertically */
+       height:fit-content ;
+ 
+    }
+	
+  .main-section .top .row {
+    display: flex; /* Align profile and details in a row */
+    flex-direction: row; /* Ensure they stay in a row */
+    border-radius: 10px;
+    align-items: stretch; /* Ensure both items stretch to the same height */
+}
+
+.main-section .top .row .profile {
+    flex: 0 0 28%; /* Set profile width */
+    margin-right: 10px; /* Add space to the right */
+      
+}
+
+.main-section .top .row .profile img {
+   
+    width: 100%; /* Ensure it fits within the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Maintain aspect ratio */
+    padding: 5px;
+    padding-left: 20px;
+ 
+}
+
+.main-section .top .row .details {
+    flex: 1; /* Allow the details to grow */
+    font-size: 16px; /* Set font size */
+    display: flex; /* Make the details section a flex container */
+    align-items: center; /* Center content vertically */
+    border-radius: 10px;
+}
+
+#tutorNameDisplay {
+    font-size: 25px;
+}
+
+#tutorNameDisplay + br {
+    display: none; /* Hide the next <br> element */
+}
+
+
+    .main-section .top .feedback {
+        flex: 0 0 100%; /* Full width */
+        display: flex; /* Ensure feedback retains its flex properties */
+        flex-direction: row; /* Keep column layout */
+        padding-left: 10%;
+        position: relative;
+       
+    }
+    
+
+		.ratings {
+		    position: absolute;
+		    top: 1px;
+		    left: 5%; 
+		}
+		
+		.feedback-item {
+		    position: absolute;
+		    top: 1px;
+		    left: 35%; 
+		    
+		  }
+		          
+}
+
+@media (min-width: 834px) and (max-width: 1023px) {
+	
+	.main-section .top {
+       flex-direction: column; /* Stack elements vertically */
+       height:fit-content ;
+       
+    }
+	
+  .main-section .top .row {
+    display: flex; /* Align profile and details in a row */
+    flex-direction: row; /* Ensure they stay in a row */
+    border-radius: 10px;
+    align-items: stretch; /* Ensure both items stretch to the same height */
+}
+
+.main-section .top .row .profile {
+    flex: 0 0 40%; /* Set profile width */
+    margin-right: 10px; /* Add space to the right */
+
+   
+}
+
+.main-section .top .row .profile img {
+   
+    width: 100%; /* Ensure it fits within the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Maintain aspect ratio */
+    padding: 5px;
+    padding-left: 20px;
+ 
+}
+
+.main-section .top .row .details {
+    flex: 1; /* Allow the details to grow */
+    font-size: 16px; /* Set font size */
+    display: flex; /* Make the details section a flex container */
+    align-items: center; /* Center content vertically */
+    border-radius: 10px;
+}
+
+#tutorNameDisplay {
+    font-size: 25px;
+}
+
+#tutorNameDisplay + br {
+    display: none; /* Hide the next <br> element */
+}
+
+
+    .main-section .top .feedback {
+        flex: 0 0 100%; /* Full width */
+        display: flex; /* Ensure feedback retains its flex properties */
+        flex-direction: row; /* Keep column layout */
+        padding-left: 10%;
+        position: relative;
+       
+    }
+    
+
+		.ratings {
+		    position: absolute;
+		    top: 1px;
+		    left: 5%; 
+		}
+		
+		.feedback-item {
+		    position: absolute;
+		    top: 1px;
+		    left: 35%; 
+		    
+		  }
+		        
+    
+}
 
 /*LAST DESIGN*/
 
@@ -648,9 +997,8 @@ body, ul, li {
     .hidSubjects{
 		display: none;
   }
-
-
-@media screen and (max-width: 768px) {
+  
+@media (max-width: 480px) {
     .main-section .last {
         display: flex;
         flex-direction: column; /* Stack items vertically */
@@ -758,12 +1106,251 @@ body, ul, li {
 					border-radius: 10px;
 				}
 
+		 
+}
 
-			    
+
+
+@media (min-width: 768px) and (max-width: 833px) {
+    .main-section .last {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        width: 70%; /* Ensure full width */
+    }
+
+    .main-section .last .user-details {
+		
+         order: 1; /* Position .about first */
+          background-color: white;
+          height: fit-content;
+          flex: 2; /* Adjust this value to control the relative width */
+          align-content: start;
+          padding: 10px;
+          font-size: 18px;
+   
+    }
+    
+    .main-section .last .grades {
+        order: 2; /* Position .grades second */
+        margin: 0; 
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%; /* Fixed width for the .profile div */
+        
+        }
+        
+        .main-section .last .grades h4{
+  
+		   margin: 0; 
+		   text-align: left; /* Center text within the paragraph */
+		   color: #001549;
+		   padding-left: 13px;
+		   font-size: 18px;
+		   
+		}
+		
+		.grades h4 + br {
+			    display: none; /* Hides the <br> element immediately following the <h4> */
+			}
+					
+		.grades .inside {
+			  display: flex; /* Change to flex layout */
+			  flex-wrap: wrap; /* Allow items to wrap to the next line */
+			  gap: 5px; /* Space between items */
+			  align-items: flex-start;
+              justify-content: flex-start;
+              padding-left: 14px;
+			}
 			
+			.grades p {
+			  display: inline-block; /* Allows width to be determined by content */
+			  padding-left: 5px; /* Set padding */
+			  padding-right: 5px; /* Set padding */
+			  margin: 3px; /* Margin for spacing between paragraphs */
+			  background-color: #e7eeff; /* Light background for visibility */
+			  border-radius: 3px; /* Apply border radius for rounded corners */
+			  text-align: center;
+			  color: #00a550;
+			  font-size: 13.5px; /* Retain original font size */
+			  align-items: flex-start;
+              justify-content: flex-start;
+              font-size: 15px;
+			}		
+		
+  
+    
+			    .main-section .last .user-details .subjects {
+			        order: 3; /* Position .subjects third */
+			        height: fit-content;
+				    align-content: start;
+			       
+			    }
+			    
+			    .hidSubjects{
+					
+			       display: block;
+			       font-size: 18px;
+			       color: #001549;
+			       font-weight: bold;
+			       
+			    }
+
+
+			    .main-section .last .book-view {
+			        order: 4; /* Position .book-view last */
+			        display: inline-flex;
+			    
+			        align-items: center;
+                    justify-content: center;
+			    }
+			    
+		
+				   .main-section .last .book-view .repoStyle{
+					
+					   display: inline-flex;   
+					   
+				   }
+
+				
+				
+				.main-section .last .book-view .repoStyle button{
+					
+					width: 150px;
+					border-radius: 10px;
+				}
 
 		 
 }
+
+@media (min-width: 834px) and (max-width: 1023px) {
+    .main-section .last {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        width: 100%; /* Ensure full width */
+    }
+
+    .main-section .last .user-details {
+		
+         order: 1; /* Position .about first */
+          background-color: white;
+          height: fit-content;
+          flex: 2; /* Adjust this value to control the relative width */
+          align-content: start;
+          padding: 10px;
+          font-size: 18px;
+   
+    }
+    
+    .main-section .last .grades {
+        order: 2; /* Position .grades second */
+        margin: 0; 
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%; /* Fixed width for the .profile div */
+        
+        }
+        
+        .main-section .last .grades h4{
+  
+		   margin: 0; 
+		   text-align: left; /* Center text within the paragraph */
+		   color: #001549;
+		   padding-left: 13px;
+		   font-size: 18px;
+		   
+		}
+		
+		.grades h4 + br {
+			    display: none; /* Hides the <br> element immediately following the <h4> */
+			}
+					
+		.grades .inside {
+			  display: flex; /* Change to flex layout */
+			  flex-wrap: wrap; /* Allow items to wrap to the next line */
+			  gap: 5px; /* Space between items */
+			  align-items: flex-start;
+              justify-content: flex-start;
+              padding-left: 14px;
+			}
+			
+			.grades p {
+			  display: inline-block; /* Allows width to be determined by content */
+			  padding-left: 5px; /* Set padding */
+			  padding-right: 5px; /* Set padding */
+			  margin: 3px; /* Margin for spacing between paragraphs */
+			  background-color: #e7eeff; /* Light background for visibility */
+			  border-radius: 3px; /* Apply border radius for rounded corners */
+			  text-align: center;
+			  color: #00a550;
+			  font-size: 13.5px; /* Retain original font size */
+			  align-items: flex-start;
+              justify-content: flex-start;
+              font-size: 15px;
+			}		
+		
+  
+    
+			    .main-section .last .user-details .subjects {
+			        order: 3; /* Position .subjects third */
+			        height: fit-content;
+				    align-content: start;
+			       
+			    }
+			    
+			    .hidSubjects{
+					
+			       display: block;
+			       font-size: 18px;
+			       color: #001549;
+			       font-weight: bold;
+			       
+			    }
+
+
+			    .main-section .last .book-view {
+			        order: 4; /* Position .book-view last */
+			        display: inline-flex;
+			    
+			        align-items: center;
+                    justify-content: center;
+			    }
+			    
+		
+				   .main-section .last .book-view .repoStyle{
+					
+					   display: inline-flex;   
+					   
+				   }
+
+				
+				
+				.main-section .last .book-view .repoStyle button{
+					
+					width: 150px;
+					border-radius: 10px;
+				}
+
+		 
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+	
+.tutorImage{
+		
+		display: block;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
 
 .feedback-item i {
     font-size: 18px; /* Size of the icon */
@@ -864,29 +1451,3 @@ body, ul, li {
   z-index: 1000; /* Ensure images are above other content */
   display: block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

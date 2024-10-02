@@ -4,13 +4,13 @@
 <%@ page import="com.example.demo.model.Tutor" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Base64" %>
-<html>
+<html>   <!--1024 834 768-->
  <head>
     <title>ApexAcademicCentre</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <link href="assets/css/pavillion.css" rel="stylesheet">
+    <link href="assets/css/frontfront.css" rel="stylesheet">
     <link href="bookBook.css" rel="stylesheet">
     <style>
         .checkbox-container{
@@ -75,7 +75,7 @@
                 font-weight: bold;
             }
 
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 1024px) {
 
                 
         .popup {
