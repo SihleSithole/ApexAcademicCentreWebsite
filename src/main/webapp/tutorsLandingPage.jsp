@@ -191,7 +191,7 @@
         <section class="main-section">
 
         <section class="main-class">
-            <img src="tutor.jpg" alt="Tutors Image" class="tutorImage"/>
+            
 			<h2 id="tutorHead" align="center">Apex Academic Centre Tutors</h2>
 			<p id="tutorPar" align="center">These are the Highest Quality Online and In-person Tutors. Get your personalized tutor with Apex Academic Centre</p>
             <button id="tutorBtn" onclick="openOpenopen()">BOOK A TUTOR</button>
