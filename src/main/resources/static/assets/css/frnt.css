@@ -1458,7 +1458,54 @@ body, ul, li {
 
 @media (min-width: 906px) and (max-width: 1280px){
 	
-		.image-wrapper .image1,
+	    .navbar {
+        height: 50px; /* Adjust the height as needed */
+    }
+
+    .navbar-toggle {
+		color: #00a550;
+        display: block; /* Show toggle button */
+        margin-right: 5%;
+    }
+
+    .nav-links {
+        margin-top: 5%;
+        position: fixed; /* Fix position */
+        top: 0; /* Align to top */
+        right: -300px; /* Start off-screen */
+        height: 100%; /* Full height */
+        width: 250px; /* Width of the nav */
+        background-color: white; /* Background color */
+        flex-direction: column; /* Stack vertically */
+        transition: right 0.3s ease; /* Sliding effect */
+        z-index: 999; /* Ensure it is above other content */
+        
+    }
+
+    .nav-links.show {
+        right: 0; /* Slide in */
+    }
+
+    .search-container {
+        display: none; /* Hide search on small screens */
+    }
+
+    .login-register {
+        width: 100%; /* Full width */
+        margin: 10px 0; /* Add spacing */
+    }
+
+    .logo {
+        margin: 0; /* Remove margins */
+        position: absolute; /* Position it absolutely */
+        top: 10px; /* Adjust as needed */
+        left: 0; /* Align to the left */
+        margin-left: 10%;
+    }
+	
+	
+	
+	.image-wrapper .image1,
 	.image-wrapper .image2 {
 	    display: none; /* Hide both images */
 	}
@@ -1466,7 +1513,7 @@ body, ul, li {
 	    .main-section .top,
     .main-section .last {
         width: 60%; /* Increase width on smaller screens */
-        margin-left: 15%; /* Center the section */
+        margin-left: 12%; /* Center the section */
         width: 75%;
         margin-right: auto; /* Center the section */
     }
