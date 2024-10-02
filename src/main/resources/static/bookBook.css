@@ -316,7 +316,7 @@
         }
         
         
-        @media (max-width: 768px) {
+        @media (max-width: 2560px) {
 			
         .form-row {
 			
@@ -472,7 +472,7 @@
       width: 150px;
 }
 
-  @media (max-width: 768px) {
+  @media (max-width: 2560px) {
 	
 	.form_5 {
     position: relative;
