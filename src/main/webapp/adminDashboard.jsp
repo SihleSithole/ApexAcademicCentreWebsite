@@ -1,3 +1,4 @@
+
 <%@ page import="java.sql.*, javax.sql.*, java.util.ArrayList, java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.demo.model.Tutor" %>
@@ -113,6 +114,18 @@
 	<li id="reviews">
 		<a href="#" class="dashboard" onclick="showReviewsPanel(); return false;">
 			<i class="material-icons">rate_review</i>Reviews
+		</a>
+	</li>
+
+	<li id="consultants"></li>
+		<a href="#" class="dashboard" onclick="showConsultantsPanel(); return false;">
+			<i class="material-icons">business_center</i>Consultants
+		</a>
+	</li>
+
+	<li id="others"></li>
+		<a href="#" class="dashboard" onclick="showOthersPanel(); return false;">
+			<i class="material-icons">help_outline</i>others
 		</a>
 	</li>
 
@@ -317,13 +330,13 @@
 										<div class="grid-container">
 											<div class="mb-3">
 												<label for="name">Name</label>
-												<input type="text" id="name" name="name" class="form-control" placeholder="Sihle">
+												<input type="text" id="name" name="name" class="form-control" placeholder="Bongi">
 												<div id="nameError" class="error-message"></div>
 											</div>
 									
 											<div class="mb-3">
 												<label for="name">Surname</label>
-												<input type="text" id="lsurname" name="lsurname" class="form-control" placeholder="Sithole" required>
+												<input type="text" id="lsurname" name="lsurname" class="form-control" placeholder="Mabhena" required>
 												<div id="lSurnameError" class="error-message"></div>
 											</div>
 
@@ -339,6 +352,8 @@
 												<div id="phoneError" class="error-message"></div>
 											</div>
 
+											
+
 											<div class="mb-3">
 												<label for="nationality">Nationality</label>
 												<select id="nationality" name="nationality" class="form-control" required>
@@ -347,7 +362,8 @@
 												</select>
 												
 											</div>
-									
+
+											
 											<div class="mb-3">
 												<label for="email">Email Address</label>
 												<input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
@@ -571,17 +587,45 @@
 									<!-- Form 1 -->
 									<form id="editform1" class="p-4 border rounded">
 										<h1 class="mb-4"></h1>
+										
+
 										<div class="mb-3">
-											<label for="name">Full Names</label>
-											<input type="text" id="editname" name="editname" class="form-control" required>
+											<label for="name">Name</label>
+											<input type="text" id="editname" name="editname" class="form-control" placeholder="Sihle">
 											<div id="editnameError" class="error-message"></div>
 										</div>
+								
+										<div class="mb-3">
+											<label for="surname">Surname</label>
+											<input type="text" id="editsurname" name="editsurname" class="form-control" placeholder="Sithole" required>
+											<div id="editsurnameError" class="error-message"></div>
+										</div>
+
+										<div class="mb-3">
+											<label for="idnumber">Date of Birth</label>
+											<input type="date" id="idnumber" name="idnumber" class="form-control" required>
+											<div id="idError" class="error-message"></div>
+										</div>
+
 
 										<div class="mb-3">
 											<label for="phone">Phone Number</label>
 											<input type="text" id="editphone" name="editphone" class="form-control" required>
 											<div id="editphoneError" class="error-message"></div>
 										</div>
+
+										<div class="mb-3">
+											<label for="nationality">Nationality</label>
+											<select id="nationality" name="nationality" class="form-control" required>
+												<option value="" disabled selected>Select your nationality</option>
+												<option value="No">African</option>
+											</select>
+											
+										</div>
+
+										
+
+
 										<div class="mb-3">
 											<label for="email">Email Address</label>
 											<input type="editemail" id="editemail" name="editemail" class="form-control"
@@ -998,6 +1042,172 @@
 
 					<!--Reviews Panel-->
 
+					<!--Start Consultans Panel-->
+
+					<div class="row" id="consultantsPanel">
+						<div class="col-md-12">
+							<div class="table-wrapper">
+	
+								<div class="table-title">
+									<div class="row">
+										<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+											<h2 class="ml-lg-2">Consultans</h2>
+										</div>
+									</div>
+								</div>
+	
+								<table class="table table-striped table-hover">
+	
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Surname</th>
+											<th>Contacts</th>
+										
+											<th>Student Email</th>
+											<th>View</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<% 
+											// Initialize the consultants list
+											List<String> consultants = new ArrayList<>();
+											consultants.add("Bongi");
+											consultants.add("lesego");
+											consultants.add("thato");
+											consultants.add("mdu");
+									
+											// Assuming consultants are set as an attribute somewhere
+											// List<String> consultants = (List<String>) request.getAttribute("consultants");
+									
+											if (consultants != null && !consultants.isEmpty()) {
+												for (int i = 0; i < consultants.size(); i++) {
+													String message = consultants.get(i); // Use get() instead of []
+													
+													if (!message.equals("")) { // Changed to use the string method
+										%>
+														<tr>
+															<th>
+																<%= message %>
+															</th>
+															<th>
+																<%= message %>
+															</th>
+															<th>
+																<%= message %>
+															</th>
+															<th>
+																<%= message %>
+															</th>
+															
+														</tr>
+										<% 
+													} 
+												} 
+											} else { 
+										%>
+												<tr>
+													<th>No Consultants yet..</th>
+												</tr>
+										<% 
+											} 
+										%>
+									</tbody>
+									
+	
+									
+								</table>
+							</div>
+						</div>
+											
+					</div>
+
+					<!--End Consultans Panel-->
+
+					<!--Start others panel-->
+
+					<div class="row" id="othersPanel">
+						<div class="col-md-12">
+							<div class="table-wrapper">
+					
+								<div class="table-title">
+									<div class="row">
+										<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+											<h2 class="ml-lg-2">Pending Others</h2>
+										</div>
+									</div>
+								</div>
+					
+								<table class="table table-striped table-hover">
+					
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Contacts</th>
+											
+											<th>View</th>
+										</tr>
+									</thead>
+					
+									<tbody>
+					
+										<% List<Booking> othersBookings = (List<Booking>) request.getAttribute("bookings");
+										   if (othersBookings != null && !othersBookings.isEmpty()) {
+											   for (Booking other : othersBookings) {
+					
+												   String oName = other.getName();
+												   String oSurname = other.getSurname();
+												   String oEmail = other.getEmail();
+												   String oPhone = other.getPhone();
+												   String oContactName = other.getTutorName();
+												   String oContactEmail = other.getTutorEmail();
+												   
+												   
+					
+												   // Check if the syllabus is "other"
+												   String oSyllabus = other.getSchSyllabus();
+					
+												   if (oSyllabus.equalsIgnoreCase("other")) {
+										%>
+										<tr>
+											<th>
+												<%= oName %> <%= oSurname %>
+											</th>
+											<th>
+												<%= oEmail %>
+											</th>
+											<th>
+												<%= oPhone %>
+											</th>
+											
+											
+											<th>
+												<a href="#" class="view" 
+												   data-toggle="modal" data-target="#othersModal"
+												   data-name="<%= oName %>"
+												   data-email="<%= oEmail %>">
+													<i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
+												</a>
+											</th>
+										</tr>
+					
+										<% } } } else { %>
+											<tr>
+												<th>No Others yet..</th>
+											</tr>
+										<% } %>
+					
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+
+					<!--End others panel-->
+
 
 					<div class="row" id="approvedBookingPanel">
 						<div class="col-md-12">
@@ -1320,6 +1530,9 @@
 					<!--Search Panel-->
 
 
+					
+
+
 				<!------main-content-end----------->
 
 			
@@ -1350,7 +1563,8 @@
 			document.getElementById('searchPanel').style.display = 'none';
 			document.getElementById('approvedBookingPanel').style.display = 'none';
 			document.getElementById('reviewsPanel').style.display = 'none';
-			
+			document.getElementById('consultantsPanel').style.display = 'none';
+			document.getElementById('othersPanel').style.display = 'none';
 
 			$(document).ready(function () {
 				$(".xp-menubar").on('click', function () {
@@ -1497,7 +1711,8 @@
 				document.getElementById('searchEemail').style.display = 'block';
 				document.getElementById('button-addon2').style.display = 'block';
 				document.getElementById('approvedBookingPanel').style.display = 'none';
-
+				document.getElementById('consultantsPanel').style.display = 'none';
+				document.getElementById('othersPanel').style.display = 'none';
 			}
 
 
@@ -1511,8 +1726,8 @@
 				document.getElementById('bookingPanel').style.display = 'block';
 				document.getElementById('reviewsPanel').style.display = 'none';
 				document.getElementById('approvedBookingPanel').style.display = 'none';
-				
-				
+				document.getElementById('consultantsPanel').style.display = 'none';
+				document.getElementById('othersPanel').style.display = 'none';
 
 			}
 
@@ -1526,7 +1741,8 @@
 				document.getElementById('bookingPanel').style.display = 'none';
 				document.getElementById('reviewsPanel').style.display = 'none';
 				document.getElementById('approvedBookingPanel').style.display = 'block';
-
+				document.getElementById('consultantsPanel').style.display = 'none';
+				document.getElementById('othersPanel').style.display = 'none';
 			}
 
 			function showReviewsPanel(){
@@ -1539,8 +1755,40 @@
 				document.getElementById('bookingPanel').style.display = 'none';
 				document.getElementById('approvedBookingPanel').style.display = 'none';
 				document.getElementById('reviewsPanel').style.display = 'block';
-
+				document.getElementById('consultantsPanel').style.display = 'none';
+				document.getElementById('othersPanel').style.display = 'none';
 			}
+
+
+			function showConsultantsPanel(){
+
+			setActive('consultants');
+			document.getElementById('searchEemail').style.display = 'none';
+			document.getElementById('button-addon2').style.display = 'none';
+			document.getElementById('searchPanel').style.display = 'none';
+			document.getElementById('tutorPanel').style.display = 'none';
+			document.getElementById('bookingPanel').style.display = 'none';
+			document.getElementById('approvedBookingPanel').style.display = 'none';
+			document.getElementById('reviewsPanel').style.display = 'none';
+			document.getElementById('consultantsPanel').style.display = 'block';
+			document.getElementById('othersPanel').style.display = 'none';
+			}
+
+
+			function showOthersPanel(){
+
+			setActive('others');
+			document.getElementById('searchEemail').style.display = 'none';
+			document.getElementById('button-addon2').style.display = 'none';
+			document.getElementById('searchPanel').style.display = 'none';
+			document.getElementById('tutorPanel').style.display = 'none';
+			document.getElementById('bookingPanel').style.display = 'none';
+			document.getElementById('approvedBookingPanel').style.display = 'none';
+			document.getElementById('reviewsPanel').style.display = 'none';
+			document.getElementById('consultantsPanel').style.display = 'none';
+			document.getElementById('othersPanel').style.display = 'block';
+			}
+
 
 			document.getElementById("form3").style.display = "none";
 
@@ -1840,6 +2088,7 @@
 
 					// Check if name, phone, and email are filled
 					var name = document.getElementById("editname").value;
+					var surname= document.getElementById("editsurname").value;
 					var phone = document.getElementById("editphone").value;
 					var email = document.getElementById("editemail").value;
 					var address = document.getElementById("editaddress").value;
@@ -1848,6 +2097,7 @@
 				
 					//Get error message divs
 					var nameError = document.getElementById("editnameError");
+					var surnameError = document.getElementById("editsurnameError");
 					var phoneError = document.getElementById("editphoneError");
 					var emailError = document.getElementById("editemailError");
 					var addressError = document.getElementById("editaddressError");
