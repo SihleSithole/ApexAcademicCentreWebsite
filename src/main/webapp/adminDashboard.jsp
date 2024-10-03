@@ -96,37 +96,37 @@
 			</div>
 			<ul class="list-unstyled component m-0">
 
-    <li class="active" id="tutors">
-        <a href="#" class="dashboard" onclick="showTutorPanel(); return false;"><i class="material-icons">dashboard</i>Tutors </a>
-    </li>
+				<li class="active" id="tutors">
+					<a href="#" class="dashboard" onclick="showTutorPanel(); return false;"><i class="material-icons">dashboard</i>Tutors </a>
+				</li>
 
-    <li id="bookings">
-        <a href="#" class="dashboard" onclick="showBookingsPanel(); return false;"><i class="material-icons">library_books</i>Pending Bookings </a>
-    </li>
+				<li id="bookings">
+					<a href="#" class="dashboard" onclick="showBookingsPanel(); return false;"><i class="material-icons">library_books</i>Pending Bookings </a>
+				</li>
 
-	<li id="blogs">
-		<a href="#" class="dashboard" onclick="showApprovedPanel(); return false;">
-			<i class="material-icons">check_circle</i>Approved Bookings 
-		</a>
-	</li>
+				<li id="blogs">
+					<a href="#" class="dashboard" onclick="showApprovedPanel(); return false;">
+						<i class="material-icons">check_circle</i>Approved Bookings 
+					</a>
+				</li>
 
-	<li id="reviews">
-		<a href="#" class="dashboard" onclick="showReviewsPanel(); return false;">
-			<i class="material-icons">rate_review</i>Reviews
-		</a>
-	</li>
+				<li id="reviews">
+					<a href="#" class="dashboard" onclick="showReviewsPanel(); return false;">
+						<i class="material-icons">rate_review</i>Reviews
+					</a>
+				</li>
 
-	<li id="consultants"></li>
-		<a href="#" class="dashboard" onclick="showConsultantsPanel(); return false;">
-			<i class="material-icons">business_center</i>Consultants
-		</a>
-	</li>
+				<li id="consultants">
+					<a href="#" class="dashboard" onclick="showConsultantsPanel(); return false;">
+						<i class="material-icons">business_center</i>Consultants
+					</a>
+				</li>
 
-	<li id="others"></li>
-		<a href="#" class="dashboard" onclick="showOthersPanel(); return false;">
-			<i class="material-icons">help_outline</i>others
-		</a>
-	</li>
+				<li id="others">
+					<a href="#" class="dashboard" onclick="showOthersPanel(); return false;">
+						<i class="material-icons">help_outline</i>Others
+					</a>
+				</li>
 
 			</ul>
 		</div>
@@ -1107,7 +1107,7 @@
 													String universitySurname = consultation.getUnSurname();
 													String universityYear = consultation.getUnYear();
 					
-													if(consultationStatus.equalsIgnoreCase("pending")) {
+													if(consultationStatus.equalsIgnoreCase("consult")) {
 					
 														%>
 														<tr>

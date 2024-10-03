@@ -297,7 +297,7 @@ public class PageController {
 		    }
 		    
 		     String tutorOption = booking.get("tutor-option");
-		     String status = "other";
+		     String status = booking.get("who");
 		     String userPackage = "Not Selected";
 		     String tutorName = "not applicable";
 		     String tutorEmail = "not applicable";

@@ -133,6 +133,15 @@
                 
             }
 
+            .subject-label {
+    max-width: 180px; /* Set max width for the label */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    white-space: nowrap; /* Prevent text wrapping */
+    display: flex; /* Keep flex for alignment */
+    align-items: center; /* Center checkbox and text */
+}
+
     </style>
 
  </head>
@@ -362,7 +371,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">Phone <span class="required">*</span></label>
-                                            <input type="tel" id="phone" name="phone" class="input" placeholder="(123) 456-7890" required>
+                                            <input 
+                                                type="tel" 
+                                                id="phone" 
+                                                name="phone" 
+                                                class="input" 
+                                                placeholder="+27797565412" 
+                                                required 
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                            >
                                             <div id="phone-error" class="error"></div>
                                         </div>
                                     </div>
@@ -1007,11 +1024,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 if (!phone) {
-                    document.getElementById('phone-error').textContent = "Phone number is required.";
+                document.getElementById('phone-error').textContent = "Phone number is required.";
+                isValid = false;
+            } else {
+                // Check if it consists of only digits
+                const phoneRegex = /^[0-9]+$/; // Matches any length of digits
+
+                if (!phoneRegex.test(phone)) {
+                    document.getElementById('phone-error').textContent = "Phone number must consist of digits only.";
                     isValid = false;
                 } else {
                     document.getElementById('phone-error').textContent = "";
                 }
+            }
 
                 if (!country) {
                     document.getElementById('country-error').textContent = "Country is required.";
@@ -1215,8 +1240,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const allData = combineFormData();
 
+                var other = "consult";
+
                 const dataToSend = {
-                    ...allData
+                    ...allData, who : other
                 };
 
                         fetch('/other-booking', { // Replace with your actual endpoint URL
@@ -1575,8 +1602,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const allData = combineFormData();
 
+                    var other = "other";
+
                     const dataToSend = {
-                        ...allData
+                        ...allData, who : other
                     };
 
                             fetch('/other-booking', { // Replace with your actual endpoint URL
@@ -1820,32 +1849,60 @@ document.addEventListener('DOMContentLoaded', function() {
            /*Grades End Here*/
 
            /*Subects Start Here*/
+           const defaultSubjects = "Mathematics, English, Afrikaans, Accounting, Life Sciences, Chemistry, Biology, Physics, E.M.S, Natural Sciences, Geography, History, IsiZulu, Sepedi, Mathematics Literacy, Computer Science, French, German, Physical Sciences, Information and Technology";
+const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
 
-           const defaultSubjects = "Mathematics, Mathematics Literacy, Biology, Chemistry,Physics,Life Sciences,Physical Sciences,Combined Science,Natural Science,Social Sciences,Technonology";
-    const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
-    
-    const subjectContainer = document.getElementById('subjectContainer');
-    
-    // Clear existing checkboxes
-    subjectContainer.innerHTML = '';
+const subjectContainer = document.getElementById('subjectContainer');
 
-    subjectsArray.forEach(subject => {
-        const label = document.createElement('label');
-        label.style.display = 'inline'; // Make each label take up a new line
+// Clear existing checkboxes
+subjectContainer.innerHTML = '';
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = subject;
-        checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+// Create a wrapper for the checkboxes to apply flex styles
+let wrapper = document.createElement('div');
+wrapper.style.display = 'flex';
+wrapper.style.flexWrap = 'wrap';
+wrapper.style.justifyContent = 'flex-start'; // Align items to the start of the line
+wrapper.style.gap = '5%'; // Space between checkboxes
 
-        // Set the label text
-        label.textContent = subject; // Set the text for the label
+subjectsArray.forEach((subject, index) => {
+    const label = document.createElement('label');
+    label.className = 'subject-label'; // Add class to the label
+    label.style.display = 'flex'; // Use flex to align checkbox and text
+    label.style.alignItems = 'center'; // Center vertically
+    label.style.maxWidth = '150px'; // Set a max width for the label
+    label.style.overflow = 'hidden'; // Hide overflow text
+    label.style.textOverflow = 'ellipsis'; // Show ellipsis for overflow text
+    label.style.whiteSpace = 'nowrap'; // Prevent text wrapping
 
-        // Append checkbox to label and label to container
-        label.prepend(checkbox); // Add checkbox before the label text
-        subjectContainer.appendChild(label);
-    });
-  
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = subject;
+    checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+
+    // Set the label text
+    label.textContent = subject; // Set the text for the label
+
+    // Append checkbox to label and label to wrapper
+    label.prepend(checkbox); // Add checkbox before the label text
+    wrapper.appendChild(label);
+
+    // Break after every 5 subjects
+    if ((index + 1) % 5 === 0) {
+        subjectContainer.appendChild(wrapper); // Append the current row of subjects
+        wrapper = document.createElement('div'); // Create a new wrapper for the next row
+        wrapper.style.display = 'flex';
+        wrapper.style.flexWrap = 'wrap';
+        wrapper.style.justifyContent = 'flex-start'; // Align items to the start of the line
+        wrapper.style.gap = '5%'; // Space between checkboxes
+    }
+});
+
+// Append remaining subjects if there are less than 5 in the last row
+if (wrapper.childElementCount > 0) {
+    subjectContainer.appendChild(wrapper);
+}
+
+
            /*Subects End Here*/
 
             const button = document.getElementById('tutorBtn');
