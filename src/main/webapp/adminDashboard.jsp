@@ -1,4 +1,3 @@
-
 <%@ page import="java.sql.*, javax.sql.*, java.util.ArrayList, java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.demo.model.Tutor" %>
@@ -1047,82 +1046,138 @@
 					<div class="row" id="consultantsPanel">
 						<div class="col-md-12">
 							<div class="table-wrapper">
-	
+					
 								<div class="table-title">
 									<div class="row">
 										<div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-											<h2 class="ml-lg-2">Consultans</h2>
+											<h2 class="ml-lg-2">Pending Consultations</h2>
 										</div>
 									</div>
 								</div>
-	
+					
 								<table class="table table-striped table-hover">
-	
+					
 									<thead>
 										<tr>
 											<th>Name</th>
-											<th>Surname</th>
-											<th>Contacts</th>
-										
-											<th>Student Email</th>
+											<th>Email</th>
+											<th>Online / In-person</th>
+											<th>Consultant Name</th>
+											<th>Consultant Email</th>
+											<th>Status</th>
 											<th>View</th>
 										</tr>
 									</thead>
-
+					
 									<tbody>
-										<% 
-											// Initialize the consultants list
-											List<String> consultants = new ArrayList<>();
-											consultants.add("Bongi");
-											consultants.add("lesego");
-											consultants.add("thato");
-											consultants.add("mdu");
-									
-											// Assuming consultants are set as an attribute somewhere
-											// List<String> consultants = (List<String>) request.getAttribute("consultants");
-									
-											if (consultants != null && !consultants.isEmpty()) {
-												for (int i = 0; i < consultants.size(); i++) {
-													String message = consultants.get(i); // Use get() instead of []
-													
-													if (!message.equals("")) { // Changed to use the string method
-										%>
+					
+										<% List<Booking> consultations = (List<Booking>)
+												request.getAttribute("bookings");
+												if (consultations != null && !consultations.isEmpty()) {
+					
+												for (Booking consultation : consultations) {
+					
+													String consultantFirstName = consultation.getName();
+													String consultantLastName = consultation.getSurname();
+													String consultantEmail = consultation.getEmail();
+													String consultingOption = consultation.getTutorStyle();
+													String consultantName = consultation.getTutorName();
+													String consultantContactEmail = consultation.getTutorEmail();
+													String consultationStatus = consultation.getStatus();
+													String clientFullName = consultantFirstName + " " + consultantLastName;
+					
+													String isPaid = consultation.getIsPaid();
+													String packageType = consultation.getPackageType();
+													String tutorOption = consultation.getTutorOption();
+													String message = consultation.getMessage();
+													String suburb = consultation.getSuburb();
+													String address = consultation.getAddress();
+													String subject = consultation.getSubject();
+													String phone = consultation.getPhone();
+													String province = consultation.getProvince();
+													String country = consultation.getCountry();
+													String instructionLanguage = consultation.getInstrLanguage();
+													String consultingFor = consultation.getTutorFor();
+													String helpWith = consultation.getHelpWith();
+													String studentName = consultation.getSchName();
+													String studentSurname = consultation.getSchSurname();
+													String studentGrade = consultation.getSchGrade();
+													String studentSyllabus = consultation.getSchSyllabus();
+													String universityName = consultation.getUnName();
+													String universitySurname = consultation.getUnSurname();
+													String universityYear = consultation.getUnYear();
+					
+													if(consultationStatus.equalsIgnoreCase("pending")) {
+					
+														%>
 														<tr>
+					
 															<th>
-																<%= message %>
+																<%= consultantFirstName %> <%= consultantLastName %>
 															</th>
 															<th>
-																<%= message %>
+																<%= consultantEmail %>
 															</th>
 															<th>
-																<%= message %>
+																<%= consultingOption %>
 															</th>
 															<th>
-																<%= message %>
+																<%= consultantName %>
 															</th>
-															
+															<th>
+																<%= consultantContactEmail %>
+															</th>
+															<th>
+																<%= consultationStatus %>
+															</th>
+															<th>
+					
+																<a href="#" class="view"
+																   data-toggle="modal" data-target="#consultationModal"
+																   data-name="<%= clientFullName %>"
+																   data-phone="<%= phone %> "
+																   data-email="<%= consultantEmail %> "
+																   data-country="<%= country %> "
+																   data-province="<%= province %> "
+																   data-language="<%= instructionLanguage %> "
+																   data-consultingfor="<%= consultingFor %> "
+																   data-helpwith="<%= helpWith %> "
+																   data-sname="<%= studentName %> "
+																   data-ssurname="<%= studentSurname %> "
+																   data-sgrade="<%= studentGrade %> "
+																   data-ssyllabus="<%= studentSyllabus %> "
+																   data-ssubject="<%= subject %> "
+																   data-syear="<%= universityYear %> "
+																   data-uname="<%= universityName %> "
+																   data-usurname="<%= universitySurname %>"
+																   data-address="<%= address %>"
+																   data-suburb="<%= suburb %>"
+																   data-message="<%= message %>"
+																   data-status="<%= consultationStatus %>"
+																   data-consultantname="<%= consultantName %>"
+																   data-consultantemail="<%= consultantContactEmail %>"
+																   data-consultantopt="<%= consultingOption %>"
+																   data-secondopt="<%= tutorOption %>"
+																   data-package="<%= packageType %>"
+																   >
+																	<i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
+																</a>
+					
+															</th>
 														</tr>
-										<% 
-													} 
-												} 
-											} else { 
-										%>
-												<tr>
-													<th>No Consultants yet..</th>
-												</tr>
-										<% 
-											} 
-										%>
+					
+														<% } } } else { %>
+															<tr>
+																<th>No Consultations yet..</th>
+															</tr>
+															<% } %>
+					
 									</tbody>
-									
-	
-									
 								</table>
 							</div>
 						</div>
-											
 					</div>
-
+					
 					<!--End Consultans Panel-->
 
 					<!--Start others panel-->
