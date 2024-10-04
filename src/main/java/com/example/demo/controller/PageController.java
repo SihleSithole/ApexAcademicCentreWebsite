@@ -587,33 +587,29 @@ public class PageController {
 		    }
 		    
 		    
-		    @PostMapping("view-profile")
+		    @GetMapping("view-profile")
 		    public ModelAndView getTry(@RequestParam("email") String email) {
-		    	
-		    	List<Tutor> tutors = tutorService.listAll();
-				 Optional<Tutor> opT = tutorRepo.findById(email);
-				 Tutor tutor = new Tutor();
-				 List<Review> reviews = reviewService.listAll();
-				     
-				 if (opT.isPresent()){
-					 
-					 tutor = opT.get();
-
-				 }
-				 
-				 String name = tutor.getFullNames();
-				 
-		    	
-				ModelAndView data = new ModelAndView("profile.jsp");// load the admin dashboard
-				data.addObject("tutor", tutor);
-				data.addObject("tutors", tutors);
-				data.addObject("name", name);
-				data.addObject("reviews",reviews);
+		        
+		        List<Tutor> tutors = tutorService.listAll();
+		        Optional<Tutor> opT = tutorRepo.findById(email);
+		        Tutor tutor = new Tutor();
+		        List<Review> reviews = reviewService.listAll();
+		            
+		        if (opT.isPresent()){
+		            tutor = opT.get();
+		        }
+		        
+		        String name = tutor.getFullNames();
+		        
+		        ModelAndView data = new ModelAndView("profile.jsp"); // load the admin dashboard
+		        data.addObject("tutor", tutor);
+		        data.addObject("tutors", tutors);
+		        data.addObject("name", name);
+		        data.addObject("reviews", reviews);
 		       
-
-				return data;
-				
+		        return data;   
 		    }
+
 		    
 		    		
 			 @PostMapping("/deleteConsult")

@@ -305,14 +305,14 @@
                             </div>
                         </div>
                         <div class="book-view">
-                            <form action="/view-profile" method="post">
+                            <form action="/view-profile" method="get">
                                 <input type="hidden" name="email" value="<%= email %>"/>
-                           <div class="repoStyle">
-                            <button type="submit" class="view_pp">
-                                VIEW PROFILE
-                            </button>
-                            <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>', '<%= syllabus %>', '<%= grades %> ', '<%= subjects %> ')"  class="bk_tutor">BOOK TUTOR</button>
-                            </div>
+                                <div class="repoStyle">
+                                    <button type="submit" class="view_pp">
+                                        VIEW PROFILE
+                                    </button>
+                                    <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>', '<%= syllabus %>', '<%= grades %>', '<%= subjects %>')" class="bk_tutor">BOOK TUTOR</button>
+                                </div>
                             </form>
                            
                             <br>
