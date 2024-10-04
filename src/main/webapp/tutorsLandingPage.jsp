@@ -1448,10 +1448,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function(){
                     window.location.href = '/';
                 } , 2000);
-
-            
+        
 });
-
 
             function validateForm4() {
 
@@ -1467,7 +1465,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     var schoolPackages = document.getElementById("schoolPackages");
                     schoolPackages.style.display = 'flex';
 
-                if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
+
+                    alert("Online - IEB - CAPs");
 
                     const onceOffPackage = document.getElementById('onceOffPackage');
                     onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
@@ -1486,8 +1486,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 }
                 else{
-                    if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                    if(ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel")){
                        
+                        alert("Online - Cambridge - IB - Pearson Edexcel");
                     
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
@@ -1506,7 +1507,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     }
                     else{
-                        if(ghg === "In Person" && syllabusId === "IEB" || syllabusId === "CAPs"){
+                        if(ghg === "In Person" && (syllabusId === "IEB" || syllabusId === "CAPs")){
+
+                            alert("In person - IEB - CAPs");
 
                             const onceOffPackage = document.getElementById('onceOffPackage');
                             onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
@@ -1526,8 +1529,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 }
 
                             else{
-                                if(ghg === "In Person" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
+                                if(ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel")){
                        
+                                   alert("In person - Cambridge - IB - Pearson Edexcel");
+
                                         const onceOffPackage = document.getElementById('onceOffPackage');
                                         onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
 
@@ -1561,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         var yearFor = document.querySelector('input[name="year"]:checked');
                         var yearIn = yearFor ? yearFor.value : 'None';
 
-                       if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
+                       if(ghg === "In Person" && (yearIn === '1st' ||  yearIn === '2nd')){
                        
                        const onceOffPackage = document.getElementById('oneOnone');
                        onceOffPackage.textContent = 'R650'; // or button.innerHTML = 'Submit';
@@ -1576,7 +1581,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         else{
 
-                            if(ghg === "Online" && yearIn === '1st' ||  yearIn === '2nd'){
+                            if(ghg === "Online" && (yearIn === '1st' ||  yearIn === '2nd')){
                        
                        const onceOffPackage = document.getElementById('oneOnone');
                        onceOffPackage.textContent = 'R450'; // or button.innerHTML = 'Submit';
@@ -1591,7 +1596,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         else{
 
-                            if(ghg === "In Person" && yearIn === '3rd' ||  yearIn === '4th'){
+                            if(ghg === "In Person" && (yearIn === '3rd' ||  yearIn === '4th')){
                        
                        const onceOffPackage = document.getElementById('oneOnone');
                        onceOffPackage.textContent = 'R750'; // or button.innerHTML = 'Submit';
@@ -1606,7 +1611,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         else{
 
-                            if(ghg === "Online" && yearIn === '3rd' ||  yearIn === '4th'){
+                            if(ghg === "Online" && (yearIn === '3rd' ||  yearIn === '4th')){
                        
                        const onceOffPackage = document.getElementById('oneOnone');
                        onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
