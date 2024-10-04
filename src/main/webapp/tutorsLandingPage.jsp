@@ -1467,7 +1467,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
-                    alert("Online - IEB - CAPs");
+                   
 
                     const onceOffPackage = document.getElementById('onceOffPackage');
                     onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
@@ -1486,9 +1486,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 }
                 else{
-                    if(ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel")){
+                    if(ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel")){
                        
-                        alert("Online - Cambridge - IB - Pearson Edexcel");
+                       
                     
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
@@ -1509,7 +1509,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     else{
                         if(ghg === "In Person" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
-                            alert("In person - IEB - CAPs");
+                            
 
                             const onceOffPackage = document.getElementById('onceOffPackage');
                             onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
@@ -1529,9 +1529,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 }
 
                             else{
-                                if(ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel")){
+                                if(ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexcel")){
                        
-                                   alert("In person - Cambridge - IB - Pearson Edexcel");
+                                  
 
                                         const onceOffPackage = document.getElementById('onceOffPackage');
                                         onceOffPackage.textContent = 'R550'; // or button.innerHTML = 'Submit';
