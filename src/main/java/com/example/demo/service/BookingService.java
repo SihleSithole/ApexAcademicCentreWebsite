@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Booking;
-
 import com.example.demo.repository.BookingRepository;
 
 
@@ -25,6 +24,12 @@ public class BookingService {
 	public void save(Booking msc) {
 		
 		  repo.save(msc);
+	}
+	
+	public void delete(Booking msc) {
+		
+		repo.delete(msc);
+		
 	}
 	
 	public Booking findOneBook(Long id) {

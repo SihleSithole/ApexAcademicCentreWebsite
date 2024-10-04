@@ -26,10 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.model.Admin;
 import com.example.demo.model.Booking;
 import com.example.demo.model.Review;
 import com.example.demo.model.Tutor;
 import com.example.demo.repository.TutorRepository;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.BookingService;
 import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.ReviewService;
@@ -37,6 +39,7 @@ import com.example.demo.service.TutorService;
 import com.example.demo.service.PayPalService.PayPalService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -60,6 +63,9 @@ public class PageController {
 	 
 	 @Autowired
 	 private ReviewService reviewService;
+	 
+	 @Autowired
+	 private AdminService adminService;
 	 
 	 @Autowired
 	 private TutorRepository tutorRepo;
@@ -87,6 +93,8 @@ public class PageController {
 	
 	@GetMapping("/admin")
 	public ModelAndView adminDashboard() {
+		
+		System.out.println("here");
 		
 		List<Tutor> tutor = tutorService.listAll();
 		List<Booking> booking = bookingService.listAll();
@@ -607,13 +615,59 @@ public class PageController {
 				
 		    }
 		    
-		    
-		    @GetMapping("/adminpanel")
-		    public String adminLogin() {
-		    	
-		    	  return "loginAdmin.html";
-		    }
-		 
+		    		
+			 @PostMapping("/deleteConsult")
+		     public String deleteConsultant(@RequestParam("deleteEmailConsult") Long id ) {
+				 
+				 Booking booking = bookingService.findOneBook(id);
+				    bookingService.delete(booking);
+				 	 
+				 return "redirect:/admin";
+				 
+			 }
+			 
+			 @PostMapping("/deleteOther")
+		     public String deleteOther(@RequestParam("deleteEmailOther") Long id ) {
+				 
+				 Booking booking = bookingService.findOneBook(id);
+				    bookingService.delete(booking);
+				 	 
+				 return "redirect:/admin";
+				 
+			 }
+			 
+			    @GetMapping("/adminpanel")
+			    public String adminLogin() {
+			    	
+			    	  return "loginAdmin.html";
+			    }
+			    
+			    @GetMapping("/retriveAdmin")
+			    @ResponseBody
+			    public Admin getAdmin() {
+			 
+ 
+					 Admin admin = adminService.retriveAdmin("sihlesithole810@gmail.com");
+					 
+					 
+					 return admin;
+			    }
+			    @GetMapping("/logout")
+			    public String logout(HttpSession session, HttpServletResponse response) {
+			        // Invalidate the session
+			        if (session != null) {
+			            session.invalidate(); // Terminate the session
+			        }
+
+			        // Set cache control headers to prevent caching
+			        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+			        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+			        response.setDateHeader("Expires", 0); // Proxies
+
+			        // Redirect to the login page
+			        return "redirect:/loginAdmin.html"; // Change this to your login URL
+			    }
+			 
 
 	 
 	

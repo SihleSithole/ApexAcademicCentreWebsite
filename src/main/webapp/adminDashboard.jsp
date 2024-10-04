@@ -174,7 +174,7 @@
 											</a>
 											<ul class="dropdown-menu small-menu">
 
-												<li><a href="#">
+												<li><a href="/logout" onclick="preventBackNavigation()">
 														<span class="material-icons">logout</span>
 														Logout
 													</a></li>
@@ -810,6 +810,7 @@
 					<!----delete-modal end--------->
 
 				</div>
+				
 
 				<!--Booking Panel-->
 
@@ -1018,7 +1019,7 @@
 													</th>
 													<th>
 											
-														<a href="#" class="review" data-toggle="modal" data-target="#reviewModal" data-name="<%= rName %>" data-message="<%= message %>" data-rating="<%= rRating %>" data-message="<%= message %>" data-tutor="<%= rEntryId %>" data-email="rTutorEmail>
+														<a href="#" class="review" data-toggle="modal" data-target="#reviewModal" data-name="<%= rName %>" data-message="<%= message %>" data-rating="<%= rRating %>" data-message="<%= message %>" data-tutor="<%= rEntryId %>" data-email="rTutorEmail">
 														 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
 													    </a>
 	
@@ -1077,93 +1078,102 @@
 					
 												for (Booking consultation : consultations) {
 					
-													String consultantFirstName = consultation.getName();
-													String consultantLastName = consultation.getSurname();
-													String consultantEmail = consultation.getEmail();
-													String consultingOption = consultation.getTutorStyle();
-													String consultantName = consultation.getTutorName();
-													String consultantContactEmail = consultation.getTutorEmail();
-													String consultationStatus = consultation.getStatus();
-													String clientFullName = consultantFirstName + " " + consultantLastName;
+													String cbName = consultation.getName();
+													String cbSurname = consultation.getSurname();
+													String cbEmail = consultation.getEmail();
+													String cbTutoringOption = consultation.getTutorStyle();
+													String cbTutorName = consultation.getTutorName();
+													String cbTutorEmail = consultation.getTutorEmail();
+													String cbStatus = consultation.getStatus();
+													String cclientName = cbName + " " + cbSurname;
+													
+													String cbPaid = consultation.getIsPaid();
+													String cbPackageType = consultation.getPackageType();
+													String cbTutorOption = consultation.getTutorOption();
+													String cbMessage = consultation.getMessage();
+													String cbSuburb = consultation.getSuburb();
+													String cbAddress = consultation.getAddress();
+													String cbSubject = consultation.getSubject();
+													String cbPhone = consultation.getPhone();
+													String cbProvince = consultation.getProvince();
+													String cbCountry = consultation.getCountry();
+													String cbInstrLanguage = consultation.getInstrLanguage();
+													String cbTutorFor = consultation.getTutorFor();
+													String cbHelpWith = consultation.getHelpWith();
+													String cbSchName = consultation.getSchName() ;
+													String cbSchSurname = consultation.getSchSurname();
+													String cbSchGrade = consultation.getSchGrade();
+													String cbSchSyllabus = consultation.getSchSyllabus();
+													String cbnName = consultation.getUnName();
+													String cbnSurname = consultation.getUnSurname();
+													String cbnYear = consultation.getUnYear();
+
+													Long cId = consultation.getEntry();
+													
 					
-													String isPaid = consultation.getIsPaid();
-													String packageType = consultation.getPackageType();
-													String tutorOption = consultation.getTutorOption();
-													String message = consultation.getMessage();
-													String suburb = consultation.getSuburb();
-													String address = consultation.getAddress();
-													String subject = consultation.getSubject();
-													String phone = consultation.getPhone();
-													String province = consultation.getProvince();
-													String country = consultation.getCountry();
-													String instructionLanguage = consultation.getInstrLanguage();
-													String consultingFor = consultation.getTutorFor();
-													String helpWith = consultation.getHelpWith();
-													String studentName = consultation.getSchName();
-													String studentSurname = consultation.getSchSurname();
-													String studentGrade = consultation.getSchGrade();
-													String studentSyllabus = consultation.getSchSyllabus();
-													String universityName = consultation.getUnName();
-													String universitySurname = consultation.getUnSurname();
-													String universityYear = consultation.getUnYear();
-					
-													if(consultationStatus.equalsIgnoreCase("consult")) {
+													if(cbStatus.equalsIgnoreCase("consult")) {
 					
 														%>
 														<tr>
 					
 															<th>
-																<%= consultantFirstName %> <%= consultantLastName %>
+																<%= cclientName %>
 															</th>
 															<th>
-																<%= consultantEmail %>
+																<%= cbEmail %>
 															</th>
 															<th>
-																<%= consultingOption %>
+																<%= cbTutoringOption %>
 															</th>
 															<th>
-																<%= consultantName %>
+																<%= cbTutorName %>
 															</th>
 															<th>
-																<%= consultantContactEmail %>
+																<%= cbTutorEmail %>
 															</th>
 															<th>
-																<%= consultationStatus %>
+																<%= cbStatus %>
 															</th>
 															<th>
 					
-																<a href="#" class="view"
+																<a href="#" class="consultView"
 																   data-toggle="modal" data-target="#consultationModal"
-																   data-name="<%= clientFullName %>"
-																   data-phone="<%= phone %> "
-																   data-email="<%= consultantEmail %> "
-																   data-country="<%= country %> "
-																   data-province="<%= province %> "
-																   data-language="<%= instructionLanguage %> "
-																   data-consultingfor="<%= consultingFor %> "
-																   data-helpwith="<%= helpWith %> "
-																   data-sname="<%= studentName %> "
-																   data-ssurname="<%= studentSurname %> "
-																   data-sgrade="<%= studentGrade %> "
-																   data-ssyllabus="<%= studentSyllabus %> "
-																   data-ssubject="<%= subject %> "
-																   data-syear="<%= universityYear %> "
-																   data-uname="<%= universityName %> "
-																   data-usurname="<%= universitySurname %>"
-																   data-address="<%= address %>"
-																   data-suburb="<%= suburb %>"
-																   data-message="<%= message %>"
-																   data-status="<%= consultationStatus %>"
-																   data-consultantname="<%= consultantName %>"
-																   data-consultantemail="<%= consultantContactEmail %>"
-																   data-consultantopt="<%= consultingOption %>"
-																   data-secondopt="<%= tutorOption %>"
-																   data-package="<%= packageType %>"
+																 
+																   data-name="<%= cclientName%>"
+																   data-phone="<%= cbPhone %> "
+																   data-email="<%= cbEmail %> "
+																   data-country="<%= cbCountry %> "
+																   data-province="<%= cbProvince %> "
+																   data-language="<%= cbInstrLanguage %> "
+																   data-tutoringfor="<%= cbTutorFor %> "
+																   data-helpwith="<%= cbHelpWith %> "
+																   data-sname="<%= cbSchName %> "
+																   data-ssurname="<%= cbSchSurname %> "
+																   data-sgrade="<%= cbSchGrade %> "
+																   data-ssyllabus="<%= cbSchSyllabus %> "
+																   data-ssubject="<%= cbSubject %> "
+																   data-syear="<%= cbnYear%> "
+																   data-uname="<%= cbnName %> "
+																   data-usurname="<%= cbnSurname %>"
+																   data-address="<%= cbAddress %>"
+																   data-suburb="<%= cbSuburb %>"
+																   data-message="<%= cbMessage %>"
+																   data-status="<%= cbStatus %>"
+																   data-tutorname="<%= cbTutorName %>"
+																   data-tutoremail="<%= cbTutorEmail %>"
+																   data-tutoropt="<%= cbTutoringOption %>"
+																   data-secondopt="<%= cbTutorOption %>"
+																   data-package="<%= cbPackageType %>"
+																   data-sid="<%= cId %>"
 																   >
+																   
 																	<i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
+
 																</a>
 					
 															</th>
+
+
 														</tr>
 					
 														<% } } } else { %>
@@ -1212,37 +1222,82 @@
 										   if (othersBookings != null && !othersBookings.isEmpty()) {
 											   for (Booking other : othersBookings) {
 					
-												   String oName = other.getName();
-												   String oSurname = other.getSurname();
-												   String oEmail = other.getEmail();
-												   String oPhone = other.getPhone();
-												   String oContactName = other.getTutorName();
-												   String oContactEmail = other.getTutorEmail();
-												   
-												   
+												String obName = other.getName();
+												String obSurname = other.getSurname();
+												String obEmail = other.getEmail();
+												String obTutoringOption = other.getTutorStyle();
+												String obTutorName = other.getTutorName();
+												String obTutorEmail = other.getTutorEmail();
+												String obStatus = other.getStatus();
+												String oclientName = obName + " " + obSurname;
+												
+												String obPaid = other.getIsPaid();
+												String obPackageType = other.getPackageType();
+												String obTutorOption = other.getTutorOption();
+												String obMessage = other.getMessage();
+												String obSuburb = other.getSuburb();
+												String obAddress = other.getAddress();
+												String obSubject = other.getSubject();
+												String obPhone = other.getPhone();
+												String obProvince = other.getProvince();
+												String obCountry = other.getCountry();
+												String obInstrLanguage = other.getInstrLanguage();
+												String obTutorFor = other.getTutorFor();
+												String obHelpWith = other.getHelpWith();
+												String obSchName = other.getSchName() ;
+												String obSchSurname = other.getSchSurname();
+												String obSchGrade = other.getSchGrade();
+												String obSchSyllabus = other.getSchSyllabus();
+												String obnName = other.getUnName();
+												String obnSurname = other.getUnSurname();
+												String obnYear = other.getUnYear();
+
+												Long oid = other.getEntry();
 					
-												   // Check if the syllabus is "other"
-												   String oSyllabus = other.getSchSyllabus();
-					
-												   if (oSyllabus.equalsIgnoreCase("other")) {
+												   if (obSchSyllabus.equalsIgnoreCase("other")) {
 										%>
 										<tr>
 											<th>
-												<%= oName %> <%= oSurname %>
+												<%= oclientName %>
 											</th>
 											<th>
-												<%= oEmail %>
+												<%= obEmail %>
 											</th>
 											<th>
-												<%= oPhone %>
+												<%= obPhone %>
 											</th>
 											
 											
 											<th>
-												<a href="#" class="view" 
-												   data-toggle="modal" data-target="#othersModal"
-												   data-name="<%= oName %>"
-												   data-email="<%= oEmail %>">
+												<a href="#" class="otherView" 
+												   data-toggle="modal" data-target="#otherModal"
+												   data-name="<%= oclientName%>"
+												   data-phone="<%= obPhone %> "
+												   data-email="<%= obEmail %> "
+												   data-country="<%= obCountry %> "
+												   data-province="<%= obProvince %> "
+												   data-language="<%= obInstrLanguage %> "
+												   data-tutoringfor="<%= obTutorFor %> "
+												   data-helpwith="<%= obHelpWith %> "
+												   data-sname="<%= obSchName %> "
+												   data-ssurname="<%= obSchSurname %> "
+												   data-sgrade="<%= obSchGrade %> "
+												   data-ssyllabus="<%= obSchSyllabus %> "
+												   data-ssubject="<%= obSubject %> "
+												   data-syear="<%= obnYear%> "
+												   data-uname="<%= obnName %> "
+												   data-usurname="<%= obnSurname %>"
+												   data-address="<%= obAddress %>"
+												   data-suburb="<%= obSuburb %>"
+												   data-message="<%= obMessage %>"
+												   data-status="<%= obStatus %>"
+												   data-tutorname="<%= obTutorName %>"
+												   data-tutoremail="<%= obTutorEmail %>"
+												   data-tutoropt="<%= obTutoringOption %>"
+												   data-secondopt="<%= obTutorOption %>"
+												   data-package="<%= obPackageType %>"
+												   data-oid = "<%= oid %>"
+												   >
 													<i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
 												</a>
 											</th>
@@ -1515,6 +1570,166 @@
 
 					<!--View Reviews Modal-->
 
+
+					<!--CONSULTATION MODAL-->
+
+					<div id="consultationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title" id="bookingModalLabel">Consultant Details</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body">
+							<div class="row">
+								<!-- Applicant Section -->
+								<div class="col-md-6">
+								<h5>Applicant</h5>
+								<p><strong>Name:</strong> <span id="cmodalName"></span></p>
+								<p><strong>Email:</strong> <span id="cmodalEmail"></span></p>
+								<p><strong>Phone:</strong> <span id="cmodalPhone"></span></p>
+								<p><strong>Country:</strong> <span id="cmodalCountry"></span></p>
+								<p><strong>Province:</strong> <span id="cmodalProvince"></span></p>
+								<p><strong>Language oF Instruction:</strong> <span id="cmodalLanguage"></span></p>
+								<p><strong>Package Type:</strong> <span id="cmodalPackage"></span></p>
+								</div>
+								<!-- Student Details Section -->
+								<div class="col-md-6">
+								<h5>Student Details</h5>
+								<p><strong>Tutoring For:</strong> <span id="cmodalTutoringFor"></span></p>
+								<p><strong>Help with:</strong> <span id="cmodalHelpWith"></span></p>
+								<p><strong>Student Name:</strong> <span id="cmodalStudName"></span></p>
+								<p><strong>Student Surname:</strong> <span id="cmodalStudSurname"></span></p>
+								<p id="cschGrade"><strong>Grade:</strong> <span id="cmodalGrade"></span></p>
+								<p id="cschSyllabus"><strong>Syllabus:</strong> <span id="cmodalSyllabus"></span></p>
+								<p><strong>Subject:</strong> <span id="cmodalSubject"></span></p>
+								<p id="cunvYear"><strong>Year:</strong> <span id="cmodalYear"></span></p>	
+							</div>
+							</div>
+							<!-- Message Section -->
+							<div class="row">
+							<div class="col-md-6">
+								<h5>Process</h5>
+							    <p><strong>Booking Message:</strong> <span id="cmodalMessage"></span></p>
+								<p><strong>Status:</strong><span id="cmodalStatus"></span></p>
+								<p><strong>Platform:</strong><span id="cmodalPlatform"></span></p>
+								<p id="cfOne"><strong>Suburb:</strong><span id="cmodalSuburb"></span></p>
+								<p id="cfSec"><strong>Address:</strong><span id="cmodalAddress"></span></p>
+							</div>
+
+							<div class="col-md-6">
+								<h5>Tutor</h5>
+								<p><strong>Tutor Name:</strong> <span id="cmodalTutorName"></span></p>
+								<p><strong>Tutor Email:</strong> <span id="cmodalTutorEmail"></span></p>
+								<p><strong>Second Tutor Option?</strong> <span id="cmodalSecondOpt"></span></p>
+							</div>
+							</div>
+							</div>
+							<div class="modal-footer">
+								<form action="/deleteConsult" method="post">
+									<div class="modal-body">
+										<p>Before you remove the consultant, make sure you have reach to.</p>
+										<input type="hidden" name="deleteEmailConsult" id="deleteEmailConsult" />
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-danger"
+											onclick="confirmDeletionConsult()">Delete</button>
+									</div>
+								</form>
+							
+							</div>
+						</div>
+						</div>
+					</div>
+
+
+					<!--CONSULTATION MODAL-->
+
+
+					<!--OTHER MODAL-->
+
+
+					<div id="otherModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title" id="bookingModalLabel">Other Details</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body">
+							<div class="row">
+								<!-- Applicant Section -->
+								<div class="col-md-6">
+								<h5>Applicant</h5>
+								<p><strong>Name:</strong> <span id="omodalName"></span></p>
+								<p><strong>Email:</strong> <span id="omodalEmail"></span></p>
+								<p><strong>Phone:</strong> <span id="omodalPhone"></span></p>
+								<p><strong>Country:</strong> <span id="omodalCountry"></span></p>
+								<p><strong>Province:</strong> <span id="omodalProvince"></span></p>
+								<p><strong>Language oF Instruction:</strong> <span id="omodalLanguage"></span></p>
+								<p><strong>Package Type:</strong> <span id="omodalPackage"></span></p>
+								</div>
+								<!-- Student Details Section -->
+								<div class="col-md-6">
+								<h5>Student Details</h5>
+								<p><strong>Tutoring For:</strong> <span id="omodalTutoringFor"></span></p>
+								<p><strong>Help with:</strong> <span id="omodalHelpWith"></span></p>
+								<p><strong>Student Name:</strong> <span id="omodalStudName"></span></p>
+								<p><strong>Student Surname:</strong> <span id="omodalStudSurname"></span></p>
+								<p id="oschGrade"><strong>Grade:</strong> <span id="omodalGrade"></span></p>
+								<p id="oschSyllabus"><strong>Syllabus:</strong> <span id="omodalSyllabus"></span></p>
+								<p><strong>Subject:</strong> <span id="omodalSubject"></span></p>
+								<p id="ounvYear"><strong>Year:</strong> <span id="omodalYear"></span></p>	
+							</div>
+							</div>
+							<!-- Message Section -->
+							<div class="row">
+							<div class="col-md-6">
+								<h5>Process</h5>
+							    <p><strong>Booking Message:</strong> <span id="omodalMessage"></span></p>
+								<p><strong>Status:</strong><span id="omodalStatus"></span></p>
+								<p><strong>Platform:</strong><span id="omodalPlatform"></span></p>
+								<p id="ofOne"><strong>Suburb:</strong><span id="omodalSuburb"></span></p>
+								<p id="ofSec"><strong>Address:</strong><span id="omodalAddress"></span></p>
+							</div>
+
+							<div class="col-md-6">
+								<h5>Tutor</h5>
+								<p><strong>Tutor Name:</strong> <span id="omodalTutorName"></span></p>
+								<p><strong>Tutor Email:</strong> <span id="omodalTutorEmail"></span></p>
+								<p><strong>Second Tutor Option?</strong> <span id="omodalSecondOpt"></span></p>
+							</div>
+							</div>
+							</div>
+							<div class="modal-footer">
+								<form action="/deleteOther" method="post">
+									<div class="modal-body">
+										<p>Before you remove the applicant, make sure you have reach to.</p>
+										<input type="hidden" name="deleteEmailOther" id="deleteEmailOther" />
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-danger"
+											onclick="confirmDeletionOther()">Delete</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						</div>
+					</div>
+
+
+					<!--OTHER MODAL-->
+
+
+
 					<!--Search Panel-->
 
 					<div class="row" id="searchPanel">
@@ -1586,7 +1801,7 @@
 
 
 					
-
+				
 
 				<!------main-content-end----------->
 
@@ -1612,6 +1827,228 @@
 				// Set the email in the modal
 				$('#emailToDelete').text(email);
 			});
+
+
+			$(document).ready(function() {
+			$('a.consultView').on('click', function () {
+				
+				            $('#cmodalStudName').hide();
+							$('#cmodalStudSurname').hide();
+							$('#cmodalGrade').hide();
+							$('#cmodalSyllabus').hide();
+							$('#cmodalSubject').hide();
+							$('#cmodalYear').hide();
+
+
+						// Get data from attributes
+						var name = $(this).data('name');
+						var email = $(this).data('email');
+						var phone = $(this).data('phone');
+						var country = $(this).data('country');
+						var province = $(this).data('province');
+						var language = $(this).data('language');
+						var tutoringFor = $(this).data('tutoringfor');
+						var helpWith = $(this).data('helpwith');
+						var sName = $(this).data('sname');
+						var sSurname = $(this).data('ssurname');
+						var uName = $(this).data('uname');
+						var uSurname = $(this).data('usurname');
+						var sGrade = $(this).data('sgrade');
+						var sSyllabus = $(this).data('ssyllabus');
+						var sSubject = $(this).data('ssubject');
+						var sYear = $(this).data('syear');
+						var tutorOpt = $(this).data('tutoropt');
+						var address = $(this).data('address');
+						var suburb = $(this).data('suburb');
+						var message = $(this).data('message');
+						var status = $(this).data('status');
+						var tutorName = $(this).data('tutorname');
+						var tutorEmail = $(this).data('tutoremail');
+						var secondOpt = $(this).data('secondopt');
+						var package = $(this).data('package');
+						var cIs = $(this).data('sid');
+
+						var deleteEmailConsult = document.getElementById('deleteEmailConsult');
+				        deleteEmailConsult.value = cIs;
+				        deleteEmailConsult.placeholder = cIs;
+						
+
+		 				// Populate modal with the data
+						$('#cmodalName').text(name);
+						$('#cmodalEmail').text(email);
+						$('#cmodalPhone').text(phone);
+						$('#cmodalCountry').text(country);
+						$('#cmodalProvince').text(province);
+						$('#cmodalLanguage').text(language);
+						$('#cmodalTutoringFor').text(tutoringFor);
+						$('#cmodalHelpWith').text(helpWith);
+
+						helpWith = helpWith.replace(/\s+/g, '');
+						tutorOpt = tutorOpt.replace(/\s+/g, '');
+
+						if (helpWith === "school") {
+								// Set values for the modal fields and show them
+								$('#cmodalStudName').text(sName).show();
+								$('#cmodalStudSurname').text(sSurname).show();
+								$('#cmodalGrade').text(sGrade).show();
+								$('#cmodalSyllabus').text(sSyllabus).show();
+								$('#cmodalSubject').text(sSubject).show();
+								schGrade.style.display = 'block';
+                                schSyllabus.style.display = 'block';
+								
+							} else {
+								// Set values for the modal fields and show them
+								
+								$('#cmodalStudName').text(uName).show();
+								$('#cmodalStudSurname').text(uSurname).show();
+								$('#cmodalYear').text(sYear).show();
+								$('#cmodalSubject').text(sSubject).show();
+								
+                            }
+
+						$('#cmodalPlatform').text(tutorOpt);
+						$('#cmodalAddress').text(address);
+						$('#cmodalSuburb').text(suburb);
+
+						if(tutorOpt === "Online"){
+
+                             var addrSub = document.getElementById('cfOne');
+		                       addrSub.style.display = 'none';
+							var subAdrr = document.getElementById('cfSec');
+							  subAdrr.style.display = 'none';
+						}
+
+						else{
+
+							var addrSub = document.getElementById('cfOne');
+		                       addrSub.style.display = 'block';
+							var subAdrr = document.getElementById('cfSec');
+							  subAdrr.style.display = 'block';
+						}
+
+						$('#cmodalMessage').text(message);
+						$('#cmodalStatus').text(status );
+						$('#cmodalTutorName').text(tutorName );
+						$('#cmodalTutorEmail').text(tutorEmail );
+						$('#cmodalSecondOpt').text(secondOpt);
+						$('#cmodalPackage').text(package);		
+		                
+
+			});
+		});
+
+
+
+		$(document).ready(function() {
+
+			$('a.otherView').on('click', function () {
+				
+				            $('#omodalStudName').hide();
+							$('#omodalStudSurname').hide();
+							$('#omodalGrade').hide();
+							$('#omodalSyllabus').hide();
+							$('#omodalSubject').hide();
+							$('#omodalYear').hide();
+
+
+						// Get data from attributes
+						var name = $(this).data('name');
+						var email = $(this).data('email');
+						var phone = $(this).data('phone');
+						var country = $(this).data('country');
+						var province = $(this).data('province');
+						var language = $(this).data('language');
+						var tutoringFor = $(this).data('tutoringfor');
+						var helpWith = $(this).data('helpwith');
+						var sName = $(this).data('sname');
+						var sSurname = $(this).data('ssurname');
+						var uName = $(this).data('uname');
+						var uSurname = $(this).data('usurname');
+						var sGrade = $(this).data('sgrade');
+						var sSyllabus = $(this).data('ssyllabus');
+						var sSubject = $(this).data('ssubject');
+						var sYear = $(this).data('syear');
+						var tutorOpt = $(this).data('tutoropt');
+						var address = $(this).data('address');
+						var suburb = $(this).data('suburb');
+						var message = $(this).data('message');
+						var status = $(this).data('status');
+						var tutorName = $(this).data('tutorname');
+						var tutorEmail = $(this).data('tutoremail');
+						var secondOpt = $(this).data('secondopt');
+						var package = $(this).data('package');
+
+						var cIs = $(this).data('oid');
+
+						var deleteEmailOther = document.getElementById('deleteEmailOther');
+						deleteEmailOther.value = cIs;
+						deleteEmailOther.placeholder = cIs;
+						
+
+		 				// Populate modal with the data
+						$('#omodalName').text(name);
+						$('#omodalEmail').text(email);
+						$('#omodalPhone').text(phone);
+						$('#omodalCountry').text(country);
+						$('#omodalProvince').text(province);
+						$('#omodalLanguage').text(language);
+						$('#omodalTutoringFor').text(tutoringFor);
+						$('#omodalHelpWith').text(helpWith);
+
+						helpWith = helpWith.replace(/\s+/g, '');
+						tutorOpt = tutorOpt.replace(/\s+/g, '');
+
+						if (helpWith === "school") {
+								// Set values for the modal fields and show them
+								$('#omodalStudName').text(sName).show();
+								$('#omodalStudSurname').text(sSurname).show();
+								$('#omodalGrade').text(sGrade).show();
+								$('#omodalSyllabus').text(sSyllabus).show();
+								$('#omodalSubject').text(sSubject).show();
+								schGrade.style.display = 'block';
+                                schSyllabus.style.display = 'block';
+								
+							} else {
+								// Set values for the modal fields and show them
+								
+								$('#omodalStudName').text(uName).show();
+								$('#omodalStudSurname').text(uSurname).show();
+								$('#omodalYear').text(sYear).show();
+								$('#omodalSubject').text(sSubject).show();
+								
+                            }
+
+						$('#omodalPlatform').text(tutorOpt);
+						$('#omodalAddress').text(address);
+						$('#omodalSuburb').text(suburb);
+
+						if(tutorOpt === "Online"){
+
+                             var addrSub = document.getElementById('ofOne');
+		                       addrSub.style.display = 'none';
+							var subAdrr = document.getElementById('ofSec');
+							  subAdrr.style.display = 'none';
+						}
+
+						else{
+
+							var addrSub = document.getElementById('ofOne');
+		                       addrSub.style.display = 'block';
+							var subAdrr = document.getElementById('ofSec');
+							  subAdrr.style.display = 'block';
+						}
+
+						$('#omodalMessage').text(message);
+						$('#omodalStatus').text(status );
+						$('#omodalTutorName').text(tutorName );
+						$('#omodalTutorEmail').text(tutorEmail );
+						$('#omodalSecondOpt').text(secondOpt);
+						$('#omodalPackage').text(package);	
+				
+
+			});
+
+		});
 
 
 			document.getElementById('bookingPanel').style.display = 'none';
@@ -2103,6 +2540,16 @@
 				alert("Tutor Deleted");
 			}
 
+			function confirmDeletionConsult(){
+
+				alert("Consultant deleted.");
+			}
+
+			function confirmDeletionOther(){
+
+				alert("Applicant deleted.");
+				}
+
 
             /*START HERE*/
 
@@ -2534,6 +2981,20 @@
 						modulesDiv.style.display = 'none';
 					}
 				});
+
+				function preventBackNavigation() {
+            // Push a new state to the history
+            window.history.pushState(null, null, window.location.href);
+            // Listen for the popstate event
+            window.onpopstate = function() {
+                // Redirect to a specific page when the back button is pressed
+                window.location.href = '/adminpanel'; // Change this to your desired page
+            };
+        }
+
+
+
+
 
 </script>
 </body>

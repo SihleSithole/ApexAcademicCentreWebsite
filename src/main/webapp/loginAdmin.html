@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-	<link href="fix.css" rel="stylesheet">
+	<link href="tb.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<style>
 		body {
@@ -115,100 +115,71 @@
 </head>
 <body>
 	
-	<nav class="navbar">
-	    <img src="apex.png" alt="Logo" class="logo" id="logo_image">
-	    <button class="navbar-toggle" id="navbar-toggle">
-	        <i class="fas fa-bars"></i> <!-- Hamburger icon -->
-	    </button>
-	    <ul class="nav-links">
-	        <li><a href="#">Home</a></li>
-	        <li><a href="#">About Us</a></li>
-	        <li class="dropdown">
-	            <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>
-	            <div class="dropdown-content">
-	                <a href="#">Online Tutoring</a>
-	                <a href="#">In-person Tutor</a>
-	                <a href="#">Matric Re-Write</a>
-	                <a href="#">Special Need Tutoring</a>
-	                <a href="#">University/ College Tutors</a>
-	                <a href="#">Homeschooling Support</a>
-	                <a href="#">Person Edexcel Tutoring</a>
+	<div class="login-container" id="loginContainer">
+	    <h2>Apex Academic Centre <i class="fas fa-user-lock"></i></h2>
+	    <form id="loginForm" action="" method="post" onsubmit="handleLogin(event)">
+	        <div class="form-group">
+	            <label for="username">Username:</label>
+	            <div class="input-icon">
+	                <i class="fas fa-user"></i>
+	                <input type="text" id="username" name="username" required>
 	            </div>
-	        </li>
-	        <li class="dropdown">
-	            <a href="#" class="dropbtn">Cambridge <i class="fas fa-chevron-down"></i></a>
-	            <div class="dropdown-content">
-	                <a href="#">Cambridge</a>
-	                <a href="#">A Level Tutoring</a>
-	                <a href="#">Expert Cambridge Tutors</a>
-	                <a href="#">IGCSE Level Tutoring</a>
-	                <a href="#">Cambridge Exam Timetable</a>
+	        </div>
+	        <div class="form-group">
+	            <label for="password">Password:</label>
+	            <div class="input-icon">
+	                <i class="fas fa-lock"></i>
+	                <input type="password" id="password" name="password" required>
 	            </div>
-	        </li>
-	        <li><a href="#">Resources</a></li>
-	        <li><a href="#">Contact Us</a></li>
+	        </div>
+	        <button type="submit">Login</button>
+	        <p></p>
+	        <a href="#" id="fg">Forget password?</a>
+	    </form>
+	</div>
 	
-	        <li>
-	            <button class="login-register">
-	                <i class="fas fa-user login-icon"></i> Login / Register
-	            </button>
-	        </li>
-	    </ul>
-	</nav>
-
-<div class="login-container" id="loginContainer">
-    <h2>Apex Academic Centre <i class="fas fa-user-lock"></i></h2>
-    <form id="loginForm" action="" method="post">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <div class="input-icon">
-                <i class="fas fa-user"></i>
-                <input type="text" id="username" name="username" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <div class="input-icon">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" name="password" required>
-            </div>
-        </div>
-		<button type="submit">Login</button>
-		<p></p>
-		<a href="#" id="fg" >forget password?</a>
-		
-       
-    </form>
-</div>
-
-<div class="popup" id="popup" style="display: none;">
-    <span class="close-btn" id="close-popup">&times;</span>
-    <p>Admin can't be managed on a small screen.</p>
-</div>
-
-<script>
-	document.getElementById('loginForm').addEventListener('submit', function(event) {
-	    event.preventDefault(); // Prevent default form submission
+	<script>
+	    async function handleLogin(event) {
+	        event.preventDefault(); // Prevent form submission
 	
-	    // Check screen size
-	    if (window.innerWidth < 600) {
-	        showPopup(); // Show popup if the screen is small
-	    } else {
-	        // Handle normal login logic here (e.g., authentication)
-	        alert('Logging in...');
+	        const username = document.getElementById('username').value; // Get the username (email)
+	        const password = document.getElementById('password').value; // Get the password
+	
+	        try {
+	            // Fetch admin data from the backend
+	            const response = await fetch('/retriveAdmin', { // URL for retrieving admin data
+	                method: 'GET',
+	                headers: { 
+	                    'Content-Type': 'application/json' 
+	                }
+	            });
+	
+	            if (!response.ok) {
+	                throw new Error('Network response was not ok');
+	            }
+	
+	            const admin = await response.json(); // Assuming the API returns an Admin object
+	
+	            // Check if the provided username and password match the retrieved admin
+	            if (admin.email === username && admin.password === password) {
+	                // Successful login
+	                alert("Login successful!");
+	              
+	                    window.location.href = '/admin'; // Redirect after 2 seconds
+	              
+	            } else {
+	                // Access denied
+	                alert("Access Denied");
+	            }
+	
+	        } catch (error) {
+	            console.error('Error:', error);
+	            alert('Error during login. Please try again later.');
+	        }
 	    }
-	});
-	
-	// Function to show the popup
-	function showPopup() {
-	    document.getElementById('popup').style.display = 'block';
-	}
-	
-	// Function to close the popup
-	document.getElementById('close-popup').addEventListener('click', function() {
-	    document.getElementById('popup').style.display = 'none';
-	});
+	</script>
 
-</script>
+
+
 </body>
 </html>
