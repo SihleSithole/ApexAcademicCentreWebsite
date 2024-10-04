@@ -134,7 +134,7 @@
             }
 
             .subject-label {
-    max-width: 180px; /* Set max width for the label */
+    max-width: 250x; /* Set max width for the label */
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for overflow text */
     white-space: nowrap; /* Prevent text wrapping */
@@ -705,7 +705,7 @@
                                     <h3>Once Off Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">1 Session per month<br>(once off)</div>
-                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
+                                        <div class="package-details" onclick="onceOffPackage()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="onceOffPackage"></button>
                                       
@@ -715,7 +715,7 @@
                                     <h3>Basic Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
-                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
+                                        <div class="package-details" onclick="basicPackage()">Package Details</div>
                                 
                                         <button type="submit" class="package-btn" id="basicPackage"></button>
                                      
@@ -725,7 +725,7 @@
                                     <h3>Premium Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">8 Sessions per month<br>(twice a week)</div>
-                                        <div class="package-details" onclick="openPackageDetails()" id="popular">Popular</div>
+                                        <div class="package-details" onclick="premiumPackage()" id="popular">Popular</div>
                                  
                                         <button type="submit" class="package-btn" id="premiumPackage"></button>
                                     
@@ -735,7 +735,7 @@
                                     <h3>Advanced Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">12 Sessions per month<br>(three times a week)</div>
-                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
+                                        <div class="package-details" onclick="advanceElite()">Package Details</div>
                                     
                                         <button type="submit" class="package-btn" id="advancedPackage"></button>
                                       
@@ -745,7 +745,7 @@
                                     <h3>Elite Package</h3>
                                     <div class="content">
                                         <div class="session-per-month">16 Sessions per month<br>(four times a week)</div>
-                                        <div class="package-details" onclick="openPackageDetails()">Package Details</div>
+                                        <div class="package-details" onclick="advanceElite()">Package Details</div>
                                         
                                         <button type="submit" class="package-btn" id="elitePackage"></button>
                                     
@@ -758,7 +758,7 @@
                                     <h3>One on One</h3>
                                     <div class="content">
                                         
-                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
+                                        <div class="package-details" onclick="oneOnoneUniversity()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="oneOnone"></button>
                                       
@@ -768,7 +768,7 @@
                                     <h3>2 to 5 students</h3>
                                     <div class="content">
                                         
-                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
+                                        <div class="package-details" onclick="groupUniversity()">Package Details</div>
                                 
                                         <button type="submit" class="package-btn" id="twoTofivePackage"></button>
                                         
@@ -778,7 +778,7 @@
                                     <h3>6 to 10 students</h3>
                                     <div class="content">
                                       
-                                        <div class="package-details" onclick="openPackageDetailsUniversity()">Package Details</div>
+                                        <div class="package-details" onclick="groupUniversity()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="sixTo10Package"></button>
                                     
@@ -877,45 +877,222 @@ document.addEventListener("DOMContentLoaded", function() {
 
          /*#########################BOOKINGS#######################*/
 
-         function openPackageDetails(){
+         function onceOffPackage(){
 
-  var pack_details = document.getElementById('pack-details');
-  var syllabusId = document.getElementById('syllabus').value;
-  var ghg = document.getElementById('tutor-style').value.trim(); 
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+            var helpingFor = document.querySelector('input[name="help-with"]:checked');
+            var forwho = helpingFor ? helpingFor.value : 'None';
 
-  if (ghg === "Online" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
-  pack_details.innerHTML = `
-      •Each session is 60 minutes
-      <ul>
-          <li>•One-on-one live sessions</li>
-          <li>•We offer a 10% sibling discount</li>
-          <li>•All prices are in South African currency</li>
-          <li>•Each can cover only one subject (basic)</li>
-          <li>•It can cover 2 subjects (premium)</li>
-          <li>•It can cover 2 subjects and above (advanced and elite)</li>
-      </ul>`;
-   }
+            if (ghg === "Online" && forwho === 'school' ){
 
-   else{
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session 
+                    <ul>
+                        <li>•Format: One-on-one live sessions </li>
+                        <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
+                    </ul>`;
+                  
+            } 
 
-      if (ghg === "In Person" && (syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" || syllabusId === "IEB" || syllabusId === "CAPs")) {
-          pack_details.innerHTML = `
-      •Each session is 60 minutes
-      <ul>
-          <li>•One-on-one in-person tutoring at your home</li>
-          <li>•We offer a 10% sibling discount</li>
-          <li>•All prices are in South African currency</li>
-          <li>•Each can cover only one subject (basic)</li>
-          <li>•It can cover 2 subjects (premium)</li>
-          <li>•It can cover 2 subjects and above (advanced and elite)</li>
-      </ul>`;
-            
-      }
+            else{
 
-   }
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one In-person tutoring at your home</li>
+                        <li>•Pricing: All prices are quoted in South African Rand.</li>
+                    </ul>`;
 
-  document.getElementById('popup').classList.remove('hide');
-  }
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+
+         }
+          
+
+         function basicPackage(){
+
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+            var helpingFor = document.querySelector('input[name="help-with"]:checked');
+            var forwho = helpingFor ? helpingFor.value : 'None';
+
+            if (ghg === "Online" && forwho === 'school' ){
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one live sessions</li>
+                        <li>•Special Offer: 10% sibling discount available</li>
+                        <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Only covers one subject in a month</li>
+                    </ul>`;
+                  
+            } 
+
+            else{
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one, in-person tutoring at your home</li>
+                        <li>•Pricing: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Family Discount: 10% sibling discount available.</li>
+                        <li>•Covers one subject per month.</li>
+                    </ul>`;
+
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+         }
+
+         function premiumPackage(){
+
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+            var helpingFor = document.querySelector('input[name="help-with"]:checked');
+            var forwho = helpingFor ? helpingFor.value : 'None';
+
+            if (ghg === "Online" && forwho === 'school' ){
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one live sessions</li>
+                        <li>•Special Offer: 10% sibling discount available</li>
+                        <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Covers 2 subjects in a month</li>
+                    </ul>`;
+                  
+            } 
+
+            else{
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one, in-person tutoring at your home</li>
+                        <li>•Pricing: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Family Discount: 10% sibling discount available.</li>
+                        <li>•Covers up to two subjects per month.</li>
+                    </ul>`;
+
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+
+         }
+
+
+         function advanceElite(){
+
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+            var helpingFor = document.querySelector('input[name="help-with"]:checked');
+            var forwho = helpingFor ? helpingFor.value : 'None';
+
+            if (ghg === "Online" && forwho === 'school' ){
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one live sessions</li>
+                        <li>•Special Offer: 10% sibling discount available</li>
+                        <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Covers two or more subjects per month </li>
+                    </ul>`;
+                  
+            } 
+
+            else{
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•Format: One-on-one, in-person tutoring at your home</li>
+                        <li>•Pricing: All prices quoted in South African Rand (ZAR)</li>
+                        <li>•Family Discount: 10% sibling discount available.</li>
+                        <li>•Covers two or more subjects </li>
+                    </ul>`;
+
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+              
+         }
+
+         function oneOnoneUniversity(){
+
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+
+            if (ghg === "Online"){
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes 
+                    <ul>
+                        <li>•Format: One-on-one live sessions.</li>
+                        <li>•Discount: we offer a discount if you book more than 5 sessions</li>
+                        <li>•All prices are quoted in South African Rand (ZAR).</li>
+                    </ul>`;
+                  
+            } 
+
+            else{
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes 
+                    <ul>
+                        <li>•Location: Campus or home tutoring</li>
+                        <li>•Discount: we offer a discount if you book more than 5 sessions.</li>
+                        <li>•All prices are quoted in South African Rand (ZAR)</li>
+                    </ul>`;
+
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+
+         }
+
+         function groupUniversity(){
+
+            var ghg = document.getElementById('tutor-style').value.trim(); 
+            var pack_details = document.getElementById('pack-details');
+
+            if (ghg === "Online"){
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes per session
+                    <ul>
+                        <li>•All sessions are live interactive learning experiences </li>
+                        <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
+                      
+                    </ul>`;
+
+     
+                  
+            } 
+
+            else{
+
+                pack_details.innerHTML = `
+                    •Duration: 60 minutes 
+                    <ul>
+                        <li>•Location: Campus or home tutoring</li>
+                        <li>•Discount: we offer a discount if you book more than 5 sessions.</li>
+                        <li>•All prices are quoted in South African Rand (ZAR)</li>
+                    </ul>`;
+
+               }
+
+            document.getElementById('popup').classList.remove('hide');
+
+
+         }
+
+
+
 
 function closePopup() {
   document.getElementById('popup').classList.add('hide');
@@ -925,6 +1102,7 @@ function openPackageDetailsUniversity(){
 
     var pack_details = document.getElementById('pack-details');
     var ghg = document.getElementById('tutor-style').value.trim(); 
+
 
      if (ghg === "In Person"){
 
@@ -1310,7 +1488,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 else{
                     if(ghg === "Online" && syllabusId === "Cambridge" || syllabusId === "IB" || syllabusId === "Pearson Edexel" ){
                        
-                       
+                    
                         const onceOffPackage = document.getElementById('onceOffPackage');
                         onceOffPackage.textContent = 'R400'; // or button.innerHTML = 'Submit';
 
@@ -1849,7 +2027,8 @@ document.addEventListener('DOMContentLoaded', function() {
            /*Grades End Here*/
 
            /*Subects Start Here*/
-           const defaultSubjects = "Mathematics, English, Afrikaans, Accounting, Life Sciences, Chemistry, Biology, Physics, E.M.S, Natural Sciences, Geography, History, IsiZulu, Sepedi, Mathematics Literacy, Computer Science, French, German, Physical Sciences, Information and Technology";
+           const defaultSubjects = "Mathematics, Mathematics Literacy, English, Afrikaans, IsiZulu, Physics, Life Sciences, Physical Sciences, Biology, Chemistry, Natural Sciences, E.M.S, Sepedi, Accounting, History, Geography, German, Computer Science, Information Technology, Combined Science, Marine Science, Social Sciences, Technology, Humanities and Social Sciences, Creative Arts, Life Orientation, Life Skills, Business Studies, Economics, Sociology, Tourism, Travel & Tourism, French, Spanish, Portuguese, Engineering Graphics and Design, Sesotho, Setswana, IsiNdebele, Tshivenda, Xitsonga, Arabic, Italian, Computer Application Technology, Chinese, Swahili, Hindi,  Environmental Management, Thai, Turkish, Vietnamese,  Malay, IsiXhosa, Urdu, Psychology, Enterprise, Civil Technology, Electrical Technology, Mechanical Technology, Dance Studies, Design, Dramatic Arts,  Agricultural Management Practices, Design & Technology, Drama, Chinese, Agricultural Sciences,Music, Agricultural Technology, Physical Education";
+
 const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
 
 const subjectContainer = document.getElementById('subjectContainer');
@@ -1857,19 +2036,26 @@ const subjectContainer = document.getElementById('subjectContainer');
 // Clear existing checkboxes
 subjectContainer.innerHTML = '';
 
-// Create a wrapper for the checkboxes to apply flex styles
+// Calculate the maximum length of subject names
+const maxSubjectLength = Math.max(...subjectsArray.map(subject => subject.length));
+
+// Increased spacing values
+const baseGap = 10; // Increased base gap for styling
+const dynamicGap = maxSubjectLength * 2; // Increased multiplier for more spacing
+const gapSize = Math.max(baseGap, dynamicGap); // Ensure the gap isn't too small
+
+const columnCount = 4; // Number of columns to display
 let wrapper = document.createElement('div');
 wrapper.style.display = 'flex';
-wrapper.style.flexWrap = 'wrap';
-wrapper.style.justifyContent = 'flex-start'; // Align items to the start of the line
-wrapper.style.gap = '5%'; // Space between checkboxes
+wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
+wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
 
 subjectsArray.forEach((subject, index) => {
     const label = document.createElement('label');
     label.className = 'subject-label'; // Add class to the label
     label.style.display = 'flex'; // Use flex to align checkbox and text
     label.style.alignItems = 'center'; // Center vertically
-    label.style.maxWidth = '150px'; // Set a max width for the label
+    label.style.width = 'calc(25% - 15px)'; // Set width for each label to fit 4 columns and adjust for gaps
     label.style.overflow = 'hidden'; // Hide overflow text
     label.style.textOverflow = 'ellipsis'; // Show ellipsis for overflow text
     label.style.whiteSpace = 'nowrap'; // Prevent text wrapping
@@ -1882,22 +2068,23 @@ subjectsArray.forEach((subject, index) => {
     // Set the label text
     label.textContent = subject; // Set the text for the label
 
-    // Append checkbox to label and label to wrapper
+    // Append checkbox to label
     label.prepend(checkbox); // Add checkbox before the label text
+
+    // Append the label to the wrapper
     wrapper.appendChild(label);
 
-    // Break after every 5 subjects
-    if ((index + 1) % 5 === 0) {
-        subjectContainer.appendChild(wrapper); // Append the current row of subjects
-        wrapper = document.createElement('div'); // Create a new wrapper for the next row
+    // Append the wrapper to the container after every specified number of subjects (columns)
+    if ((index + 1) % columnCount === 0) {
+        subjectContainer.appendChild(wrapper); // Append the current column set
+        wrapper = document.createElement('div'); // Create a new wrapper for the next column
         wrapper.style.display = 'flex';
-        wrapper.style.flexWrap = 'wrap';
-        wrapper.style.justifyContent = 'flex-start'; // Align items to the start of the line
-        wrapper.style.gap = '5%'; // Space between checkboxes
+        wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
+        wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
     }
 });
 
-// Append remaining subjects if there are less than 5 in the last row
+// Append remaining subjects if there are less than 'columnCount' in the last wrapper
 if (wrapper.childElementCount > 0) {
     subjectContainer.appendChild(wrapper);
 }
