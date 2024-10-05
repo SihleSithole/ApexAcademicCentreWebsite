@@ -762,19 +762,123 @@ public class PageController {
 			    }
 			 
 			    @GetMapping("/success")
-			    public String handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails, Model model) {
+			    public ModelAndView handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails) {
 			        // Extract necessary details from paymentDetails
-			     
-			        String name = paymentDetails.get("name"); // Adjust based on actual keys from payment details
-			        String email = paymentDetails.get("email"); // Adjust based on actual keys from payment details
-			         
-			
-			        // Add the booking details to the model to display on the success page
-			        model.addAttribute("name", name);
-			        model.addAttribute("email", email);
-			       
-			        
-			        return "success.html"; // Name of the success HTML page (success.html)
-			    }
 
+		            String amount =  paymentDetails.get("amount");
+		            String name =  paymentDetails.get("name");
+		            String surname =  paymentDetails.get("surname");
+		            String email =  paymentDetails.get("email");
+		            String phone =  paymentDetails.get("phone");
+		            String province =  paymentDetails.get("province");
+		            String country =  paymentDetails.get("country");
+		            String instrLangauge =  paymentDetails.get("instrLangauge");
+		            String tutorFor = paymentDetails.get("tutorFor");
+		            String helpWith =  paymentDetails.get("helpWith");
+		            String learnerName =  paymentDetails.get("learnerName");
+		            String learnerSurname =  paymentDetails.get("learnerSurname");
+		            String grade = paymentDetails.get("grade");
+		            String syllabus =  paymentDetails.get("syllabus");
+		            String studentName =  paymentDetails.get("studentName");
+		            String studentSurname =  paymentDetails.get("studentSurname");
+		            String year =  paymentDetails.get("year");
+		            String postGrad =  paymentDetails.get("postGrad");
+		            String subject =  paymentDetails.get("subject");
+		            String onlineInperson =  paymentDetails.get("onlineInperson");
+		            String suburb =  paymentDetails.get("suburb");
+		            String toStart =  paymentDetails.get("toStart");
+		            String secTutor =  paymentDetails.get("secTutor");
+		            String tutorName =  paymentDetails.get("tutorName");
+		            String tutorEmail =  paymentDetails.get("tutorEmail");
+		            String packageType =  paymentDetails.get("packageType");
+		            String message =  paymentDetails.get("message");
+		            String isPaid = "Yes";
+			        
+
+			        ModelAndView data = new ModelAndView("success.jsp"); // load the admin dashboard
+			        data.addObject("name", name);
+			        data.addObject("email", email);
+			        
+				     Booking bookings = new Booking( name,  surname,  email,  phone,  province,  country,
+				    		 instrLangauge,  tutorFor,  helpWith,  learnerName,  learnerSurname,  grade,
+							 syllabus,  studentName,  studentSurname,  year,  subject,  onlineInperson,
+							 toStart,  suburb,  message,  secTutor,  "pending",  packageType,
+							 tutorName,  tutorEmail,  isPaid);
+				     
+				     bookingService.save(bookings);
+				     
+				     String sendName = "";
+				     String clientName = name + " " + surname;
+				     
+				     if(learnerName.equals("N/A")) {
+				    	 
+				    	 sendName = studentName + " " + studentSurname;
+				     }
+				     
+				     else {
+				    	 
+				    	 sendName = learnerName + " " + learnerSurname;
+				    	 
+				     }
+				     
+				     if(tutorName.equals("N/A")) {
+				    	 
+				    	 tutorName = "Our Highly intelligent tutor";
+				    	 
+				     }
+				     
+				     
+				     bookingService.save(bookings);
+					    
+					    Long entryId = bookings.getEntry();
+					    String tutorEmaill = bookings.getTutorEmail();
+					    
+					     if(tutorEmail.equals("N/A")) {
+					    	 
+					    	 tutorEmaill = "apexexcellencetutors@gmail.com";
+					    	 
+					     }
+					    
+					    String serverName = request.getServerName();
+					    int serverPort = request.getServerPort();
+					    String protocol = request.getScheme();
+					    String host = protocol + "://" + serverName + ":" + serverPort;
+
+				        String bookingLink = host + "/booking-details?id=" + entryId;
+				        
+					    /*Send email to tutor*/
+						senderService.sendSimpleEmail(tutorEmaill, "Booking-info: " + subject ,
+						"Dear " + tutorName + "\n\nWe're pleased to inform you that [" +  name + " " + surname + "] has booked your services to support their child, [" + sendName + "]. We're thrilled to have you on board and are confident in your ability to provide exceptional guidance and support.\r\n"
+								+ "\r\n"
+								+ "To confirm your booking, please review the details at the link below and ACCEPT within 24 hours. If you're unavailable or need to reschedule, please notify us immediately so we can arrange a suitable replacement tutor.\r\n"
+								+ "\r\n"
+								+ "Link : " + bookingLink + "\r\n"
+								+ "\r\n"
+								+ "Thank you for your cooperation and expertise. We look forward to a successful collaboration!\r\n"
+								+ "\r\n"
+								+ "Best regards,\r\n"
+								+ "Apex Academic Centre");
+						
+						
+					    /*Send email to the student who book tutor*/
+						senderService.sendSimpleEmail(email, "Apex Tutor booking : no-reply" ,
+						"Dear " + clientName + "\n\nThank you for choosing " + tutorName + "! We're thrilled to have them work with " + sendName + " and are confident they will receive exceptional guidance and support in " + subject + ".\r\n"
+								+ "\r\n"
+								+ "Next Steps:\r\n"
+								+ "\r\n"
+								+ "- " + tutorName + " will contact you within the next 24 hours to introduce themselves and discuss a personalized lesson plan.\r\n"
+								+ "- Please note that if " + tutorName + " is unavailable for any reason or needs to reschedule, we have a secondary tutor available to ensure continuity.\r\n"
+								+ "\r\n"
+								+ "Thank you for entrusting us with your academic needs. We look forward to " + sendName + " success!\r\n"
+								+ "\r\n"
+								+ "Best regards,\r\n"
+								+ "Apex Academic Centre");
+			        
+			        
+			        
+			        return data; // Name of the success HTML page (success.html)
+			        
+			    }
+			    
+			  
 }
