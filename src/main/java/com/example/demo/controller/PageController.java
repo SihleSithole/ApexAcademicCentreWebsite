@@ -680,7 +680,10 @@ public class PageController {
 		    public ModelAndView getTry(@RequestParam("email") String email) {
 		        
 		        List<Tutor> tutors = tutorService.listAll();
-		        Optional<Tutor> opT = tutorRepo.findById(email);
+		        
+		        String tutorEmail = simpleDecrypt(email);
+		        
+		        Optional<Tutor> opT = tutorRepo.findById(tutorEmail);
 		        Tutor tutor = new Tutor();
 		        List<Review> reviews = reviewService.listAll();
 		            
@@ -884,6 +887,32 @@ public class PageController {
 			        return data; // Name of the success HTML page (success.html)
 			        
 			    }
+			    
+			    public String simpleDecrypt(String encryptedText) {
+			        int shift = 3; // This should match the shift used in encryption
+			        StringBuilder decrypted = new StringBuilder();
+			        
+			        for (int i = 0; i < encryptedText.length(); i++) {
+			            char ch = encryptedText.charAt(i);
+			            
+			            // Shift uppercase letters
+			            if (ch >= 'A' && ch <= 'Z') {
+			                ch = (char) (((ch - 'A' - shift + 26) % 26) + 'A');
+			            }
+			            // Shift lowercase letters
+			            else if (ch >= 'a' && ch <= 'z') {
+			                ch = (char) (((ch - 'a' - shift + 26) % 26) + 'a');
+			            }
+			            // Shift numbers
+			            else if (ch >= '0' && ch <= '9') {
+			                ch = (char) (((ch - '0' - shift + 10) % 10) + '0');
+			            }
+			            
+			            decrypted.append(ch);
+			        }
+			        return decrypted.toString();
+			    }
+
 			    
 			  
 }

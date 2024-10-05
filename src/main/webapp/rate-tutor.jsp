@@ -86,7 +86,7 @@ h1 {
                 
                         <div class="mb-3">
                             <label for="ratings" class="form-label">Ratings</label>
-                            <input type="number" id="ratings" name="ratings" class="form-control" placeholder="1 to 5" min="1" max="5" required>
+                            <input type="number" id="ratings" name="ratings" class="form-control" placeholder="4" min="1" max="5" required>
                         </div>
                 
                         <input type="hidden" id="tutorEmail" name="tutorEmail" value="<%= tutorEmail %>" required>

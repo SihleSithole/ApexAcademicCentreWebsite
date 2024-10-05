@@ -329,18 +329,18 @@
                             </div>
                         </div>
                         <div class="book-view">
-                            <form action="/view-profile" method="get">
-                                <input type="hidden" name="email" value="<%= email %>"/>
+                            <form action="/view-profile" method="get" id="profileForm1">
+                                <input type="hidden" id="encryptedEmail1" name="email" value=""/> <!-- Encrypted email hidden field -->
                                 <div class="repoStyle">
-                                    <button type="submit" class="view_pp">
+                                    <button type="submit" class="view_pp" onclick="encryptEmail(event, '<%= email %>', 'encryptedEmail1')">
                                         VIEW PROFILE
                                     </button>
                                     <button type="button" onclick="openOpenopen('<%= name %>' , '<%= email %>', '<%= syllabus %>', '<%= grades %>', '<%= subjects %>')" class="bk_tutor">BOOK TUTOR</button>
                                 </div>
                             </form>
-                           
                             <br>
                         </div>
+                        
                        </div>
                     <br>
                     <br>
@@ -1492,7 +1492,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
                     const onceOffPackage = document.getElementById('onceOffPackage');
-                    onceOffPackage.textContent = 'R10'; // I changed R300 to R10 for testing
+                    onceOffPackage.textContent = 'R300'; // I changed R300 to R10 for testing
 
                     const basicPackage= document.getElementById('basicPackage');
                     basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
@@ -2265,7 +2265,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             var typePackage = 'Once off Package';
 
             if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '10'; // amount to pay; i changed R300 to R10 for testing
+                 amountTopay = '300'; // amount to pay; i changed R300 to R10 for testing
                }
                else{
 
@@ -3873,6 +3873,48 @@ function toggleReadOnly() {
         toggleProvince();
         countrySelect.addEventListener("change", toggleProvince);
     });
+
+
+    /*ENCRYPTEMAIL*/
+
+       function simpleEncrypt(text) {
+        let shift = 3; // You can change this value to shift by more or less
+        let encrypted = '';
+        
+        for (let i = 0; i < text.length; i++) {
+            let char = text.charCodeAt(i);
+            
+            // Shift uppercase letters
+            if (char >= 65 && char <= 90) {
+                char = ((char - 65 + shift) % 26) + 65;
+            }
+            // Shift lowercase letters
+            else if (char >= 97 && char <= 122) {
+                char = ((char - 97 + shift) % 26) + 97;
+            }
+            // Shift numbers
+            else if (char >= 48 && char <= 57) {
+                char = ((char - 48 + shift) % 10) + 48;
+            }
+            
+            encrypted += String.fromCharCode(char);
+        }
+        return encrypted;
+    }
+
+    function encryptEmail(event, email, hiddenFieldId) {
+        // Prevent the form from submitting immediately
+        event.preventDefault();
+
+        // Encrypt the email
+        const encryptedEmail = simpleEncrypt(email);
+
+        // Set the encrypted email in the hidden input
+        document.getElementById(hiddenFieldId).value = encryptedEmail;
+
+        // Now submit the form
+        document.getElementById(hiddenFieldId).closest('form').submit();
+    }
 
 </script>
 <script src="js/jquery-3.3.1.slim.min.js"></script>
