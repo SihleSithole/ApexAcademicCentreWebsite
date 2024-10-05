@@ -13,7 +13,43 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom CSS (if any) -->
     <!--<link rel="stylesheet" href="css/non.css">-->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        /* Custom styles for modal form */
+.modal-body {
+    max-width: 500px; /* Set a maximum width for the form */
+    margin: auto; /* Center the form */
+}
+
+@media (max-width: 768px) {
+    .modal-body {
+        padding: 20px; /* Add padding on smaller screens */
+    }
+}
+
+h1 {
+    font-size: 1.5rem; /* Set font size for the heading */
+    color: #333; /* Set heading color */
+}
+
+.form-control {
+    transition: border-color 0.2s ease; /* Smooth border transition */
+}
+
+.form-control:focus {
+    border-color: #5cb85c; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(92, 184, 92, .5); /* Add shadow effect on focus */
+}
+
+.btn-success {
+    background-color: #5cb85c; /* Bootstrap success color */
+    border: none; /* Remove default border */
+}
+
+.btn-success:hover {
+    background-color: #4cae4c; /* Darker green on hover */
+}
+
+    </style>
 </head>
 <body>
 
@@ -35,35 +71,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form  action="/add-review-ratings" method="post" class="p-4 border rounded" id="myForm">
-                        <h1 class="mb-4"></h1>
-                        <div class="mb-3">
-                            <label for="name">Full Names</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Sihle Sithole"  required>
-                           
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="message">Message</label>
-                            <input type="text" id="message" name="message" placeholder="The best tutor ever"  class="form-control" required>
+                    <form action="/add-review-ratings" method="post" class="p-4 border rounded shadow-sm bg-light" id="myForm">
+                        <h1 class="mb-4 text-center">Submit Your Review</h1>
                         
-                        </div>
                         <div class="mb-3">
-                            <label for="ratings">Ratings</label>
-                            <input type="number" id="ratings" name="ratings" class="form-control"
-                                placeholder="1 to 5" min="1" max="5" required>
-                            
+                            <label for="name" class="form-label">Full Names</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Sihle Sithole" required>
                         </div>
-
-                        <input type="hidden" id="tutorEmail" name="tutorEmail" value=" <%= tutorEmail %> " class="form-control"
-                                placeholder="5" required>
-
+                
                         <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="The best tutor ever" rows="3" required></textarea>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="ratings" class="form-label">Ratings</label>
+                            <input type="number" id="ratings" name="ratings" class="form-control" placeholder="1 to 5" min="1" max="5" required>
+                        </div>
+                
+                        <input type="hidden" id="tutorEmail" name="tutorEmail" value="<%= tutorEmail %>" required>
+                
+                        <div class="mb-3 text-center">
                             <button class="btn btn-success" type="submit">Submit</button>
                         </div>
-  
                     </form>
-            </div>
+                </div>
+                
         </div>
     </div>
 

@@ -826,7 +826,7 @@ public class PageController {
 				    	 
 				     }
 				     
-				     if(tutorName.equals("N/A")) {
+				     if(tutorName.equals("Main Booking")) {
 				    	 
 				    	 tutorName = "Our Highly intelligent tutor";
 				    	 

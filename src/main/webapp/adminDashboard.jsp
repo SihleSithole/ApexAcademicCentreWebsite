@@ -1511,7 +1511,7 @@
 								<p><strong>Platform:</strong><span id="modalPlatform"></span></p>
 								<p id="fOne"><strong>Suburb:</strong><span id="modalSuburb"></span></p>
 								<p id="fSec"><strong>Address:</strong><span id="modalAddress"></span></p>
-								<p><strong>Amount Paid:</strong><span id="modalAmountPaid"></span></p>
+								<p><strong>Amount Paid:</strong>R<span id="modalAmountPaid"></span></p>
 								<p><strong>Sessions:</strong><span id="modalSessions"></span></p>
 							
 
