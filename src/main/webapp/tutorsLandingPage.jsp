@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <link href="assets/css/tb.css" rel="stylesheet">
-    <link href="tutorBookings.css" rel="stylesheet">
+    <link href="assets/css/mainTutorsFinal.css" rel="stylesheet">
+    <link href="tutorBookingFinal.css" rel="stylesheet">
     <style>
         .checkbox-container{
             display: inline-flex;
@@ -78,17 +78,17 @@
             @media screen and (max-width: 1024px) {
 
                 
-        .popup {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
+                .popup {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        z-index: 1000;
             }
 
             .popup-content {
@@ -134,13 +134,17 @@
             }
 
             .subject-label {
-    max-width: 250x; /* Set max width for the label */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Show ellipsis for overflow text */
-    white-space: nowrap; /* Prevent text wrapping */
-    display: flex; /* Keep flex for alignment */
-    align-items: center; /* Center checkbox and text */
-}
+                max-width: 250x; /* Set max width for the label */
+                overflow: hidden; /* Hide overflow text */
+                text-overflow: ellipsis; /* Show ellipsis for overflow text */
+                white-space: nowrap; /* Prevent text wrapping */
+                display: flex; /* Keep flex for alignment */
+                align-items: center; /* Center checkbox and text */
+            }
+
+            #tutorNameDisplay{
+                font-size: 20px;
+            }
 
     </style>
 
@@ -252,7 +256,27 @@
                             <p>
                                 <span class="static-text" id="tutorNameDisplay"><strong><%= name %></strong></span><br><br>
                                 <span class="static-text">Country :</span> <span class="detail-info"><%= country %></span><br>
-                                <span class="static-text">Province :</span> <span class="detail-info"><%= address %></span><br>
+
+                                <%
+                                   if(country.equals("South Africa")){
+
+                                    %>
+
+                                    <span class="static-text">Province :</span> <span class="detail-info"><%= address %></span><br>
+
+                                    <%
+
+                                   }
+
+                                   else{
+
+                                       %>
+                                       <span class="static-text">International </span><br>
+                                       <%
+
+                                   }
+                                %>
+                               
                                 <span class="static-text">Area :</span> <span class="detail-info"><%= area %></span><br>
                                 <span class="static-text">Curriculum :</span> <span class="detail-info"><%= syllabus %></span><br>
                                 <span class="static-text">Tutoring Option :</span> <span class="detail-info"><%= availability %></span>
@@ -589,8 +613,8 @@
                             <form id="submit-form">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <label for="subject">Select Subject <span class="required">*</span></label><br>
-                                        <input type="text" id="subject" name="subject" class="input" required readonly onclick="toggleSubjectOptions()">
+                                        <label for="subject">Subjects<span class="required">*</span></label><br>
+                                        <input type="text" id="subject" name="subject" class="input" placeholder="Mathematics,Mathematics Literacy...." required readonly onclick="toggleSubjectOptions()">
                                         <div id="subjectContainer" style="display: none;"></div>
                                         <div id="subject-error" class="error"></div>
                                     </div>
@@ -1467,10 +1491,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
-                   
-
                     const onceOffPackage = document.getElementById('onceOffPackage');
-                    onceOffPackage.textContent = 'R300'; // or button.innerHTML = 'Submit';
+                    onceOffPackage.textContent = 'R10'; // I changed R300 to R10 for testing
 
                     const basicPackage= document.getElementById('basicPackage');
                     basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
@@ -2032,11 +2054,12 @@ document.addEventListener('DOMContentLoaded', function() {
            /*Grades End Here*/
 
            /*Subects Start Here*/
-           const defaultSubjects = "Mathematics, Mathematics Literacy, English, Afrikaans, IsiZulu, Physics, Life Sciences, Physical Sciences, Biology, Chemistry, Natural Sciences, E.M.S, Sepedi, Accounting, History, Geography, German, Computer Science, Information Technology, Combined Science, Marine Science, Social Sciences, Technology, Humanities and Social Sciences, Creative Arts, Life Orientation, Life Skills, Business Studies, Economics, Sociology, Tourism, Travel & Tourism, French, Spanish, Portuguese, Engineering Graphics and Design, Sesotho, Setswana, IsiNdebele, Tshivenda, Xitsonga, Arabic, Italian, Computer Application Technology, Chinese, Swahili, Hindi,  Environmental Management, Thai, Turkish, Vietnamese,  Malay, IsiXhosa, Urdu, Psychology, Enterprise, Civil Technology, Electrical Technology, Mechanical Technology, Dance Studies, Design, Dramatic Arts,  Agricultural Management Practices, Design & Technology, Drama, Chinese, Agricultural Sciences,Music, Agricultural Technology, Physical Education";
+           const defaultSubjects = "Mathematics, Mathematics Literacy, English, Afrikaans, IsiZulu, Physics, Life Sciences, Physical Sciences, Biology, Chemistry, Natural Sciences, E.M.S, Sepedi, Accounting, History, Geography, German, Computer Science, Information Technology, Combined Science, Marine Science, Social Sciences, Technology, Humanities and Social Sciences, Creative Arts, Life Orientation, Life Skills, Business Studies, Economics, Sociology, Tourism, Travel & Tourism, French, Spanish, Portuguese, Engineering Graphics and Design, Sesotho, Setswana, IsiNdebele, Tshivenda, Xitsonga, Arabic, Italian, Computer Application Technology, Chinese, Swahili, Hindi, Environmental Management, Thai, Turkish, Vietnamese, Malay, IsiXhosa, Urdu, Psychology, Enterprise, Civil Technology, Electrical Technology, Mechanical Technology, Dance Studies, Design, Dramatic Arts, Agricultural Management Practices, Design & Technology, Drama, Chinese, Agricultural Sciences, Music, Agricultural Technology, Physical Education";
 
 const subjectsArray = (subsub || defaultSubjects).split(',').map(item => item.trim());
 
 const subjectContainer = document.getElementById('subjectContainer');
+
 
 // Clear existing checkboxes
 subjectContainer.innerHTML = '';
@@ -2050,50 +2073,67 @@ const dynamicGap = maxSubjectLength * 2; // Increased multiplier for more spacin
 const gapSize = Math.max(baseGap, dynamicGap); // Ensure the gap isn't too small
 
 const columnCount = 4; // Number of columns to display
-let wrapper = document.createElement('div');
-wrapper.style.display = 'flex';
-wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
-wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
 
-subjectsArray.forEach((subject, index) => {
-    const label = document.createElement('label');
-    label.className = 'subject-label'; // Add class to the label
-    label.style.display = 'flex'; // Use flex to align checkbox and text
-    label.style.alignItems = 'center'; // Center vertically
-    label.style.width = 'calc(25% - 15px)'; // Set width for each label to fit 4 columns and adjust for gaps
-    label.style.overflow = 'hidden'; // Hide overflow text
-    label.style.textOverflow = 'ellipsis'; // Show ellipsis for overflow text
-    label.style.whiteSpace = 'nowrap'; // Prevent text wrapping
+function appendCheckboxes() {
+    let wrapper = document.createElement('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
+    wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.value = subject;
-    checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
+    subjectsArray.forEach((subject, index) => {
+        const label = document.createElement('label');
+        label.className = 'subject-label'; // Add class to the label
+        label.style.display = 'flex'; // Use flex to align checkbox and text
+        label.style.alignItems = 'center'; // Center vertically
+        label.style.width = 'calc(25% - 15px)'; // Set width for each label to fit 4 columns and adjust for gaps
+        label.style.overflow = 'hidden'; // Hide overflow text
+        label.style.textOverflow = 'ellipsis'; // Show ellipsis for overflow text
+        label.style.whiteSpace = 'nowrap'; // Prevent text wrapping
 
-    // Set the label text
-    label.textContent = subject; // Set the text for the label
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = subject;
+        checkbox.onchange = updateSubjects; // Assuming updateSubjects is defined elsewhere
 
-    // Append checkbox to label
-    label.prepend(checkbox); // Add checkbox before the label text
+        // Set the label text
+        label.textContent = subject; // Set the text for the label
 
-    // Append the label to the wrapper
-    wrapper.appendChild(label);
+        // Append checkbox to label
+        label.prepend(checkbox); // Add checkbox before the label text
 
-    // Append the wrapper to the container after every specified number of subjects (columns)
-    if ((index + 1) % columnCount === 0) {
-        subjectContainer.appendChild(wrapper); // Append the current column set
-        wrapper = document.createElement('div'); // Create a new wrapper for the next column
-        wrapper.style.display = 'flex';
-        wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
-        wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
+        // Check if the screen width is greater than 768px
+        if (window.innerWidth > 768) {
+            // Append the label to the wrapper only if not a small screen
+            
+            wrapper.appendChild(label);
+        }
+
+        // Append the wrapper to the container after every specified number of subjects (columns)
+        if ((index + 1) % columnCount === 0) {
+            subjectContainer.appendChild(wrapper); // Append the current column set
+            wrapper = document.createElement('div'); // Create a new wrapper for the next column
+            wrapper.style.display = 'flex';
+            wrapper.style.flexWrap = 'wrap'; // Allow wrapping to the next line
+            wrapper.style.gap = `${gapSize}px`; // Space between checkboxes based on longest subject
+        }
+    });
+
+    // Append remaining subjects if there are less than 'columnCount' in the last wrapper
+    if (wrapper.childElementCount > 0) {
+        subjectContainer.appendChild(wrapper);
     }
-});
-
-// Append remaining subjects if there are less than 'columnCount' in the last wrapper
-if (wrapper.childElementCount > 0) {
-    subjectContainer.appendChild(wrapper);
 }
 
+// Call the function to append checkboxes initially
+appendCheckboxes();
+
+// Add an event listener for window resize
+window.addEventListener('resize', () => {
+    // Clear existing checkboxes
+    subjectContainer.innerHTML = '';
+    // Re-append the checkboxes based on current screen width
+    appendCheckboxes();
+});
 
            /*Subects End Here*/
 
@@ -2222,9 +2262,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             case 'onceOffPackage':
             alert('Once Off Package selected');
             var amountTopay;
+            var typePackage = 'Once off Package';
 
             if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '300'; // amount to pay;
+                 amountTopay = '10'; // amount to pay; i changed R300 to R10 for testing
                }
                else{
 
@@ -2260,7 +2301,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const dataToSend = {
                     ...allData, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
+                    amount: amountTopay , package : typePackage
                 };
 
                 fetch('/booking', { // Replace with your actual endpoint URL
@@ -2289,6 +2330,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 alert('Basic Package selected');
 
                 var amountTopay;
+                var typePackage = 'Basic Package';
 
                 if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
                  amountTopay = '1100'; // amount to pay;
@@ -2322,7 +2364,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const ToSend = {
                     ...all, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
+                    amount: amountTopay , package : typePackage
                 };
 
                 fetch('/booking', { // Replace with your actual endpoint URL
@@ -2351,6 +2393,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 alert('Premium Package selected');
 
                 var amountTopay;
+                var typePackage = 'Premium Package';
 
                 if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
                 amountTopay = '2150'; // amount to pay;
@@ -2383,7 +2426,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const ToSendData = {
                     ...dataall, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
+                    amount: amountTopay , package : typePackage
                 };
 
                 fetch('/booking', { // Replace with your actual endpoint URL
@@ -2412,6 +2455,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 alert('Advanced Package selected');
 
                 var amountTopay;
+                var typePackage = 'Advanced Package';
 
                 if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
                  amountTopay = '3250'; // amount to pay;
@@ -2441,7 +2485,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const sendData = {
                     ...data, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
+                    amount: amountTopay, package : typePackage
                 };
 
                 fetch('/booking', { // Replace with your actual endpoint URL
@@ -2469,6 +2513,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 break;
             case 'elitePackage':
                alert('Elite Package selected');
+               var  typePackage = 'Elite Package';
 
                var amountTopay;
 
@@ -2502,7 +2547,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const dataSend = {
                     ...gatherData, // Spread the existing data
-                    amount: amountTopay // Add the buttonId
+                    amount: amountTopay , package : typePackage
                 };
 
                 fetch('/booking', { // Replace with your actual endpoint URL
@@ -2553,6 +2598,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                    var discountAmount;
                    var amountAfterDiscount;
                    var trackDiscount = 0;
+                   var  typePackage = 'One on One: University';
 
                    if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
 
@@ -2883,7 +2929,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                     const dataSendout = {
                         ...gatheredData, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
+                        amount: amountTopay , package : typePackage
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
@@ -2935,6 +2981,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
  var discountAmount;
  var amountAfterDiscount;
  var trackDiscount = 0;
+ var typePackage = 'Two to Five : University';
 
  if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
 
@@ -3264,7 +3311,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     const ataSendout = {
                         ...gatheredDat, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
+                        amount: amountTopay , package : typePackage
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
@@ -3287,8 +3334,6 @@ var yearIn = yearFor ? yearFor.value : 'None';
                                 setTimeout(function(){
                             window.location.href = '/payment';
                         } , 2000);
-
-
  }
 
                 break;
@@ -3307,9 +3352,6 @@ var yearIn = yearFor ? yearFor.value : 'None';
                         }
 
                     } while (isNaN(valueee) || valueee <= 0);
-               
-                
-
 
 var yearFor = document.querySelector('input[name="year"]:checked');
 var yearIn = yearFor ? yearFor.value : 'None';
@@ -3319,6 +3361,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
  var discountAmount;
  var amountAfterDiscount;
  var trackDiscount = 0;
+ var typePackage = 'Six to Ten : University';
 
  if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
 
@@ -3648,7 +3691,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     const sendOut = {
                         ...outData, // Spread the existing data
-                        amount: amountTopay // Add the buttonId
+                        amount: amountTopay , package : typePackage
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
@@ -3717,8 +3760,31 @@ function openPopup(email) {
 
 function toggleSubjectOptions() {
     const container = document.getElementById('subjectContainer');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    const inputField = document.getElementById('subject');
+    
+    // For larger screens, toggle the visibility of the checkbox list
+    if (window.innerWidth > 768) {
+        // Show the container if hidden and hide it if shown
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'block'; // Show container
+            inputField.readOnly = true; // Keep input read-only
+        } else {
+            container.style.display = 'none'; // Hide container
+        }
+    } else {
+        // For small screens, toggle the visibility of the subject container
+        if (container.style.display === 'none' || container.style.display === '') {
+            // Show the container
+            container.style.display = 'block';
+            inputField.readOnly = false; // Allow typing in the input field
+        } else {
+            // Hide the container and enable typing
+            container.style.display = 'none';
+            inputField.readOnly = true; // Make input read-only when container is hidden
+        }
+    }
 }
+
 
 function updateSubjects() {
     const checkboxes = document.querySelectorAll('#subjectContainer input[type="checkbox"]');

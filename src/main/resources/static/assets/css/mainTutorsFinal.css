@@ -165,10 +165,23 @@ body, ul, li {
   
 }
 
-
+   .hidSubjects{
+					
+      display: none;
+			       
+    }
 		
 
 @media  (max-width: 1024px)  {
+	
+	.hidSubjects{
+			
+	    display: block;
+		font-size: 18px;
+		color: #001549;
+	    font-weight: bold;
+			       
+			    }
 	
     .navbar {
         height: 50px; /* Adjust the height as needed */
@@ -496,6 +509,15 @@ body, ul, li {
 
 @media screen and (max-width:768px){
 	
+		 .hidSubjects{
+					
+			       display: block;
+			       font-size: 18px;
+			       color: #001549;
+			       font-weight: bold;
+			       
+			    }
+	
      .tutorImage{
 		display: none;
 	}
@@ -737,6 +759,14 @@ body, ul, li {
 
 @media (min-width:480px) and (max-width:833px){
 	
+			 .hidSubjects{
+					
+			       display: block;
+			       font-size: 18px;
+			       color: #001549;
+			       font-weight: bold;
+			       
+			    }
  
 	.image-wrapper .image1,
 	.image-wrapper .image2 {
@@ -1948,16 +1978,7 @@ body, ul, li {
     color: #02A552; /* Change text color to lime green on hover */
 }
 
-    .hidSubjects{
-		display: none;
-  }
-  
 
-/*LAST TIME*/
-
-
-
-	
 }
 
 
@@ -1966,10 +1987,6 @@ body, ul, li {
     color: #02A552; /* Change text color to lime green on hover */
 }
 
-    .hidSubjects{
-		display: none;
-  }
-  
 
 .feedback-item i {
     font-size: 18px; /* Size of the icon */

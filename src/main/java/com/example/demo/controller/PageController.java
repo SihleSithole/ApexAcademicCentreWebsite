@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -226,16 +226,142 @@ public class PageController {
 	 @PostMapping("/booking")
 	    public ModelAndView placeBooking(@RequestBody Map<String, String> booking, HttpSession session) {
 	        
+		             /*Amount*/
 	        String amount = booking.get("amount");
 	        
+	                 /**first-form**/
+		    String name = booking.get("first-name");
+		    String surname = booking.get("last-name");
+		    String email = booking.get("email");
+		    String phone = booking.get("phone");
+		    String province = booking.get("province");
+		    String country = booking.get("country");
+		    String instrLangauge = booking.get("language");
+		    session.setAttribute("name", name);
+		    session.setAttribute("surname", surname);
+		    session.setAttribute("email", email);
+		    session.setAttribute("phone", phone);
+		    session.setAttribute("province", province);
+		    session.setAttribute("country", country);
+		    session.setAttribute("instrLangauge", instrLangauge);
+	
+		    
+		            /*second form*/
+		    String tutorFor = booking.get("tutoring-for");
+		    String helpWith = booking.get("help-with");
+
+		 
+	                  /*school*/
+		    
+		    String learnerName = "N/A";
+		    String learnerSurname = "N/A";
+		    String grade = "N/A";
+		    String syllabus = "N/A";
+		    
+		            /*university*/
+		    
+		    String studentName = "N/A";
+		    String studentSurname = "N/A";
+		    String year ="N/A";
+		    String postGrad = "N/A";
+
+		    
+		    if(helpWith.equals("school")) {
+		    	
+		    	 learnerName = booking.get("student-name");
+		    	 learnerSurname = booking.get("student-last-name");
+		    	 grade = booking.get("grade");
+		    	 syllabus = booking.get("syllabus");
+		    }
+		    
+		    else {
+		    	
+			    studentName = booking.get("stud-name");
+			    studentSurname = booking.get("stud-last");
+			    year = booking.get("year");
+			    postGrad = booking.get("postgrad-type");
+		    	
+		    }
+		    
+
+		    /*third form*/
+		    
+		    String subject =  booking.get("subject");
+		    String onlineInperson =  booking.get("tutor-style");
+		    String suburb =  "N/A";
+		    String toStart = "N/A";
+		    
+		    if(!onlineInperson.equals("Online")) {
+		    	
+			    suburb =  booking.get("suburb-inperson");
+			    toStart =  booking.get("address-inperson");
+		    	
+		    }
+		    
+		    System.out.println(onlineInperson);
+		    System.out.println(toStart);
+		    	    
+
+		      
+		    /*fourth form*/
+		    String message = booking.get("message");
+		    
+		    if(message.equals("")) {
+		    	
+		    	message = "nothing...";
+		    
+		    }
+		    
+		    String secTutor = booking.get("tutor-option");
+		    String tutorName = booking.get("hiddenTutorName");
+		    String tutorEmail = booking.get("hiddenTutorEmail");
+		    
+		    if(tutorName.equals("")) {
+		    	
+		    	  tutorName = "N/A";
+		    	  tutorEmail = "N/A";
+		    	 
+		    }
+		  
+		    String packageType = booking.get("package");
+
+
 	        // Create or update session attributes
 	        session.setAttribute("bookings", booking);
 	        session.setAttribute("amount", amount);
+		    session.setAttribute("name", name);
+		    session.setAttribute("surname", surname);
+		    session.setAttribute("email", email);
+		    session.setAttribute("phone", phone);
+		    session.setAttribute("province", province);
+		    session.setAttribute("country", country);
+		    session.setAttribute("instrLangauge", instrLangauge);
+		    session.setAttribute("tutorFor", tutorFor);
+		    session.setAttribute("helpWith", helpWith);
+		    session.setAttribute("learnerName", learnerName);
+		    session.setAttribute("learnerSurname", learnerSurname);
+		    session.setAttribute("grade", grade);
+		    session.setAttribute("syllabus", syllabus);
+		    session.setAttribute("studentName", studentName);
+		    session.setAttribute("studentSurname", studentSurname);
+		    session.setAttribute("year", year);
+		    session.setAttribute("postGrad", postGrad);
+		    session.setAttribute("subject", subject);
+		    session.setAttribute("onlineInperson", onlineInperson);
+		    session.setAttribute("suburb", suburb);
+		    session.setAttribute("toStart", toStart);
+		    session.setAttribute("secTutor", secTutor);
+		    session.setAttribute("tutorName", tutorName);
+		    session.setAttribute("tutorEmail", tutorEmail);
+		    session.setAttribute("packageType", packageType);
+		    session.setAttribute("message", message);
 
 	        // Return the view name without the .jsp extension
 	        ModelAndView data = new ModelAndView("payment"); // View name without the .jsp extension
 	        data.addObject("bookings", booking);
-	        data.addObject("amount", amount);	        
+	        data.addObject("amount", amount);	      
+	        
+	        
 	        /* Send email to tutor (if needed)
 	        senderService.sendSimpleEmail(tutorEmaill, subject ,
 	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
@@ -556,36 +682,7 @@ public class PageController {
 		 }
 		 
 		 
-		  @PostMapping("/create-payment")
-		    public ResponseEntity<Map<String, String>> createPayment(@RequestBody Map<String, String> requestBody) {
-			  
-			  String amount = requestBody.get("amount");
-			  
-			   System.out.println(amount);
-			  
-		        try {
-		            String approvalUrl = payPalService.createOrder(amount); // Method to create PayPal order
-		            Map<String, String> response = new HashMap<>();
-		            response.put("id", approvalUrl); // Pass the order ID or approval URL
-		            return ResponseEntity.ok(response);
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Failed to create payment"));
-		        }
-		    }
 
-		    @PostMapping("/execute-payment")
-		    public ResponseEntity<Map<String, Object>> executePayment(@RequestBody Map<String, String> body) {
-		        try {
-		            String orderId = body.get("orderID");
-		            Map<String, Object> result = payPalService.executeOrder(orderId); // Method to execute PayPal payment
-		            return ResponseEntity.ok(result);
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Failed to execute payment"));
-		        }
-		    }
-		    
 		    
 		    @GetMapping("view-profile")
 		    public ModelAndView getTry(@RequestParam("email") String email) {
@@ -664,5 +761,20 @@ public class PageController {
 			        return "redirect:/loginAdmin.html"; // Change this to your login URL
 			    }
 			 
+			    @GetMapping("/success")
+			    public String handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails, Model model) {
+			        // Extract necessary details from paymentDetails
+			        Double amount = Double.valueOf(paymentDetails.get("amount"));
+			        String name = paymentDetails.get("name"); // Adjust based on actual keys from payment details
+			        String email = paymentDetails.get("email"); // Adjust based on actual keys from payment details
+			        
+			
+			        // Add the booking details to the model to display on the success page
+			        model.addAttribute("name", name);
+			        model.addAttribute("email", email);
+			        model.addAttribute("amount", amount);
+			        
+			        return "success.html"; // Name of the success HTML page (success.html)
+			    }
 
 }
