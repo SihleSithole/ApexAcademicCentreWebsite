@@ -767,7 +767,7 @@ public class PageController {
 			        Double amount = Double.valueOf(paymentDetails.get("amount"));
 			        String name = paymentDetails.get("name"); // Adjust based on actual keys from payment details
 			        String email = paymentDetails.get("email"); // Adjust based on actual keys from payment details
-			        
+			         
 			
 			        // Add the booking details to the model to display on the success page
 			        model.addAttribute("name", name);
