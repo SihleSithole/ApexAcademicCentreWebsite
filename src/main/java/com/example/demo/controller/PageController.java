@@ -764,7 +764,7 @@ public class PageController {
 			    @GetMapping("/success")
 			    public String handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails, Model model) {
 			        // Extract necessary details from paymentDetails
-			        Double amount = Double.valueOf(paymentDetails.get("amount"));
+			     
 			        String name = paymentDetails.get("name"); // Adjust based on actual keys from payment details
 			        String email = paymentDetails.get("email"); // Adjust based on actual keys from payment details
 			         
@@ -772,7 +772,7 @@ public class PageController {
 			        // Add the booking details to the model to display on the success page
 			        model.addAttribute("name", name);
 			        model.addAttribute("email", email);
-			        model.addAttribute("amount", amount);
+			       
 			        
 			        return "success.html"; // Name of the success HTML page (success.html)
 			    }
