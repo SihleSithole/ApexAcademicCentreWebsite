@@ -792,7 +792,7 @@ public class PageController {
 		            String tutorEmail =  (String) session.getAttribute("tutorEmail");
 		            String packageType =  (String) session.getAttribute("packageType");
 		            String message = (String) session.getAttribute("message");
-		            String isPaid = "Yes";
+		            String isPaid = "Yes"; 
 			        
 
 			        ModelAndView data = new ModelAndView("success.jsp"); // load the admin dashboard
