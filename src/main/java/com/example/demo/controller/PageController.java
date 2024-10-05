@@ -357,7 +357,7 @@ public class PageController {
 	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
 	            
 	        */
-	        
+	         
 	    }
 	 
 	 
