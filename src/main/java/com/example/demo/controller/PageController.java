@@ -237,14 +237,6 @@ public class PageController {
 		    String province = booking.get("province");
 		    String country = booking.get("country");
 		    String instrLangauge = booking.get("language");
-		    session.setAttribute("name", name);
-		    session.setAttribute("surname", surname);
-		    session.setAttribute("email", email);
-		    session.setAttribute("phone", phone);
-		    session.setAttribute("province", province);
-		    session.setAttribute("country", country);
-		    session.setAttribute("instrLangauge", instrLangauge);
-	
 		    
 		            /*second form*/
 		    String tutorFor = booking.get("tutoring-for");
@@ -315,14 +307,18 @@ public class PageController {
 		    String secTutor = booking.get("tutor-option");
 		    String tutorName = booking.get("hiddenTutorName");
 		    String tutorEmail = booking.get("hiddenTutorEmail");
+
 		    
-		    if(tutorName.equals("")) {
+		    
+		    if(tutorName.equals("undefined")) {
 		    	
 		    	  tutorName = "N/A";
 		    	  tutorEmail = "N/A";
+		    	  
+		    	  
 		    	 
 		    }
-		  
+		    		    
 		    String packageType = booking.get("package");
 
 
@@ -791,13 +787,11 @@ public class PageController {
 		            String tutorName = (String) session.getAttribute("tutorName");
 		            String tutorEmail =  (String) session.getAttribute("tutorEmail");
 		            
-		            if (tutorName == null) {
+		            if (tutorName.equals("N/A")) {
 		                tutorName = "Main Booking"; // Initialize to empty string
-		            }
-
-		            if (tutorEmail == null) {
 		                tutorEmail = "Main Booking"; // Initialize to empty string
 		            }
+
 
 		            String packageType =  (String) session.getAttribute("packageType");
 		            String message = (String) session.getAttribute("message");
@@ -842,7 +836,7 @@ public class PageController {
 					    Long entryId = bookings.getEntry();
 					    String tutorEmaill = bookings.getTutorEmail();
 					    
-					     if(tutorEmail.equals("N/A")) {
+					     if(tutorEmail.equals("Main Booking")) {
 					    	 
 					    	 tutorEmaill = "apexexcellencetutors@gmail.com";
 					    	 
