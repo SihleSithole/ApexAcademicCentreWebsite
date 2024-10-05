@@ -762,36 +762,36 @@ public class PageController {
 			    }
 			 
 			    @GetMapping("/success")
-			    public ModelAndView handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails) {
+			    public ModelAndView handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails , HttpSession session) {
 			        // Extract necessary details from paymentDetails
 
-		            String amount =  paymentDetails.get("amount");
-		            String name =  paymentDetails.get("name");
-		            String email =  paymentDetails.get("email");
-		            String surname =  paymentDetails.get("surname");
-		            String phone =  paymentDetails.get("phone");
-		            String province =  paymentDetails.get("province");
-		            String country =  paymentDetails.get("country");
-		            String instrLangauge =  paymentDetails.get("instrLangauge");
-		            String tutorFor = paymentDetails.get("tutorFor");
-		            String helpWith =  paymentDetails.get("helpWith");
-		            String learnerName =  paymentDetails.get("learnerName");
-		            String learnerSurname =  paymentDetails.get("learnerSurname");
-		            String grade = paymentDetails.get("grade");
-		            String syllabus =  paymentDetails.get("syllabus");
-		            String studentName =  paymentDetails.get("studentName");
-		            String studentSurname =  paymentDetails.get("studentSurname");
-		            String year =  paymentDetails.get("year");
-		            String postGrad =  paymentDetails.get("postGrad");
-		            String subject =  paymentDetails.get("subject");
-		            String onlineInperson =  paymentDetails.get("onlineInperson");
-		            String suburb =  paymentDetails.get("suburb");
-		            String toStart =  paymentDetails.get("toStart");
-		            String secTutor =  paymentDetails.get("secTutor");
-		            String tutorName =  paymentDetails.get("tutorName");
-		            String tutorEmail =  paymentDetails.get("tutorEmail");
-		            String packageType =  paymentDetails.get("packageType");
-		            String message =  paymentDetails.get("message");
+		            String amount =  (String) session.getAttribute("amount");
+		            String name =  (String) session.getAttribute("name");
+		            String email = (String) session.getAttribute("email");
+		            String surname = (String) session.getAttribute("surname");
+		            String phone = (String) session.getAttribute("phone");
+		            String province =  (String) session.getAttribute("province");
+		            String country =  (String) session.getAttribute("country");
+		            String instrLangauge =  (String) session.getAttribute("instrLangauge");
+		            String tutorFor = (String) session.getAttribute("tutorFor");
+		            String helpWith =  (String) session.getAttribute("helpWith");
+		            String learnerName = (String) session.getAttribute("learnerName");
+		            String learnerSurname =  (String) session.getAttribute("learnerSurname");
+		            String grade = (String) session.getAttribute("grade");
+		            String syllabus =  (String) session.getAttribute("syllabus");
+		            String studentName =  (String) session.getAttribute("studentName");
+		            String studentSurname = (String) session.getAttribute("studentSurname");
+		            String year =  (String) session.getAttribute("year");
+		            String postGrad = (String) session.getAttribute("postGrad");
+		            String subject =  (String) session.getAttribute("subject");
+		            String onlineInperson =  (String) session.getAttribute("onlineInperson");
+		            String suburb =  (String) session.getAttribute("suburb");
+		            String toStart = (String) session.getAttribute("toStart");
+		            String secTutor =  (String) session.getAttribute("secTutor");
+		            String tutorName = (String) session.getAttribute("tutorName");
+		            String tutorEmail =  (String) session.getAttribute("tutorEmail");
+		            String packageType =  (String) session.getAttribute("packageType");
+		            String message = (String) session.getAttribute("message");
 		            String isPaid = "Yes";
 			        
 
