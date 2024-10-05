@@ -148,7 +148,7 @@
             String message = (String) session.getAttribute("message");
 
             String baseUrl = "https://apexacademiccentrewebsite-production-017a.up.railway.app/"; // Change this to your actual domain
-            String successUrl = baseUrl + "/payment/success";
+            String successUrl = baseUrl + "success";
             String failedUrl = baseUrl + "/payment/failed"; // Handle failed payments
 
     %>
