@@ -877,6 +877,8 @@
 												String bnName = book.getUnName();
 												String bnSurname = book.getUnSurname();
 												String bnYear = book.getUnYear();
+												String amountPaid = book.getPaidAmount();
+												String numSessions = book. getSessions();
 												
 
 
@@ -933,6 +935,8 @@
 													data-tutoropt="<%= bTutoringOption %>"
 													data-secondopt="<%= bTutorOption %>"
 													data-package="<%= bPackageType %>"
+													data-session="<%= numSessions %>"
+													data-paid="<%= amountPaid %>"
 													>
 													 <i class="material-icons" data-toggle="tooltip" title="View">&#xE8F4;</i>
 												 </a>
@@ -1507,6 +1511,10 @@
 								<p><strong>Platform:</strong><span id="modalPlatform"></span></p>
 								<p id="fOne"><strong>Suburb:</strong><span id="modalSuburb"></span></p>
 								<p id="fSec"><strong>Address:</strong><span id="modalAddress"></span></p>
+								<p><strong>Amount Paid:</strong><span id="modalAmountPaid"></span></p>
+								<p><strong>Sessions:</strong><span id="modalSessions"></span></p>
+							
+
 							</div>
 
 							<div class="col-md-6">
@@ -2116,6 +2124,9 @@
 						var tutorEmail = $(this).data('tutoremail');
 						var secondOpt = $(this).data('secondopt');
 						var package = $(this).data('package');
+						var ses = $(this).data('session');
+						var paid = $(this).data('paid');
+
 						
 
 		 				// Populate modal with the data
@@ -2127,6 +2138,9 @@
 						$('#modalLanguage').text(language);
 						$('#modalTutoringFor').text(tutoringFor);
 						$('#modalHelpWith').text(helpWith);
+						$('#modalAmountPaid').text(paid);
+						$('#modalSessions').text(ses);
+
 
 						helpWith = helpWith.replace(/\s+/g, '');
 						tutorOpt = tutorOpt.replace(/\s+/g, '');

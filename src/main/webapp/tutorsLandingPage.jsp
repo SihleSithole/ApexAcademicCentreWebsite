@@ -1492,7 +1492,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
                     const onceOffPackage = document.getElementById('onceOffPackage');
-                    onceOffPackage.textContent = 'R10'; // I changed R300 to R10 for testing
+                    onceOffPackage.textContent = 'R300'; // I changed R300 to R10 for testing
 
                     const basicPackage= document.getElementById('basicPackage');
                     basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
@@ -2265,7 +2265,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             var typePackage = 'Once off Package';
 
             if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '10'; // amount to pay; i changed R300 to R10 for testing
+                 amountTopay = '300'; // amount to pay; i changed R300 to R10 for testing
                }
                else{
 
@@ -2929,7 +2929,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                     const dataSendout = {
                         ...gatheredData, // Spread the existing data
-                        amount: amountTopay , package : typePackage
+                        amount: amountTopay , package : typePackage , sessions : value
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
@@ -3311,7 +3311,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     const ataSendout = {
                         ...gatheredDat, // Spread the existing data
-                        amount: amountTopay , package : typePackage
+                        amount: amountTopay , package : typePackage , sessions : value
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
@@ -3691,7 +3691,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     const sendOut = {
                         ...outData, // Spread the existing data
-                        amount: amountTopay , package : typePackage
+                        amount: amountTopay , package : typePackage , sessions : value
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL

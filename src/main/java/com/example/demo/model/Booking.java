@@ -94,6 +94,12 @@ public class Booking {
 	@Column(name = "isPaid")
 	private String isPaid;
 	
+	@Column(name = "paidAmount")
+	private String paidAmount;
+	
+	@Column(name = "Sessions")
+	private String sessions;
+	
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -105,7 +111,7 @@ public class Booking {
 			String instrLanguage, String tutorFor, String helpWith, String schName, String schSurname, String schGrade,
 			String schSyllabus, String unName, String unSurname, String unYear, String subject, String tutorStyle,
 			String address, String suburb, String message, String tutorOption, String status, String packageType,
-			String tutorName, String tutorEmail, String isPaid) {
+			String tutorName, String tutorEmail, String isPaid , String paidAmount , String sessions) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -134,9 +140,10 @@ public class Booking {
 		this.tutorName = tutorName;
 		this.tutorEmail = tutorEmail;
 		this.isPaid = isPaid;
+		this.paidAmount = paidAmount;
+		this.sessions = sessions;
+		
 	}
-
-
 
 	public String getName() {
 		return name;
@@ -356,6 +363,28 @@ public class Booking {
 
 	public Long getEntry() {
 		return entry;
+	}
+
+	public String getPaidAmount() {
+		return paidAmount;
+	}
+
+
+
+	public void setPaidAmount(String paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+
+
+	public String getSessions() {
+		return sessions;
+	}
+
+
+
+	public void setSessions(String sessions) {
+		this.sessions = sessions;
 	}
 
 	

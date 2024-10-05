@@ -289,12 +289,7 @@ public class PageController {
 			    toStart =  booking.get("address-inperson");
 		    	
 		    }
-		    
-		    System.out.println(onlineInperson);
-		    System.out.println(toStart);
-		    	    
-
-		      
+ 
 		    /*fourth form*/
 		    String message = booking.get("message");
 		    
@@ -320,8 +315,8 @@ public class PageController {
 		    }
 		    		    
 		    String packageType = booking.get("package");
-
-
+		    String sessions = booking.get("sessions");
+		    
 	        // Create or update session attributes
 	        session.setAttribute("bookings", booking);
 	        session.setAttribute("amount", amount);
@@ -351,6 +346,7 @@ public class PageController {
 		    session.setAttribute("tutorEmail", tutorEmail);
 		    session.setAttribute("packageType", packageType);
 		    session.setAttribute("message", message);
+		    session.setAttribute("sessions", sessions);
 
 	        // Return the view name without the .jsp extension
 	        ModelAndView data = new ModelAndView("payment"); // View name without the .jsp extension
@@ -437,7 +433,7 @@ public class PageController {
 		    		 instrLangauge,  tutorFor,  helpWith,  schName,  schSurname,  schGrade,
 					 schSyllabus,  unName,  unSurname,  unYear,  subject,  tutorStyle,
 					 address,  suburb,  message,  tutorOption,  status,  userPackage,
-					 tutorName,  tutorEmail,  isPaid);
+					 tutorName,  tutorEmail,  isPaid , "not paid" , "0");
 		     
 		     String sendName = "";
 		     String clientName = name + " " + surname;
@@ -519,7 +515,7 @@ public class PageController {
 		    		 instrLangauge,  tutorFor,  helpWith,  schName,  schSurname,  schGrade,
 					 schSyllabus,  unName,  unSurname,  unYear,  subject,  tutorStyle,
 					 address,  suburb,  message,  tutorOption,  status,  userPackage,
-					 tutorName,  tutorEmail,  isPaid);
+					 tutorName,  tutorEmail,  isPaid , "not paid" , "0");
 		     
 		     String sendName = "";
 		     String clientName = name + " " + surname;
@@ -786,10 +782,16 @@ public class PageController {
 		            String secTutor =  (String) session.getAttribute("secTutor");
 		            String tutorName = (String) session.getAttribute("tutorName");
 		            String tutorEmail =  (String) session.getAttribute("tutorEmail");
+		            String sessions =  (String) session.getAttribute("sessions");
 		            
 		            if (tutorName.equals("N/A")) {
 		                tutorName = "Main Booking"; // Initialize to empty string
 		                tutorEmail = "Main Booking"; // Initialize to empty string
+		            }
+		            
+		            if(sessions == null) {
+		            	
+		            	sessions = "0";
 		            }
 
 
@@ -806,7 +808,7 @@ public class PageController {
 				    		 instrLangauge,  tutorFor,  helpWith,  learnerName,  learnerSurname,  grade,
 							 syllabus,  studentName,  studentSurname,  year,  subject,  onlineInperson,
 							 toStart,  suburb,  message,  secTutor,  "pending",  packageType,
-							 tutorName,  tutorEmail,  isPaid);
+							 tutorName,  tutorEmail,  isPaid , amount , sessions);
 				     
 				     bookingService.save(bookings);
 				     
