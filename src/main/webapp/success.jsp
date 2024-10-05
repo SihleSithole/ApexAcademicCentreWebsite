@@ -1,3 +1,6 @@
+
+<%@ page import="java.sql.*, javax.sql.*, java.util.ArrayList, java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,11 +34,18 @@
 </head>
 <body>
 
+<%
+
+    String name = (String) request.getAttribute("name");
+    String email = (String) request.getAttribute("email");
+
+%>
+
 <div class="container">
     <h1>Payment Successful!</h1>
-    <p>Thank you, <strong>Name</strong>!</p>
+    <p>Thank you, <strong><%= name %>></strong>!</p>
     <p>Your payment has been successfully processed.</p>
-    <p>A confirmation has been sent to <strong>Email</strong>.</p>
+    <p>A confirmation has been sent to <strong><%= email %></strong>.</p>
     <p>Apex Academic Centre</p>
 </div>
 

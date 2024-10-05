@@ -767,8 +767,8 @@ public class PageController {
 
 		            String amount =  paymentDetails.get("amount");
 		            String name =  paymentDetails.get("name");
-		            String surname =  paymentDetails.get("surname");
 		            String email =  paymentDetails.get("email");
+		            String surname =  paymentDetails.get("surname");
 		            String phone =  paymentDetails.get("phone");
 		            String province =  paymentDetails.get("province");
 		            String country =  paymentDetails.get("country");
