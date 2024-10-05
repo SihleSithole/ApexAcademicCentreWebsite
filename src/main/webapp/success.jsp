@@ -43,7 +43,7 @@
 
 <div class="container">
     <h1>Payment Successful!</h1>
-    <p>Thank you, <strong><%= name %>></strong>!</p>
+    <p>Thank you, <strong><%= name %></strong></p>
     <p>Your payment has been successfully processed.</p>
     <p>A confirmation has been sent to <strong><%= email %></strong>.</p>
     <p>Apex Academic Centre</p>

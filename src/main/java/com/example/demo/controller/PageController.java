@@ -790,6 +790,15 @@ public class PageController {
 		            String secTutor =  (String) session.getAttribute("secTutor");
 		            String tutorName = (String) session.getAttribute("tutorName");
 		            String tutorEmail =  (String) session.getAttribute("tutorEmail");
+		            
+		            if (tutorName == null) {
+		                tutorName = "Main Booking"; // Initialize to empty string
+		            }
+
+		            if (tutorEmail == null) {
+		                tutorEmail = "Main Booking"; // Initialize to empty string
+		            }
+
 		            String packageType =  (String) session.getAttribute("packageType");
 		            String message = (String) session.getAttribute("message");
 		            String isPaid = "Yes"; 

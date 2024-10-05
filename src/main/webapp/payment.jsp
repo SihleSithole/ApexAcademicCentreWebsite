@@ -155,7 +155,7 @@
 
     <form name="PayFastPayNowForm" action="https://payment.payfast.io/eng/process" method="post">
         <input required type="hidden" name="cmd" value="_paynow">
-        <input type="hidden" name="name" value="<%= name %>">
+        <input type="" name="name" value="<%= name %>">
         <input type="hidden" name="surname" value="<%= surname  %>">
         <input type="hidden" name="email" value="<%= email %>">
         <input type="hidden" name="phone" value="<%= phone %>">
