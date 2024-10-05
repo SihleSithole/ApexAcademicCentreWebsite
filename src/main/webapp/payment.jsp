@@ -139,13 +139,7 @@
         </div>
     </form>
 </section>
-<script>
-        window.onload = function() {
-            setTimeout(function(){
-                window.location.href = '/';
-            }, 3000); // Redirect after 3 seconds
-        };
-</script>
+
 
 </body>
 </html>
