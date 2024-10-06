@@ -912,6 +912,13 @@ public class PageController {
 			        }
 			        return decrypted.toString();
 			    }
+			    
+				 @GetMapping("/bookingTutor")
+				 public String bookingForm() {
+					 
+						return "bookTutor.html";
+					 
+				 }
 
 			    
 			  
