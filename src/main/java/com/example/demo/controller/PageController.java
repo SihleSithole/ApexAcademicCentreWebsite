@@ -7,16 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +34,7 @@ import com.example.demo.service.BookingService;
 import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.ReviewService;
 import com.example.demo.service.TutorService;
-import com.example.demo.service.PayPalService.PayPalService;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,9 +43,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class PageController {
 	
-	
-    @Autowired
-	private PayPalService payPalService;
+
 	
 	@Autowired
 	private EmailSenderService senderService;
@@ -92,13 +88,19 @@ public class PageController {
 	
 	
 	@GetMapping("/admin")
-	public ModelAndView adminDashboard() {
+       public ModelAndView adminDashboard(HttpSession session) {
+		    String email = (String) session.getAttribute("adminEmail");
+		    if (email == null || !adminService.isAdminLoggedIn(email)) {
+		        return new ModelAndView("loginAdmin.html"); // Redirect to login if not logged in
+		    }
 		
-		System.out.println("here");
+		System.out.println(email);
 		
 		List<Tutor> tutor = tutorService.listAll();
 		List<Booking> booking = bookingService.listAll();
 		List<Review> reviews = reviewService.listAll();
+		
+		if(email.equals("sihlesithole810@gmail.com")) {
 		
 		ModelAndView data = new ModelAndView("adminDashboard.jsp");// load the admin dashboard
 		data.addObject("tutors" , tutor);
@@ -107,6 +109,17 @@ public class PageController {
 				
 		return data;
 		
+		}
+		
+		else {
+			
+			ModelAndView data = new ModelAndView("loginAdmin.html");// login first
+		
+				
+			return data;
+			
+			
+		}
 	}
 	
 
@@ -425,8 +438,22 @@ public class PageController {
 		     String tutorOption = booking.get("tutor-option");
 		     String status = booking.get("who");
 		     String userPackage = "Not Selected";
-		     String tutorName = "not applicable";
-		     String tutorEmail = "not applicable";
+		     
+		     
+			    String tutorName = booking.get("hiddenTutorName");
+			    String tutorEmail = booking.get("hiddenTutorEmail");
+
+			    
+			    
+			    if(tutorName.equals("undefined")) {
+			    	
+			    	  tutorName = "Apex Tutor";
+			    	  tutorEmail = "apexexcellencetutors@gmail.com";
+			    	  
+			    	  
+			    	 
+			    }
+		     
 		     String isPaid = "No";
 		     
 		     Booking bookings = new Booking( name,  surname,  email,  phone,  province,  country,
@@ -468,13 +495,42 @@ public class PageController {
 	            + "Best regards,\r\n"
 	            + "Apex Academic Centre");
 	        
-		     
-		    /*   SEND EMAIL TO APEX
-
-                 sendSimpleEmail(tutorEmaill, subject ,
-	            "Name : " + name + "\nEmail : " + email + "\nLink : " + bookingLink);
+	            /*   SEND EMAIL TO APEX  */
 	            
-	        */
+			    Long entryId = bookings.getEntry();
+			    
+			    String serverName = request.getServerName();
+			    int serverPort = request.getServerPort();
+			    String protocol = request.getScheme();
+			    String host = protocol + "://" + serverName + ":" + serverPort;
+
+		        String bookingLink = host + "/booking-details?id=" + entryId;
+	            
+	            if(status.equals("consult")) {
+	            	
+	            	senderService.sendSimpleEmail(tutorEmail, 
+		            	    "New Tutor Request - " + clientName, 
+		            	    "Dear Apex Academic Centre Team,\r\n" +
+		            	    "\r\n" +
+		            	    "We have received a tutoring inquiry from " + clientName + ", who has filled out our Book A Tutor form.\r\n" +
+		            	    "\r\n" +
+		            	    "Please review the details of their request here: " + bookingLink + "\r\n" +
+		            	    "\r\n" +
+		            	    "We kindly request that you contact " + clientName + " to schedule a consultation and discuss their tutoring needs.\r\n" +
+		            	    "\r\n" +
+		            	    "Thank you for your prompt attention.\r\n" +
+		            	    "\r\n" +
+		            	    "Best regards,\r\n" +
+		            	    "Admin"
+		            	);
+	            	
+	            }
+		     
+		   
+
+
+	            
+	        
 	         
 	    }
 	 
@@ -730,7 +786,7 @@ public class PageController {
 			    	  return "loginAdmin.html";
 			    }
 			    
-			    @GetMapping("/retriveAdmin")
+			 /*   @GetMapping("/retriveAdmin")
 			    @ResponseBody
 			    public Admin getAdmin() {
 			 
@@ -739,23 +795,9 @@ public class PageController {
 					 
 					 
 					 return admin;
-			    }
-			    @GetMapping("/logout")
-			    public String logout(HttpSession session, HttpServletResponse response) {
-			        // Invalidate the session
-			        if (session != null) {
-			            session.invalidate(); // Terminate the session
-			        }
-
-			        // Set cache control headers to prevent caching
-			        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-			        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-			        response.setDateHeader("Expires", 0); // Proxies
-
-			        // Redirect to the login page
-			        return "redirect:/loginAdmin.html"; // Change this to your login URL
-			    }
-			 
+			    }*/
+			    
+			    	    
 			    @GetMapping("/success")
 			    public ModelAndView handlePaymentSuccess(@RequestParam Map<String, String> paymentDetails , HttpSession session) {
 			        // Extract necessary details from paymentDetails
@@ -919,6 +961,33 @@ public class PageController {
 						return "bookTutor.html";
 					 
 				 }
+				 
+				 @PostMapping("/login")
+				 public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
+				     if (adminService.isAdminLoggedIn(email)) {
+				         return new ModelAndView("loginAdmin.html").addObject("message", "This admin is already logged in.");
+				     }
+
+				     if (adminService.validateAdmin(email, password)) {
+				         session.setAttribute("adminEmail", email); // Store email in session
+				         adminService.logInAdmin(email, session); // Register this session
+				         return new ModelAndView("redirect:/admin"); // Redirect without exposing email in URL
+				     } else {
+				         return new ModelAndView("redirect:/loginAdmin.html").addObject("message", "Invalid credentials.");
+				     }
+				 }
+				 
+				 
+				    @GetMapping("/logout")
+				    public String logout(HttpSession session) {
+				        String email = (String) session.getAttribute("adminEmail");
+				        if (email != null) {
+				            adminService.logOutAdmin(email); // Remove this admin from logged-in users
+				            session.invalidate(); // Invalidate the session
+				        }
+				        return "loginAdmin.html"; // Redirect to the login page
+				    }
+
 
 			    
 			  

@@ -1,57 +1,37 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Admin;
-
-import com.example.demo.repository.AdminRepository;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class AdminService {
-	
-	@Autowired
-	private AdminRepository repo;
-	
-	public void save(Admin msc) {
-		
-		  repo.save(msc);
-	}
-	
-	public Admin retriveAdmin(String email) {
-		
-		 Optional<Admin> book = repo.findById(email);
-		 
-		    Admin mainAdmin = book.get();
-		      
-		    return mainAdmin;
-		
-		}
-		
-		public void update(String email , String updatedPassword) {
-		       
-			 Optional<Admin> admin = repo.findById(email);
-			 
-			 if (admin.isPresent()){
-				 
-				 Admin existingAdmin = admin.get();
+    private final ConcurrentHashMap<String, HttpSession> loggedInAdmins = new ConcurrentHashMap<>();
 
-				 existingAdmin.setPassword(updatedPassword);
-				  
-		            // Save the updated student object
-		            repo.save(existingAdmin);
-		            
-	        }
-		        
-		 }
-		
-		public List<Admin> listAll(){
-			
-			 return repo.findAll();
-		}
-		
+    public boolean isAdminLoggedIn(String email) {
+        return loggedInAdmins.containsKey(email);
+    }
 
+    public void logInAdmin(String email, HttpSession session) {
+        loggedInAdmins.put(email, session);
+    }
+
+    public void logOutAdmin(String email) {
+        loggedInAdmins.remove(email);
+    }
+    
+    public boolean validateAdmin(String email, String password) {
+    	
+    	boolean  bFlag = false;
+    	
+    	if(email.equals("sihlesithole810@gmail.com") && password.equals("ozor101!")) {
+    		
+    		  bFlag = true;
+    	}
+    	
+    	
+    	return bFlag;
+    }
 }
