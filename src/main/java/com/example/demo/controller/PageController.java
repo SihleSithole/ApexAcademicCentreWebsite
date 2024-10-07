@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.demo.model.Admin;
 import com.example.demo.model.Booking;
 import com.example.demo.model.Review;
 import com.example.demo.model.Tutor;
@@ -37,7 +36,7 @@ import com.example.demo.service.TutorService;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -819,7 +818,7 @@ public class PageController {
 		            String studentName =  (String) session.getAttribute("studentName");
 		            String studentSurname = (String) session.getAttribute("studentSurname");
 		            String year =  (String) session.getAttribute("year");
-		            String postGrad = (String) session.getAttribute("postGrad");
+		           // String postGrad = (String) session.getAttribute("postGrad");
 		            String subject =  (String) session.getAttribute("subject");
 		            String onlineInperson =  (String) session.getAttribute("onlineInperson");
 		            String suburb =  (String) session.getAttribute("suburb");
