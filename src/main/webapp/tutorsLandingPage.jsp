@@ -1492,7 +1492,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(ghg === "Online" && (syllabusId === "IEB" || syllabusId === "CAPs")){
 
                     const onceOffPackage = document.getElementById('onceOffPackage');
-                    onceOffPackage.textContent = 'R300'; // I changed R300 to R10 for testing
+                    onceOffPackage.textContent = 'R100'; // I changed R300 to R10 for testing
 
                     const basicPackage= document.getElementById('basicPackage');
                     basicPackage.textContent = 'R1100'; // or button.innerHTML = 'Submit';
@@ -2265,7 +2265,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             var typePackage = 'Once off Package';
 
             if(ghg === "Online" && syllabusId === "IEB" || syllabusId === "CAPs"){
-                 amountTopay = '300'; // amount to pay; i changed R300 to R10 for testing
+                 amountTopay = '100'; // amount to pay; i changed R300 to R10 for testing
                }
                else{
 
