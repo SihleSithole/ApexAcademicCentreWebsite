@@ -47,7 +47,7 @@ public class PageController {
 	@Autowired
 	private EmailSenderService senderService;
 	
-    @Autowired   
+    @Autowired         
     private HttpServletRequest request;
 	
 	 @Autowired
