@@ -65,7 +65,7 @@ public class PageController {
 	 @Autowired
 	 private TutorRepository tutorRepo;
 
-	@GetMapping("/tutors")
+	@GetMapping("/")
 	public ModelAndView bookTutorPage() {
 	    // Retrieve the list of tutors
 	    List<Tutor> tutors = tutorService.listAll();

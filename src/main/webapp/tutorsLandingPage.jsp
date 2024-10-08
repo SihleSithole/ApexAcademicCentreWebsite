@@ -11,7 +11,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link href="assets/css/mainTutorsmain.css" rel="stylesheet">
-    <link href="tutorBookingFinal.css" rel="stylesheet">
+    <link href="bookingStyleResponsive.css" rel="stylesheet">
     <style>
         .checkbox-container{
             display: inline-flex;
@@ -1818,10 +1818,10 @@ document.addEventListener('DOMContentLoaded', function() {
         modC.style.width = '300px'; // Width for small screens
     } else if (currentWidth < 1024) { // Tablet view
         divContainer.style.width = '625px'; // Default width for larger screens
-        modC.style.width = '700px'; // Default width for larger screens
+        modC.style.width = '780px'; // Default width for larger screens
     } else { // Large screens
         divContainer.style.width = '625px'; // Default width for larger screens
-        modC.style.width = '700px'; // Default width for larger screens
+        modC.style.width = '780px'; // Default width for larger screens
     }
 }
 
@@ -1829,7 +1829,10 @@ window.addEventListener('resize', applyResponsiveStyles);
 
             form_4_next_btn.addEventListener("click", function() {
 
-                const divContainer = document.getElementById('universityPackages');
+
+                if(validateForm4()) {
+
+                    const divContainer = document.getElementById('universityPackages');
 
 const modC = document.getElementById('yesyes');
 
@@ -1846,7 +1849,6 @@ if (forWho === "university") {
        //lso be set in applyResponsiveStyles)
     }
 
-                if(validateForm4()) {
 
                     var syllabus = document.getElementById("syllabus").value;
                     var helpingFor = document.querySelector('input[name="help-with"]:checked');

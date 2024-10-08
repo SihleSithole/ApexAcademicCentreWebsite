@@ -359,7 +359,7 @@
    
 }
 
-  @media (min-width:480px) and (max-width: 1350px) {
+  @media (min-width:480px) and (max-width: 1365px) {
 	
 			.wrapper {
             
@@ -635,14 +635,9 @@
 
 /* Button styling */
 .package-btn {
-    background: #001549;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;  
-    margin-top: 0%;
-    width: fit-content; 
+
+margin-top: 10%;
+margin-left: 10%;
 
 }
 
