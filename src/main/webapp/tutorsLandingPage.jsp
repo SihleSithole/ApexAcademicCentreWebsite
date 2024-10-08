@@ -150,7 +150,7 @@
 
                   color: #02A552;
             }
-
+       
     </style>
 
  </head>
@@ -370,7 +370,7 @@
 	
                    <div class="wrapper" id="modal">
 
-                    <div class="modal-content">
+                    <div class="modal-content" id="yesyes">
 
                     <span class="close-btn" id="close-popup">&times;</span>
                     <!--START OF FORMS-->
@@ -790,7 +790,7 @@
                                         <div class="package-details" onclick="oneOnoneUniversity()">Package Details</div>
                                  
                                         <button type="submit" class="package-btn" id="oneOnone"></button>
-                                      
+    
                                     </div>
                                 </div>
                                 <div class="custom-div">
@@ -1788,6 +1788,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             form_4_back_btn.addEventListener("click", function() {
+
+                const modC = document.getElementById('yesyes');
+                    modC.style.backgroundColor = ''; // Reset to default
+                    modC.style.width = ''; // Reset to default
+
                 form_3.style.display = "block";
                 form_4.style.display = "none";
 
@@ -1796,15 +1801,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
             });
 
+
+            function applyResponsiveStyles() {
+    const divContainer = document.getElementById('universityPackages');
+    const modC = document.getElementById('yesyes');
+    
+    const currentWidth = window.innerWidth; // Get the current width of the viewport
+
+    if (currentWidth === 480) { // Mobile view
+        divContainer.style.width = '250px'; // Width for small screens
+        modC.style.width = '300px'; // Width for small screens
+    } 
+    // Apply styles based on the current width
+    if (currentWidth < 768) { // Mobile view
+        divContainer.style.width = '250px'; // Width for small screens
+        modC.style.width = '300px'; // Width for small screens
+    } else if (currentWidth < 1024) { // Tablet view
+        divContainer.style.width = '625px'; // Default width for larger screens
+        modC.style.width = '700px'; // Default width for larger screens
+    } else { // Large screens
+        divContainer.style.width = '625px'; // Default width for larger screens
+        modC.style.width = '700px'; // Default width for larger screens
+    }
+}
+
+window.addEventListener('resize', applyResponsiveStyles);
+
             form_4_next_btn.addEventListener("click", function() {
 
-               const modalWrapper = document.querySelector('.form_wrap');
+                const divContainer = document.getElementById('universityPackages');
 
-                    modalWrapper.style.width = '750px'; 
+const modC = document.getElementById('yesyes');
 
-                    const modal_Content = document.querySelector('.modal-content');
+var helpingFor = document.querySelector('input[name="help-with"]:checked');
+var forWho = helpingFor ? helpingFor.value : 'None';
 
-                    modal_Content.style.width = '800px'; 
+if (forWho === "university") {
+
+        divContainer.style.padding = '10px'; // Add padding if desired
+        divContainer.style.justifyContent = 'center'; // Change justification if needed
+        applyResponsiveStyles(); // Apply responsive styles
+
+       
+        modC.style.width = '700px'; // Default width (this can also be set in applyResponsiveStyles)
+    }
 
                 if(validateForm4()) {
 
@@ -1870,6 +1910,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             form_5_back_btn.addEventListener("click", function() {
+
+                const modC = document.getElementById('yesyes');
+                    modC.style.backgroundColor = ''; // Reset to default
+                    modC.style.width = ''; // Reset to default
+
                 form_4.style.display = "block";
                 form_5.style.display = "none";
 
