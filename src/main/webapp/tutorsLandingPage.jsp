@@ -146,6 +146,11 @@
                 font-size: 20px;
             }
 
+            #termsCondition{
+
+                  color: #02A552;
+            }
+
     </style>
 
  </head>
@@ -704,7 +709,7 @@
                                 <div class="terms-row">
                                     <input type="checkbox" id="terms" name="terms" required>
                                     <label for="terms">
-                                        I have read and agree to the <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Policy</a>.<span class="required">*</span>
+                                        I have read and agree to the <a href="#" target="_blank" id="termsCondition">Terms and Conditions</a> and <a href="#" target="_blank" id="termsCondition">Privacy Policy</a>.<span class="required">*</span>
                                     </label>
                                     <div id="terms-error" class="error"></div>
                                 </div>
@@ -1792,6 +1797,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             form_4_next_btn.addEventListener("click", function() {
+
+               const modalWrapper = document.querySelector('.form_wrap');
+
+                    modalWrapper.style.width = '750px'; 
+
+                    const modal_Content = document.querySelector('.modal-content');
+
+                    modal_Content.style.width = '800px'; 
+
                 if(validateForm4()) {
 
                     var syllabus = document.getElementById("syllabus").value;
@@ -3761,8 +3775,14 @@ function openPopup(email) {
 function toggleSubjectOptions() {
     const container = document.getElementById('subjectContainer');
     const inputField = document.getElementById('subject');
+
+    var helpingFor = document.querySelector('input[name="help-with"]:checked');
+    var forwho = helpingFor ? helpingFor.value : 'None';
     
     // For larger screens, toggle the visibility of the checkbox list
+
+    if(forwho === "school"){
+
     if (window.innerWidth > 768) {
         // Show the container if hidden and hide it if shown
         if (container.style.display === 'none' || container.style.display === '') {
@@ -3771,7 +3791,9 @@ function toggleSubjectOptions() {
         } else {
             container.style.display = 'none'; // Hide container
         }
-    } else {
+    }
+    
+    else {
         // For small screens, toggle the visibility of the subject container
         if (container.style.display === 'none' || container.style.display === '') {
             // Show the container
@@ -3783,6 +3805,38 @@ function toggleSubjectOptions() {
             inputField.readOnly = true; // Make input read-only when container is hidden
         }
     }
+
+}
+else{
+
+    if (window.innerWidth > 768) {
+        // Show the container if hidden and hide it if shown
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'none'; // Show container
+            inputField.readOnly = false; // Keep input read-only
+        } else {
+            container.style.display = 'none'; // Hide container
+        }
+    }
+    
+    else {
+        // For small screens, toggle the visibility of the subject container
+        if (container.style.display === 'none' || container.style.display === '') {
+            // Show the container
+            container.style.display = 'block';
+            inputField.readOnly = false; // Allow typing in the input field
+        } else {
+            // Hide the container and enable typing
+            container.style.display = 'none';
+            inputField.readOnly = true; // Make input read-only when container is hidden
+        }
+    }
+
+
+
+}
+
+
 }
 
 

@@ -65,7 +65,7 @@ public class PageController {
 	 @Autowired
 	 private TutorRepository tutorRepo;
 
-	@GetMapping("/")
+	@GetMapping("/tutors")
 	public ModelAndView bookTutorPage() {
 	    // Retrieve the list of tutors
 	    List<Tutor> tutors = tutorService.listAll();
@@ -321,11 +321,16 @@ public class PageController {
 		    	
 		    	  tutorName = "N/A";
 		    	  tutorEmail = "N/A";
-		    	  
-		    	  
-		    	 
+ 
 		    }
-		    		    
+		    
+		    if(tutorName.equals("")) {
+		    	
+		    	  tutorName = "Apex Tutor";
+		    	  tutorEmail = "apexexcellencetutors@gmail.com";
+		    	  	 
+		    }
+		    
 		    String packageType = booking.get("package");
 		    String sessions = booking.get("sessions");
 		    
@@ -438,6 +443,7 @@ public class PageController {
 		     String status = booking.get("who");
 		     String userPackage = "Not Selected";
 		     
+		     System.out.println(status);
 		     
 			    String tutorName = booking.get("hiddenTutorName");
 			    String tutorEmail = booking.get("hiddenTutorEmail");
@@ -448,10 +454,18 @@ public class PageController {
 			    	
 			    	  tutorName = "Apex Tutor";
 			    	  tutorEmail = "apexexcellencetutors@gmail.com";
-			    	  
-			    	  
-			    	 
+			    	  	 
 			    }
+			    
+			    
+			    if(tutorName.equals("")) {
+			    	
+			    	  tutorName = "Apex Tutor";
+			    	  tutorEmail = "apexexcellencetutors@gmail.com";
+			    	  	 
+			    }
+			    
+			    
 		     
 		     String isPaid = "No";
 		     
