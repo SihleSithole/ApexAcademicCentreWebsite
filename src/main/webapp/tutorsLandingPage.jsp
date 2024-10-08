@@ -15,8 +15,8 @@
     <style>
         .checkbox-container{
             display: inline-flex;
-        }
-            
+        }   
+                
         .opt{
             display: none;
         }
