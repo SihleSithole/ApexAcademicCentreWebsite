@@ -1843,7 +1843,7 @@ if (forWho === "university") {
         applyResponsiveStyles(); // Apply responsive styles
 
        
-        modC.style.width = '700px'; // Default width (this can also be set in applyResponsiveStyles)
+       //lso be set in applyResponsiveStyles)
     }
 
                 if(validateForm4()) {
