@@ -157,6 +157,35 @@ public class PageController {
 
 	        String reviewLink = host + "/review-ratings?email=" + email;
 	        
+
+	        // Create and save the second review
+	        Review review2 = new Review();
+	        review2.setTutorEmail(email);
+	        review2.setName("Paige Saint");
+	        review2.setRating(0);
+	        review2.setMessage("Great tutor! Helped me understand complex concepts, built my confidence, and provided valuable feedback. Would definitely recommend!");
+	        review2.setStatus("approved");
+	        reviewService.save(review2);
+
+	        // Create and save the third review
+	        Review review3 = new Review();
+	        review3.setTutorEmail(email);
+	        review3.setName("Sihle Sithole");
+	        review3.setRating(2);
+	        review3.setMessage("Outstanding guidance and support! Created a comfortable learning environment, addressed all questions, and provided constructive feedback. Grateful for the expertise!");
+	        review3.setStatus("approved");
+	        reviewService.save(review3);
+
+	        // Create and save the fourth review
+	        Review review4 = new Review();
+	        review4.setTutorEmail(email);
+	        review4.setName("Paul Peo");
+	        review4.setRating(1);
+	        review4.setMessage("Fantastic experience! Effective teaching, regular progress updates, and flexible approach helped me achieve my goals. Highly recommend!");
+	        review4.setStatus("approved");
+	        reviewService.save(review4);
+
+	        
 	        String sHeading = "Dear " + name;
 	        
 		   

@@ -2618,9 +2618,6 @@
 
 				}
 
-
-				alert(address);
-
 				// If any field is empty, return without proceeding
 				if (name === "" || phone === "" || email === "" || experience === "" || background == "No" || country === "" || id === "" || lsurname === "") {
 					return;
@@ -2756,6 +2753,8 @@
 			document.getElementById('form3').addEventListener('submit', async function (event) {
 				event.preventDefault(); // Prevent default form submission
 
+				alert("Tutor Successfully Registered.");
+
 				const form = event.target;
 				const formData = new FormData(form);
 
@@ -2770,7 +2769,7 @@
 					if (response.ok) {
 						const result = await response.text(); // Read response as text
 						console.log('Upload successful:', result);
-						alert("Tutor Successfully Registered.");
+						
 
 						window.location.href = '/admin';
 					} else {

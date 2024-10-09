@@ -422,7 +422,7 @@
                                                 hasReviews = true; // Set flag if there's at least one approved review
                                                 String tutName = r.getName();
                                                 String reviewDescription = r.getMessage();
-                                                
+                    
                                                 // Create a unique key for each tutor's review
                                                 String uniqueKey = emailTutor + "_" + tutName;
                     
@@ -432,19 +432,18 @@
                                                     reviewCount++; // Increment the review counter
                     
                                                     // Limit the number of displayed reviews
-                                                    if (reviewCount > maxReviewsToShow) {
-                                                        break; // Exit the loop if the limit is reached
-                                                    }
+                                                    if (reviewCount <= maxReviewsToShow) { // Change the condition here
                                 %>
-                                                    <article class="card__article swiper-slide">
-                                                        <div class="card__data">
-                                                            <h3 class="card__name"><%= tutName %></h3>
-                                                            <p class="card__description">
-                                                                <%= reviewDescription != null ? reviewDescription : "No description available." %>
-                                                            </p>
-                                                        </div>
-                                                    </article>
+                                                        <article class="card__article swiper-slide">
+                                                            <div class="card__data">
+                                                                <h3 class="card__name"><%= tutName %></h3>
+                                                                <p class="card__description">
+                                                                    <%= reviewDescription != null ? reviewDescription : "No description available." %>
+                                                                </p>
+                                                            </div>
+                                                        </article>
                                 <%
+                                                    }
                                                 }
                                             }
                                         }
@@ -472,6 +471,7 @@
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>
+                    
                     
                 </section>
 
