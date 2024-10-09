@@ -22,7 +22,7 @@
     
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
-          <link href="bookingStyleResponsive.css" rel="stylesheet">
+          <link href="latestBookingStyle.css" rel="stylesheet">
           <link href="profilePage.css" rel="stylesheet"> 
           <style>
          
@@ -898,92 +898,72 @@
 
             <div class="form_5" style="display: none;" id="formFive">
                 <h2>Payment Packages</h2>
-            
+                
                 <div class="div-container" id="schoolPackages">
                     <div class="custom-div">
-                        <h3>Once Off Package</h3>
+                        <p>Once Off Package</p>
                         <div class="content">
                             <div class="session-per-month">1 Session per month<br>(once off)</div>
                             <div class="package-details" onclick="onceOffPackage()">Package Details</div>
-                     
-                            <button type="submit" class="package-btn" id="onceOffPackage"></button>
-                          
+                            <button type="submit" class="package-btn" id="onceOffPackage">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>Basic Package</h3>
+                        <p>Basic Package</p>
                         <div class="content">
                             <div class="session-per-month">4 Sessions per month<br>(once a week)</div>
                             <div class="package-details" onclick="basicPackage()">Package Details</div>
-                    
-                            <button type="submit" class="package-btn" id="basicPackage"></button>
-                         
+                            <button type="submit" class="package-btn" id="basicPackage">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>Premium Package</h3>
+                        <p>Premium Package</p>
                         <div class="content">
                             <div class="session-per-month">8 Sessions per month<br>(twice a week)</div>
                             <div class="package-details" onclick="premiumPackage()" id="popular">Popular</div>
-                     
-                            <button type="submit" class="package-btn" id="premiumPackage"></button>
-                        
+                            <button type="submit" class="package-btn" id="premiumPackage">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>Advanced Package</h3>
+                        <p>Advanced Package</p>
                         <div class="content">
                             <div class="session-per-month">12 Sessions per month<br>(three times a week)</div>
                             <div class="package-details" onclick="advanceElite()">Package Details</div>
-                        
-                            <button type="submit" class="package-btn" id="advancedPackage"></button>
-                          
+                            <button type="submit" class="package-btn" id="advancedPackage">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>Elite Package</h3>
+                        <p>Elite Package</p>
                         <div class="content">
                             <div class="session-per-month">16 Sessions per month<br>(four times a week)</div>
                             <div class="package-details" onclick="advanceElite()">Package Details</div>
-                            
-                            <button type="submit" class="package-btn" id="elitePackage"></button>
-                        
+                            <button type="submit" class="package-btn" id="elitePackage">Select</button>
                         </div>
                     </div>
                 </div>
-
+            
                 <div class="div-container" id="universityPackages">
                     <div class="custom-div">
-                        <h3>One on One</h3>
+                        <p>One on One</p>
                         <div class="content">
-                            
                             <div class="package-details" onclick="oneOnoneUniversity()">Package Details</div>
-                     
-                            <button type="submit" class="package-btn" id="oneOnone"></button>
-
+                            <button type="submit" class="package-btn" id="oneOnone">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>2 to 5 students</h3>
+                        <p>2 to 5 students</p>
                         <div class="content">
-                            
                             <div class="package-details" onclick="groupUniversity()">Package Details</div>
-                    
-                            <button type="submit" class="package-btn" id="twoTofivePackage"></button>
-                            
+                            <button type="submit" class="package-btn" id="twoTofivePackage">Select</button>
                         </div>
                     </div>
                     <div class="custom-div">
-                        <h3>6 to 10 students</h3>
+                        <p>6 to 10 students</p>
                         <div class="content">
-                          
                             <div class="package-details" onclick="groupUniversity()">Package Details</div>
-                     
-                            <button type="submit" class="package-btn" id="sixTo10Package"></button>
-                        
+                            <button type="submit" class="package-btn" id="sixTo10Package">Select</button>
                         </div>
                     </div>
-            
                 </div>
                 
                 <div class="btns_wrap">
@@ -993,6 +973,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!--form 5-->
 
