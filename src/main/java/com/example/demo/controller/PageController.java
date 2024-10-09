@@ -664,6 +664,10 @@ public class PageController {
 		 @ResponseBody
 		 public RedirectView acceptBooking(@RequestParam("accept-id") Long id, HttpServletRequest request) {
 			 
+			 Booking booking = bookingService.findOneBook(id); 
+			 
+			 String checkStatus = booking.getStatus();
+			 
 			  bookingService.update(id);
 			  
 			    String serverName = request.getServerName();
@@ -674,19 +678,17 @@ public class PageController {
 		        String bookingLink = host + "/booking-details?id=" + id;
 		        
 			    /*Send email to applicant*/
-		        Booking booking = bookingService.findOneBook(id); 
+		        
 		        
 		        String email = booking.getEmail();
 		        String subject = booking.getSubject();
 		        String tutorName = booking.getTutorName();
 		        String name = booking.getName();
 		        String surname = booking.getSurname();
-		        String status = booking.getStatus();
-		        
-		        
+ 
 		        String clientName = name + " " + surname;
 		        
-		        if(status.equals("consult")) {
+		        if(checkStatus.equals("consult")) {
 		        	
 					senderService.sendSimpleEmail(email, "Booking Confirmation - Next Steps"  ,
 							"Dear " + clientName+",\n\nThank you for choosing Apex Academic Centre. We're delighted to confirm your booking.\r\n"
