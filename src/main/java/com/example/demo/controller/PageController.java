@@ -129,17 +129,24 @@ public class PageController {
 				@RequestParam("hiddenGrades") String grades , @RequestParam("hiddenSyllabus") String syllabus ,
 				@RequestParam("tutorOption") String tutorOption , @RequestParam("hiddenAddress") String address,
 				@RequestParam("bio") String qualification , @RequestParam("about") String about,
-				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob , @RequestParam("hiddenSurname") String surname ,@RequestParam("hiddenModules") String hiddenModules) throws IOException, ParseException 
+				@RequestParam("hours") String bio , @RequestParam("hiddenArea") String area, @RequestParam("hiddenCountry") String country , @RequestParam("hiddenIdentity") String dob , @RequestParam("hiddenSurname") String surname ,@RequestParam("hiddenModules") String hiddenModules , @RequestParam("hiddenExp") String hiddenExp) throws IOException, ParseException 
 		{
 		 
-		 System.out.println(hiddenModules);
+		 if(address.equals("")) {
+			 
+			 address = "international";
+			 
+		 }
+		 		 
+		 int expYear = Integer.parseInt(hiddenExp);
+		 int experienceYears = 2024 - expYear;
 		 
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		 Date date = dateFormat.parse(dob);
 		 
            byte[] imageData = profile.getBytes();
                 
-		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date,surname,hiddenModules);
+		   Tutor tutor = new Tutor(email,name,id,phone,subjects,grades,address,tutorOption,qualification,about,bio,imageData,syllabus,area,country,date,surname,hiddenModules,experienceYears);
 		      
 		    tutorService.save(tutor); 
 		    
@@ -499,7 +506,7 @@ public class PageController {
 	            "Dear " + clientName + ",\r\n"
 	            + "\r\n"
 	            + "\r\n"
-	            + "Thank you for considering Apex Academic Centre for " + sendName  +"'s educational needs. We appreciate your inquiry about our one-on-one [in-person/online] tutoring services for " + subject + ".\r\n"
+	            + "Thank you for considering Apex Academic Centre for " + sendName  +"'s educational needs. We appreciate your inquiry about our one-on-one " + tutorStyle + " tutoring services for " + subject + ".\r\n"
 	            + "\r\n"
 	            + "\r\n"
 	            + "Our consultants will promptly contact you to discuss " + sendName  +"'s requirements and match them with a suitable tutor.\r\n"
@@ -538,12 +545,7 @@ public class PageController {
 		            	);
 	            	
 	            }
-		     
-		   
-
-
-	            
-	        
+		      
 	         
 	    }
 	 
@@ -679,8 +681,34 @@ public class PageController {
 		        String tutorName = booking.getTutorName();
 		        String name = booking.getName();
 		        String surname = booking.getSurname();
+		        String status = booking.getStatus();
+		        
 		        
 		        String clientName = name + " " + surname;
+		        
+		        if(status.equals("consult")) {
+		        	
+					senderService.sendSimpleEmail(email, "Booking Confirmation - Next Steps"  ,
+							"Dear " + clientName+",\n\nThank you for choosing Apex Academic Centre. We're delighted to confirm your booking.\r\n"
+									+ "\r\n"
+									+ "\r\n"
+									+ "What's next:\r\n"
+									+ "\r\n"
+									+ "\r\n"
+									+ "- Our team will contact you to discuss tutor-matching\r\n"
+									+ "- Arrange scheduling and logistics\r\n"
+									+ "- Ensure a tailored tutoring plan\r\n"
+									+ "\r\n"
+									+ "\r\n"
+									+ "We're dedicated to your child's academic success.\r\n"
+									+ "\r\n"
+									+ "\r\n"
+									+ "Best regards,\r\n"
+									+ "Apex Academic Centre");
+		        	
+		        	
+		        }
+		        else {
 		        
 				senderService.sendSimpleEmail(email, "Booking Approval - " + subject  ,
 				"Dear " + clientName+",\n\nWe're delighted to inform you that " + tutorName + " has accepted your booking! They will be in touch with you shortly to arrange a suitable timetable and discuss any necessary details.\r\n"
@@ -694,6 +722,8 @@ public class PageController {
 						+ "\r\n"
 						+ "Kind regards,\r\n"
 						+ "Apex Academic Centre");
+				
+		        }
 			  
 		        return new RedirectView(bookingLink);
 

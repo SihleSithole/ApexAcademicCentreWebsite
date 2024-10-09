@@ -22,7 +22,7 @@
     
           <!--=============== CSS ===============-->
           <link rel="stylesheet" href="assets/styles.css">
-          <link href="latestBookingStyle.css" rel="stylesheet">
+          <link href="bookingRep.css" rel="stylesheet">
           <link href="profilePage.css" rel="stylesheet"> 
           <style>
          
@@ -259,6 +259,7 @@
             String modules = tutor.getModule();
             String fullName = name;
             String grades = tutor.getGrades();
+            int exp = tutor.getExperience();
 
             
   %>
@@ -274,6 +275,7 @@
                         <img src="data:image/png;base64,<%= tutorImage %>" alt="Tutor's Picture">
                         <div class="name"><%= name %></div>
                         <div class="age"><%= age %> years old</div>
+                        <div class="age"><%= exp %> year(s) experience</div>
                     </div>
                     <div class="details">
                         <p>

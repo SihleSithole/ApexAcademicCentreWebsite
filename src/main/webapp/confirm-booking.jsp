@@ -45,6 +45,9 @@
         String unSurname = book.getUnSurname();
         String unYear = book.getUnYear();
         String status = book.getStatus();
+        String tutorEmails = book.getTutorEmail();
+        String email = book.getEmail();
+        String phone = book.getPhone();
 
     %>
 
@@ -65,6 +68,22 @@
                             <h5>Applicant</h5>
                             <p><strong>Name :</strong> <span id="modalName"><%= name %> </span></p>
                             <p><strong>Surname :</strong> <span id="modalEmail"><%= surname %></span></p>
+
+                          <%
+                          
+                              if(status.equals("consult") && tutorEmails.equals("apexexcellencetutors@gmail.com")){
+
+                                 %>
+
+                                 <p><strong>Phone :</strong> <span id="modalName"><%= phone %> </span></p>
+                                 <p><strong>Email :</strong> <span id="modalEmail"><%= email %></span></p>
+
+                                 <%
+
+                              }
+
+                          %>
+
                             <p><strong>Province :</strong> <span id="modalPhone"><%= province %></span></p>
                             <p><strong>Country :</strong> <span id="modalSubject"><%= country %></span></p>
                             <p><strong>Language of Instruction :</strong> <span id="modalTutoring"><%= instrLanguage %></span></p>
@@ -72,7 +91,7 @@
                             <% if(!address.equals("n/a")){
                                 %>
 
-                            <p><strong>Address :</strong> <span id="modalProvince"><%= address %></span></p>
+                            <p><strong>When To Start :</strong> <span id="modalProvince"><%= address %></span></p>
                             <p><strong>Suburb :</strong> <span id="modalSuburb"><%= suburb %></span></p>
                       
                             <%

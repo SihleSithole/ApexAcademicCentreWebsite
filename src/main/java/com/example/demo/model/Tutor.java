@@ -75,6 +75,9 @@ public class Tutor {
 	@Column(name = "module")
 	private String module;
 	
+	@Column(name = "experience")
+	private int experience;
+	
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] image;
@@ -85,7 +88,7 @@ public class Tutor {
 	}
 
 	public Tutor(String email, String fullNames, String background, String phoneNumber, String subjects, String grades,
-			String address, String availability, String bio, String about, String hoursTutored, byte[] image , String syllabus , String area, String country, Date dob , String surname, String modules) {
+			String address, String availability, String bio, String about, String hoursTutored, byte[] image , String syllabus , String area, String country, Date dob , String surname, String modules, int experience) {
 		super();
 		this.email = email;
 		this.fullNames = fullNames;
@@ -105,6 +108,7 @@ public class Tutor {
 		this.dob = dob;
 		this.surname = surname;
 		this.module = modules;
+		this.experience = experience;
 		
 		String online = availability.substring(0, 6);
 		
@@ -285,6 +289,14 @@ public class Tutor {
 
 	public void setModule(String module) {
 		this.module = module;
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 	
 	

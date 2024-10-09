@@ -11,7 +11,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link href="assets/css/mainTutorsmain.css" rel="stylesheet">
-    <link href="latestBookingStyle.css" rel="stylesheet">
+    <link href="bookingRep.css" rel="stylesheet">
     <style>
         .checkbox-container{
             display: inline-flex;
@@ -1079,9 +1079,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
                       
                     </ul>`;
-
-     
-                  
+    
             } 
 
             else{
@@ -1244,7 +1242,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Validate dropdown
                 if(country === "South Africa"){
                      document.getElementById("in-peerson").style.display = 'block';
-                    if (!province) {
+                    /* country.style.width = 'calc(100% - 22px)' */
+                       
+                   if (!province) {
                     document.getElementById('province-error').textContent = "Please select a province.";
                     isValid = false;
                 } else {
