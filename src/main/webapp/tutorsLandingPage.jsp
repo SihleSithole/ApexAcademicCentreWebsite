@@ -1602,6 +1602,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if(ghg === "In Person"){
 					
+                    addressTeaching.value = "";
 	
 				if (!suburbTeaching) {
                     document.getElementById('suburb-inperson-error').textContent = "please fill in your suburb.";
@@ -1609,17 +1610,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     document.getElementById('suburb-inperson-error').textContent = "";
                 }
-              }
 
-              if (!addressTeaching) {
+                if (!addressTeaching) {
                     document.getElementById('inperson-error').textContent = "please specify.";
                     isValid = false;
                 } else {
                     document.getElementById('inperson-error').textContent = "";
                 }
 
-             
-                
+
+
+              }
+              else{
+
+                addressTeaching.value = "";
+
+                if (!addressTeaching) {
+                    document.getElementById('inperson-error').textContent = "please specify.";
+                    isValid = false;
+                } else {
+                    document.getElementById('inperson-error').textContent = "";
+                }
+
+              }
+   
 				return isValid;
 
             }
@@ -3548,20 +3562,22 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
           }
 
- }
-                    const gatheredDat = combineFormData();
+               }
 
-                    const ataSendout = {
-                        ...gatheredDat, // Spread the existing data
-                        amount: amountTopay , package : typePackage , sessions : value
-                    };
+                    const gatheredData = combineFormData();
 
+                        const dataSendout = {
+                            ...gatheredData, // Spread the existing data
+                            amount: amountTopay , package : typePackage , sessions : valuee
+                        };
+
+    
                     fetch('/booking', { // Replace with your actual endpoint URL
                                     method: 'POST',
                                     headers: { 
                                         'Content-Type': 'application/json' 
                                     },
-                                    body: JSON.stringify(ataSendout)
+                                    body: JSON.stringify(gatheredData)
                                 })
                                 .then(response => response.json())
                                 .then(result => {
@@ -3576,7 +3592,8 @@ var yearIn = yearFor ? yearFor.value : 'None';
                                 setTimeout(function(){
                             window.location.href = '/payment';
                         } , 2000);
- }
+
+                          }
 
                 break;
 
@@ -3933,7 +3950,7 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     const sendOut = {
                         ...outData, // Spread the existing data
-                        amount: amountTopay , package : typePackage , sessions : value
+                        amount: amountTopay , package : typePackage , sessions : valueee
                     };
 
                     fetch('/booking', { // Replace with your actual endpoint URL
