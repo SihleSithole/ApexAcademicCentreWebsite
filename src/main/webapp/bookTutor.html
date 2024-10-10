@@ -158,8 +158,9 @@
 		#subjectContainer {
 			display: none;
 			/* Initially hidden */
-			flex-wrap: wrap;
+			/*flex-wrap: wrap;
 			/* Allow wrapping of checkboxes */
+			
 		}
 
 		#tutorNameDisplay {
@@ -179,6 +180,15 @@
 
 			color: #02A552;
 		}
+		
+		
+		.flex-container{
+			display: none;
+			display: flex;
+			    flex-wrap: wrap;
+			    gap: 10px; 
+		}
+		
 	</style>
 </head>
 
@@ -702,7 +712,7 @@
 								placeholder="Mathematics, Mathematics Literacy..." required readonly
 								onclick="toggleSubjectOptions()">
 
-							<div id="subjectContainer">
+							<div id="subjectContainer" 	class="flex-container">
 								<label class="subject-label"><input type="checkbox" value="Mathematics"
 										onchange="updateSubjects()"> Mathematics</label>
 								<label class="subject-label"><input type="checkbox" value="Mathematics Literacy"
@@ -847,7 +857,11 @@
 										onchange="updateSubjects()"> Agricultural Technology</label>
 								<label class="subject-label"><input type="checkbox" value="Physical Education"
 										onchange="updateSubjects()"> Physical Education</label>
-							</div>
+							
+										
+										
+									
+									</div>
 
 							<div id="subject-error" class="error"></div>
 						</div>
@@ -3857,7 +3871,7 @@
 				if (window.innerWidth > 768) {
 					// Show the container if hidden and hide it if shown
 					if (container.style.display === 'none' || container.style.display === '') {
-						container.style.display = 'block'; // Show container
+						container.style.display = 'flex'; // Show container
 						inputField.readOnly = true; // Keep input read-only
 					} else {
 						container.style.display = 'none'; // Hide container
@@ -3868,7 +3882,7 @@
 					// For small screens, toggle the visibility of the subject container
 					if (container.style.display === 'none' || container.style.display === '') {
 						// Show the container
-						container.style.display = 'block';
+						container.style.display = 'none';
 						inputField.readOnly = false; // Allow typing in the input field
 					} else {
 						// Hide the container and enable typing
@@ -3924,6 +3938,7 @@
 			document.getElementById('subject').value = selectedSubjects.join(', ');
 		}
 
+		
 		function toggleReadOnly() {
 			const tutoringFor = document.getElementById('tutoring-for').value;
 			const studentName = document.getElementById('student-name');
