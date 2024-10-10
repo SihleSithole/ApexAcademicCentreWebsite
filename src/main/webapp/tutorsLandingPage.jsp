@@ -825,6 +825,18 @@
                                 </div>
 
                                 <div class="row" id="internetCheck">
+                         
+                                    <div class="form-group">
+                                        <label for="address">When would you like to start<span class="required">*</span></label><br>
+                                        <select id="address-inperson" name="address-inperson" class="input" required>
+                                            <option value="" disabled selected>Select an option</option>
+                                            <option value="ASAP">ASAP</option>
+                                            <option value="This Week">This Week</option>
+                                            <option value="This Month">This Month</option>
+                                            <option value="Not right now">Not right now</option>
+                                        </select>
+                                        <div id="inperson-error" class="error"></div>
+                                    </div>
                                     <div class="checkbox-container">
                                         <br>
                                         <input type="checkbox" id="internet-check" name="internet-check" />
@@ -1590,13 +1602,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if(ghg === "In Person"){
 					
-					if (!addressTeaching) {
-                    document.getElementById('inperson-error').textContent = "please specify.";
-                    isValid = false;
-                } else {
-                    document.getElementById('inperson-error').textContent = "";
-                }
-
+	
 				if (!suburbTeaching) {
                     document.getElementById('suburb-inperson-error').textContent = "please fill in your suburb.";
                     isValid = false;
@@ -1604,6 +1610,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('suburb-inperson-error').textContent = "";
                 }
               }
+
+              if (!addressTeaching) {
+                    document.getElementById('inperson-error').textContent = "please specify.";
+                    isValid = false;
+                } else {
+                    document.getElementById('inperson-error').textContent = "";
+                }
+
              
                 
 				return isValid;
