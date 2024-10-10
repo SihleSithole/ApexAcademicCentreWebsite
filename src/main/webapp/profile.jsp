@@ -176,7 +176,7 @@
             <i class="fas fa-bars"></i> <!-- Hamburger icon -->
         </button>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Tutoring <i class="fas fa-chevron-down"></i></a>

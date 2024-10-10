@@ -398,6 +398,7 @@
                                             <input type="email" id="email" name="email" class="input" placeholder="example@domain.com" required>
                                             <div id="email-error" class="error"></div>
                                         </div>
+
                                         <div class="form-group">
                                             <label for="phone">Phone <span class="required">*</span></label>
                                             <input 
@@ -407,7 +408,8 @@
                                                 class="input" 
                                                 placeholder="+27797565412" 
                                                 required 
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                                onfocus="updateCountryCode();" 
+                                                oninput="validatePhoneNumber();"
                                             >
                                             <div id="phone-error" class="error"></div>
                                         </div>
@@ -417,20 +419,207 @@
 
                                         <div class="form-group">
                                             <label for="country">Country <span class="required">*</span></label>
-                                            <select id="country" name="country" class="input" required>
+                                            <select id="country" name="country" class="input" required onchange="updateCountryCode()">
                                                 <option value="" disabled selected>Select your country</option>
-                                                <option value="South Africa">South Africa</option>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Japan">Japan</option>
-                                                <option value="Brazil">Brazil</option>
-                                                <option value="India">India</option>
-                                                <option value="Mexico">Mexico</option>
-                                                <option value="France">France</option>
-                                                <option value="Italy">Italy</option>
-                                                <option value="Germany">Germany</option>
+                                                <option value="South Africa" data-code="+27" data-length="10">South Africa</option>
+                                                <option value="Afghanistan" data-code="+93" data-length="9">Afghanistan</option>
+                                                <option value="Albania" data-code="+355" data-length="8">Albania</option>
+                                                <option value="Algeria" data-code="+213" data-length="9">Algeria</option>
+                                                <option value="Andorra" data-code="+376" data-length="6">Andorra</option>
+                                                <option value="Angola" data-code="+244" data-length="9">Angola</option>
+                                                <option value="Antigua and Barbuda" data-code="+1-268" data-length="7">Antigua and Barbuda</option>
+                                                <option value="Argentina" data-code="+54" data-length="10">Argentina</option>
+                                                <option value="Armenia" data-code="+374" data-length="8">Armenia</option>
+                                                <option value="Australia" data-code="+61" data-length="9">Australia</option>
+                                                <option value="Austria" data-code="+43" data-length="10">Austria</option>
+                                                <option value="Azerbaijan" data-code="+994" data-length="9">Azerbaijan</option>
+                                                <option value="Bahamas" data-code="+1-242" data-length="7">Bahamas</option>
+                                                <option value="Bahrain" data-code="+973" data-length="8">Bahrain</option>
+                                                <option value="Bangladesh" data-code="+880" data-length="10">Bangladesh</option>
+                                                <option value="Barbados" data-code="+1-246" data-length="7">Barbados</option>
+                                                <option value="Belarus" data-code="+375" data-length="9">Belarus</option>
+                                                <option value="Belgium" data-code="+32" data-length="8">Belgium</option>
+                                                <option value="Belize" data-code="+501" data-length="7">Belize</option>
+                                                <option value="Benin" data-code="+229" data-length="8">Benin</option>
+                                                <option value="Bhutan" data-code="+975" data-length="8">Bhutan</option>
+                                                <option value="Bolivia" data-code="+591" data-length="8">Bolivia</option>
+                                                <option value="Bosnia and Herzegovina" data-code="+387" data-length="8">Bosnia and Herzegovina</option>
+                                                <option value="Botswana" data-code="+267" data-length="7">Botswana</option>
+                                                <option value="Brazil" data-code="+55" data-length="11">Brazil</option>
+                                                <option value="Brunei" data-code="+673" data-length="7">Brunei</option>
+                                                <option value="Bulgaria" data-code="+359" data-length="8">Bulgaria</option>
+                                                <option value="Burkina Faso" data-code="+226" data-length="8">Burkina Faso</option>
+                                                <option value="Burundi" data-code="+257" data-length="8">Burundi</option>
+                                                <option value="Cabo Verde" data-code="+238" data-length="7">Cabo Verde</option>
+                                                <option value="Cambodia" data-code="+855" data-length="8">Cambodia</option>
+                                                <option value="Cameroon" data-code="+237" data-length="9">Cameroon</option>
+                                                <option value="Canada" data-code="+1" data-length="10">Canada</option>
+                                                <option value="Central African Republic" data-code="+236" data-length="8">Central African Republic</option>
+                                                <option value="Chad" data-code="+235" data-length="8">Chad</option>
+                                                <option value="Chile" data-code="+56" data-length="9">Chile</option>
+                                                <option value="China" data-code="+86" data-length="11">China</option>
+                                                <option value="Colombia" data-code="+57" data-length="10">Colombia</option>
+                                                <option value="Comoros" data-code="+269" data-length="7">Comoros</option>
+                                                <option value="Congo (Congo-Brazzaville)" data-code="+242" data-length="8">Congo (Congo-Brazzaville)</option>
+                                                <option value="Costa Rica" data-code="+506" data-length="8">Costa Rica</option>
+                                                <option value="Croatia" data-code="+385" data-length="9">Croatia</option>
+                                                <option value="Cuba" data-code="+53" data-length="8">Cuba</option>
+                                                <option value="Cyprus" data-code="+357" data-length="8">Cyprus</option>
+                                                <option value="Czechia (Czech Republic)" data-code="+420" data-length="9">Czechia (Czech Republic)</option>
+                                                <option value="Democratic Republic of the Congo" data-code="+243" data-length="9">Democratic Republic of the Congo</option>
+                                                <option value="Denmark" data-code="+45" data-length="8">Denmark</option>
+                                                <option value="Djibouti" data-code="+253" data-length="6">Djibouti</option>
+                                                <option value="Dominica" data-code="+1-767" data-length="7">Dominica</option>
+                                                <option value="Dominican Republic" data-code="+1-809" data-length="10">Dominican Republic</option>
+                                                <option value="Ecuador" data-code="+593" data-length="9">Ecuador</option>
+                                                <option value="Egypt" data-code="+20" data-length="10">Egypt</option>
+                                                <option value="El Salvador" data-code="+503" data-length="8">El Salvador</option>
+                                                <option value="Equatorial Guinea" data-code="+240" data-length="9">Equatorial Guinea</option>
+                                                <option value="Eritrea" data-code="+291" data-length="7">Eritrea</option>
+                                                <option value="Estonia" data-code="+372" data-length="7">Estonia</option>
+                                                <option value="Eswatini" data-code="+268" data-length="7">Eswatini</option>
+                                                <option value="Ethiopia" data-code="+251" data-length="10">Ethiopia</option>
+                                                <option value="Fiji" data-code="+679" data-length="7">Fiji</option>
+                                                <option value="Finland" data-code="+358" data-length="10">Finland</option>
+                                                <option value="France" data-code="+33" data-length="9">France</option>
+                                                <option value="Gabon" data-code="+241" data-length="7">Gabon</option>
+                                                <option value="Gambia" data-code="+220" data-length="7">Gambia</option>
+                                                <option value="Georgia" data-code="+995" data-length="9">Georgia</option>
+                                                <option value="Germany" data-code="+49" data-length="11">Germany</option>
+                                                <option value="Ghana" data-code="+233" data-length="10">Ghana</option>
+                                                <option value="Greece" data-code="+30" data-length="10">Greece</option>
+                                                <option value="Grenada" data-code="+1-473" data-length="7">Grenada</option>
+                                                <option value="Guatemala" data-code="+502" data-length="8">Guatemala</option>
+                                                <option value="Guinea" data-code="+224" data-length="9">Guinea</option>
+                                                <option value="Guinea-Bissau" data-code="+245" data-length="7">Guinea-Bissau</option>
+                                                <option value="Guyana" data-code="+592" data-length="7">Guyana</option>
+                                                <option value="Haiti" data-code="+509" data-length="8">Haiti</option>
+                                                <option value="Honduras" data-code="+504" data-length="8">Honduras</option>
+                                                <option value="Hungary" data-code="+36" data-length="9">Hungary</option>
+                                                <option value="Iceland" data-code="+354" data-length="7">Iceland</option>
+                                                <option value="India" data-code="+91" data-length="10">India</option>
+                                                <option value="Indonesia" data-code="+62" data-length="10">Indonesia</option>
+                                                <option value="Iran" data-code="+98" data-length="10">Iran</option>
+                                                <option value="Iraq" data-code="+964" data-length="10">Iraq</option>
+                                                <option value="Ireland" data-code="+353" data-length="9">Ireland</option>
+                                                <option value="Israel" data-code="+972" data-length="9">Israel</option>
+                                                <option value="Italy" data-code="+39" data-length="10">Italy</option>
+                                                <option value="Jamaica" data-code="+1-876" data-length="7">Jamaica</option>
+                                                <option value="Japan" data-code="+81" data-length="10">Japan</option>
+                                                <option value="Jordan" data-code="+962" data-length="9">Jordan</option>
+                                                <option value="Kazakhstan" data-code="+7" data-length="10">Kazakhstan</option>
+                                                <option value="Kenya" data-code="+254" data-length="10">Kenya</option>
+                                                <option value="Kiribati" data-code="+686" data-length="7">Kiribati</option>
+                                                <option value="Kuwait" data-code="+965" data-length="8">Kuwait</option>
+                                                <option value="Kyrgyzstan" data-code="+996" data-length="9">Kyrgyzstan</option>
+                                                <option value="Laos" data-code="+856" data-length="8">Laos</option>
+                                                <option value="Latvia" data-code="+371" data-length="8">Latvia</option>
+                                                <option value="Lebanon" data-code="+961" data-length="8">Lebanon</option>
+                                                <option value="Lesotho" data-code="+266" data-length="8">Lesotho</option>
+                                                <option value="Liberia" data-code="+231" data-length="7">Liberia</option>
+                                                <option value="Libya" data-code="+218" data-length="9">Libya</option>
+                                                <option value="Liechtenstein" data-code="+423" data-length="8">Liechtenstein</option>
+                                                <option value="Lithuania" data-code="+370" data-length="8">Lithuania</option>
+                                                <option value="Luxembourg" data-code="+352" data-length="6">Luxembourg</option>
+                                                <option value="Madagascar" data-code="+261" data-length="9">Madagascar</option>
+                                                <option value="Malawi" data-code="+265" data-length="9">Malawi</option>
+                                                <option value="Malaysia" data-code="+60" data-length="10">Malaysia</option>
+                                                <option value="Maldives" data-code="+960" data-length="7">Maldives</option>
+                                                <option value="Mali" data-code="+223" data-length="8">Mali</option>
+                                                <option value="Malta" data-code="+356" data-length="8">Malta</option>
+                                                <option value="Marshall Islands" data-code="+692" data-length="7">Marshall Islands</option>
+                                                <option value="Mauritania" data-code="+222" data-length="8">Mauritania</option>
+                                                <option value="Mauritius" data-code="+230" data-length="8">Mauritius</option>
+                                                <option value="Mexico" data-code="+52" data-length="10">Mexico</option>
+                                                <option value="Micronesia" data-code="+691" data-length="7">Micronesia</option>
+                                                <option value="Moldova" data-code="+373" data-length="8">Moldova</option>
+                                                <option value="Monaco" data-code="+377" data-length="7">Monaco</option>
+                                                <option value="Mongolia" data-code="+976" data-length="8">Mongolia</option>
+                                                <option value="Montenegro" data-code="+382" data-length="8">Montenegro</option>
+                                                <option value="Morocco" data-code="+212" data-length="10">Morocco</option>
+                                                <option value="Mozambique" data-code="+258" data-length="9">Mozambique</option>
+                                                <option value="Myanmar (Burma)" data-code="+95" data-length="9">Myanmar (Burma)</option>
+                                                <option value="Namibia" data-code="+264" data-length="9">Namibia</option>
+                                                <option value="Nauru" data-code="+674" data-length="7">Nauru</option>
+                                                <option value="Nepal" data-code="+977" data-length="10">Nepal</option>
+                                                <option value="Netherlands" data-code="+31" data-length="9">Netherlands</option>
+                                                <option value="New Zealand" data-code="+64" data-length="9">New Zealand</option>
+                                                <option value="Nicaragua" data-code="+505" data-length="8">Nicaragua</option>
+                                                <option value="Niger" data-code="+227" data-length="8">Niger</option>
+                                                <option value="Nigeria" data-code="+234" data-length="10">Nigeria</option>
+                                                <option value="North Macedonia" data-code="+389" data-length="8">North Macedonia</option>
+                                                <option value="Norway" data-code="+47" data-length="8">Norway</option>
+                                                <option value="Oman" data-code="+968" data-length="8">Oman</option>
+                                                <option value="Pakistan" data-code="+92" data-length="10">Pakistan</option>
+                                                <option value="Palau" data-code="+680" data-length="7">Palau</option>
+                                                <option value="Palestine" data-code="+970" data-length="9">Palestine</option>
+                                                <option value="Panama" data-code="+507" data-length="7">Panama</option>
+                                                <option value="Papua New Guinea" data-code="+675" data-length="8">Papua New Guinea</option>
+                                                <option value="Paraguay" data-code="+595" data-length="9">Paraguay</option>
+                                                <option value="Peru" data-code="+51" data-length="9">Peru</option>
+                                                <option value="Philippines" data-code="+63" data-length="10">Philippines</option>
+                                                <option value="Poland" data-code="+48" data-length="9">Poland</option>
+                                                <option value="Portugal" data-code="+351" data-length="9">Portugal</option>
+                                                <option value="Qatar" data-code="+974" data-length="8">Qatar</option>
+                                                <option value="Romania" data-code="+40" data-length="10">Romania</option>
+                                                <option value="Russia" data-code="+7" data-length="10">Russia</option>
+                                                <option value="Rwanda" data-code="+250" data-length="9">Rwanda</option>
+                                                <option value="Saint Kitts and Nevis" data-code="+1-869" data-length="7">Saint Kitts and Nevis</option>
+                                                <option value="Saint Lucia" data-code="+1-758" data-length="7">Saint Lucia</option>
+                                                <option value="Saint Vincent and the Grenadines" data-code="+1-784" data-length="7">Saint Vincent and the Grenadines</option>
+                                                <option value="Samoa" data-code="+685" data-length="7">Samoa</option>
+                                                <option value="San Marino" data-code="+378" data-length="7">San Marino</option>
+                                                <option value="Sao Tome and Principe" data-code="+239" data-length="7">Sao Tome and Principe</option>
+                                                <option value="Saudi Arabia" data-code="+966" data-length="9">Saudi Arabia</option>
+                                                <option value="Senegal" data-code="+221" data-length="8">Senegal</option>
+                                                <option value="Serbia" data-code="+381" data-length="9">Serbia</option>
+                                                <option value="Seychelles" data-code="+248" data-length="7">Seychelles</option>
+                                                <option value="Sierra Leone" data-code="+232" data-length="8">Sierra Leone</option>
+                                                <option value="Singapore" data-code="+65" data-length="8">Singapore</option>
+                                                <option value="Slovakia" data-code="+421" data-length="9">Slovakia</option>
+                                                <option value="Slovenia" data-code="+386" data-length="8">Slovenia</option>
+                                                <option value="Solomon Islands" data-code="+677" data-length="7">Solomon Islands</option>
+                                                <option value="Somalia" data-code="+252" data-length="9">Somalia</option>
+                                                <option value="South Korea" data-code="+82" data-length="10">South Korea</option>
+                                                <option value="South Sudan" data-code="+211" data-length="9">South Sudan</option>
+                                                <option value="Spain" data-code="+34" data-length="9">Spain</option>
+                                                <option value="Sri Lanka" data-code="+94" data-length="10">Sri Lanka</option>
+                                                <option value="Sudan" data-code="+249" data-length="9">Sudan</option>
+                                                <option value="Suriname" data-code="+597" data-length="7">Suriname</option>
+                                                <option value="Sweden" data-code="+46" data-length="10">Sweden</option>
+                                                <option value="Switzerland" data-code="+41" data-length="9">Switzerland</option>
+                                                <option value="Syria" data-code="+963" data-length="9">Syria</option>
+                                                <option value="Taiwan" data-code="+886" data-length="10">Taiwan</option>
+                                                <option value="Tajikistan" data-code="+992" data-length="9">Tajikistan</option>
+                                                <option value="Tanzania" data-code="+255" data-length="10">Tanzania</option>
+                                                <option value="Thailand" data-code="+66" data-length="9">Thailand</option>
+                                                <option value="Timor-Leste" data-code="+670" data-length="7">Timor-Leste</option>
+                                                <option value="Togo" data-code="+228" data-length="8">Togo</option>
+                                                <option value="Tonga" data-code="+676" data-length="7">Tonga</option>
+                                                <option value="Trinidad and Tobago" data-code="+1-868" data-length="7">Trinidad and Tobago</option>
+                                                <option value="Tunisia" data-code="+216" data-length="8">Tunisia</option>
+                                                <option value="Turkey" data-code="+90" data-length="10">Turkey</option>
+                                                <option value="Turkmenistan" data-code="+993" data-length="8">Turkmenistan</option>
+                                                <option value="Tuvalu" data-code="+688" data-length="7">Tuvalu</option>
+                                                <option value="Uganda" data-code="+256" data-length="10">Uganda</option>
+                                                <option value="Ukraine" data-code="+380" data-length="9">Ukraine</option>
+                                                <option value="United Arab Emirates" data-code="+971" data-length="9">United Arab Emirates</option>
+                                                <option value="United Kingdom" data-code="+44" data-length="10">United Kingdom</option>
+                                                <option value="United States" data-code="+1" data-length="10">United States</option>
+                                                <option value="Uruguay" data-code="+598" data-length="8">Uruguay</option>
+                                                <option value="Uzbekistan" data-code="+998" data-length="9">Uzbekistan</option>
+                                                <option value="Vanuatu" data-code="+678" data-length="7">Vanuatu</option>
+                                                <option value="Vatican City" data-code="+39" data-length="7">Vatican City</option>
+                                                <option value="Venezuela" data-code="+58" data-length="10">Venezuela</option>
+                                                <option value="Vietnam" data-code="+84" data-length="10">Vietnam</option>
+                                                <option value="Yemen" data-code="+967" data-length="9">Yemen</option>
+                                                <option value="Zambia" data-code="+260" data-length="10">Zambia</option>
+                                                <option value="Zimbabwe" data-code="+263" data-length="9">Zimbabwe</option>
                                             </select>
                                             <div id="country-error" class="error"></div>
                                         </div>
+
+
 
                                         <div class="form-group" id="fProvince">
                                             <label for="province">Province <span class="required">*</span></label>
@@ -1079,7 +1268,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         <li>•Currency: All prices quoted in South African Rand (ZAR)</li>
                       
                     </ul>`;
-    
+
+     
+                  
             } 
 
             else{
@@ -1212,17 +1403,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!phone) {
                 document.getElementById('phone-error').textContent = "Phone number is required.";
                 isValid = false;
-            } else {
-                // Check if it consists of only digits
-                const phoneRegex = /^[0-9]+$/; // Matches any length of digits
-
-                if (!phoneRegex.test(phone)) {
-                    document.getElementById('phone-error').textContent = "Phone number must consist of digits only.";
-                    isValid = false;
-                } else {
-                    document.getElementById('phone-error').textContent = "";
                 }
-            }
+                else{
+
+                     var checkNumber = validatePhoneNumber();
+
+                       if(!checkNumber){
+                        isValid = false;
+                       }
+                      
+                }
 
                 if (!country) {
                     document.getElementById('country-error').textContent = "Country is required.";
@@ -1242,9 +1432,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Validate dropdown
                 if(country === "South Africa"){
                      document.getElementById("in-peerson").style.display = 'block';
-                    /* country.style.width = 'calc(100% - 22px)' */
-                       
-                   if (!province) {
+                    if (!province) {
                     document.getElementById('province-error').textContent = "Please select a province.";
                     isValid = false;
                 } else {
@@ -3393,15 +3581,15 @@ var yearIn = yearFor ? yearFor.value : 'None';
 
                     } while (isNaN(valueee) || valueee <= 0);
 
-var yearFor = document.querySelector('input[name="year"]:checked');
-var yearIn = yearFor ? yearFor.value : 'None';
+                    var yearFor = document.querySelector('input[name="year"]:checked');
+                    var yearIn = yearFor ? yearFor.value : 'None';
 
- var amountTopay;
- var calcAmount;
- var discountAmount;
- var amountAfterDiscount;
- var trackDiscount = 0;
- var typePackage = 'Six to Ten : University';
+                    var amountTopay;
+                    var calcAmount;
+                    var discountAmount;
+                    var amountAfterDiscount;
+                    var trackDiscount = 0;
+                    var typePackage = 'Six to Ten : University';
 
  if(ghg === "In Person" && yearIn === '1st' ||  yearIn === '2nd'){
 
@@ -3995,6 +4183,83 @@ function toggleReadOnly() {
         // Now submit the form
         document.getElementById(hiddenFieldId).closest('form').submit();
     }
+
+
+
+    function updateCountryCode() {
+    const countrySelect = document.getElementById("country");
+    const phoneInput = document.getElementById("phone");
+    const lengthMessage = document.getElementById("lengthMessage");
+    const phoneError = document.getElementById("phone-error");
+
+    // Get the selected option
+    const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+    const code = selectedOption.getAttribute("data-code");
+    const length = selectedOption.getAttribute("data-length");
+
+    // Update the phone input with the country code and a space
+    phoneInput.value = code + " ";
+    
+    // Update the message to display required length
+    lengthMessage.textContent = `Required length: ${length} digits (excluding code)`;
+    phoneError.textContent = ''; // Clear previous error message
+}
+
+function validatePhoneNumber() {
+    const phoneInput = document.getElementById("phone");
+    const countrySelect = document.getElementById("country");
+    const phoneError = document.getElementById("phone-error");
+
+    if (countrySelect.selectedIndex === 0) {
+        phoneError.textContent = ''; // Clear error if no country selected
+        return;
+    }
+
+    // Get the selected option's length
+    const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+    const requiredLength = parseInt(selectedOption.getAttribute("data-length"), 10);
+    
+    // Extract the digits entered after the country code
+    const phoneValue = phoneInput.value.trim();
+    const phoneDigits = phoneValue.slice(phoneValue.indexOf(" ") + 1).replace(/\D/g, ''); // Get only the digits
+
+    // Validate the phone number length
+    const actualLength = phoneDigits.length; // Actual length of entered digits
+    var phoneValid = false;
+
+    // Check if the entered digits match the required length
+    if (actualLength < requiredLength) {
+        phoneError.textContent = `Phone number must be exactly ${requiredLength} digits (excluding code).`;
+        
+        
+    } else if (actualLength > requiredLength) {
+        // If too long, prevent further input
+        phoneInput.value = phoneValue.slice(0, phoneValue.indexOf(" ") + requiredLength + 1); // Keep the code, space, and required digits
+        
+       
+    } else {
+
+        phoneValid = true;
+        phoneError.textContent = ''; // Clear error if valid
+    }
+
+   return phoneValid;
+
+}
+
+// Ensure the input maintains the format
+document.getElementById("phone").addEventListener("input", (event) => {
+    const phoneInput = event.target;
+    const code = document.getElementById("country").options[document.getElementById("country").selectedIndex].getAttribute("data-code");
+
+    // If the current value doesn't start with the country code, reset it
+    if (!phoneInput.value.startsWith(code + " ")) {
+        phoneInput.value = code + " "; // Reset to include country code and space
+    }
+
+    // Move cursor to the end of the input
+    phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
+});
 
 </script>
 <script src="js/jquery-3.3.1.slim.min.js"></script>
